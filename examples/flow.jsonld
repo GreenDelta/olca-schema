@@ -1,0 +1,10 @@
+{
+  "@context": {
+	"@vocab": "http://openlca.org/"
+  },
+  "@type": "Flow",
+  "@id": "http://openlca.org/flows/00062e88-f6d1-478d-aa3a-3f35c8c00127",
+  "uuid": "00062e88-f6d1-478d-aa3a-3f35c8c00127",
+  "name": "1,2-dinitrobenzene",
+  "description": "A flow from the openLCA reference database"
+}

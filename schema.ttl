@@ -1,0 +1,97 @@
+
+@prefix olca: <http://openlca.org/> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+olca:Entity a rdfs:Class;
+	rdfs:label "Entity";
+	rdfs:comment "The most generic type of the openLCA model";
+	.
+	
+olca:RootEntity a rdfs:Class;
+	rdfs:subClassOf olca:Entity;
+	rdfs:label "Root Entity";
+	rdfs:comment "A standalone item in a database like a location or unit";
+	.
+
+olca:ategorizedEntity a rdfs:Class;
+	rdfs:subClassOf olca:RootEntity;
+	rdfs:label "Categorized Entity";
+	rdfs:comment "A standalone item that can be categorized like a process, flow, etc.";
+	.
+	
+olca:Category a rdfs:Class;
+	rdfs:subClassOf olca:RootEntity;
+	rdfs:label "Category";
+	rdfs:comment ""
+	.
+	
+olca:Unit a rdfs:Class;
+	rdfs:subClassOf olca:RootEntity;
+	rdfs:label "Unit";
+	rdfs:comment ""
+	.
+	
+olca:FlowPropertyFactor a rdfs:Class;
+	rdfs:subClassOf olca:Entity;
+	rdfs:label "Flow Property Factor";
+	rdfs:comment "A conversion factor between two flow properties of a flow.";
+	.
+	
+## data properties
+
+olca:refId a rdf:Property;
+	rdfs:label "Reference ID";
+	rdfs:comment "The reference ID (UUID) of a root entity.";
+	rdfs:domain olca:RootEntity;
+	rdfs:range xsd:string;
+	.
+
+olca:name a rdf:Property;
+	rdfs:label "Name";
+	rdfs:comment "The name of an entity.";
+	rdfs:domain olca:RootEntity;
+	rdfs:range xsd:string;
+	.	
+	
+olca:escription a rdf:Property;
+	rdfs:label "Description";
+	rdfs:comment "The description of an entity.";
+	rdfs:domain olca:RootEntity;
+	rdfs:range xsd:string;
+	.		
+	
+olca:conversionFactor a rdf:Property;
+	rdfs:label "Conversion Factor";
+	rdfs:comment "A factor for converting the amounts of entities of the same type.";
+	rdfs:domain [ a owl:Class; owl:unionOf (olca:FlowPropertyFactor olca:Unit) ];
+	rdfs:range xsd:decimal;
+	.
+	
+olca:synonyms a rdf:Property;
+	rdfs:label "Synonyms";
+	rdfs:comment "A list of synonyms for the name of an entity separated by semicolons."
+	rdfs:domain olca:Unit;
+	rdfs:range xsd:string;
+	
+
+olca:CategoryList a owl:Class ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            rdf:List
+            [
+                a owl:Restriction ;
+                owl:allValuesFrom olca:Category ;
+                owl:onProperty rdf:first
+            ]
+            [
+                a owl:Restriction ;
+                owl:allValuesFrom olca:CategoryList ;
+                owl:onProperty rdf:rest
+            ] )
+    ] .
+	
