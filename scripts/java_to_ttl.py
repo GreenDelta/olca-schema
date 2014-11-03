@@ -52,14 +52,16 @@ def handle_field_def(line, clazz):
     field = field.rstrip(";")
     print(":%s a rdf:Property;" % field)
     print("\trdfs:domain :%s;" % clazz)
-    print("\trdfs:range :%s;" % type)
-    print('\trdfs:comment :""')
+    print("\trdfs:range %s;" % type)
+    print('\trdfs:comment ""')
     print('\t.\n')
 
 
 def get_type(field_type):
     if field_type == "String":
         return "xsd:string"
+    if field_type == "double" or field_type == "Double":
+        return "xsd:decimal"
     return ":%s" % field_type
 
 if __name__ == '__main__':

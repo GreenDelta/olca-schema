@@ -8,7 +8,11 @@
 :Entity a rdfs:Class;
 	rdfs:comment "The most generic type of the openLCA model";
 	.
-	
+
+:Enumeration a rdfs:Class;
+	rdfs:comment "Super-class for all enumeration types in openLCA"
+	.
+
 :RootEntity a rdfs:Class;
 	rdfs:subClassOf :Entity;
 	rdfs:comment "A standalone item in a database like a location or unit";
@@ -32,51 +36,105 @@
 
 :address a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
 :city a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
 :country a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
 :email a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
+    .
 
 :telefax a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
 :telephone a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
 :website a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
 :zipCode a rdf:Property;
 	rdfs:domain :Actor;
-	rdfs:range :xsd:string;
-	rdfs:comment :""
+	rdfs:range xsd:string;
+	rdfs:comment ""
 	.
 
+## AllocationFactor #############
+
+:AllocationFactor a rdfs:Class;
+	rdfs:subClassOf :Entity;
+	rdfs:comment ""
+	.
+
+:productExchange a rdf:Property;
+	rdfs:domain :AllocationFactor;
+	rdfs:range :Exchange;
+	rdfs:comment ""
+	.
+
+:allocationType a rdf:Property;
+	rdfs:domain :AllocationFactor;
+	rdfs:range [ a owl:Class; owl:unionOf (:CAUSAL :ECONOMIC :PHYSICAL) ];
+	rdfs:comment ""
+	.
+
+:value a rdf:Property;
+	rdfs:domain :AllocationFactor;
+	rdfs:range xsd:decimal;
+	rdfs:comment ""
+	.
+
+:allocatedExchange a rdf:Property;
+	rdfs:domain :AllocationFactor;
+	rdfs:range :Exchange;
+	rdfs:comment ""
+	.
+
+## AllocationMethod ##################
+:AllocationMethod a rdfs:Class;
+    rdfs:subClassOf :Enumeration;
+    rdfs:comment ""
+	.
+
+:CAUSAL a rdfs:Class;
+    rdfs:subClassOf :AllocationMethod;
+    rdfs:comment ""
+	.
+
+:ECONOMIC a rdfs:Class;
+    rdfs:subClassOf :AllocationMethod;
+    rdfs:comment ""
+	.
+
+:PHYSICAL a rdfs:Class;
+    rdfs:subClassOf :AllocationMethod;
+    rdfs:comment ""
+	.
+
+#########
 
 :Unit a rdfs:Class;
 	rdfs:subClassOf :RootEntity;
