@@ -21,6 +21,8 @@ class Model:
                 yaml_model = yaml.load(f)
                 if 'class' in yaml_model:
                     m.types.append(ClassType.load_yaml(yaml_model['class']))
+                if 'enum' in yaml_model:
+                    m.types.append(EnumType.load_yaml(yaml_model['enum']))
         return m
 
     def find_type(self, name):
@@ -39,6 +41,7 @@ class Model:
             c = self.find_type(c.super_class)
         return classes
 
+
 class ClassType:
     def __init__(self, name=None, super_class=None, doc=None):
         self.name = name
@@ -50,13 +53,13 @@ class ClassType:
     def load_yaml(yaml_model):
         c = ClassType()
         c.name = yaml_model['name']
-        if 'doc' in yaml_model.keys():
+        if 'doc' in yaml_model:
             c.doc = yaml_model['doc']
         else:
             c.doc = ''
-        if 'superClass' in yaml_model.keys():
+        if 'superClass' in yaml_model:
             c.super_class = yaml_model['superClass']
-        if 'properties' in yaml_model.keys():
+        if 'properties' in yaml_model:
             for prop in yaml_model['properties']:
                 c.properties.append(Property.load_yaml(prop))
         return c
@@ -79,12 +82,25 @@ class Property:
 
 
 class EnumType:
-    def __init__(self, name, doc):
+    def __init__(self, name=None, doc=None):
         self.name = name
         self.doc = doc
         self.items = []
 
+    @staticmethod
+    def load_yaml(yaml_model):
+        e = EnumType()
+        e.name = yaml_model['name']
+        if 'doc' in yaml_model:
+            e.doc = yaml_model['doc']
+        else:
+            e.doc = ''
+        if 'items' in yaml_model:
+            for item in yaml_model['items']:
+                e.items.append(EnumItem(item['name']))
+        return e
+
 
 class EnumItem:
-    def __init__(self, name):
+    def __init__(self, name=None):
         self.name = name

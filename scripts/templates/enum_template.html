@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ model.name }}</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 150%;
+        }
+        td { padding: 15px; }
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Enumeration <a href="#">{{ model.name }}</a></h1>
+    <p class="comment">{{ model.doc }}</p>
+    {% if model.items|length > 0 %}
+    <p class="comment">Items:</p>
+    <table>
+        {% for item in model.items %}
+        <tr>
+            <td><span class="property">{{ item.name }}</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+enum:
+  name: ModelType
+  doc: An enumeration of the root entity types.
+
+  items:
+    - name: PROJECT
+
+    - name: IMPACT_METHOD
+
+    - name: IMPACT_CATEGORY
+
+    - name: PRODUCT_SYSTEM
+
+    - name: PROCESS
+
+    - name: FLOW
+
+    - name: FLOW_PROPERTY
+
+    - name: UNIT_GROUP
+
+    - name: UNIT
+
+    - name: ACTOR
+
+    - name: SOURCE
+
+    - name: CATEGORY
+
+    - name: LOCATION
+
+    - name: NW_SET
