@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ model.name }}</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 150%;
+        }
+        td { padding: 15px; }
+        .comment { color: #888888; }
+        a { text-decoration: none }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>{{ model.name }}</h1>
+    <p class="comment">{{ doc }}</p>
+    {% if model.properties|length > 0 %}
+    <p>Properties:</p>
+    <table>
+        {% for property in model.properties %}
+        <tr>
+            <td>{{ property.name }}</td>
+            <td><a href="#">{{ property.field_type }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

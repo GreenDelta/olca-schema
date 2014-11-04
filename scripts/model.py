@@ -6,19 +6,22 @@ class Model:
     def __init__(self):
         self.types = []
 
-    def load_yaml(self, dir):
+    @staticmethod
+    def load_yaml(folder):
         """
         Loads a model from a directory which contains YAML files that describe
         the model.
         :param dir: The directory that contains the YAML files (extension *.yaml)
         """
-        d = dir if dir.endswith('/') or dir.endswith('\\') else dir + '/'
+        m = Model()
+        d = folder if folder.endswith('/') or folder.endswith('\\') else folder + '/'
         files = glob.glob(d + "*.yaml")
         for file_path in files:
             with open(file_path, 'r') as f:
-                m = yaml.load(f)
-                if 'class' in m.keys():
-                    self.types.append(ClassType.load_yaml(m['class']))
+                yaml_model = yaml.load(f)
+                if 'class' in yaml_model:
+                    m.types.append(ClassType.load_yaml(yaml_model['class']))
+        return m
 
 
 class ClassType:
