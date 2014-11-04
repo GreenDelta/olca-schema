@@ -1,0 +1,10 @@
+
+class:
+  name: CategorizedEntity
+  superClass: RootEntity
+  doc: A root entity which can have a category.
+
+  properties:
+    - name: category
+      type: Category
+      doc: The category of the entity.

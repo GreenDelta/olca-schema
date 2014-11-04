@@ -1,0 +1,30 @@
+
+class:
+  name: Actor
+  superClass: CategorizedEntity
+  doc: An actor is a person or organisation.
+
+  properties:
+    - name: address
+      type: string
+
+    - name: city
+      type: string
+
+    - name: country
+      type: string
+
+    - name: email
+      type: string
+
+    - name: telefax
+      type: string
+
+    - name: telephone
+      type: string
+
+    - name: website
+      type: string
+
+    - name: zipCode
+      type: string
