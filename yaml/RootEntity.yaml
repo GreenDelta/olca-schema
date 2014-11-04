@@ -1,0 +1,15 @@
+
+class:
+  name: RootEntity
+  superClass: Entity
+  doc: The most generic type of the openLCA model.
+
+  properties:
+    - name: name
+      type: String
+
+    - name: description
+      type: String
+
+    - name: uuid
+      type: String
