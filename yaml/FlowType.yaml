@@ -1,0 +1,9 @@
+
+enum:
+  name: FlowType
+  doc: The basic flow types.
+
+  items:
+    - name: ELEMENTARY_FLOW
+    - name: PRODUCT_FLOW
+    - name: WASTE_FLOW

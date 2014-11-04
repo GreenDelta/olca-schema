@@ -18,11 +18,11 @@ class:
       doc: A CAS number of the flow.
 
     - name: formula
-      type:
+      type: string
       doc: A chemical formula of the flow.
 
     - name: flowPropertyFactors
-      type: FlowPropertyFactor
+      type: List[FlowPropertyFactor]
       doc: >
            Conversion factors between flow properties that can be used to
            express amounts of the flow.

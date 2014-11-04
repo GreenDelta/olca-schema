@@ -1,0 +1,22 @@
+
+class:
+  name: Location
+  superClass: RootEntity
+  doc: A location like a country, state, city, etc.
+
+  properties:
+    - name: code
+      type: string
+      doc: The code of the location (e.g. an ISO 2-letter country code).
+
+    - name: latitude
+      type: decimal
+      doc: The average latitude of the location.
+
+    - name: longitude
+      type: decimal
+      doc: The average longitude of the location.
+
+    - name: kml
+      type: string
+      doc: KML data of the location.
