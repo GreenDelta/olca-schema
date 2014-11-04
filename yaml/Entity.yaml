@@ -1,4 +1,4 @@
 
 class:
   name: Entity
-
+  doc: The most generic type of the openLCA model.

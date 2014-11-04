@@ -11,7 +11,7 @@ class Model:
         """
         Loads a model from a directory which contains YAML files that describe
         the model.
-        :param dir: The directory that contains the YAML files (extension *.yaml)
+        :param folder: The directory that contains the YAML files (extension *.yaml)
         """
         m = Model()
         d = folder if folder.endswith('/') or folder.endswith('\\') else folder + '/'
@@ -23,6 +23,21 @@ class Model:
                     m.types.append(ClassType.load_yaml(yaml_model['class']))
         return m
 
+    def find_type(self, name):
+        if name is None:
+            return None
+        for t in self.types:
+            if t.name == name:
+                return t
+        return None
+
+    def get_super_classes(self, clazz):
+        classes = []
+        c = self.find_type(clazz.super_class)
+        while not c is None:
+            classes.append(c)
+            c = self.find_type(c.super_class)
+        return classes
 
 class ClassType:
     def __init__(self, name=None, super_class=None, doc=None):

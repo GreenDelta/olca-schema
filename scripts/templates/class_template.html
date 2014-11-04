@@ -11,23 +11,39 @@
         }
         td { padding: 15px; }
         .comment { color: #888888; }
-        a { text-decoration: none }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
         a:hover { text-decoration: underline; }
     </style>
 </head>
-<body>
-    <h1>{{ model.name }}</h1>
-    <p class="comment">{{ doc }}</p>
+<body style="padding:20px;">
+    <h1>Class <a href="#">{{ model.name }}</a></h1>
+    <p class="comment">{{ model.doc }}</p>
     {% if model.properties|length > 0 %}
-    <p>Properties:</p>
+    <p class="comment">Properties:</p>
     <table>
         {% for property in model.properties %}
         <tr>
-            <td>{{ property.name }}</td>
+            <td><span class="property">{{ property.name }}</span></td>
             <td><a href="#">{{ property.field_type }}</a></td>
+            <td class="comment">{{ property.doc }}</td>
         </tr>
         {% endfor %}
     </table>
     {% endif %}
+    {% for clazz in super_classes %}
+    {% if clazz.properties|length > 0 %}
+    <p class="comment">Properties from <a href="./{{ clazz.name }}.html">{{ clazz.name }}</a>:</p>
+    <table>
+        {% for property in clazz.properties %}
+        <tr>
+            <td><span class="property">{{ property.name }}</span></td>
+            <td><a href="#">{{ property.field_type }}</a></td>
+            <td class="comment">{{ property.doc }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% endfor %}
 </body>
 </html>

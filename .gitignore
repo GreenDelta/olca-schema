@@ -1,4 +1,5 @@
 .idea/
 generated/
+html/
 catalog-*.xml
 scripts/__pycache__/

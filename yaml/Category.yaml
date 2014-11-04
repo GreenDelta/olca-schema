@@ -1,0 +1,14 @@
+
+class:
+  name: Category
+  superClass: RootEntity
+  doc: A category for the categorisation of types like processes, flows, etc.
+
+  properties:
+    - name: childCategories
+      type: List
+      doc: A list of categories that are sub-categories of the category.
+
+    - name: modelType
+      type: ModelType
+      doc: The type of models that can be linked to the category.
