@@ -1,0 +1,21 @@
+
+class:
+  name: UnitGroup
+  superClass: CategorizedEntity
+  doc: A group of units that can be converted into each other.
+
+  properties:
+    - name: defaultFlowProperty
+      type: FlowProperty
+      doc: >
+           Some LCA data formats does not have the concept of flow properties or
+           quantities. This field provides default link to a flow property for
+           units that are contained in this group.
+
+    - name: referenceUnit
+      type: Unit
+      doc: The reference unit of the group with the conversion factor 1.0.
+
+    - name: units
+      type: List[Unit]
+      doc: All units of the unit group.

@@ -1,0 +1,9 @@
+
+enum:
+  name: FlowPropertyType
+  doc: An enumeration of flow property types.
+
+  items:
+    - name: ECONOMIC_QUANTITY
+
+    - name: PHYSICAL_QUANTITY
