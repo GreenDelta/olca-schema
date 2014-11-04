@@ -16,4 +16,3 @@ class:
     - name: value
       type: decimal
       doc: The value of the conversion factor.
-    

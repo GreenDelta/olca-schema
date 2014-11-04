@@ -1,0 +1,9 @@
+
+enum:
+  name: ParameterScope
+  doc: The possible scopes of parameters.
+
+  items:
+    - name: PROCESS_SCOPE
+    - name: LCIA_METHOD_SCOPE
+    - name: GLOBAL_SCOPE

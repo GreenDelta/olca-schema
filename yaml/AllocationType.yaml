@@ -1,0 +1,11 @@
+
+enum:
+  name: AllocationType
+  doc: Types of allocation methods that can be applied on processes.
+
+  items:
+    - name: PHYSICAL_ALLOCATION
+
+    - name: ECONOMIC_ALLOCATION
+
+    - name: CAUSAL_ALLOCATION
