@@ -1,0 +1,14 @@
+
+class:
+  name: Unit
+  superClass: RootEntity
+  doc: An unit of measure
+
+  properties:
+    - name: conversionFactor
+      type: decimal
+      doc: The conversion factor to the reference unit of the unit group to which this unit belongs.
+
+    - name: synonyms
+      type: List[string]
+      doc: A list of synonyms for the unit.

@@ -20,12 +20,13 @@
     <h1>Class <a href="#">{{ model.name }}</a></h1>
     <p class="comment">{{ model.doc }}</p>
     {% if model.properties|length > 0 %}
+    <p>~</p>
     <p class="comment">Properties:</p>
     <table>
         {% for property in model.properties %}
         <tr>
             <td><span class="property">{{ property.name }}</span></td>
-            <td><a href="#">{{ property.field_type }}</a></td>
+            <td><a href="{{ property.html_type_link }}">{{ property.field_type }}</a></td>
             <td class="comment">{{ property.doc }}</td>
         </tr>
         {% endfor %}
@@ -33,12 +34,13 @@
     {% endif %}
     {% for clazz in super_classes %}
     {% if clazz.properties|length > 0 %}
+    <p>~</p>
     <p class="comment">Properties from <a href="./{{ clazz.name }}.html">{{ clazz.name }}</a>:</p>
     <table>
         {% for property in clazz.properties %}
         <tr>
             <td><span class="property">{{ property.name }}</span></td>
-            <td><a href="#">{{ property.field_type }}</a></td>
+            <td><a href="{{ property.html_type_link }}">{{ property.field_type }}</a></td>
             <td class="comment">{{ property.doc }}</td>
         </tr>
         {% endfor %}

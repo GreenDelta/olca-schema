@@ -80,6 +80,16 @@ class Property:
             p.doc = yaml_model['doc']
         return p
 
+    @property
+    def html_type_link(self):
+        t = self.field_type
+        if t.startswith('List['):
+            end = len(t) -1
+            t = t[5:end]
+        if t[0].isupper():
+            return "./%s.html" % t
+        else:
+            return 'http://www.w3.org/2001/XMLSchema#' + t
 
 class EnumType:
     def __init__(self, name=None, doc=None):
