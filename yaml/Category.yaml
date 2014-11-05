@@ -2,6 +2,7 @@
 class:
   name: Category
   superClass: RootEntity
+  example: category.jsonld
   doc: A category for the categorisation of types like processes, flows, etc.
 
   properties:
@@ -12,3 +13,7 @@ class:
     - name: modelType
       type: ModelType
       doc: The type of models that can be linked to the category.
+
+    - name: parentCategory
+      type: Category
+      doc: The parent category of the category.

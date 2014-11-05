@@ -1,0 +1,51 @@
+
+class:
+  name: Parameter
+  superClass: Entity
+  doc:
+
+  properties:
+    - name: name
+      type: string
+      doc: The name of the parameter.
+
+    - name: description
+      type: string
+      doc: A description of the parameter.
+
+    - name: scope
+      type: ParameterScope
+      doc: The scope where the parameter is valid.
+
+    - name: inputParameter
+      type: boolean
+      doc: >
+           Indicates whether the parameter is an input parameter (true) or a
+           dependent/calculated parameter (false). A parameter can have a formula
+           if it is not an input parameter.
+
+    - name: value
+      type: decimal
+      doc: The parameter value.
+
+    - name: formula
+      type: string
+      doc: A mathematical expression to calculate the parameter value.
+
+    - name: externalSource
+      type: string
+      doc: >
+           A reference to an external source where the parameter is defined (e.g.
+           an Excel table, shapefile, etc.).
+
+    - name: sourceType
+      type: string
+      doc: >
+           Indicates the type of the source if an external source is defined for
+           the parameter.
+
+    - name: uncertainty
+      type: Uncertainty
+      doc: >
+           An uncertainty distribution of the parameter value. This is only
+           valid for input parameters.

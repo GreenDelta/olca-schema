@@ -10,6 +10,7 @@
             font-size: 130%;
         }
         td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
         .comment { color: #888888; }
         .property { border-bottom: 1px dotted; }
         a { text-decoration: none; color: #8A084B; }
@@ -47,5 +48,10 @@
     </table>
     {% endif %}
     {% endfor %}
+    {% if example %}
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{{ example }}</pre>
+    {% endif %}
 </body>
 </html>

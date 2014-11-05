@@ -13,10 +13,6 @@ class:
       type: string
       doc: The description of the entity.
 
-    - name: uuid
-      type: string
-      doc: The UUID (reference ID) of the entity.
-
     - name: version
       type: string
       doc: A version number in ILCD format (e.g. 1.0 or 1.0.1).

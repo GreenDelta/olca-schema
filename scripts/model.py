@@ -47,6 +47,7 @@ class ClassType:
         self.name = name
         self.super_class = super_class
         self.doc = doc
+        self.example = None
         self.properties = []
 
     @staticmethod
@@ -62,6 +63,8 @@ class ClassType:
         if 'properties' in yaml_model:
             for prop in yaml_model['properties']:
                 c.properties.append(Property.load_yaml(prop))
+        if 'example' in yaml_model:
+            c.example = yaml_model['example']
         return c
 
 

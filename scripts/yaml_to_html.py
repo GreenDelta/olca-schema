@@ -27,10 +27,20 @@ def write_enum(template, t):
 
 def write_class(template, m, t):
     super_classes = m.get_super_classes(t)
-    text = template.render(model=t, super_classes=super_classes)
+    example = get_example(t)
+    text = template.render(model=t, super_classes=super_classes,
+                           example=example)
     file_path = '../html/%s.html' % t.name
     with open(file_path, 'w') as f:
         f.write(text)
+
+
+def get_example(t):
+    if t.example is None:
+        return None
+    path = '../examples/' + t.example
+    with open(path, 'r') as f:
+        return f.read()
 
 if __name__ == '__main__':
     main()
