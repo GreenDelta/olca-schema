@@ -1,0 +1,68 @@
+
+class:
+  name: Uncertainty
+  superClass: Entity
+  doc: >
+       Defines the parameter values of an uncertainty distribution. Depending on
+       the uncertainty distribution type different parameters could be used.
+
+  properties:
+    - name: distributionType
+      type: UncertaintyType
+      doc: The uncertainty distribution type
+
+    - name: mean
+      type: decimal
+      doc: The arithmetic mean (used for normal distributions).
+
+    - name: meanFormula
+      type: string
+      doc: A mathematical formula for the arithmetic mean.
+
+    - name: geomMean
+      type: decimal
+      doc: The geometric mean value (used for log-normal distributions).
+
+    - name: geomMeanFormula
+      type: decimal
+      doc: A mathematical formula for the geometric mean.
+
+    - name: minimum
+      type: decimal
+      doc: The minimum value (used for uniform and triangle distributions).
+
+    - name: minimumFormula
+      type: string
+      doc: A mathematical formula for the minimum value.
+
+    - name: sd
+      type: decimal
+      doc: The arithmetic standard deviation  (used for normal distributions).
+
+    - name: sdFormula
+      type: string
+      doc: A mathematical formula for the arithmetic standard deviation.
+
+    - name: geomSd
+      type: decimal
+      doc: The geometric standard deviation (used for log-normal distributions).
+
+    - name: geomSdFormula
+      type: string
+      doc: A mathematical formula for the geometric standard deviation.
+
+    - name: mode
+      type: decimal
+      doc: The most likely value (used for triangle distributions).
+
+    - name: modeFormula
+      type: string
+      doc: A mathematical formula for the most likely value.
+
+    - name: maximum
+      type: decimal
+      doc: The maximum value (used for uniform and triangle distributions).
+
+    - name: maximumFormula
+      type: string
+      doc: A mathematical formula for the maximum value.

@@ -1,0 +1,15 @@
+
+enum:
+  name: UncertaintyType
+  doc: >
+       Enumeration of uncertainty distribution types that can be used in
+       exchanges, parameters, LCIA factors, etc.
+
+  items:
+    - name: LOG_NORMAL_DISTRIBUTION
+
+    - name: NORMAL_DISTRIBUTION
+
+    - name: TRIANGLE_DISTRIBUTION
+
+    - name: UNIFORM_DISTRIBUTION
