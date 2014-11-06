@@ -1,0 +1,38 @@
+
+class:
+  name: Process
+  superClass: CategorizedEntity
+  doc:
+
+  properties:
+    - name: defaultAllocationMethod
+      type: AllocationType
+      doc:
+
+    - name: allocationFactors
+      type: List[AllocationFactor]
+      doc:
+
+    - name: exchanges
+      type: List[Exchange]
+      doc:
+
+    - name: location
+      type: Location
+      doc:
+
+    - name: parameters
+      type: List[Parameter]
+      doc:
+
+    - name: processDocumentation
+      type: ProcessDocumentation
+      doc:
+
+    - name: processTyp
+      type: ProcessType
+      doc:
+
+    - name: quantitativeReference
+      type: Exchange
+      doc:

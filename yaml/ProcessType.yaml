@@ -1,0 +1,9 @@
+
+enum:
+  name: ProcessType
+  doc:
+
+  items:
+    - name: LCI_RESULT
+
+    - name: UNIT_PROCESS

@@ -1,0 +1,103 @@
+
+class:
+  name: ProcessDocumentation
+  superClass: Entity
+  doc:
+
+  properties:
+    - name: timeDescription
+      type: string
+      doc:
+
+    - name: validUntil
+      type: date
+      doc:
+
+    - name: validFrom
+      type: date
+      doc:
+
+    - name: technologyDescription
+      type: string
+      doc:
+
+    - name: dataCollectionDescription
+      type: string
+      doc:
+
+    - name: completenessDescription
+      type: string
+      doc:
+
+    - name: dataSelectionDescription
+      type: string
+      doc:
+
+    - name: reviewDetails
+      type: string
+      doc:
+
+    - name: dataTreatmentDescription
+      type: string
+      doc:
+
+    - name: inventoryMethodDescription
+      type: string
+      doc:
+
+    - name: modelingConstantsDescription
+      type: string
+      doc:
+
+    - name: reviewer
+      type: Actor
+      doc:
+
+    - name: samplingDescription
+      type: string
+      doc:
+
+    - name: sources
+      type: List[Source]
+      doc:
+
+    - name: restrictionsDescription
+      type: string
+      doc:
+
+    - name: copyright
+      type: boolean
+      doc:
+
+    - name: creationDate
+      type: date
+      doc:
+
+    - name: dataDocumentor
+      type: Actor
+      doc:
+
+    - name: dataGenerator
+      type: Actor
+      doc:
+
+    - name: dataSetOwner
+      type: Actor
+      doc:
+
+    - name: intendedApplication
+      type: string
+      doc:
+
+    - name: projectDescription
+      type: string
+      doc:
+
+    - name: publication
+      type: Source
+      doc:
+
+    - name: geographyDescription
+      type: string
+      doc:
+

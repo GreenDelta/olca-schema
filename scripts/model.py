@@ -81,6 +81,8 @@ class Property:
         p.field_type = yaml_model['type']
         if 'doc' in yaml_model:
             p.doc = yaml_model['doc']
+        else:
+            p.doc = ''
         return p
 
     @property

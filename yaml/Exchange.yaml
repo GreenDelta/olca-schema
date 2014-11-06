@@ -1,0 +1,44 @@
+
+class:
+  name: Exchange
+  superClass: Entity
+  doc: An input or output of a process.
+
+  properties:
+    - name: avoidedProduct
+      type: boolean
+      doc: Indicates whether this exchange is an avoided product.
+
+    - name: flow
+      type: Flow
+      doc: The flow of the exchange.
+
+    - name: flowPropertyFactor
+      type: FlowPropertyFactor
+      doc: >
+           Contains the quantity in which the exchange amount is given and the
+           conversion factor to the reference flow property of the exchange.
+
+    - name: input
+      type: boolean
+
+    - name: baseUncertainty
+      type: decimal
+
+    - name: provider
+      type: Process
+
+    - name: amount
+      type: decimal
+
+    - name: amountFormula
+      type: string
+
+    - name: unit
+      type: Unit
+
+    - name: pedigreeUncertainty
+      type: string
+
+    - name: uncertainty
+      type: Uncertainty
