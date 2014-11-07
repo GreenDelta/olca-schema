@@ -2,6 +2,7 @@
 class:
   name: UnitGroup
   superClass: CategorizedEntity
+  example: unitgroup.jsonld
   doc: A group of units that can be converted into each other.
 
   properties:
