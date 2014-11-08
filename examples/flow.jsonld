@@ -1,10 +1,30 @@
 {
-  "@context": {
-	"@vocab": "http://openlca.org/"
-  },
-  "@type": "Flow",
-  "@id": "http://openlca.org/flows/00062e88-f6d1-478d-aa3a-3f35c8c00127",
-  "uuid": "00062e88-f6d1-478d-aa3a-3f35c8c00127",
-  "name": "1,2-dinitrobenzene",
-  "description": "A flow from the openLCA reference database"
+	"@context" : {
+		"@vocab" : "http://openlca.org/",
+		"flowType" : {
+			"@type" : "@vocab"
+		}
+	},
+	"@type" : "Flow",
+	"@id" : "00062e88-f6d1-478d-aa3a-3f35c8c00127",
+	"name" : "rotenone",
+	"category" : {
+		"@id" : "7c393da4-5f55-41d5-baa2-4216a299c21c"
+	},
+	"flowType" : "ELEMENTARY_FLOW",
+	"cas" : "000083-79-4",
+	"referenceFlowProperty" : {
+		"@type" : "FlowProperty",
+		"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+		"name" : "Mass"
+	},
+	"flowPropertyFactors" : [{
+			"flowProperty" : {
+				"@type" : "FlowProperty",
+				"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+				"name" : "Mass"
+			},
+			"value" : 1.0
+		}
+	]
 }

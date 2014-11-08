@@ -1,0 +1,20 @@
+{
+	"@context" : {
+		"@vocab" : "http://openlca.org/",
+		"flowPropertyType" : {
+			"@type" : "@vocab"
+		}
+	},
+	"@type" : "FlowProperty",
+	"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+	"name" : "Mass",
+	"category" : {
+		"@id" : "86863950-d175-4400-8cc2-c40511322f94"
+	},
+	"flowPropertyType" : "PHYSICAL_QUANTITY",
+	"unitGroup" : {
+		"@type" : "UnitGroup",
+		"@id" : "93a60a57-a4c8-11da-a746-0800200c9a66",
+		"name" : "Units of mass"
+	}
+}

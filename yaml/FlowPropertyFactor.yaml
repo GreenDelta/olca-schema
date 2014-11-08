@@ -2,6 +2,7 @@
 class:
   name: FlowPropertyFactor
   superClass: Entity
+  example: flow_property_factor.jsonld
   doc: A conversion factor of a quantity to the reference flow property of a flow.
 
   properties:

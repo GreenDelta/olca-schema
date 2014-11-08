@@ -1,0 +1,12 @@
+{
+	"@context" : {
+		"@vocab" : "http://openlca.org/"
+	},
+	"@type" : "FlowPropertyFactor",
+	"flowProperty" : {
+		"@type" : "FlowProperty",
+		"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+		"name" : "Mass"
+	},
+	"value" : 1.0
+}
