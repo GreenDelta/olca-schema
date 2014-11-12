@@ -15,5 +15,5 @@ class:
       doc: The flow property (quantity) of the factor.
 
     - name: value
-      type: decimal
+      type: double
       doc: The value of the conversion factor.

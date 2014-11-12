@@ -7,7 +7,7 @@ class:
 
   properties:
     - name: conversionFactor
-      type: decimal
+      type: double
       doc: The conversion factor to the reference unit of the unit group to which this unit belongs.
 
     - name: synonyms

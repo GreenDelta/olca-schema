@@ -14,7 +14,7 @@ class:
       doc: The type of allocation.
 
     - name: value
-      type: decimal
+      type: double
       doc: The value of the allocation factor.
 
     - name: allocatedExchange

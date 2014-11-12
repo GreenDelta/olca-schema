@@ -12,7 +12,7 @@ class:
       doc: The uncertainty distribution type
 
     - name: mean
-      type: decimal
+      type: double
       doc: The arithmetic mean (used for normal distributions).
 
     - name: meanFormula
@@ -20,15 +20,15 @@ class:
       doc: A mathematical formula for the arithmetic mean.
 
     - name: geomMean
-      type: decimal
+      type: double
       doc: The geometric mean value (used for log-normal distributions).
 
     - name: geomMeanFormula
-      type: decimal
+      type: double
       doc: A mathematical formula for the geometric mean.
 
     - name: minimum
-      type: decimal
+      type: double
       doc: The minimum value (used for uniform and triangle distributions).
 
     - name: minimumFormula
@@ -36,7 +36,7 @@ class:
       doc: A mathematical formula for the minimum value.
 
     - name: sd
-      type: decimal
+      type: double
       doc: The arithmetic standard deviation  (used for normal distributions).
 
     - name: sdFormula
@@ -44,7 +44,7 @@ class:
       doc: A mathematical formula for the arithmetic standard deviation.
 
     - name: geomSd
-      type: decimal
+      type: double
       doc: The geometric standard deviation (used for log-normal distributions).
 
     - name: geomSdFormula
@@ -52,7 +52,7 @@ class:
       doc: A mathematical formula for the geometric standard deviation.
 
     - name: mode
-      type: decimal
+      type: double
       doc: The most likely value (used for triangle distributions).
 
     - name: modeFormula
@@ -60,7 +60,7 @@ class:
       doc: A mathematical formula for the most likely value.
 
     - name: maximum
-      type: decimal
+      type: double
       doc: The maximum value (used for uniform and triangle distributions).
 
     - name: maximumFormula

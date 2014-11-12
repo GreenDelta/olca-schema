@@ -23,13 +23,13 @@ class:
       type: boolean
 
     - name: baseUncertainty
-      type: decimal
+      type: double
 
     - name: provider
       type: Process
 
     - name: amount
-      type: decimal
+      type: double
 
     - name: amountFormula
       type: string

@@ -18,5 +18,5 @@ class:
       doc: A version number in ILCD format (e.g. 1.0 or 1.0.1).
 
     - name: lastChange
-      type: datetime
+      type: dateTime
       doc: The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.

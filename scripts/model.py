@@ -94,7 +94,8 @@ class Property:
         if t[0].isupper():
             return "./%s.html" % t
         else:
-            return 'http://www.w3.org/2001/XMLSchema#' + t
+            return "http://www.w3.org/TR/xmlschema-2/#%s" % t
+
 
 class EnumType:
     def __init__(self, name=None, doc=None):

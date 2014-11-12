@@ -70,7 +70,7 @@ class:
       doc:
 
     - name: creationDate
-      type: date
+      type: dateTime
       doc:
 
     - name: dataDocumentor

@@ -2,6 +2,7 @@
 class:
   name: Location
   superClass: RootEntity
+  example: location.jsonld
   doc: A location like a country, state, city, etc.
 
   properties:
@@ -10,11 +11,11 @@ class:
       doc: The code of the location (e.g. an ISO 2-letter country code).
 
     - name: latitude
-      type: decimal
+      type: double
       doc: The average latitude of the location.
 
     - name: longitude
-      type: decimal
+      type: double
       doc: The average longitude of the location.
 
     - name: kml

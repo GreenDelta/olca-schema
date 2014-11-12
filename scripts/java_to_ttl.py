@@ -61,7 +61,7 @@ def get_type(field_type):
     if field_type == "String":
         return "xsd:string"
     if field_type == "double" or field_type == "Double":
-        return "xsd:decimal"
+        return "xsd:double"
     return ":%s" % field_type
 
 if __name__ == '__main__':

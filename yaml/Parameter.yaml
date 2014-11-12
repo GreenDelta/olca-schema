@@ -13,7 +13,7 @@ class:
       type: string
       doc: A description of the parameter.
 
-    - name: scope
+    - name: parameterScope
       type: ParameterScope
       doc: The scope where the parameter is valid.
 
@@ -25,7 +25,7 @@ class:
            if it is not an input parameter.
 
     - name: value
-      type: decimal
+      type: double
       doc: The parameter value.
 
     - name: formula

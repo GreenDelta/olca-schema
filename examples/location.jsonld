@@ -1,0 +1,13 @@
+{
+	"@context" : {
+		"@vocab" : "http://openlca.org/"
+
+	},
+	"@type" : "Location",
+	"@id" : "28840420-4e3d-3522-a930-8317344a285d",
+	"name" : "Poland",
+	"description" : "reference location, sources: ISO 3166-1, ecoinvent 3, ILCD, GaBi",
+	"code" : "PL",
+	"latitude" : 52.125,
+	"longitude" : 19.401
+}
