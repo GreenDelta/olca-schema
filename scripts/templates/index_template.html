@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>openLCA Schema</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>openLCA Schema</h1>
+    <p>~</p>
+    <p class="comment">Types:</p>
+    <table>
+        {% for concept in concepts %}
+        <tr>
+            <td><a href="html/{{ concept }}.html">{{ concept }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

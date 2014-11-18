@@ -8,9 +8,11 @@ from jinja2 import Environment, FileSystemLoader
 
 def main():
     env = Environment(loader=FileSystemLoader('./templates'))
+    index_template = env.get_template('index_template.html')
     class_template = env.get_template('class_template.html')
     enum_template = env.get_template('enum_template.html')
     m = model.Model.load_yaml('../yaml')
+    write_index(m, index_template)
     for t in m.types:
         if type(t) == model.ClassType:
             write_class(class_template, m, t)
@@ -41,6 +43,16 @@ def get_example(t):
     path = '../examples/' + t.example
     with open(path, 'r') as f:
         return f.read()
+
+
+def write_index(m, template):
+    concepts = []
+    for t in m.types:
+        concepts.append(t.name)
+    text = template.render(concepts=concepts)
+    with open('../index.html', 'w') as f:
+        f.write(text)
+
 
 if __name__ == '__main__':
     main()
