@@ -2,6 +2,7 @@
 class:
   name: Uncertainty
   superClass: Entity
+  example: uncertainty.jsonld
   doc: >
        Defines the parameter values of an uncertainty distribution. Depending on
        the uncertainty distribution type different parameters could be used.

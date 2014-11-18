@@ -2,6 +2,7 @@
 class:
   name: Process
   superClass: CategorizedEntity
+  example: process.jsonld
   doc:
 
   properties:

@@ -6,10 +6,6 @@ class:
   doc: A conversion factor of a quantity to the reference flow property of a flow.
 
   properties:
-    - name: flow
-      type: Flow
-      doc: The flow for which the factor is defined.
-
     - name: flowProperty
       type: FlowProperty
       doc: The flow property (quantity) of the factor.

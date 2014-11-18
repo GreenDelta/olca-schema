@@ -1,0 +1,90 @@
+{
+
+	"@context" : {
+		"@vocab" : "http://openlca.org/",
+		"distributionType" : {
+			"@type" : "@vocab"
+		}
+		"processTyp" : {
+			"@type" : "@vocab"
+		}
+	},
+	"@type" : "Process",
+	"@id" : "4ab9897f-422c-4de2-a2aa-27f12ddaa82f",
+	"name" : "Steel production",
+	"description" : "",
+	"processTyp" : "UNIT_PROCESS",
+	"location" : {
+		"@type" : "Location",
+		"@id" : "5f02f088-9301-3d7b-a1ac-972c11bf3e7d",
+		"name" : "Germany"
+	},
+	"processDocumentation" : {
+		"copyright" : false,
+		"creationDate" : "2014-11-18T15:48:36.111+01:00"
+	},
+	"exchanges" : [{
+			"@type" : "Exchange",
+			"@id" : 20978,
+			"avoidedProduct" : false,
+			"input" : false,
+			"amount" : 1000,
+			"flow" : {
+				"@type" : "Flow",
+				"@id" : "c1d9370c-ea79-45ab-a0cf-2206521c6d16",
+				"name" : "Steel"
+			},
+			"unit" : {
+				"@type" : "Unit",
+				"@id" : "20aadc24-a391-41cf-b340-3e4529f44bde",
+				"name" : "kg"
+			},
+			"flowPropertyFactor" : {
+				"@type" : "FlowPropertyFactor",
+				"@id" : 20975,
+				"flowProperty" : {
+					"@type" : "FlowProperty",
+					"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+					"name" : "Mass"
+				},
+				"value" : 1
+			}
+		}, {
+			"@type" : "Exchange",
+			"@id" : 20979,
+			"avoidedProduct" : false,
+			"input" : false,
+			"amount" : 10.4,
+			"flow" : {
+				"@type" : "Flow",
+				"@id" : "7ae371ac-8532-11e0-9d78-0800200c9a66",
+				"name" : "Carbon monoxide"
+			},
+			"unit" : {
+				"@type" : "Unit",
+				"@id" : "20aadc24-a391-41cf-b340-3e4529f44bde",
+				"name" : "kg"
+			},
+			"flowPropertyFactor" : {
+				"@type" : "FlowPropertyFactor",
+				"@id" : 15653,
+				"flowProperty" : {
+					"@type" : "FlowProperty",
+					"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+					"name" : "Mass"
+				},
+				"value" : 1
+			},
+			"uncertainty" : {
+				"@type" : "Uncertainty",
+				"distributionType" : "NORMAL_DISTRIBUTION",
+				"mean" : 10.4,
+				"sd" : 1
+			}
+		}
+	],
+	"quantitativeReference" : {
+		"@type" : "Exchange",
+		"@id" : 20978
+	}
+}

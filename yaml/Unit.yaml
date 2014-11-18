@@ -13,7 +13,3 @@ class:
     - name: synonyms
       type: List[string]
       doc: A list of synonyms for the unit.
-
-    - name: unitGroup
-      type: UnitGroup
-      doc: The unit group to which the unit belongs.

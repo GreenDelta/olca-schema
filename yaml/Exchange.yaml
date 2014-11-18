@@ -2,6 +2,7 @@
 class:
   name: Exchange
   superClass: Entity
+  example: exchange.jsonld
   doc: An input or output of a process.
 
   properties:
