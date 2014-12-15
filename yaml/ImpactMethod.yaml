@@ -1,0 +1,16 @@
+
+class:
+  name: ImpactMethod
+  superClass: CategorizedEntity
+  doc: A impact assessment method.
+
+  properties:
+    - name: impactCategories
+      type: List[ImpactCategory]
+      doc: The LCIA categories of the method.
+
+    - name: parameters
+      type: List[Parameter]
+      doc: >
+            A set of method specific parameters which can be used in formulas
+            of the characterisation factors in this method.

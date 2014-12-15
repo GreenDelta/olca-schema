@@ -1,0 +1,16 @@
+
+class:
+  name: ImpactCategory
+  superClass: RootEntity
+  doc: >
+       A LCIA category of a LCIA method (see ImpactMethod) which groups a set of
+       characterisation factors
+
+  properties:
+    - name: referenceUnit
+      type: string
+      doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
+
+    - name: impactFactors
+      type: List[ImpactFactor]
+      doc: The characterisation factors of the LCIA category.

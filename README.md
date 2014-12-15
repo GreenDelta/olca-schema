@@ -7,7 +7,6 @@ the examples). You can use tools like http://rdf-translator.appspot.com/ to
 convert the examples into other formats.
 
 Is there an easy way to specify lists? 
-
 http://stackoverflow.com/questions/19474738/can-i-specify-a-range-for-rdflist-members
 
 TODO

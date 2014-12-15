@@ -1,0 +1,30 @@
+
+class:
+  name: ImpactFactor
+  superClass: Entity
+  doc: A single characterisation factor of a LCIA category for a flow.
+
+  properties:
+    - name: flow
+      type: Flow
+      doc: The flow of the impact assessment factor.
+
+    - name: flowPropertyFactor
+      type: FlowPropertyFactor
+      doc: The flow property to which the LCIA factor refers (e.g. mass).
+
+    - name: unit
+      type: Unit
+      doc: The unit to which the LCIA refers (e.g. kg).
+
+    - name: value
+      type: double
+      doc: The value of the impact assessment factor.
+
+    - name: formula
+      type: string
+      doc: A mathematical formula for calculating the value of the LCIA factor.
+
+    - name: uncertainty
+      type: Uncertainty
+      doc: The uncertainty distribution of the factors' value.

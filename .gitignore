@@ -1,4 +1,5 @@
 .idea/
 generated/
+index.html
 html/
 scripts/__pycache__/
