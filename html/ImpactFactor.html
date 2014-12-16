@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ImpactFactor</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">ImpactFactor</a></h1>
+    <p class="comment">A single characterisation factor of a LCIA category for a flow.</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">flow</span></td>
+            <td><a href="./Flow.html">Flow</a></td>
+            <td class="comment">The flow of the impact assessment factor.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">flowPropertyFactor</span></td>
+            <td><a href="./FlowPropertyFactor.html">FlowPropertyFactor</a></td>
+            <td class="comment">The flow property to which the LCIA factor refers (e.g. mass).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">unit</span></td>
+            <td><a href="./Unit.html">Unit</a></td>
+            <td class="comment">The unit to which the LCIA refers (e.g. kg).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">value</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The value of the impact assessment factor.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">formula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for calculating the value of the LCIA factor.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">uncertainty</span></td>
+            <td><a href="./Uncertainty.html">Uncertainty</a></td>
+            <td class="comment">The uncertainty distribution of the factors' value.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>UnitGroup</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">UnitGroup</a></h1>
+    <p class="comment">A group of units that can be converted into each other.</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">defaultFlowProperty</span></td>
+            <td><a href="./FlowProperty.html">FlowProperty</a></td>
+            <td class="comment">Some LCA data formats do not have the concept of flow properties or quantities. This field provides a default link to a flow property for units that are contained in this group.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">referenceUnit</span></td>
+            <td><a href="./Unit.html">Unit</a></td>
+            <td class="comment">The reference unit of the group with the conversion factor 1.0.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">units</span></td>
+            <td><a href="./Unit.html">List[Unit]</a></td>
+            <td class="comment">All units of the unit group.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./CategorizedEntity.html">CategorizedEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">category</span></td>
+            <td><a href="./Category.html">Category</a></td>
+            <td class="comment">The category of the entity.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./RootEntity.html">RootEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">name</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">description</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The description of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">version</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A version number in ILCD format (e.g. 1.0 or 1.0.1).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">lastChange</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
+            <td class="comment">The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+	"@context" : {
+		"@vocab" : "http://openlca.org/"
+	},
+	"@type" : "UnitGroup",
+	"@id" : "59f191d6-5dd3-4553-af88-1a32accfe308",
+	"name" : "Units of mass*time",
+	"defaultFlowProperty" : {
+		"@type" : "FlowProperty",
+		"@id" : "4e10f566-0358-489a-8e3a-d687b66c50e6",
+		"name" : "Mass*time"
+	},
+	"referenceUnit" : {
+		"@type" : "Unit",
+		"@id" : "b2ad404c-3e4f-4a7a-a604-46fb36654823",
+		"name" : "kg*a"
+	},
+	"units" : [{
+			"@type" : "Unit",
+			"@id" : "23cc7a32-f08a-43df-a87c-66953eeeb3f5",
+			"name" : "t*a",
+			"description" : "Metric tonnes times year",
+			"conversionFactor" : 1000.0
+		}, {
+			"@type" : "Unit",
+			"@id" : "2fdc0039-6c5e-489a-af77-b225684fa337",
+			"name" : "g*a",
+			"description" : "Gram times year",
+			"conversionFactor" : 0.001
+		}, {
+			"@type" : "Unit",
+			"@id" : "5209be3d-094e-4203-a074-06d7b75e9a38",
+			"name" : "t*d",
+			"description" : "Metric ton times day (1 year \u003d 365 days)",
+			"conversionFactor" : 2.73
+		}, {
+			"@type" : "Unit",
+			"@id" : "ab01fe47-d2c0-4308-adb1-e32df38d5a50",
+			"name" : "kg*d",
+			"description" : "Kilogram times day (1 year \u003d 365 days)",
+			"conversionFactor" : 0.002739726
+		}, {
+			"@type" : "Unit",
+			"@id" : "b2ad404c-3e4f-4a7a-a604-46fb36654823",
+			"name" : "kg*a",
+			"description" : "Kilogram times year",
+			"conversionFactor" : 1.0
+		}
+	]
+}
+</pre>
+    
+</body>
+</html>

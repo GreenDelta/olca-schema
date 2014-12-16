@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">Location</a></h1>
+    <p class="comment">A location like a country, state, city, etc.</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">code</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The code of the location (e.g. an ISO 2-letter country code).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">latitude</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The average latitude of the location.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">longitude</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The average longitude of the location.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">kml</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">KML data of the location.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./RootEntity.html">RootEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">name</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">description</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The description of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">version</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A version number in ILCD format (e.g. 1.0 or 1.0.1).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">lastChange</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
+            <td class="comment">The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+	"@context" : {
+		"@vocab" : "http://openlca.org/"
+
+	},
+	"@type" : "Location",
+	"@id" : "28840420-4e3d-3522-a930-8317344a285d",
+	"name" : "Poland",
+	"description" : "reference location, sources: ISO 3166-1, ecoinvent 3, ILCD, GaBi",
+	"code" : "PL",
+	"latitude" : 52.125,
+	"longitude" : 19.401
+}</pre>
+    
+</body>
+</html>

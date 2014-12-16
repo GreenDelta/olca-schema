@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>FlowPropertyFactor</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">FlowPropertyFactor</a></h1>
+    <p class="comment">A conversion factor of a quantity to the reference flow property of a flow.</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">flowProperty</span></td>
+            <td><a href="./FlowProperty.html">FlowProperty</a></td>
+            <td class="comment">The flow property (quantity) of the factor.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">value</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The value of the conversion factor.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+	"@context" : {
+		"@vocab" : "http://openlca.org/"
+	},
+	"@type" : "FlowPropertyFactor",
+	"flowProperty" : {
+		"@type" : "FlowProperty",
+		"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+		"name" : "Mass"
+	},
+	"value" : 1.0
+}</pre>
+    
+</body>
+</html>

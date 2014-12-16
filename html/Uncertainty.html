@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Uncertainty</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">Uncertainty</a></h1>
+    <p class="comment">Defines the parameter values of an uncertainty distribution. Depending on the uncertainty distribution type different parameters could be used.
+</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">distributionType</span></td>
+            <td><a href="./UncertaintyType.html">UncertaintyType</a></td>
+            <td class="comment">The uncertainty distribution type</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">mean</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The arithmetic mean (used for normal distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">meanFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for the arithmetic mean.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">geomMean</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The geometric mean value (used for log-normal distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">geomMeanFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">A mathematical formula for the geometric mean.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">minimum</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The minimum value (used for uniform and triangle distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">minimumFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for the minimum value.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">sd</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The arithmetic standard deviation  (used for normal distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">sdFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for the arithmetic standard deviation.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">geomSd</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The geometric standard deviation (used for log-normal distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">geomSdFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for the geometric standard deviation.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">mode</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The most likely value (used for triangle distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">modeFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for the most likely value.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">maximum</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The maximum value (used for uniform and triangle distributions).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">maximumFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A mathematical formula for the maximum value.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+    "@context" : {
+		"@vocab" : "http://openlca.org/"
+	},
+    "@type": "Uncertainty",
+    "distributionType": "NORMAL_DISTRIBUTION",
+    "mean": 10.4,
+    "sd": 1
+}</pre>
+    
+</body>
+</html>

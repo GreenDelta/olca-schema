@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Source</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">Source</a></h1>
+    <p class="comment">A source is a literature reference.</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">doi</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The digital object identifier of the source (see http://en.wikipedia.org/wiki/Digital_object_identifier).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">textReference</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The full text reference of the source.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">year</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#integer">integer</a></td>
+            <td class="comment">The publication year of the source.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">externalFile</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A direct link (relative or absolute URL) to the source file.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./CategorizedEntity.html">CategorizedEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">category</span></td>
+            <td><a href="./Category.html">Category</a></td>
+            <td class="comment">The category of the entity.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./RootEntity.html">RootEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">name</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">description</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The description of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">version</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A version number in ILCD format (e.g. 1.0 or 1.0.1).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">lastChange</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
+            <td class="comment">The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+</body>
+</html>

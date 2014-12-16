@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Flow</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">Flow</a></h1>
+    <p class="comment">Everything that can be an input or output of a process (e.g. a substance, a product, a waste, a service etc.)
+</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">flowType</span></td>
+            <td><a href="./FlowType.html">FlowType</a></td>
+            <td class="comment">The type of the flow. Note that this type is more a descriptor of how the flow is handled in calculations.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">cas</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A CAS number of the flow.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">formula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A chemical formula of the flow.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">flowPropertyFactors</span></td>
+            <td><a href="./FlowPropertyFactor.html">List[FlowPropertyFactor]</a></td>
+            <td class="comment">Conversion factors between flow properties that can be used to express amounts of the flow.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">location</span></td>
+            <td><a href="./Location.html">Location</a></td>
+            <td class="comment">The location of the flow. Normally the location of a flow is defined by the process location where the flow is an input or output. However, some data formats define a location as a property of a flow.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">referenceFlowProperty</span></td>
+            <td><a href="./FlowProperty.html">FlowProperty</a></td>
+            <td class="comment">The flow property that should be normally used to express quantities of the flow (e.g. in results).</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./CategorizedEntity.html">CategorizedEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">category</span></td>
+            <td><a href="./Category.html">Category</a></td>
+            <td class="comment">The category of the entity.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./RootEntity.html">RootEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">name</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">description</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The description of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">version</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A version number in ILCD format (e.g. 1.0 or 1.0.1).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">lastChange</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
+            <td class="comment">The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+	"@context" : {
+		"@vocab" : "http://openlca.org/",
+		"flowType" : {
+			"@type" : "@vocab"
+		}
+	},
+	"@type" : "Flow",
+	"@id" : "00062e88-f6d1-478d-aa3a-3f35c8c00127",
+	"name" : "rotenone",
+	"category" : {
+		"@id" : "7c393da4-5f55-41d5-baa2-4216a299c21c"
+	},
+	"flowType" : "ELEMENTARY_FLOW",
+	"cas" : "000083-79-4",
+	"referenceFlowProperty" : {
+		"@type" : "FlowProperty",
+		"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+		"name" : "Mass"
+	},
+	"flowPropertyFactors" : [{
+			"flowProperty" : {
+				"@type" : "FlowProperty",
+				"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+				"name" : "Mass"
+			},
+			"value" : 1.0
+		}
+	]
+}</pre>
+    
+</body>
+</html>

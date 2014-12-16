@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Process</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #0000FF;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">Process</a></h1>
+    <p class="comment">None</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">defaultAllocationMethod</span></td>
+            <td><a href="./AllocationType.html">AllocationType</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">allocationFactors</span></td>
+            <td><a href="./AllocationFactor.html">List[AllocationFactor]</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">exchanges</span></td>
+            <td><a href="./Exchange.html">List[Exchange]</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">location</span></td>
+            <td><a href="./Location.html">Location</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">parameters</span></td>
+            <td><a href="./Parameter.html">List[Parameter]</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">processDocumentation</span></td>
+            <td><a href="./ProcessDocumentation.html">ProcessDocumentation</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">processTyp</span></td>
+            <td><a href="./ProcessType.html">ProcessType</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">quantitativeReference</span></td>
+            <td><a href="./Exchange.html">Exchange</a></td>
+            <td class="comment">None</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./CategorizedEntity.html">CategorizedEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">category</span></td>
+            <td><a href="./Category.html">Category</a></td>
+            <td class="comment">The category of the entity.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./RootEntity.html">RootEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">name</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">description</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The description of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">version</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A version number in ILCD format (e.g. 1.0 or 1.0.1).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">lastChange</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
+            <td class="comment">The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+
+	"@context" : {
+		"@vocab" : "http://openlca.org/",
+		"distributionType" : {
+			"@type" : "@vocab"
+		}
+		"processTyp" : {
+			"@type" : "@vocab"
+		}
+	},
+	"@type" : "Process",
+	"@id" : "4ab9897f-422c-4de2-a2aa-27f12ddaa82f",
+	"name" : "Steel production",
+	"description" : "",
+	"processTyp" : "UNIT_PROCESS",
+	"location" : {
+		"@type" : "Location",
+		"@id" : "5f02f088-9301-3d7b-a1ac-972c11bf3e7d",
+		"name" : "Germany"
+	},
+	"processDocumentation" : {
+		"copyright" : false,
+		"creationDate" : "2014-11-18T15:48:36.111+01:00"
+	},
+	"exchanges" : [{
+			"@type" : "Exchange",
+			"@id" : 20978,
+			"avoidedProduct" : false,
+			"input" : false,
+			"amount" : 1000,
+			"flow" : {
+				"@type" : "Flow",
+				"@id" : "c1d9370c-ea79-45ab-a0cf-2206521c6d16",
+				"name" : "Steel"
+			},
+			"unit" : {
+				"@type" : "Unit",
+				"@id" : "20aadc24-a391-41cf-b340-3e4529f44bde",
+				"name" : "kg"
+			},
+			"flowPropertyFactor" : {
+				"@type" : "FlowPropertyFactor",
+				"@id" : 20975,
+				"flowProperty" : {
+					"@type" : "FlowProperty",
+					"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+					"name" : "Mass"
+				},
+				"value" : 1
+			}
+		}, {
+			"@type" : "Exchange",
+			"@id" : 20979,
+			"avoidedProduct" : false,
+			"input" : false,
+			"amount" : 10.4,
+			"flow" : {
+				"@type" : "Flow",
+				"@id" : "7ae371ac-8532-11e0-9d78-0800200c9a66",
+				"name" : "Carbon monoxide"
+			},
+			"unit" : {
+				"@type" : "Unit",
+				"@id" : "20aadc24-a391-41cf-b340-3e4529f44bde",
+				"name" : "kg"
+			},
+			"flowPropertyFactor" : {
+				"@type" : "FlowPropertyFactor",
+				"@id" : 15653,
+				"flowProperty" : {
+					"@type" : "FlowProperty",
+					"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+					"name" : "Mass"
+				},
+				"value" : 1
+			},
+			"uncertainty" : {
+				"@type" : "Uncertainty",
+				"distributionType" : "NORMAL_DISTRIBUTION",
+				"mean" : 10.4,
+				"sd" : 1
+			}
+		}
+	],
+	"quantitativeReference" : {
+		"@type" : "Exchange",
+		"@id" : 20978
+	}
+}
+</pre>
+    
+</body>
+</html>
