@@ -1,6 +1,6 @@
 {
 	"@context" : {
-		"@vocab" : "http://openlca.org/"
+		"@vocab" : "http://openlca.org/schema/v1.0#"
 	},
 	"@type" : "Unit",
 	"@id" : "23cc7a32-f08a-43df-a87c-66953eeeb3f5",
