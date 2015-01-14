@@ -1,6 +1,7 @@
 {
     "@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
+		"@vocab" : "http://openlca.org/schema/v1.0/",
+		"@base": "http://openlca.org/schema/v1.0/"
 		"modelType" : {
 			"@type" : "@vocab"
 		},
@@ -22,7 +23,7 @@
 		"defaultAllocationMethod" : {
 			"@type" : "@vocab"
 		},
-		"processTyp" : {
+		"processType" : {
 			"@type" : "@vocab"
 		}
 	}

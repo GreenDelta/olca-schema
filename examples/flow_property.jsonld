@@ -1,10 +1,5 @@
 {
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
-		"flowPropertyType" : {
-			"@type" : "@vocab"
-		}
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "FlowProperty",
 	"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
 	"name" : "Mass",

@@ -1,10 +1,5 @@
 {
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
-		"modelType" : {
-			"@type" : "@vocab"
-		}
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Category",
 	"@id" : "096a3a28-1918-4692-a198-9aa54d73f745",
 	"name" : "construction processes",

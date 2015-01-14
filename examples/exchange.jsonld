@@ -1,7 +1,5 @@
 {
-    "@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-	},
+    "@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Exchange",
 	"@id" : 20979,
 	"avoidedProduct" : false,

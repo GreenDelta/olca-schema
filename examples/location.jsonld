@@ -1,8 +1,5 @@
 {
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Location",
 	"@id" : "28840420-4e3d-3522-a930-8317344a285d",
 	"name" : "Poland",

@@ -1,7 +1,5 @@
 {
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Unit",
 	"@id" : "23cc7a32-f08a-43df-a87c-66953eeeb3f5",
 	"name" : "t*a",

@@ -1,10 +1,5 @@
 {
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
-		"flowType" : {
-			"@type" : "@vocab"
-		}
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Flow",
 	"@id" : "00062e88-f6d1-478d-aa3a-3f35c8c00127",
 	"name" : "rotenone",
