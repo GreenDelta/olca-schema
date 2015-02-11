@@ -1,25 +1,28 @@
 {
 	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Flow",
-	"@id" : "00062e88-f6d1-478d-aa3a-3f35c8c00127",
-	"name" : "rotenone",
+	"@id" : "4a40cb39-e306-3649-b6da-ca061e384e23",
+	"name" : "electricity, high voltage, at grid",
 	"category" : {
-		"@id" : "7c393da4-5f55-41d5-baa2-4216a299c21c"
+		"@type" : "Category",
+		"@id" : "773bee4a-6f9a-41d9-b8fb-c400fb9960cf",
+		"name" : "supply mix"
 	},
-	"flowType" : "ELEMENTARY_FLOW",
-	"cas" : "000083-79-4",
-	"referenceFlowProperty" : {
-		"@type" : "FlowProperty",
-		"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
-		"name" : "Mass"
+	"flowType" : "PRODUCT_FLOW",
+	"location" : {
+		"@type" : "Location",
+		"@id" : "28840420-4e3d-3522-a930-8317344a285d",
+		"name" : "Poland"
 	},
-	"flowPropertyFactors" : [{
+	"flowProperties" : [{
+			"@type" : "FlowPropertyFactor",
+			"referenceFlowProperty" : true,
+			"conversionFactor" : 1.0,
 			"flowProperty" : {
 				"@type" : "FlowProperty",
-				"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
-				"name" : "Mass"
-			},
-			"value" : 1.0
+				"@id" : "f6811440-ee37-11de-8a39-0800200c9a66",
+				"name" : "Energy"
+			}
 		}
 	]
 }
