@@ -115,35 +115,24 @@
     <pre>{
     "@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Exchange",
-	"@id" : 20979,
 	"avoidedProduct" : false,
 	"input" : false,
-	"amount" : 10.4,
+	"amount" : 1.0,
+	"quantitativeReference" : true,
 	"flow" : {
 		"@type" : "Flow",
-		"@id" : "7ae371ac-8532-11e0-9d78-0800200c9a66",
-		"name" : "Carbon monoxide"
+		"@id" : "54290a29-8baa-495c-84b3-db212c75f7b7",
+		"name" : "Steel"
 	},
 	"unit" : {
 		"@type" : "Unit",
 		"@id" : "20aadc24-a391-41cf-b340-3e4529f44bde",
 		"name" : "kg"
 	},
-	"flowPropertyFactor" : {
-		"@type" : "FlowPropertyFactor",
-		"@id" : 15653,
-		"flowProperty" : {
-			"@type" : "FlowProperty",
-			"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
-			"name" : "Mass"
-		},
-		"value" : 1
-	},
-	"uncertainty" : {
-		"@type" : "Uncertainty",
-		"distributionType" : "NORMAL_DISTRIBUTION",
-		"mean" : 10.4,
-		"sd" : 1
+	"flowProperty" : {
+		"@type" : "FlowProperty",
+		"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
+		"name" : "Mass"
 	}
 }
 </pre>
