@@ -1,33 +1,12 @@
 {
 	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Category",
-	"@id" : "096a3a28-1918-4692-a198-9aa54d73f745",
-	"name" : "construction processes",
-	"modelType" : "PROCESS",
-	"childCategories" : [{
-			"@type" : "Category",
-			"@id" : "525b0a06-1a0d-4c69-bbb5-7f34f8e0523a",
-			"name" : "buildings",
-			"modelType" : "PROCESS",
-			"parentCategory" : {
-				"@id" : "096a3a28-1918-4692-a198-9aa54d73f745"
-			}
-		}, {
-			"@type" : "Category",
-			"@id" : "6940a737-f1e4-47a2-be89-086429580f3e",
-			"name" : "civil engineering",
-			"modelType" : "PROCESS",
-			"parentCategory" : {
-				"@id" : "096a3a28-1918-4692-a198-9aa54d73f745"
-			}
-		}, {
-			"@type" : "Category",
-			"@id" : "113081a4-79a8-4f9c-aa4a-6562fe1acf9b",
-			"name" : "machinery",
-			"modelType" : "PROCESS",
-			"parentCategory" : {
-				"@id" : "096a3a28-1918-4692-a198-9aa54d73f745"
-			}
-		}
-	]
+	"@id" : "e7e7833c-d22a-477d-b765-bf2b80cd83ef",
+	"name" : "buildings",
+	"modelType" : "FLOW",
+	"parentCategory" : {
+		"@type" : "Category",
+		"@id" : "4570d2ec-89d0-4927-ba3f-1b6795a9a137",
+		"name" : "agricultural means of production"
+	}
 }
