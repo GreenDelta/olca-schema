@@ -95,48 +95,91 @@
     <pre>{
 	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "UnitGroup",
-	"@id" : "59f191d6-5dd3-4553-af88-1a32accfe308",
-	"name" : "Units of mass*time",
+	"@id" : "93a60a57-a3c8-11da-a746-0800200c9a66",
+	"name" : "Units of energy",
+	"category" : {
+		"@type" : "Category",
+		"@id" : "e38f841d-bc83-49a3-ab86-2783de8cebfb",
+		"name" : "Technical unit groups"
+	},
 	"defaultFlowProperty" : {
 		"@type" : "FlowProperty",
-		"@id" : "4e10f566-0358-489a-8e3a-d687b66c50e6",
-		"name" : "Mass*time"
-	},
-	"referenceUnit" : {
-		"@type" : "Unit",
-		"@id" : "b2ad404c-3e4f-4a7a-a604-46fb36654823",
-		"name" : "kg*a"
+		"@id" : "f6811440-ee37-11de-8a39-0800200c9a66",
+		"name" : "Energy"
 	},
 	"units" : [{
 			"@type" : "Unit",
-			"@id" : "23cc7a32-f08a-43df-a87c-66953eeeb3f5",
-			"name" : "t*a",
-			"description" : "Metric tonnes times year",
+			"@id" : "010f811e-3cc2-4b14-a901-337da9b3e49c",
+			"name" : "kcal",
+			"description" : "Kilocalorie (International table)",
+			"conversionFactor" : 0.0041867
+		}, {
+			"@type" : "Unit",
+			"@id" : "01e58eb9-0aba-4c76-ba0c-03f6f3be1353",
+			"name" : "GJ",
+			"description" : "Gigajoule",
 			"conversionFactor" : 1000.0
 		}, {
 			"@type" : "Unit",
-			"@id" : "2fdc0039-6c5e-489a-af77-b225684fa337",
-			"name" : "g*a",
-			"description" : "Gram times year",
+			"@id" : "425aff51-b7e5-4561-aa5a-562ec103a79e",
+			"name" : "TOE",
+			"description" : "Ton oil equivalent",
+			"conversionFactor" : 41868.0
+		}, {
+			"@type" : "Unit",
+			"@id" : "469d61f1-3bc4-4841-8adf-873825c1bc11",
+			"name" : "J",
+			"description" : "Joule",
+			"conversionFactor" : 1.0E-6
+		}, {
+			"@type" : "Unit",
+			"@id" : "52765a6c-3896-43c2-b2f4-c679acf13efe",
+			"name" : "MJ",
+			"description" : "Megajoule",
+			"referenceUnit" : true,
+			"conversionFactor" : 1.0
+		}, {
+			"@type" : "Unit",
+			"@id" : "55244053-94ba-404e-9172-cb279d905e00",
+			"name" : "btu",
+			"description" : "British thermal unit (International table)",
+			"conversionFactor" : 0.001055056
+		}, {
+			"@type" : "Unit",
+			"@id" : "57c492e7-d94b-4fcc-98df-cdc4163b754c",
+			"name" : "TJ",
+			"description" : "Terajoule",
+			"conversionFactor" : 1000000.0
+		}, {
+			"@type" : "Unit",
+			"@id" : "787f2ac9-7bcd-4a91-9fab-55bfe414138f",
+			"name" : "TCE",
+			"description" : "Ton coal equivalent",
+			"conversionFactor" : 29307.6
+		}, {
+			"@type" : "Unit",
+			"@id" : "86ad2244-1f0e-4912-af53-7865283103e4",
+			"name" : "kWh",
+			"description" : "Kilowatt times hour",
+			"conversionFactor" : 3.6
+		}, {
+			"@type" : "Unit",
+			"@id" : "92e3bd49-8ed5-4885-9db6-fc88c7afcfcb",
+			"name" : "MWh",
+			"description" : "Megawatt times hour",
+			"conversionFactor" : 3600.0
+		}, {
+			"@type" : "Unit",
+			"@id" : "f4119718-2d50-47fe-9154-cab6fd2d30eb",
+			"name" : "kJ",
+			"description" : "Kilojoule",
 			"conversionFactor" : 0.001
 		}, {
 			"@type" : "Unit",
-			"@id" : "5209be3d-094e-4203-a074-06d7b75e9a38",
-			"name" : "t*d",
-			"description" : "Metric ton times day (1 year \u003d 365 days)",
-			"conversionFactor" : 2.73
-		}, {
-			"@type" : "Unit",
-			"@id" : "ab01fe47-d2c0-4308-adb1-e32df38d5a50",
-			"name" : "kg*d",
-			"description" : "Kilogram times day (1 year \u003d 365 days)",
-			"conversionFactor" : 0.002739726
-		}, {
-			"@type" : "Unit",
-			"@id" : "b2ad404c-3e4f-4a7a-a604-46fb36654823",
-			"name" : "kg*a",
-			"description" : "Kilogram times year",
-			"conversionFactor" : 1.0
+			"@id" : "fc3604f7-aa93-4aa3-8ae9-8f822874da5f",
+			"name" : "Wh",
+			"description" : "Watt times hour",
+			"conversionFactor" : 0.0036
 		}
 	]
 }
