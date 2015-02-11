@@ -2,6 +2,7 @@
 class:
   name: ImpactCategory
   superClass: RootEntity
+  example: impact_category.jsonld
   doc: >
        A LCIA category of a LCIA method (see ImpactMethod) which groups a set of
        characterisation factors
