@@ -14,14 +14,18 @@ class:
       type: Flow
       doc: The flow of the exchange.
 
-    - name: flowPropertyFactor
-      type: FlowPropertyFactor
-      doc: >
-           Contains the quantity in which the exchange amount is given and the
-           conversion factor to the reference flow property of the exchange.
+    - name: flowProperty
+      type: FlowProperty
+      doc: The quantity in which the amount is given.
 
     - name: input
       type: boolean
+
+    - name: quantitativeReference
+      type: boolean
+      doc: >
+           Indicates whether the exchange is the quantitative reference of the
+           process.
 
     - name: baseUncertainty
       type: double

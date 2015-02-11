@@ -9,13 +9,15 @@ class:
       type: Flow
       doc: The flow of the impact assessment factor.
 
-    - name: flowPropertyFactor
-      type: FlowPropertyFactor
-      doc: The flow property to which the LCIA factor refers (e.g. mass).
+    - name: flowProperty
+      type: FlowProperty
+      doc: >
+           The quantity of the flow to which the LCIA factor is related (e.g.
+           Mass).
 
     - name: unit
       type: Unit
-      doc: The unit to which the LCIA refers (e.g. kg).
+      doc: The flow unit to which the LCIA factor is related (e.g. kg).
 
     - name: value
       type: double

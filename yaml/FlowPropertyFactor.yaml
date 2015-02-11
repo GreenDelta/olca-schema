@@ -32,6 +32,15 @@ class:
       type: FlowProperty
       doc: The flow property (quantity) of the factor.
 
-    - name: value
+    - name: conversionFactor
       type: double
       doc: The value of the conversion factor.
+
+    - name: referenceFlowProperty
+      type: boolean
+      doc: >
+           Indicates whether the flow property of the factor is the reference
+           flow property of the flow. The reference flow property must have
+           a conversion factor of 1.0 and there should be only one reference
+           flow property.
+

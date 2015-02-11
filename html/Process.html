@@ -40,7 +40,7 @@
         <tr>
             <td><span class="property">exchanges</span></td>
             <td><a href="./Exchange.html">List[Exchange]</a></td>
-            <td class="comment">None</td>
+            <td class="comment">The inputs and outputs of the process.</td>
         </tr>
         
         <tr>
@@ -64,12 +64,6 @@
         <tr>
             <td><span class="property">processTyp</span></td>
             <td><a href="./ProcessType.html">ProcessType</a></td>
-            <td class="comment">None</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">quantitativeReference</span></td>
-            <td><a href="./Exchange.html">Exchange</a></td>
             <td class="comment">None</td>
         </tr>
         
@@ -129,15 +123,7 @@
     <p>JSON-LD Example</p>
     <pre>{
 
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
-		"distributionType" : {
-			"@type" : "@vocab"
-		}
-		"processTyp" : {
-			"@type" : "@vocab"
-		}
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Process",
 	"@id" : "4ab9897f-422c-4de2-a2aa-27f12ddaa82f",
 	"name" : "Steel production",

@@ -12,4 +12,6 @@ class:
 
     - name: unitGroup
       type: UnitGroup
-      doc: The units of measure that can be used to express quantities of the flow property.
+      doc: >
+           The units of measure that can be used to express quantities of the
+           flow property.

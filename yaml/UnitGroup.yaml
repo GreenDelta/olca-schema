@@ -13,10 +13,6 @@ class:
            quantities. This field provides a default link to a flow property for
            units that are contained in this group.
 
-    - name: referenceUnit
-      type: Unit
-      doc: The reference unit of the group with the conversion factor 1.0.
-
     - name: units
       type: List[Unit]
-      doc: All units of the unit group.
+      doc: The units of the unit group.

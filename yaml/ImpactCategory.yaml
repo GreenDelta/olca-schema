@@ -7,7 +7,7 @@ class:
        characterisation factors
 
   properties:
-    - name: referenceUnit
+    - name: referenceUnitName
       type: string
       doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
 

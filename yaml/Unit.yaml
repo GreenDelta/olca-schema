@@ -8,7 +8,19 @@ class:
   properties:
     - name: conversionFactor
       type: double
-      doc: The conversion factor to the reference unit of the unit group to which this unit belongs.
+      doc: >
+           The conversion factor to the reference unit of the unit group to
+           which this unit belongs.
+
+    - name: referenceUnit
+      type: boolean
+      doc: >
+           Indicates whether the unit is the reference unit of the unit group to
+           which this unit belongs. If it is the reference unit the conversion
+           factor must be 1.0. There should be always only one reference unit
+           in a unit group. The reference unit is used to convert amounts given
+           in one unit to amounts given in another unit of the respective unit
+           group.
 
     - name: synonyms
       type: List[string]

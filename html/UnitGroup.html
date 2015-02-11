@@ -33,15 +33,9 @@
         </tr>
         
         <tr>
-            <td><span class="property">referenceUnit</span></td>
-            <td><a href="./Unit.html">Unit</a></td>
-            <td class="comment">The reference unit of the group with the conversion factor 1.0.</td>
-        </tr>
-        
-        <tr>
             <td><span class="property">units</span></td>
             <td><a href="./Unit.html">List[Unit]</a></td>
-            <td class="comment">All units of the unit group.</td>
+            <td class="comment">The units of the unit group.</td>
         </tr>
         
     </table>
@@ -99,9 +93,7 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "UnitGroup",
 	"@id" : "59f191d6-5dd3-4553-af88-1a32accfe308",
 	"name" : "Units of mass*time",

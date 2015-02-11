@@ -38,16 +38,22 @@
         </tr>
         
         <tr>
-            <td><span class="property">flowPropertyFactor</span></td>
-            <td><a href="./FlowPropertyFactor.html">FlowPropertyFactor</a></td>
-            <td class="comment">Contains the quantity in which the exchange amount is given and the conversion factor to the reference flow property of the exchange.
-</td>
+            <td><span class="property">flowProperty</span></td>
+            <td><a href="./FlowProperty.html">FlowProperty</a></td>
+            <td class="comment">The quantity in which the amount is given.</td>
         </tr>
         
         <tr>
             <td><span class="property">input</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
             <td class="comment"></td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">quantitativeReference</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
+            <td class="comment">Indicates whether the exchange is the quantitative reference of the process.
+</td>
         </tr>
         
         <tr>
@@ -107,9 +113,7 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-    "@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-	},
+    "@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Exchange",
 	"@id" : 20979,
 	"avoidedProduct" : false,

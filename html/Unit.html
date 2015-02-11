@@ -28,7 +28,15 @@
         <tr>
             <td><span class="property">conversionFactor</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
-            <td class="comment">The conversion factor to the reference unit of the unit group to which this unit belongs.</td>
+            <td class="comment">The conversion factor to the reference unit of the unit group to which this unit belongs.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">referenceUnit</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
+            <td class="comment">Indicates whether the unit is the reference unit of the unit group to which this unit belongs. If it is the reference unit the conversion factor must be 1.0. There should be always only one reference unit in a unit group. The reference unit is used to convert amounts given in one unit to amounts given in another unit of the respective unit group.
+</td>
         </tr>
         
         <tr>
@@ -78,9 +86,7 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Unit",
 	"@id" : "23cc7a32-f08a-43df-a87c-66953eeeb3f5",
 	"name" : "t*a",

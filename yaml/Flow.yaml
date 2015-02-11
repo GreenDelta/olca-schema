@@ -22,11 +22,12 @@ class:
       type: string
       doc: A chemical formula of the flow.
 
-    - name: flowPropertyFactors
+    - name: flowProperties
       type: List[FlowPropertyFactor]
       doc: >
-           Conversion factors between flow properties that can be used to
-           express amounts of the flow.
+           The flow properties (quantities) in which amounts of the flow can
+           be expressed together with conversion factors between these flow
+           flow properties.
 
     - name: location
       type: Location
@@ -34,9 +35,3 @@ class:
            The location of the flow. Normally the location of a flow is defined
            by the process location where the flow is an input or output. However,
            some data formats define a location as a property of a flow.
-
-    - name: referenceFlowProperty
-      type: FlowProperty
-      doc: >
-           The flow property that should be normally used to express quantities
-           of the flow (e.g. in results).

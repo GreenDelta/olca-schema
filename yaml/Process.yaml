@@ -16,7 +16,7 @@ class:
 
     - name: exchanges
       type: List[Exchange]
-      doc:
+      doc: The inputs and outputs of the process.
 
     - name: location
       type: Location
@@ -32,8 +32,4 @@ class:
 
     - name: processTyp
       type: ProcessType
-      doc:
-
-    - name: quantitativeReference
-      type: Exchange
       doc:

@@ -19,17 +19,12 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">Category</a></h1>
-    <p class="comment">A category for the categorisation of types like processes, flows, etc.</p>
+    <p class="comment">A category is used for the categorisation of types like processes, flows, etc.
+</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
     <table>
-        
-        <tr>
-            <td><span class="property">childCategories</span></td>
-            <td><a href="./Category.html">List[Category]</a></td>
-            <td class="comment">A list of categories that are sub-categories of the category.</td>
-        </tr>
         
         <tr>
             <td><span class="property">modelType</span></td>
@@ -84,12 +79,7 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
-		"modelType" : {
-			"@type" : "@vocab"
-		}
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Category",
 	"@id" : "096a3a28-1918-4692-a198-9aa54d73f745",
 	"name" : "construction processes",

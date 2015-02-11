@@ -33,9 +33,16 @@
         </tr>
         
         <tr>
-            <td><span class="property">value</span></td>
+            <td><span class="property">conversionFactor</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
             <td class="comment">The value of the conversion factor.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">referenceFlowProperty</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
+            <td class="comment">Indicates whether the flow property of the factor is the reference flow property of the flow. The reference flow property must have a conversion factor of 1.0 and there should be only one reference flow property.
+</td>
         </tr>
         
     </table>
@@ -47,9 +54,7 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#"
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "FlowPropertyFactor",
 	"flowProperty" : {
 		"@type" : "FlowProperty",

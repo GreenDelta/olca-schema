@@ -46,23 +46,16 @@
         </tr>
         
         <tr>
-            <td><span class="property">flowPropertyFactors</span></td>
+            <td><span class="property">flowProperties</span></td>
             <td><a href="./FlowPropertyFactor.html">List[FlowPropertyFactor]</a></td>
-            <td class="comment">Conversion factors between flow properties that can be used to express amounts of the flow.
+            <td class="comment">The flow properties (quantities) in which amounts of the flow can be expressed together with conversion factors between these flow flow properties.
 </td>
         </tr>
         
         <tr>
             <td><span class="property">location</span></td>
             <td><a href="./Location.html">Location</a></td>
-            <td class="comment">The location of the flow. Normally the location of a flow is defined by the process location where the flow is an input or output. However, some data formats define a location as a property of a flow.
-</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">referenceFlowProperty</span></td>
-            <td><a href="./FlowProperty.html">FlowProperty</a></td>
-            <td class="comment">The flow property that should be normally used to express quantities of the flow (e.g. in results).</td>
+            <td class="comment">The location of the flow. Normally the location of a flow is defined by the process location where the flow is an input or output. However, some data formats define a location as a property of a flow.</td>
         </tr>
         
     </table>
@@ -120,12 +113,7 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-	"@context" : {
-		"@vocab" : "http://openlca.org/schema/v1.0#",
-		"flowType" : {
-			"@type" : "@vocab"
-		}
-	},
+	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
 	"@type" : "Flow",
 	"@id" : "00062e88-f6d1-478d-aa3a-3f35c8c00127",
 	"name" : "rotenone",
