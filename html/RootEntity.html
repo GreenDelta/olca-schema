@@ -19,7 +19,8 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">RootEntity</a></h1>
-    <p class="comment">A standalone item in a database like a location or unit</p>
+    <p class="comment">A standalone item in a database like a location, unit group, flow, or process. A root entity can be unambiguously identified by its id (the JSON-LD @id field), version, and lastChange fields.
+</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
@@ -40,13 +41,14 @@
         <tr>
             <td><span class="property">version</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
-            <td class="comment">A version number in ILCD format (e.g. 1.0 or 1.0.1).</td>
+            <td class="comment">A version number in MAJOR.MINOR.PATCH format where the MINOR and PATCH fields are optional and the fields may have leading zeros (so 01.00.00 is the same as 1.0.0 or 1).
+</td>
         </tr>
         
         <tr>
             <td><span class="property">lastChange</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
-            <td class="comment">The date when the entity was changed the last time. Together with the UUID and version this identifies an entity unambiguously.</td>
+            <td class="comment">The timestamp when the entity was changed the last time.</td>
         </tr>
         
     </table>

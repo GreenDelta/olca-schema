@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>FlowProperty</title>
+    <title>SocialIndicator</title>
     <style type="text/css">
         body {
             font-family: 'Courier New';
@@ -18,23 +18,41 @@
     </style>
 </head>
 <body style="padding:20px;">
-    <h1>Class <a href="#">FlowProperty</a></h1>
-    <p class="comment">A flow property is a quantity that can be used to express amounts of a flow.</p>
+    <h1>Class <a href="#">SocialIndicator</a></h1>
+    <p class="comment">None</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
     <table>
         
         <tr>
-            <td><span class="property">flowPropertyType</span></td>
-            <td><a href="./FlowPropertyType.html">FlowPropertyType</a></td>
-            <td class="comment">The type of the flow property</td>
+            <td><span class="property">activityVariable</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name of the activity variable of the indicator.</td>
         </tr>
         
         <tr>
-            <td><span class="property">unitGroup</span></td>
-            <td><a href="./UnitGroup.html">UnitGroup</a></td>
-            <td class="comment">The units of measure that can be used to express quantities of the flow property.</td>
+            <td><span class="property">activityQuantity</span></td>
+            <td><a href="./FlowProperty.html">FlowProperty</a></td>
+            <td class="comment">The quantity of the activity variable.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">activityUnit</span></td>
+            <td><a href="./Unit.html">Unit</a></td>
+            <td class="comment">The unit of the activity variable.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">unitOfMeasurement</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The unit in which the indicator is measured.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">evaluationScheme</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">Documentation of the evaluation scheme of the indicator.</td>
         </tr>
         
     </table>
@@ -93,19 +111,28 @@
     <p>~</p>
     <p>JSON-LD Example</p>
     <pre>{
-	"@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
-	"@type" : "FlowProperty",
-	"@id" : "93a60a56-a3c8-11da-a746-0800200b9a66",
-	"name" : "Mass",
-	"category" : {
-		"@id" : "86863950-d175-4400-8cc2-c40511322f94"
+    "@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
+	"@type" : "SocialIndicator",
+	"@id": "685bea55-61bf-44e5-87c3-71038cebd0b0",
+	"name": "Gender wage gap",
+	"category": {
+	    "@type": "Category",
+	    "@id": "35bc9654-5499-4fae-9e1c-df5aba1de9ec",
+	    "name": "Discrimination"
 	},
-	"flowPropertyType" : "PHYSICAL_QUANTITY",
-	"unitGroup" : {
-		"@type" : "UnitGroup",
-		"@id" : "93a60a57-a4c8-11da-a746-0800200c9a66",
-		"name" : "Units of mass"
-	}
+	"activityVariable": "Worker hours",
+	"activityQuantity": {
+	    "@type": "FlowProperty",
+	    "@id": "c0447923-0e60-4b3c-97c2-a86dddd9eea5",
+	    "name": "Duration"
+	},
+	"activityUnit": {
+	    "@type": "Unit",
+	    "@id": "227a54d9-44e7-468c-b8bb-f2dd1ae68c7a",
+	    "name": "h"
+	},
+	"unitOfMeasurement": "%",
+	"evaluationScheme": "0% = no risk; 0% - <5% and 0% - >-5%= very low risk; 5% - <10% and -5% - >-10% = low risk; 10% - <20% and -10% - >-20% = medium risk; 20% - <30% and -20% - >-30% = high risk; >=30% and <=-30 = very high risk; n.a. = no data"
 }</pre>
     
 </body>

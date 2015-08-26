@@ -1,0 +1,24 @@
+{
+    "@context" : "http://greendelta.github.io/olca-schema/context.jsonld",
+	"@type" : "SocialIndicator",
+	"@id": "685bea55-61bf-44e5-87c3-71038cebd0b0",
+	"name": "Gender wage gap",
+	"category": {
+	    "@type": "Category",
+	    "@id": "35bc9654-5499-4fae-9e1c-df5aba1de9ec",
+	    "name": "Discrimination"
+	},
+	"activityVariable": "Worker hours",
+	"activityQuantity": {
+	    "@type": "FlowProperty",
+	    "@id": "c0447923-0e60-4b3c-97c2-a86dddd9eea5",
+	    "name": "Duration"
+	},
+	"activityUnit": {
+	    "@type": "Unit",
+	    "@id": "227a54d9-44e7-468c-b8bb-f2dd1ae68c7a",
+	    "name": "h"
+	},
+	"unitOfMeasurement": "%",
+	"evaluationScheme": "0% = no risk; 0% - <5% and 0% - >-5%= very low risk; 5% - <10% and -5% - >-10% = low risk; 10% - <20% and -10% - >-20% = medium risk; 20% - <30% and -20% - >-30% = high risk; >=30% and <=-30 = very high risk; n.a. = no data"
+}

@@ -31,3 +31,5 @@ enum:
     - name: LOCATION
 
     - name: NW_SET
+
+    - name: SOCIAL_INDICATOR
