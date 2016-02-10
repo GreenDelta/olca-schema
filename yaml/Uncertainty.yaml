@@ -25,7 +25,7 @@ class:
       doc: The geometric mean value (used for log-normal distributions).
 
     - name: geomMeanFormula
-      type: double
+      type: string
       doc: A mathematical formula for the geometric mean.
 
     - name: minimum

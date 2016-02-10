@@ -4,7 +4,7 @@
 	"@id" : "59963026-9b57-4666-a732-59fa9ebd9223",
 	"name" : "Steel production",
 	"description" : "",
-	"processTyp" : "UNIT_PROCESS",
+	"processType" : "UNIT_PROCESS",
 	"location" : {
 		"@type" : "Location",
 		"@id" : "5f02f088-9301-3d7b-a1ac-972c11bf3e7d",

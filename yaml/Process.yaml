@@ -30,6 +30,6 @@ class:
       type: ProcessDocumentation
       doc:
 
-    - name: processTyp
+    - name: processType
       type: ProcessType
       doc:
