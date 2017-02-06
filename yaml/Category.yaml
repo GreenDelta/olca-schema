@@ -2,7 +2,7 @@
 class:
   name: Category
   superClass: RootEntity
-  example: category.jsonld
+  example: category.json
   doc: >
        A category is used for the categorisation of types like processes, flows,
        etc.

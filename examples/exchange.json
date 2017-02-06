@@ -1,0 +1,23 @@
+{
+  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+  "@type": "Exchange",
+  "avoidedProduct": false,
+  "input": false,
+  "amount": 1.0,
+  "quantitativeReference": true,
+  "flow": {
+    "@type": "Flow",
+    "@id": "54290a29-8baa-495c-84b3-db212c75f7b7",
+    "name": "Steel"
+  },
+  "unit": {
+    "@type": "Unit",
+    "@id": "20aadc24-a391-41cf-b340-3e4529f44bde",
+    "name": "kg"
+  },
+  "flowProperty": {
+    "@type": "FlowProperty",
+    "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
+    "name": "Mass"
+  }
+}

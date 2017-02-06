@@ -2,7 +2,7 @@
 class:
   name: SocialIndicator
   superClass: CategorizedEntity
-  example: social_indicator.jsonld
+  example: social_indicator.json
   doc:
 
   properties:

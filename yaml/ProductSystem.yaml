@@ -1,0 +1,37 @@
+
+class:
+  name: ProductSystem
+  superClass: CategorizedEntity
+  example: product_system.json
+  doc: A product system describes the supply chain of a product (the functional unit) ...
+
+  properties:
+    - name: processes
+      type: List[Process]
+      doc: The descriptors of all processes that are contained in the product system.
+
+    - name: referenceProcess
+      type: Process
+      doc: The descriptor of the process that provides the flow of the functional unit of the product system.
+
+    - name: referenceExchange
+      type: Exchange
+      doc: >
+           The exchange of the reference processes (typically the product output) that provides the flow of the
+           functional unit of the product system.
+
+    - name: targetAmount
+      type: double
+      doc: The flow amount of the functional unit of the product system.
+
+    - name: targetUnit
+      type: Unit
+      doc: The unit in which the flow amount of the functional unit is given.
+
+    - name: targetFlowProperty
+      type: FlowProperty
+      doc: The flow property in which the flow amount of the functional unit is given.
+
+    - name: processLinks
+      type: List[ProcessLink]
+      doc: The process links of the product system.

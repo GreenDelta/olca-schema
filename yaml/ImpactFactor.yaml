@@ -2,7 +2,7 @@
 class:
   name: ImpactFactor
   superClass: Entity
-  example: impact_factor.jsonld
+  example: impact_factor.json
   doc: A single characterisation factor of a LCIA category for a flow.
 
   properties:

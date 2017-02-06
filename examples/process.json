@@ -1,0 +1,69 @@
+{
+  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+  "@type": "Process",
+  "@id": "59963026-9b57-4666-a732-59fa9ebd9223",
+  "name": "Steel production",
+  "description": "",
+  "processType": "UNIT_PROCESS",
+  "location": {
+    "@type": "Location",
+    "@id": "5f02f088-9301-3d7b-a1ac-972c11bf3e7d",
+    "name": "Germany"
+  },
+  "processDocumentation": {
+    "copyright": false,
+    "creationDate": "2015-02-11T13:58:48.789+01:00"
+  },
+  "exchanges": [
+    {
+      "@type": "Exchange",
+      "avoidedProduct": false,
+      "input": false,
+      "amount": 1.0,
+      "flow": {
+        "@type": "Flow",
+        "@id": "54290a29-8baa-495c-84b3-db212c75f7b7",
+        "name": "Steel"
+      },
+      "unit": {
+        "@type": "Unit",
+        "@id": "20aadc24-a391-41cf-b340-3e4529f44bde",
+        "name": "kg"
+      },
+      "flowProperty": {
+        "@type": "FlowProperty",
+        "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
+        "name": "Mass"
+      },
+      "quantitativeReference": true
+    },
+    {
+      "@type": "Exchange",
+      "avoidedProduct": false,
+      "input": false,
+      "amount": 10.4,
+      "flow": {
+        "@type": "Flow",
+        "@id": "7ae371ac-8532-11e0-9d78-0800200c9a66",
+        "name": "Carbon monoxide"
+      },
+      "unit": {
+        "@type": "Unit",
+        "@id": "20aadc24-a391-41cf-b340-3e4529f44bde",
+        "name": "kg"
+      },
+      "flowProperty": {
+        "@type": "FlowProperty",
+        "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
+        "name": "Mass"
+      },
+      "uncertainty": {
+        "@type": "Uncertainty",
+        "distributionType": "NORMAL_DISTRIBUTION",
+        "mean": 10.4,
+        "sd": 1.0
+      }
+    }
+  ]
+}
+

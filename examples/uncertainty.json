@@ -1,0 +1,7 @@
+{
+  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+  "@type": "Uncertainty",
+  "distributionType": "NORMAL_DISTRIBUTION",
+  "mean": 10.4,
+  "sd": 1
+}

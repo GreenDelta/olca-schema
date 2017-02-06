@@ -1,0 +1,27 @@
+
+class:
+  name: ProcessLink
+  superClass: Entity
+  example: process_link.json
+  doc: A process link is a connection between two processes in a product system.
+
+  properties:
+    - name: provider
+      type: Process
+      doc: >
+           The descriptor of the process that provides a product or a waste treatment.
+
+    - name: flow
+      type: Flow
+      doc: The descriptor of the flow that is exchanged between the two processes.
+
+    - name: process
+      type: Process
+      doc: The descriptor of the process that is linked to the provider.
+
+    - name: exchange
+      type: Exchange
+      doc: >
+           The exchange of the linked process (this is useful if the linked process has multiple exchanges with the
+           same flow that are linked to different provides, e.g. in an electricity mix).
+

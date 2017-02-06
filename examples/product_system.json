@@ -1,0 +1,64 @@
+{
+  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+  "@type": "ProductSystem",
+  "@id": "e673be33-b071-4ba2-9097-5b77a9c3ced2",
+  "name": "Ingot casting",
+  "description": "",
+  "version": "01.00.000",
+  "referenceProcess": {
+    "@type": "Process",
+    "@id": "55fd27b1-c73d-4a76-b560-cfc461e81efd",
+    "name": "Ingot casting"
+  },
+  "referenceExchange": {
+    "@type": "Exchange",
+    "@id": "e4649009-ddb9-3c85-be99-1d635ffd3030"
+  },
+  "targetFlowProperty": {
+    "@type": "FlowProperty",
+    "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
+    "name": "Mass"
+  },
+  "targetUnit": {
+    "@type": "Unit",
+    "@id": "20aadc24-a391-41cf-b340-3e4529f44bde",
+    "name": "kg"
+  },
+  "targetAmount": 1.0,
+  "processes": [
+    {
+      "@type": "Process",
+      "@id": "55fd27b1-c73d-4a76-b560-cfc461e81efd",
+      "name": "Ingot casting"
+    },
+    {
+      "@type": "Process",
+      "@id": "41b31d77-5223-47a1-a24a-153ac1a9f670",
+      "name": "Electrolysis"
+    }
+  ],
+  "processLinks": [
+    {
+      "@type": "ProcessLink",
+      "provider": {
+        "@type": "Process",
+        "@id": "41b31d77-5223-47a1-a24a-153ac1a9f670",
+        "name": "Electrolysis"
+      },
+      "flow": {
+        "@type": "Flow",
+        "@id": "b55f8bd2-404d-4830-b053-4731e36668b9",
+        "name": "liquid aluminium"
+      },
+      "process": {
+        "@type": "Process",
+        "@id": "55fd27b1-c73d-4a76-b560-cfc461e81efd",
+        "name": "Ingot casting"
+      },
+      "exchange": {
+        "@type": "Exchange",
+        "@id": "1c2dd916-8c4e-3e1a-bdfc-4e4b214b97b3"
+      }
+    }
+  ]
+}

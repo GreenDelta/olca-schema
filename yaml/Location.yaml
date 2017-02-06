@@ -2,7 +2,7 @@
 class:
   name: Location
   superClass: RootEntity
-  example: location.jsonld
+  example: location.json
   doc: A location like a country, state, city, etc.
 
   properties:

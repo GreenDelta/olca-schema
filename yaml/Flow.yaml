@@ -2,7 +2,7 @@
 class:
   name: Flow
   superClass: CategorizedEntity
-  example: flow.jsonld
+  example: flow.json
   doc: >
        Everything that can be an input or output of a process (e.g. a substance,
        a product, a waste, a service etc.)

@@ -2,7 +2,7 @@
 class:
   name: Unit
   superClass: RootEntity
-  example: unit.jsonld
+  example: unit.json
   doc: An unit of measure
 
   properties:

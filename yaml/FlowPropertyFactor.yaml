@@ -2,7 +2,7 @@
 class:
   name: FlowPropertyFactor
   superClass: Entity
-  example: flow_property_factor.jsonld
+  example: flow_property_factor.json
   doc: >
        A FlowPropertyFactor is a conversion factor between
        <a href="./FlowProperty.html">flow properties (quantities)</a>
