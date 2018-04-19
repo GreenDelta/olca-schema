@@ -1,6 +1,7 @@
 {
   "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "Exchange",
+  "internalId": 1,
   "avoidedProduct": false,
   "input": false,
   "amount": 1.0,
