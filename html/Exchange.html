@@ -26,6 +26,13 @@
     <table>
         
         <tr>
+            <td><span class="property">internalId</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#int">int</a></td>
+            <td class="comment">The process internal ID of the exchange. This is used to identify exchanges unambiguously within a process (e.g. when linking exchanges in a product system where multiple exchanges with the same flow are allowed). The value should be >= 1.
+</td>
+        </tr>
+        
+        <tr>
             <td><span class="property">avoidedProduct</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
             <td class="comment">Indicates whether this exchange is an avoided product.</td>
@@ -115,6 +122,7 @@
     <pre>{
   "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "Exchange",
+  "internalId": 1,
   "avoidedProduct": false,
   "input": false,
   "amount": 1.0,
