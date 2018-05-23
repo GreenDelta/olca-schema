@@ -1,0 +1,16 @@
+
+class:
+  name: ProcessDescriptor
+  superClass: Descriptor
+  doc: The typical display information of a [Process].
+
+  properties:
+    
+    - name: location
+      type: string
+      doc: >
+           The location name or code of the process.
+      
+    - name: processType
+      type: ProcessType
+      doc: The type of the process.

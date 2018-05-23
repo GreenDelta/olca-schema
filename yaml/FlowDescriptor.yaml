@@ -1,0 +1,20 @@
+
+class:
+  name: FlowDescriptor
+  superClass: Descriptor
+  doc: The typical display information of a [Flow].
+
+  properties:
+    - name: unit
+      type: string
+      doc: The name (symbol) of the reference unit of the flow.
+    
+    - name: location
+      type: string
+      doc: >
+           The location name or code of the flow. Typically, this is only used
+           for product flows in databases like ecoinvent.
+
+    - name: flowType
+      type: FlowType
+      doc: The type of the flow.

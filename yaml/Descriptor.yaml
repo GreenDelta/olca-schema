@@ -1,0 +1,16 @@
+
+class:
+  name: Descriptor
+  superClass: RootEntity
+  doc: >
+       A descriptor contains some meta data of an [RootEntity] in a readable
+       format. In most cases, they are used to display the key information of
+       such an entity in a user interface or export format (e.g. in calculation
+       results).
+  
+  properties:
+    - name: category
+      type: string
+      doc: >
+           A full path of the category, e.g.
+           `Elementary flows/Emissions to air/unspecified`.
