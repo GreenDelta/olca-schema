@@ -1,0 +1,46 @@
+
+class:
+  name: CalculationSetup
+  superClass: Entity
+  doc: A setup for a product system calculation.
+  
+  properties:
+    - name: productSystem
+      type: Ref[ProductSystem]
+      doc: The product system that should be calculated (required).
+    
+    - name: impactMethod
+      type: Ref[ImpactMethod]
+      doc: The LCIA method for the calculation (optional).
+    
+    - name: withCosts
+      type: boolean
+      doc: >
+          Indicates whether life cycle costs should be also calculated
+          (optional).
+    
+    - name: nwSet
+      type: Ref[NwSet]
+      doc: The normalisation and weighting set for the calculation (optional).
+    
+    - name: allocationMethod
+      type: AllocationType
+      doc: The calculation type to be used in the calculation (optional).
+    
+    - name: parameterRedefs
+      type: List[ParameterRedef]
+      doc: >
+           A list of parameter redefinitions to be used in the calculation
+           (optional).
+    
+    - name: amount
+      type: double
+      doc: (optional)
+
+    - name: unit
+      type: Ref[Unit]
+      doc: (optional)
+    
+    - name: flowProperty
+      type: Ref[FlowProperty]
+      doc: (optional)

@@ -1,0 +1,19 @@
+
+class:
+  name: FlowResult
+  superClass: Entity
+  doc: >
+       A result value for a flow; given in the reference unit of the flow.
+
+  properties:
+    - name: flow
+      type: FlowRef
+      doc: The flow reference.
+    
+    - name: input
+      type: boolean
+      doc: Indicates whether the flow is an input or not.
+
+    - name: value
+      type: double
+      doc: The value of the flow amount.

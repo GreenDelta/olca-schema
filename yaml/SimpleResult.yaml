@@ -1,0 +1,11 @@
+
+class:
+  name: SimpleResult
+  superClass: Entity
+
+  properties:
+    - name: flowResults
+      type: List[FlowResult]
+    
+    - name: impactResults
+      type: List[ImpactResult]

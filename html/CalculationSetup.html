@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CalculationSetup</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #2F4F4F;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">CalculationSetup</a></h1>
+    <p class="comment">A setup for a product system calculation.</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">productSystem</span></td>
+            <td><a href="./Ref.html">Ref[ProductSystem]</a></td>
+            <td class="comment">The product system that should be calculated (required).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">impactMethod</span></td>
+            <td><a href="./Ref.html">Ref[ImpactMethod]</a></td>
+            <td class="comment">The LCIA method for the calculation (optional).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">withCosts</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
+            <td class="comment">Indicates whether life cycle costs should be also calculated (optional).
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">nwSet</span></td>
+            <td><a href="./Ref.html">Ref[NwSet]</a></td>
+            <td class="comment">The normalisation and weighting set for the calculation (optional).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">allocationMethod</span></td>
+            <td><a href="./AllocationType.html">AllocationType</a></td>
+            <td class="comment">The calculation type to be used in the calculation (optional).</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">parameterRedefs</span></td>
+            <td><a href="./ParameterRedef.html">List[ParameterRedef]</a></td>
+            <td class="comment">A list of parameter redefinitions to be used in the calculation (optional).
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">amount</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">(optional)</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">unit</span></td>
+            <td><a href="./Ref.html">Ref[Unit]</a></td>
+            <td class="comment">(optional)</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">flowProperty</span></td>
+            <td><a href="./Ref.html">Ref[FlowProperty]</a></td>
+            <td class="comment">(optional)</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+</body>
+</html>

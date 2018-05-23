@@ -1,0 +1,21 @@
+
+class:
+  name: ParameterRedef
+  superClass: Entity
+  doc: A redefinition of a parameter in a product system.
+
+  properties:
+    - name: name
+      type: string
+      doc: The parameter name.
+    
+    - name: value
+      type: double
+      doc: The (new) value of the parameter.
+    
+    - name: context
+      type: Ref
+      doc: >
+           The context of the paramater (a process or LCIA method). If no
+           context is provided it is assumed that this is a redefinition of a
+           global parameter.
