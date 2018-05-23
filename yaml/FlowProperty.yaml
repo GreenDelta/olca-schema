@@ -11,7 +11,7 @@ class:
       doc: The type of the flow property
 
     - name: unitGroup
-      type: UnitGroup
+      type: Ref[UnitGroup]
       doc: >
            The units of measure that can be used to express quantities of the
            flow property.

@@ -50,7 +50,7 @@ class:
       doc:
 
     - name: reviewer
-      type: Actor
+      type: Ref[Actor]
       doc:
 
     - name: samplingDescription
@@ -58,7 +58,7 @@ class:
       doc:
 
     - name: sources
-      type: List[Source]
+      type: List[Ref[Source]]
       doc:
 
     - name: restrictionsDescription
@@ -74,15 +74,15 @@ class:
       doc:
 
     - name: dataDocumentor
-      type: Actor
+      type: Ref[Actor]
       doc:
 
     - name: dataGenerator
-      type: Actor
+      type: Ref[Actor]
       doc:
 
     - name: dataSetOwner
-      type: Actor
+      type: Ref[Actor]
       doc:
 
     - name: intendedApplication
@@ -94,7 +94,7 @@ class:
       doc:
 
     - name: publication
-      type: Source
+      type: Ref[Source]
       doc:
 
     - name: geographyDescription

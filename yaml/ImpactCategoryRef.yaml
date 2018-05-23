@@ -1,0 +1,11 @@
+
+class:
+  name: ImpactCategoryRef
+  superClass: Ref[ImpactCategory]
+  doc: A reference to a [ImpactCategory] data set.
+
+  properties:
+    - name: refUnit
+      type: string
+      doc: The name (symbol) of the reference unit of the impact category.
+    

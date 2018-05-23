@@ -29,7 +29,7 @@ class:
 
   properties:
     - name: flowProperty
-      type: FlowProperty
+      type: Ref[FlowProperty]
       doc: The flow property (quantity) of the factor.
 
     - name: conversionFactor

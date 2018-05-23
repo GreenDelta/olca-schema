@@ -6,5 +6,5 @@ class:
 
   properties:
     - name: category
-      type: Category
+      type: Ref[Category]
       doc: The category of the entity.

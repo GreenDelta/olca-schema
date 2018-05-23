@@ -7,11 +7,11 @@ class:
 
   properties:
     - name: processes
-      type: List[Process]
+      type: List[ProcessRef]
       doc: The descriptors of all processes that are contained in the product system.
 
     - name: referenceProcess
-      type: Process
+      type: ProcessRef
       doc: The descriptor of the process that provides the flow of the functional unit of the product system.
 
     - name: referenceExchange
@@ -25,11 +25,11 @@ class:
       doc: The flow amount of the functional unit of the product system.
 
     - name: targetUnit
-      type: Unit
+      type: Ref[Unit]
       doc: The unit in which the flow amount of the functional unit is given.
 
     - name: targetFlowProperty
-      type: FlowProperty
+      type: Ref[FlowProperty]
       doc: The flow property in which the flow amount of the functional unit is given.
 
     - name: processLinks

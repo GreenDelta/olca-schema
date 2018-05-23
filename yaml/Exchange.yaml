@@ -19,11 +19,11 @@ class:
       doc: Indicates whether this exchange is an avoided product.
 
     - name: flow
-      type: Flow
+      type: FlowRef
       doc: The flow of the exchange.
 
     - name: flowProperty
-      type: FlowProperty
+      type: Ref[FlowProperty]
       doc: The quantity in which the amount is given.
 
     - name: input
@@ -39,7 +39,7 @@ class:
       type: double
 
     - name: provider
-      type: Process
+      type: ProcessRef
 
     - name: amount
       type: double

@@ -11,11 +11,11 @@ class:
       doc: The name of the activity variable of the indicator.
 
     - name: activityQuantity
-      type: FlowProperty
+      type: Ref[FlowProperty]
       doc: The quantity of the activity variable.
 
     - name: activityUnit
-      type: Unit
+      type: Ref[Unit]
       doc: The unit of the activity variable.
 
     - name: unitOfMeasurement

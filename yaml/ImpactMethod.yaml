@@ -6,7 +6,7 @@ class:
 
   properties:
     - name: impactCategories
-      type: List[ImpactCategory]
+      type: List[ImpactCategoryRef]
       doc: The LCIA categories of the method.
 
     - name: parameters

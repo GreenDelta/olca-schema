@@ -7,7 +7,7 @@ class:
 
   properties:
     - name: defaultFlowProperty
-      type: FlowProperty
+      type: Ref[FlowProperty]
       doc: >
            Some LCA data formats do not have the concept of flow properties or
            quantities. This field provides a default link to a flow property for

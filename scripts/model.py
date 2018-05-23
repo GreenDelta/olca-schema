@@ -91,11 +91,13 @@ class Property:
 
     @property
     def html_type_link(self):
-        t = self.field_type
-        if t.startswith('List['):
+        t = self.field_type  # type: str
+        if t.startswith('List[Ref['):
+            t = 'Ref'
+        elif t.startswith('List['):
             end = len(t) - 1
             t = t[5:end]
-        if t.startswith('Ref['):
+        elif t.startswith('Ref['):
             t = 'Ref'
         if t[0].isupper():
             return "./%s.html" % t

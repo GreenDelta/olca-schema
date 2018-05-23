@@ -30,7 +30,7 @@ class:
            flow properties.
 
     - name: location
-      type: Location
+      type: Ref[Location]
       doc: >
            The location of the flow. Normally the location of a flow is defined
            by the process location where the flow is an input or output. However,

@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>ImpactMethod</title>
+    <title>ImpactCategoryRef</title>
     <style type="text/css">
         body {
             font-family: 'Courier New';
@@ -18,24 +18,17 @@
     </style>
 </head>
 <body style="padding:20px;">
-    <h1>Class <a href="#">ImpactMethod</a></h1>
-    <p class="comment">A impact assessment method.</p>
+    <h1>Class <a href="#">ImpactCategoryRef</a></h1>
+    <p class="comment">A reference to a [ImpactCategory] data set.</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
     <table>
         
         <tr>
-            <td><span class="property">impactCategories</span></td>
-            <td><a href="./ImpactCategoryRef.html">List[ImpactCategoryRef]</a></td>
-            <td class="comment">The LCIA categories of the method.</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">parameters</span></td>
-            <td><a href="./Parameter.html">List[Parameter]</a></td>
-            <td class="comment">A set of method specific parameters which can be used in formulas of the characterisation factors in this method.
-</td>
+            <td><span class="property">refUnit</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">The name (symbol) of the reference unit of the impact category.</td>
         </tr>
         
     </table>
@@ -43,13 +36,14 @@
     
     
     <p>~</p>
-    <p class="comment">Properties from <a href="./CategorizedEntity.html">CategorizedEntity</a>:</p>
+    <p class="comment">Properties from <a href="./Ref.html">Ref</a>:</p>
     <table>
         
         <tr>
             <td><span class="property">category</span></td>
-            <td><a href="./Ref.html">Ref[Category]</a></td>
-            <td class="comment">The category of the entity.</td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A full path of the category, e.g. `Elementary flows/Emissions to air/unspecified`.
+</td>
         </tr>
         
     </table>

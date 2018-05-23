@@ -7,16 +7,16 @@ class:
 
   properties:
     - name: provider
-      type: Process
+      type: Ref[Process]
       doc: >
            The descriptor of the process that provides a product or a waste treatment.
 
     - name: flow
-      type: Flow
+      type: Ref[Flow]
       doc: The descriptor of the flow that is exchanged between the two processes.
 
     - name: process
-      type: Process
+      type: Ref[Process]
       doc: The descriptor of the process that is linked to the provider.
 
     - name: exchange
