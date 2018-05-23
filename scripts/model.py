@@ -11,10 +11,12 @@ class Model:
         """
         Loads a model from a directory which contains YAML files that describe
         the model.
-        :param folder: The directory that contains the YAML files (extension *.yaml)
+        :param folder: The directory that contains the YAML files (extension
+                       *.yaml)
         """
         m = Model()
-        d = folder if folder.endswith('/') or folder.endswith('\\') else folder + '/'
+        d = folder if folder.endswith(
+            '/') or folder.endswith('\\') else folder + '/'
         files = glob.glob(d + "*.yaml")
         for file_path in files:
             with open(file_path, 'r') as f:
@@ -25,9 +27,11 @@ class Model:
                     m.types.append(EnumType.load_yaml(yaml_model['enum']))
         return m
 
-    def find_type(self, name):
+    def find_type(self, name: str):
         if name is None:
             return None
+        if name.startswith('Ref['):
+            return self.find_type('Ref')
         for t in self.types:
             if t.name == name:
                 return t
@@ -36,7 +40,7 @@ class Model:
     def get_super_classes(self, clazz):
         classes = []
         c = self.find_type(clazz.super_class)
-        while not c is None:
+        while c is not None:
             classes.append(c)
             c = self.find_type(c.super_class)
         return classes
@@ -89,8 +93,10 @@ class Property:
     def html_type_link(self):
         t = self.field_type
         if t.startswith('List['):
-            end = len(t) -1
+            end = len(t) - 1
             t = t[5:end]
+        if t.startswith('Ref['):
+            t = 'Ref'
         if t[0].isupper():
             return "./%s.html" % t
         else:

@@ -1,11 +1,11 @@
 
 class:
-  name: FlowDescriptor
-  superClass: Descriptor
-  doc: The typical display information of a [Flow].
+  name: FlowRef
+  superClass: Ref[Flow]
+  doc: A reference to a [Flow] data set.
 
   properties:
-    - name: unit
+    - name: refUnit
       type: string
       doc: The name (symbol) of the reference unit of the flow.
     

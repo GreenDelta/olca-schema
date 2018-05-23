@@ -1,8 +1,8 @@
 
 class:
-  name: ProcessDescriptor
-  superClass: Descriptor
-  doc: The typical display information of a [Process].
+  name: ProcessRef
+  superClass: Ref[Process]
+  doc: A reference to a [Process] data set.
 
   properties:
     
