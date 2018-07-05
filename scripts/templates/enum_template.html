@@ -26,6 +26,7 @@
         {% for item in model.items %}
         <tr>
             <td><span class="property">{{ item.name }}</span></td>
+            <td class="comment">{{ item.doc }}</td>
         </tr>
         {% endfor %}
     </table>
