@@ -19,7 +19,7 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">Ref</a></h1>
-    <p class="comment">A Ref is a reference to a [RootEntity]. When serializing an entity (e.g. a [Process]) that references another standalone entity (e.g. a [Flow] in an [Exchange]) we do not want to write the complete referenced entity into the serialized JSON object but just a reference. However, the reference contains some meta-data like name, category path etc. that are useful to display.
+    <p class="comment">A Ref is a reference to a <a href="./RootEntity.html">RootEntity</a>. When serializing an entity (e.g. a <a href="./Process.html">Process</a>) that references another standalone entity (e.g. a <a href="./Flow.html">Flow</a> in an <a href="./Exchange.html">Exchange</a>) we do not want to write the complete referenced entity into the serialized JSON object but just a reference. However, the reference contains some meta-data like name, category path etc. that are useful to display.
 </p>
     
     <p>~</p>
@@ -29,7 +29,7 @@
         <tr>
             <td><span class="property">categoryPath</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#string">List[string]</a></td>
-            <td class="comment">The full path of the category of the referenced entity from top to bottom, e.g. `["Elementary flows", "Emissions to air", "unspecified"]`.
+            <td class="comment">The full path of the category of the referenced entity from top to bottom, e.g. `"Elementary flows", "Emissions to air", "unspecified"`.
 </td>
         </tr>
         

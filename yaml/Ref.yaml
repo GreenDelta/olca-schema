@@ -15,7 +15,7 @@ class:
       type: List[string]
       doc: >
            The full path of the category of the referenced entity from top to
-           bottom, e.g. `["Elementary flows", "Emissions to air", "unspecified"]`.
+           bottom, e.g. `"Elementary flows", "Emissions to air", "unspecified"`.
 
      
     
