@@ -143,4 +143,8 @@ def format_doc(doc: str) -> str:
         link_type = match[1:(len(match)-1)]
         link = '<a href="./%s.html">%s</a>' % (link_type, link_type)
         doc = doc.replace(match, link)
+    for match in re.findall('`[^`]+`', doc):
+        code = match[1:(len(match)-1)]
+        span = '<span style="color: #7c4dff">%s</span>' % (code)
+        doc = doc.replace(match, span)
     return doc

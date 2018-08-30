@@ -5,9 +5,9 @@ class:
   example: category.json
   doc: >
        A category is used for the categorisation of types like processes, flows,
-       etc. The tricky thing is that the `Category` class inherits also from the
-       `CategorizedEntity` type so that a category can have a category attribute
-       which is then the parent category of this category (uff).
+       etc. The tricky thing is that the `Category` class inherits also from
+       the [CategorizedEntity] type so that a category can have a category
+       attribute which is then the parent category of this category (uff).
 
   properties:
     - name: modelType
