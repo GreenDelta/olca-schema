@@ -50,8 +50,14 @@ class:
     - name: unit
       type: Unit
 
-    - name: pedigreeUncertainty
+    - name: dqEntry
       type: string
+      doc: >
+           A data quality entry like `(1;3;2;5;1)`. The entry is a vector of
+           data quality values that need to match the data quality scheme for
+           flow inputs and outputs that is assigned to the [Process]. In such
+           a scheme the data quality indicators have fixed positions and the
+           respective values in the `dqEntry` vector map to these positions.
 
     - name: uncertainty
       type: Uncertainty
