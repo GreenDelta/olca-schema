@@ -1,4 +1,6 @@
 import glob
+import re
+
 import yaml
 
 
@@ -50,7 +52,7 @@ class ClassType:
     def __init__(self, name=None, super_class=None, doc=None):
         self.name = name
         self.super_class = super_class
-        self.doc = doc
+        self.doc = format_doc(doc)
         self.example = None
         self.properties = []
 
@@ -59,7 +61,7 @@ class ClassType:
         c = ClassType()
         c.name = yaml_model['name']
         if 'doc' in yaml_model:
-            c.doc = yaml_model['doc']
+            c.doc = format_doc(yaml_model['doc'])
         else:
             c.doc = ''
         if 'superClass' in yaml_model:
@@ -76,7 +78,7 @@ class Property:
     def __init__(self, name=None, field_type=None, doc=None):
         self.name = name
         self.field_type = field_type
-        self.doc = doc
+        self.doc = format_doc(doc)
 
     @staticmethod
     def load_yaml(yaml_model):
@@ -84,7 +86,7 @@ class Property:
         p.name = yaml_model['name']
         p.field_type = yaml_model['type']
         if 'doc' in yaml_model:
-            p.doc = yaml_model['doc']
+            p.doc = format_doc(yaml_model['doc'])
         else:
             p.doc = ''
         return p
@@ -108,7 +110,7 @@ class Property:
 class EnumType:
     def __init__(self, name=None, doc=None):
         self.name = name
-        self.doc = doc
+        self.doc = format_doc(doc)
         self.items = []
 
     @staticmethod
@@ -116,15 +118,29 @@ class EnumType:
         e = EnumType()
         e.name = yaml_model['name']
         if 'doc' in yaml_model:
-            e.doc = yaml_model['doc']
+            e.doc = format_doc(yaml_model['doc'])
         else:
             e.doc = ''
         if 'items' in yaml_model:
             for item in yaml_model['items']:
-                e.items.append(EnumItem(item['name']))
+                elem = EnumItem(item['name'])
+                if 'doc' in item:
+                    elem.doc = format_doc(item['doc'])
+                e.items.append(elem)
         return e
 
 
 class EnumItem:
     def __init__(self, name=None):
         self.name = name
+        self.doc = ''
+
+
+def format_doc(doc: str) -> str:
+    if doc is None:
+        return ''
+    for match in re.findall('\\[[^\\]]*\\]', doc):
+        link_type = match[1:(len(match)-1)]
+        link = '<a href="./%s.html">%s</a>' % (link_type, link_type)
+        doc = doc.replace(match, link)
+    return doc

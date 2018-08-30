@@ -19,7 +19,8 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">Exchange</a></h1>
-    <p class="comment">An input or output of a process.</p>
+    <p class="comment">An Exchange is an input or output of a <a href="./Flow.html">Flow</a> in a <a href="./Process.html">Process</a>. The amount of an exchange is given in a specific unit of a quantity (<a href="./FlowProperty.html">FlowProperty</a>) of the flow. The allowed units and flow properties that can be used for a flow in an exchange are defined by the flow property information in that flow (see also the <a href="./FlowPropertyFactor.html">FlowPropertyFactor</a> type). 
+</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
@@ -41,7 +42,7 @@
         <tr>
             <td><span class="property">flow</span></td>
             <td><a href="./FlowRef.html">FlowRef</a></td>
-            <td class="comment">The flow of the exchange.</td>
+            <td class="comment">The reference to the flow of the exchange.</td>
         </tr>
         
         <tr>
@@ -89,7 +90,7 @@
         
         <tr>
             <td><span class="property">unit</span></td>
-            <td><a href="./Unit.html">Unit</a></td>
+            <td><a href="./Ref.html">Ref[Unit]</a></td>
             <td class="comment"></td>
         </tr>
         

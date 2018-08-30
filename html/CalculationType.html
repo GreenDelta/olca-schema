@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CalculationType</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Enumeration <a href="#">CalculationType</a></h1>
+    <p class="comment">An enumeration of the different calculation methods supported by openLCA.</p>
+    <p>~</p>
+    
+    <p class="comment">Items:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">SIMPLE_CALCULATION</span></td>
+            <td class="comment">Calculates the total results for elementary flows, LCIA indicators, costs, etc. of a product system.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">CONTRIBUTION_ANALYSIS</span></td>
+            <td class="comment">Includes the total result vectors of a simple calculation but calculates also the direct contributions of each process (or better process product in case of multi-output processes) to these total results.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">UPSTREAM_ANALYSIS</span></td>
+            <td class="comment">Extends the contribution analysis by providing also the upstream results of each process (process product) in the product system. The upstream result contains the direct contributions of the respective process but also the result of the supply chain up to this process scaled to the demand of the process in the product system.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">REGIONALIZED_CALCULATION</span></td>
+            <td class="comment">A regionalized calculation is a contribution analysis but with an LCIA method that supports regionalized characterization factors (via region specific parameters in formulas) and a product system with processes that have geographic information assigned (point, line, or polygon shapes).
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">MONTE_CARLO_SIMULATION</span></td>
+            <td class="comment">A Monte Carlo simulation generates for each run, of a given number of a given number of iterations, random values according to the uncertainty distributions of process inputs/outputs, parameters, characterization factors, etc. of a product system and then performs a simple calculation for that specific run. </td>
+        </tr>
+        
+    </table>
+    
+</body>
+</html>

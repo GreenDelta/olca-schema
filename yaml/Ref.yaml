@@ -11,10 +11,11 @@ class:
        etc. that are useful to display.
 
   properties:
-    - name: category
-      type: string
+    - name: categoryPath
+      type: List[string]
       doc: >
-           A full path of the category, e.g.
-           `Elementary flows/Emissions to air/unspecified`.
+           The full path of the category of the referenced entity from top to
+           bottom, e.g. `"Elementary flows", "Emissions to air", "unspecified"`.
+
      
     

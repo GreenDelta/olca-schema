@@ -5,6 +5,10 @@ class:
   doc: A setup for a product system calculation.
   
   properties:
+    - name: calculationType
+      type: CalculationType
+      doc: The type of calculation that should be performed.
+
     - name: productSystem
       type: Ref[ProductSystem]
       doc: The product system that should be calculated (required).

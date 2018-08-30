@@ -3,7 +3,12 @@ class:
   name: Exchange
   superClass: Entity
   example: exchange.json
-  doc: An input or output of a process.
+  doc: >
+        An Exchange is an input or output of a [Flow] in a [Process]. The amount
+        of an exchange is given in a specific unit of a quantity ([FlowProperty])
+        of the flow. The allowed units and flow properties that can be used for
+        a flow in an exchange are defined by the flow property information in
+        that flow (see also the [FlowPropertyFactor] type). 
 
   properties:
     - name: internalId
@@ -20,7 +25,7 @@ class:
 
     - name: flow
       type: FlowRef
-      doc: The flow of the exchange.
+      doc: The reference to the flow of the exchange.
 
     - name: flowProperty
       type: Ref[FlowProperty]
@@ -48,7 +53,7 @@ class:
       type: string
 
     - name: unit
-      type: Unit
+      type: Ref[Unit]
 
     - name: dqEntry
       type: string
