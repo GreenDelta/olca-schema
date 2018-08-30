@@ -67,6 +67,33 @@
             <td class="comment"></td>
         </tr>
         
+        <tr>
+            <td><span class="property">dqSystem</span></td>
+            <td><a href="./Ref.html">Ref[DqSystem]</a></td>
+            <td class="comment">A reference to a data quality system (<a href="./DqSystem.html">DqSystem</a>) with which the overall quality of the process can be assessed.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">exchangeDqSystem</span></td>
+            <td><a href="./Ref.html">Ref[DqSystem]</a></td>
+            <td class="comment">A reference to a data quality system (<a href="./DqSystem.html">DqSystem</a>) with which the quality of individual inputs and outputs (<a href="./Exchange.html">Exchange</a>s) of the process can be assessed.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">socialDqSystem</span></td>
+            <td><a href="./Ref.html">Ref[DqSystem]</a></td>
+            <td class="comment">A reference to a data quality system (<a href="./DqSystem.html">DqSystem</a>) with which the quality of individual social aspects of the process can be assessed.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">dqEntry</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A data quality entry like <span style="color: #7c4dff">(1;3;2;5;1)</span>. The entry is a vector of data quality values that need to match the overall data quality system of the process (the system that is stored in the <span style="color: #7c4dff">dqSystem</span> property). In such a system the data quality indicators have fixed positions and the respective values in the <span style="color: #7c4dff">dqEntry</span> vector map to these positions.</td>
+        </tr>
+        
     </table>
     
     

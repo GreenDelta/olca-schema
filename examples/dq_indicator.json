@@ -1,0 +1,37 @@
+{
+    "@type": "DQIndicator",
+    "name": "Temporal correlation",
+    "position": 3,
+    "scores": [
+        {
+            "@type": "DQScore",
+            "position": 4,
+            "description": "Less than 15 years of difference to the time period of the data set",
+            "uncertainty": 1.2
+        },
+        {
+            "@type": "DQScore",
+            "position": 3,
+            "description": "Less than 10 years of difference to the time period of the data set",
+            "uncertainty": 1.1
+        },
+        {
+            "@type": "DQScore",
+            "position": 5,
+            "description": "Age of data unknown or more than 15 years of difference to the time period of the data set",
+            "uncertainty": 1.5
+        },
+        {
+            "@type": "DQScore",
+            "position": 1,
+            "description": "Less than 3 years of difference to the time period of the data set",
+            "uncertainty": 1.0
+        },
+        {
+            "@type": "DQScore",
+            "position": 2,
+            "description": "Less than 6 years of difference to the time period of the data set",
+            "uncertainty": 1.03
+        }
+    ]
+}

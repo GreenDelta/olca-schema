@@ -1,0 +1,6 @@
+{
+    "@type": "DQScore",
+    "position": 5,
+    "description": "Data from unknown or distinctly different area (North America instead of Middle East, OECD-Europe instead of Russia)",
+    "uncertainty": 1.1
+}

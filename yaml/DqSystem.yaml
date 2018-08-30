@@ -1,0 +1,16 @@
+
+class:
+  name: DqSystem
+  superClass: CategorizedEntity
+  example: dq_system.json
+  doc: A data quality system.
+
+  properties:
+    - name: hasUncertainties
+      type: boolean
+
+    - name: source
+      type: Ref[Source]
+
+    - name: indicators
+      type: List[DqIndicator]

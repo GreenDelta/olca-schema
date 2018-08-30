@@ -33,3 +33,32 @@ class:
     - name: processType
       type: ProcessType
       doc:
+
+    - name: dqSystem
+      type: Ref[DqSystem]
+      doc: >
+           A reference to a data quality system ([DqSystem]) with which the
+           overall quality of the process can be assessed.
+
+    - name: exchangeDqSystem
+      type: Ref[DqSystem]
+      doc: >
+           A reference to a data quality system ([DqSystem]) with which the
+           quality of individual inputs and outputs ([Exchange]s) of the process
+           can be assessed.
+
+    - name: socialDqSystem
+      type: Ref[DqSystem]
+      doc: >
+           A reference to a data quality system ([DqSystem]) with which the
+           quality of individual social aspects of the process can be assessed.
+
+    - name: dqEntry
+      type: string
+      doc: >
+           A data quality entry like `(1;3;2;5;1)`. The entry is a vector of
+           data quality values that need to match the overall data quality
+           system of the process (the system that is stored in the `dqSystem`
+           property). In such a system the data quality indicators have fixed
+           positions and the respective values in the `dqEntry` vector map to
+           these positions.
