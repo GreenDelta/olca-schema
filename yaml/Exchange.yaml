@@ -67,6 +67,6 @@ class:
     - name: uncertainty
       type: Uncertainty
 
-    - name: comment
+    - name: description
       type: string
       doc: A general comment about the input or output.

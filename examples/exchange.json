@@ -20,5 +20,6 @@
     "@type": "FlowProperty",
     "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
     "name": "Mass"
-  }
+  },
+  "description": "This is an example output of 1 kg steel."
 }
