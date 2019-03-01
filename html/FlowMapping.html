@@ -19,28 +19,28 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">FlowMapping</a></h1>
-    <p class="comment">A crosswalk of flows from a source flow list to a target flow list.</p>
+    <p class="comment">A mapping from one flow to another.</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
     <table>
         
         <tr>
-            <td><span class="property">sourceFlowList</span></td>
-            <td><a href="./FlowList.html">FlowList</a></td>
-            <td class="comment">The id of the source flow list.</td>
+            <td><span class="property">from</span></td>
+            <td><a href="./Ref.html">List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]</a></td>
+            <td class="comment">The flow, flow property, and unit of the source flow.</td>
         </tr>
         
         <tr>
-            <td><span class="property">targetFlowList</span></td>
-            <td><a href="./FlowList.html">FlowList</a></td>
-            <td class="comment">The id of the target flow list.</td>
+            <td><span class="property">to</span></td>
+            <td><a href="./Ref.html">List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]</a></td>
+            <td class="comment">The flow, flow property, and unit of the target flow.</td>
         </tr>
         
         <tr>
-            <td><span class="property">mappings</span></td>
-            <td><a href="./Mapping.html">List[Mapping]</a></td>
-            <td class="comment">A list of mappings from flows in a source flow list to flows in a target flow list.</td>
+            <td><span class="property">conversionFactor</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The factor to convert the original source flow to the target flow.</td>
         </tr>
         
     </table>
