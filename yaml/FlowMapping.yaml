@@ -3,17 +3,17 @@ class:
   name: FlowMapping
   superClass: RootEntity
   example: #none yet
-  doc: A crosswalk of flows from a source flow list to a target flow list.
+  doc: A mapping from one flow to another.
 
   properties:
-  - name: sourceFlowList
-    type: FlowList
-    doc: The id of the source flow list.
+    - name: from
+      type: List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]
+      doc: The flow, flow property, and unit of the source flow.
 
-  - name: targetFlowList
-    type: FlowList
-    doc: The id of the target flow list.
+    - name: to
+      type: List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]
+      doc: The flow, flow property, and unit of the target flow.
 
-  - name: mappings
-    type: List[Mapping]  # not sure how to render a dictionary here
-    doc: A list of mappings from flows in a source flow list to flows in a target flow list.
+    - name: conversionFactor
+      type: double
+      doc: The factor to convert the original source flow to the target flow.
