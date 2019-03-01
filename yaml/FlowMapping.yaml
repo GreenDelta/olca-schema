@@ -1,0 +1,19 @@
+
+class:
+  name: FlowMapping
+  superClass: RootEntity
+  example: #none yet
+  doc: A crosswalk of flows from a source flow list to a target flow list.
+
+  properties:
+  - name: sourceFlowList
+    type: FlowList
+    doc: The id of the source flow list.
+
+  - name: targetFlowList
+    type: FlowList
+    doc: The id of the target flow list.
+
+  - name: mappings
+    type: List[Mapping]  # not sure how to render a dictionary here
+    doc: A list of mappings from flows in a source flow list to flows in a target flow list.

@@ -1,0 +1,19 @@
+
+class:
+  name: Mapping
+  superClass: RootEntity
+  example: #none yet
+  doc: A mapping from one flow to another.
+
+  properties:
+    - name: from
+      type: List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]
+      doc: The flow, flow property, and unit of the source flow.
+
+    - name: to
+      type: List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]
+      doc: The flow, flow property, and unit of the target flow.
+
+    - name: conversionFactor
+      type: double
+      doc: The factor to convert the original source flow to the target flow.
