@@ -1,0 +1,6 @@
+
+class:
+  name: FlowList
+  superClass: RootEntity
+  example: #none yet
+  doc: An list with which flows are associated.
