@@ -1,17 +1,17 @@
 
 class:
-  name: FlowMapping
+  name: FlowMapEntry
   superClass: RootEntity
   example: #none yet
   doc: A mapping from one flow to another.
 
   properties:
     - name: from
-      type: List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]
+      type: FlowMapRef
       doc: The flow, flow property, and unit of the source flow.
 
     - name: to
-      type: List[Ref[Flow],Ref[FlowProperty],Ref[Unit]]
+      type: FlowMapRef
       doc: The flow, flow property, and unit of the target flow.
 
     - name: conversionFactor

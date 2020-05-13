@@ -1,0 +1,27 @@
+
+class:
+  name: FlowMapRef
+  superClass: Entity
+  doc: >
+       Describes a the source or target flow of a flow mapping in a `FlowMap`.
+       Such a flow reference can also optionally specify the unit and flow
+       property (quantity) for which the mapping is valid. If the unit and
+       quantity are not given, the mapping is based on the reference unit
+       of the reference flow property of the respective flow.
+  
+  properties:
+    - name: flow
+      type: FlowRef
+      doc: The reference to the flow data set.
+    
+    - name: flowProperty
+      type: Ref[FlowProperty]
+      doc: >
+           An optional reference to a flow property of the flow for which the
+           mapping is valid.
+    
+    - name: unit
+      type: Ref[Unit]
+      doc: >
+           An optional reference to a unit of the flow for which the mapping is
+           valid
