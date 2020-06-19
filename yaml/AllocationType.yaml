@@ -1,7 +1,11 @@
 
 enum:
   name: AllocationType
-  doc: Types of allocation methods that can be applied on processes.
+  doc: >
+       An enumeration type for allocation methods. This type is used to define
+       the type of an [AllocationFactor], the default allocation method of a
+       multi-functional [Process], or the allocation method in a
+       [CalculationSetup]. 
 
   items:
     - name: PHYSICAL_ALLOCATION
@@ -9,3 +13,7 @@ enum:
     - name: ECONOMIC_ALLOCATION
 
     - name: CAUSAL_ALLOCATION
+
+    - name: USE_DEFAULT_ALLOCATION
+
+    - name: NO_ALLOCATION
