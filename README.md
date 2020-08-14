@@ -8,8 +8,7 @@ can be generated via the `scripts/yaml_to_html.py` script. The script uses
 [PyYAML](https://pypi.org/project/PyYAML/) which you need to install before
 running it (e.g. via `pip install PyYAML`).
 
-This repo has also a `gh-pages` branch so that you can browse the
-[HTML documentation online](http://greendelta.github.io/olca-schema).
+You can also browse the [HTML documentation online](http://greendelta.github.io/olca-schema).
 
 ## License
 This project is in the worldwide public domain, released under the 
