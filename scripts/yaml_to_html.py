@@ -22,7 +22,7 @@ def main():
 
 def write_enum(template, t):
     text = template.render(model=t)
-    file_path = '../html/%s.html' % t.name
+    file_path = '../docs/%s.html' % t.name
     with open(file_path, 'w') as f:
         f.write(text)
 
@@ -32,7 +32,7 @@ def write_class(template, m, t):
     example = get_example(t)
     text = template.render(model=t, super_classes=super_classes,
                            example=example)
-    file_path = '../html/%s.html' % t.name
+    file_path = '../docs/%s.html' % t.name
     with open(file_path, 'w') as f:
         f.write(text)
 
@@ -50,7 +50,7 @@ def write_index(m, template):
     for t in m.types:
         concepts.append(t.name)
     text = template.render(concepts=concepts)
-    with open('../index.html', 'w') as f:
+    with open('../docs/index.html', 'w') as f:
         f.write(text)
 
 

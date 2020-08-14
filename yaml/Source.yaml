@@ -6,9 +6,9 @@ class:
 
   properties:
 
-    - name: doi
+    - name: url
       type: string
-      doc: The digital object identifier of the source (see http://en.wikipedia.org/wiki/Digital_object_identifier).
+      doc: A URL that points to the source.
 
     - name: textReference
       type: string
