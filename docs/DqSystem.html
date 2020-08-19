@@ -19,7 +19,11 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">DqSystem</a></h1>
-    <p class="comment">A data quality system.</p>
+    <p class="comment">A data quality system (DQS) in openLCA describes a pedigree matrix of $m$ data quality indicators (DQIs) and $n$ data quality scores (DQ scores). Such a system can then be used to assess the data quality of processes and exchanges by tagging them with an instance of the system $D$ where $D$ is a $m * n$ matrix with an entry $d_{ij}$ containing the value of the data quality score $j$ for indicator $i$.
+As each indicator in $D$ can only have a single score value, $D$ can be stored in a vector $d$ where $d_i$ contains the data quality score for indicator $i$. The possible values of the data quality scores are defined as a linear order $1 \dots n$. In openLCA, the data quality entry $d$ of a process or exchange is stored as a string like <span style="color: #7c4dff">(3;2;4;n.a.;2)</span> which means the data quality score for the first indicator is <span style="color: #7c4dff">3</span>, for the second <span style="color: #7c4dff">2</span> etc. A specific value is <span style="color: #7c4dff">n.a.</span> which stands for _not applicable_.
+In calculations, these data quality entries can be aggregated in different ways. For example, the data quality entry of a flow $f$ with a contribution of <span style="color: #7c4dff">0.5 kg</span> and a data quality entry of <span style="color: #7c4dff">(3;2;4;n.a.;2)</span> in a process $p$ and a contribution of <span style="color: #7c4dff">1.5 kg</span> and a data quality entry of <span style="color: #7c4dff">(2;3;1;n.a.;5)</span> in a process $q$ could be aggregated to <span style="color: #7c4dff">(2;3;2;n.a.;4)</span> by applying an weighted average and rounding.
+Finally, custom labels like <span style="color: #7c4dff">A, B, C, ...</span> or <span style="color: #7c4dff">Very good, Good, Fair, ...</span> for the DQ scores can be assigned by the user. These labels are then displayed instead of <span style="color: #7c4dff">1, 2, 3 ...</span> in the user interface or result exports. However, internally the numeric values are used in the data model and calculations.
+</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>

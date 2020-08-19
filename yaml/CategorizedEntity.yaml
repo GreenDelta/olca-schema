@@ -8,3 +8,17 @@ class:
     - name: category
       type: Ref[Category]
       doc: The category of the entity.
+    
+    - name: tags
+      type: List[string]
+      doc: >
+           A list of optional tags. A tag is just a string which should not
+           contain commas (and other special characters).
+    
+    - name: library
+      type: string
+      doc: >
+           If this entity is part of a library, this field contains the
+           identifier of that library. The identifier is typically just the
+           comination of the library name and version.
+ 

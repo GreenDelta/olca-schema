@@ -17,6 +17,12 @@ class:
       type: double
       doc: The value of the allocation factor.
 
+    - name: formula
+      type: string
+      doc: >
+           An optional formula from which the value of the allocation factor
+           is calculated.
+
     - name: allocatedExchange
       type: Exchange
       doc: >

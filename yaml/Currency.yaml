@@ -1,0 +1,14 @@
+
+class:
+  name: Currency
+  superClass: CategorizedEntity
+
+  properties:
+    - name: code
+      type: string
+    
+    - name: conversionFactor
+      type: double
+    
+    - name: referenceCurrency
+      type: Ref[Currency]
