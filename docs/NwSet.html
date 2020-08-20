@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>CategorizedEntity</title>
+    <title>NwSet</title>
     <style type="text/css">
         body {
             font-family: 'Courier New';
@@ -18,31 +18,24 @@
     </style>
 </head>
 <body style="padding:20px;">
-    <h1>Class <a href="#">CategorizedEntity</a></h1>
-    <p class="comment">A root entity which can have a category.</p>
+    <h1>Class <a href="#">NwSet</a></h1>
+    <p class="comment">A normalization and weighting set.</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
     <table>
         
         <tr>
-            <td><span class="property">category</span></td>
-            <td><a href="./Ref.html">Ref[Category]</a></td>
-            <td class="comment">The category of the entity.</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">tags</span></td>
-            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">List[string]</a></td>
-            <td class="comment">A list of optional tags. A tag is just a string which should not contain commas (and other special characters).
-</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">library</span></td>
+            <td><span class="property">weightedScoreUnit</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
-            <td class="comment">If this entity is part of a library, this field contains the identifier of that library. The identifier is typically just the comination of the library name and version.
+            <td class="comment">This is the optional unit of the (normalized and) weighted score when this normalization and weighting set was applied on a LCIA result.
 </td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">factors</span></td>
+            <td><a href="./NwFactor.html">List[NwFactor]</a></td>
+            <td class="comment">The list of normalization and weighting factors of this set.</td>
         </tr>
         
     </table>

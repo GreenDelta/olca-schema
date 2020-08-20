@@ -1,0 +1,11 @@
+
+class:
+  name: Project
+  superClass: CategorizedEntity
+
+  properties:
+    - name: impactMethod
+      type: Ref[ImpactMethod]
+
+    - name: nwSet
+      type: NwSet
