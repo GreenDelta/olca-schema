@@ -1,18 +1,19 @@
 
 class:
   name: Parameter
-  superClass: Entity
-  doc:
+  superClass: CategorizedEntity
+  doc: >
+        In openLCA, parameters can be defined in different scopes: global,
+        process, or LCIA method. The parameter name can be used in formulas and,
+        thus, need to conform to a specific syntax. Within a scope the parameter
+        name should be unique (otherwise the evaluation is not deterministic).
+        There are two types of parameters in openLCA: input parameters and
+        dependent parameters. An input parameter can have an optional
+        uncertainty distribution but not a formula. A dependent parameter can
+        (should) have a formula (where also other parameters can be used) but no
+        uncertainty distribution.
 
   properties:
-    - name: name
-      type: string
-      doc: The name of the parameter.
-
-    - name: description
-      type: string
-      doc: A description of the parameter.
-
     - name: parameterScope
       type: ParameterScope
       doc: The scope where the parameter is valid.
@@ -31,18 +32,6 @@ class:
     - name: formula
       type: string
       doc: A mathematical expression to calculate the parameter value.
-
-    - name: externalSource
-      type: string
-      doc: >
-           A reference to an external source where the parameter is defined (e.g.
-           an Excel table, shapefile, etc.).
-
-    - name: sourceType
-      type: string
-      doc: >
-           Indicates the type of the source if an external source is defined for
-           the parameter.
 
     - name: uncertainty
       type: Uncertainty

@@ -1,7 +1,7 @@
 
 class:
   name: Location
-  superClass: RootEntity
+  superClass: CategorizedEntity
   example: location.json
   doc: A location like a country, state, city, etc.
 
