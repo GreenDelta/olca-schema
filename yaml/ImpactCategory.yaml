@@ -1,11 +1,8 @@
 
 class:
   name: ImpactCategory
-  superClass: RootEntity
+  superClass: CategorizedEntity
   example: impact_category.json
-  doc: >
-       A LCIA category of a LCIA method (see ImpactMethod) which groups a set of
-       characterisation factors
 
   properties:
     - name: referenceUnitName

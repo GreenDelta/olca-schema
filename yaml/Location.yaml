@@ -18,6 +18,6 @@ class:
       type: double
       doc: The average longitude of the location.
 
-    - name: kml
-      type: string
-      doc: KML data of the location.
+    - name: geometry
+      type: GeoJSON
+      doc: A GeoJSON object.

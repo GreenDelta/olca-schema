@@ -19,8 +19,7 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">ImpactCategory</a></h1>
-    <p class="comment">A LCIA category of a LCIA method (see ImpactMethod) which groups a set of characterisation factors
-</p>
+    <p class="comment"></p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
@@ -36,6 +35,34 @@
             <td><span class="property">impactFactors</span></td>
             <td><a href="./ImpactFactor.html">List[ImpactFactor]</a></td>
             <td class="comment">The characterisation factors of the LCIA category.</td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    <p>~</p>
+    <p class="comment">Properties from <a href="./CategorizedEntity.html">CategorizedEntity</a>:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">category</span></td>
+            <td><a href="./Ref.html">Ref[Category]</a></td>
+            <td class="comment">The category of the entity.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">tags</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">List[string]</a></td>
+            <td class="comment">A list of optional tags. A tag is just a string which should not contain commas (and other special characters).
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">library</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">If this entity is part of a library, this field contains the identifier of that library. The identifier is typically just the comination of the library name and version.
+</td>
         </tr>
         
     </table>

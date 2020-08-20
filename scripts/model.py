@@ -94,6 +94,8 @@ class Property:
     @property
     def html_type_link(self):
         t = self.field_type  # type: str
+        if t == 'GeoJSON':
+            return 'https://tools.ietf.org/html/rfc7946'
         if t.startswith('List[Ref['):
             t = 'Ref'
         elif t.startswith('List['):
