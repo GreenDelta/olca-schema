@@ -9,6 +9,12 @@ class:
       type: string
       doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
 
+    - name: parameters
+      type: List[Parameter]
+      doc: >
+           A set of parameters which can be used in formulas of the
+           characterisation factors in this impact category.
+
     - name: impactFactors
       type: List[ImpactFactor]
       doc: The characterisation factors of the LCIA category.

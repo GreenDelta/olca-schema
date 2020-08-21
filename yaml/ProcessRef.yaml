@@ -1,7 +1,7 @@
 
 class:
   name: ProcessRef
-  superClass: Ref[Process]
+  superClass: Ref
   doc: A reference to a [Process] data set.
 
   properties:

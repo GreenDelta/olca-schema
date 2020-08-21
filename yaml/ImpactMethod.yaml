@@ -8,9 +8,3 @@ class:
     - name: impactCategories
       type: List[ImpactCategoryRef]
       doc: The LCIA categories of the method.
-
-    - name: parameters
-      type: List[Parameter]
-      doc: >
-            A set of method specific parameters which can be used in formulas
-            of the characterisation factors in this method.

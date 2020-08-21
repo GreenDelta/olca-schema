@@ -1,7 +1,7 @@
 
 class:
   name: ImpactCategoryRef
-  superClass: Ref[ImpactCategory]
+  superClass: Ref
   doc: A reference to a [ImpactCategory] data set.
 
   properties:

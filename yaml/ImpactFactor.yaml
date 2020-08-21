@@ -9,6 +9,12 @@ class:
     - name: flow
       type: FlowRef
       doc: The [Flow] of the impact assessment factor.
+    
+    - name: location
+      type: Ref[Location]
+      doc: >
+           In case of a regionalized impact category, this field can contain
+           the location for which this factor is valid. 
 
     - name: flowProperty
       type: Ref[FlowProperty]

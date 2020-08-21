@@ -18,7 +18,8 @@
 </head>
 <body style="padding:20px;">
     <h1>Enumeration <a href="#">ParameterScope</a></h1>
-    <p class="comment">The possible scopes of parameters.</p>
+    <p class="comment">The possible scopes of parameters. Parameters can be defined globally, in processes, or impact categories. They can be redefined in calculation setups on the project and product system level, but the initial definition is always only global, in a process, or an LCIA category.
+</p>
     <p>~</p>
     
     <p class="comment">Items:</p>
@@ -26,17 +27,20 @@
         
         <tr>
             <td><span class="property">PROCESS_SCOPE</span></td>
-            <td class="comment"></td>
+            <td class="comment">Indicates that the evaluation scope of a parameter is the process where it is defined.
+</td>
         </tr>
         
         <tr>
-            <td><span class="property">LCIA_METHOD_SCOPE</span></td>
-            <td class="comment"></td>
+            <td><span class="property">IMPACT_SCOPE</span></td>
+            <td class="comment">Indicates that the evaluation scope of a parameter is the impact category where it is defined.
+</td>
         </tr>
         
         <tr>
             <td><span class="property">GLOBAL_SCOPE</span></td>
-            <td class="comment"></td>
+            <td class="comment">Indicates that the evaluation scope of a parameter is the global scope.
+</td>
         </tr>
         
     </table>

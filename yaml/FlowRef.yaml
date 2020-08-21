@@ -1,7 +1,7 @@
 
 class:
   name: FlowRef
-  superClass: Ref[Flow]
+  superClass: Ref
   doc: A reference to a [Flow] data set.
 
   properties:
