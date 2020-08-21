@@ -1,9 +1,24 @@
 
 enum:
   name: ParameterScope
-  doc: The possible scopes of parameters.
+  doc: > 
+      The possible scopes of parameters. Parameters can be defined globally, in
+      processes, or impact categories. They can be redefined in calculation
+      setups on the project and product system level, but the initial definition
+      is always only global, in a process, or an LCIA category.
 
   items:
     - name: PROCESS_SCOPE
-    - name: LCIA_METHOD_SCOPE
+      doc: >
+           Indicates that the evaluation scope of a parameter is the process
+           where it is defined.
+
+    - name: IMPACT_SCOPE
+      doc: >
+           Indicates that the evaluation scope of a parameter is the impact
+           category where it is defined.
+
     - name: GLOBAL_SCOPE
+      doc: >
+           Indicates that the evaluation scope of a parameter is the global
+           scope.

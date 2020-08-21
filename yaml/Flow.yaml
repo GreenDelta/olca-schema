@@ -35,3 +35,18 @@ class:
            The location of the flow. Normally the location of a flow is defined
            by the process location where the flow is an input or output. However,
            some data formats define a location as a property of a flow.
+    
+    - name: synonyms
+      type: string
+      doc: >
+           A list of synonyms but packed into a single field. Best is to use
+           semicolons as separator as commas are sometimes used in names of
+           chemicals.
+    
+    - name: infrastructureFlow
+      type: boolean
+      doc: >
+           Indicates whether this flow describes an infrastructure product. This
+           field is part of the openLCA schema because of backward compatibility
+           with EcoSpold 1. It does not really have a meaning in openLCA and
+           should not be used anymore.
