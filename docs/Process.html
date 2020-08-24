@@ -91,7 +91,14 @@
         <tr>
             <td><span class="property">dqEntry</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
-            <td class="comment">A data quality entry like <span style="color: #7c4dff">(1;3;2;5;1)</span>. The entry is a vector of data quality values that need to match the overall data quality system of the process (the system that is stored in the <span style="color: #7c4dff">dqSystem</span> property). In such a system the data quality indicators have fixed positions and the respective values in the <span style="color: #7c4dff">dqEntry</span> vector map to these positions.</td>
+            <td class="comment">A data quality entry like <span style="color: #7c4dff">(1;3;2;5;1)</span>. The entry is a vector of data quality values that need to match the overall data quality system of the process (the system that is stored in the <span style="color: #7c4dff">dqSystem</span> property). In such a system the data quality indicators have fixed positions and the respective values in the <span style="color: #7c4dff">dqEntry</span> vector map to these positions.
+</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">infrastructureProcess</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
+            <td class="comment">Indicates whether this process describes an infrastructure process. This field is part of the openLCA schema because of backward compatibility with EcoSpold 1. It does not really have a meaning in openLCA and should not be used anymore.</td>
         </tr>
         
     </table>
