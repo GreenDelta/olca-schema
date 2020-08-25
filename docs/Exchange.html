@@ -27,16 +27,34 @@
     <table>
         
         <tr>
+            <td><span class="property">avoidedProduct</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
+            <td class="comment">Indicates whether this exchange is an avoided product.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">costFormula</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment">A formula for calculating the costs of this exchange.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">costValue</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment">The costs of this exchange.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">currency</span></td>
+            <td><a href="./Ref.html">Ref[Currency]</a></td>
+            <td class="comment">The currency in which the costs of this exchange are given.</td>
+        </tr>
+        
+        <tr>
             <td><span class="property">internalId</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#int">int</a></td>
             <td class="comment">The process internal ID of the exchange. This is used to identify exchanges unambiguously within a process (e.g. when linking exchanges in a product system where multiple exchanges with the same flow are allowed). The value should be >= 1.
 </td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">avoidedProduct</span></td>
-            <td><a href="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</a></td>
-            <td class="comment">Indicates whether this exchange is an avoided product.</td>
         </tr>
         
         <tr>

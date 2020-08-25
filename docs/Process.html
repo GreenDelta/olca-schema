@@ -26,14 +26,14 @@
     <table>
         
         <tr>
-            <td><span class="property">defaultAllocationMethod</span></td>
-            <td><a href="./AllocationType.html">AllocationType</a></td>
+            <td><span class="property">allocationFactors</span></td>
+            <td><a href="./AllocationFactor.html">List[AllocationFactor]</a></td>
             <td class="comment"></td>
         </tr>
         
         <tr>
-            <td><span class="property">allocationFactors</span></td>
-            <td><a href="./AllocationFactor.html">List[AllocationFactor]</a></td>
+            <td><span class="property">defaultAllocationMethod</span></td>
+            <td><a href="./AllocationType.html">AllocationType</a></td>
             <td class="comment"></td>
         </tr>
         
@@ -41,6 +41,13 @@
             <td><span class="property">exchanges</span></td>
             <td><a href="./Exchange.html">List[Exchange]</a></td>
             <td class="comment">The inputs and outputs of the process.</td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">lastInternalId</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#int">int</a></td>
+            <td class="comment">This field holds the last internal ID that was used in an exchange (which may have been deleted, so it can be larger than the largest internal ID of the exchanges of the process.) The internal ID of an exchange is used to identify exchanges within a process (for updates, data exchanges (see process links), etc.). When you add an exchange to a process, you should increment this field in the process and set the resulting value as the internal ID of that exchange. The sequence of internal IDs should start with <span style="color: #7c4dff">1</span>.
+</td>
         </tr>
         
         <tr>

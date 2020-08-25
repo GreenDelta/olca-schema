@@ -11,6 +11,22 @@ class:
         that flow (see also the [FlowPropertyFactor] type). 
 
   properties:
+    - name: avoidedProduct
+      type: boolean
+      doc: Indicates whether this exchange is an avoided product.
+
+    - name: costFormula
+      type: string
+      doc: A formula for calculating the costs of this exchange.
+    
+    - name: costValue
+      type: double
+      doc: The costs of this exchange.
+    
+    - name: currency
+      type: Ref[Currency]
+      doc: The currency in which the costs of this exchange are given.
+
     - name: internalId
       type: int
       doc: >
@@ -18,10 +34,6 @@ class:
             exchanges unambiguously within a process (e.g. when linking
             exchanges in a product system where multiple exchanges with the
             same flow are allowed). The value should be >= 1.
-
-    - name: avoidedProduct
-      type: boolean
-      doc: Indicates whether this exchange is an avoided product.
 
     - name: flow
       type: FlowRef
