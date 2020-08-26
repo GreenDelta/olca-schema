@@ -1,0 +1,15 @@
+
+class:
+  name: ExchangeRef
+  superClass: Entity
+  doc: >
+       An instance of this class describes a reference to an exchange in a
+       process. When we reference such an exchange we only need the information
+       to indentify that exchange unambiguously in a process.
+  
+  properties:
+
+    - name: internalId
+      type: int
+      doc: The internal ID of the exchange.
+    

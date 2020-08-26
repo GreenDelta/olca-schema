@@ -5,13 +5,17 @@ class:
   doc: A single allocation factor in a process.
 
   properties:
-    - name: productExchange
-      type: Exchange
-      doc: The output product.
 
     - name: allocationType
       type: AllocationType
       doc: The type of allocation.
+
+    - name: product
+      type: FlowRef
+      doc: >
+           The output product (or waste input) to which this allocation factor
+           is related. The must be an exchange with this product output (or
+           waste input) in this process.
 
     - name: value
       type: double
@@ -23,10 +27,10 @@ class:
            An optional formula from which the value of the allocation factor
            is calculated.
 
-    - name: allocatedExchange
-      type: Exchange
+    - name: exchange
+      type: ExchangeRef
       doc: >
-           An input product or elementary flow exchange which is allocated by
-           this factor. This is only valid for causal allocation where
-           allocation factors can be assigned to single exchanges.
+           A product input, waste output, or elementary flow exchange which is
+           allocated by this factor. This is only valid for causal allocation
+           where allocation factors can be assigned to single exchanges.
 
