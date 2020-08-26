@@ -82,3 +82,7 @@ class:
            This field is part of the openLCA schema because of backward
            compatibility with EcoSpold 1. It does not really have a meaning in
            openLCA and should not be used anymore.
+    
+    - name: socialAspects
+      type: List[SocialAspect]
+      doc: A set of social aspects related to this process.

@@ -1,0 +1,28 @@
+
+enum:
+  name: RiskLevel
+
+  items:
+    - name: NO_OPPORTUNITY
+
+    - name: HIGH_OPPORTUNITY
+
+    - name: MEDIUM_OPPORTUNITY
+
+    - name: LOW_OPPORTUNITY
+
+    - name: NO_RISK
+
+    - name: VERY_LOW_RISK
+
+    - name: LOW_RISK
+
+    - name: MEDIUM_RISK
+
+    - name: HIGH_RISK
+
+    - name: VERY_HIGH_RISK
+
+    - name: NO_DATA
+
+    - name: NOT_APPLICABLE

@@ -1,0 +1,34 @@
+
+class:
+  name: SocialAspect
+  superClass: Entity
+  doc: >
+       An instance of this class describes a social aspect related to a social
+       indicator in a process.
+  
+  properties:
+    - name: activityValue
+      type: double
+      doc: The value of the activity variable of the related indicator.
+    
+    - name: comment
+      type: string
+    
+    - name: quality
+      type: string
+      doc: A data quality entry, e.g. `(3,1,2,4,1)`.
+    
+    - name: rawAmount
+      type: string
+      doc: >
+           The raw amount of the indicator's unit of measurement (not required
+           to be numeric currently)
+    
+    - name: riskLevel
+      type: RiskLevel
+    
+    - name: socialIndicator
+      type: Ref[SocialIndicator]
+    
+    - name: source
+      type: Ref[Source]
