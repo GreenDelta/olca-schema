@@ -4,32 +4,38 @@ enum:
   doc: An enumeration of the root entity types.
 
   items:
-    - name: PROJECT
+    - name: ACTOR
 
-    - name: IMPACT_METHOD
+    - name: CATEGORY
 
-    - name: IMPACT_CATEGORY
+    - name: CURRENCY
 
-    - name: PRODUCT_SYSTEM
-
-    - name: PROCESS
+    - name: DQ_SYSTEM
 
     - name: FLOW
 
     - name: FLOW_PROPERTY
 
-    - name: UNIT_GROUP
+    - name: IMPACT_CATEGORY
 
-    - name: UNIT
-
-    - name: ACTOR
-
-    - name: SOURCE
-
-    - name: CATEGORY
+    - name: IMPACT_METHOD
 
     - name: LOCATION
 
     - name: NW_SET
 
+    - name: PARAMETER
+
+    - name: PROCESS
+
+    - name: PRODUCT_SYSTEM
+
+    - name: PROJECT
+
     - name: SOCIAL_INDICATOR
+
+    - name: SOURCE
+
+    - name: UNIT
+
+    - name: UNIT_GROUP
