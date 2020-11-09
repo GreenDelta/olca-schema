@@ -31,8 +31,8 @@ class:
            of internal IDs should start with `1`.
 
     - name: location
-      type: Location
-      doc:
+      type: Ref[Location]
+      doc: The location of the process.
 
     - name: parameters
       type: List[Parameter]
@@ -47,22 +47,22 @@ class:
       doc:
 
     - name: dqSystem
-      type: Ref[DqSystem]
+      type: Ref[DQSystem]
       doc: >
-           A reference to a data quality system ([DqSystem]) with which the
+           A reference to a data quality system ([DQSystem]) with which the
            overall quality of the process can be assessed.
 
     - name: exchangeDqSystem
-      type: Ref[DqSystem]
+      type: Ref[DQSystem]
       doc: >
-           A reference to a data quality system ([DqSystem]) with which the
+           A reference to a data quality system ([DQSystem]) with which the
            quality of individual inputs and outputs ([Exchange]s) of the process
            can be assessed.
 
     - name: socialDqSystem
-      type: Ref[DqSystem]
+      type: Ref[DQSystem]
       doc: >
-           A reference to a data quality system ([DqSystem]) with which the
+           A reference to a data quality system ([DQSystem]) with which the
            quality of individual social aspects of the process can be assessed.
 
     - name: dqEntry

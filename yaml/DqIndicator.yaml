@@ -1,9 +1,9 @@
 
 class:
-  name: DqIndicator
+  name: DQIndicator
   superClass: Entity
   example: dq_indicator.json
-  doc: An indicator of a data quality system ([DqSystem]).
+  doc: An indicator of a data quality system ([DQSystem]).
 
   properties:
     - name: name
@@ -13,4 +13,4 @@ class:
       type: int
 
     - name: scores
-      type: List[DqScore]
+      type: List[DQScore]

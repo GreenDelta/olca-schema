@@ -1,6 +1,6 @@
 
 class:
-  name: DqSystem
+  name: DQSystem
   superClass: CategorizedEntity
   example: dq_system.json
   doc: >
@@ -41,4 +41,4 @@ class:
       type: Ref[Source]
 
     - name: indicators
-      type: List[DqIndicator]
+      type: List[DQIndicator]

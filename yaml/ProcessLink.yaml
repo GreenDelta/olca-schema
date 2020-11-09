@@ -7,9 +7,10 @@ class:
 
   properties:
     - name: provider
-      type: Ref[Process]
+      type: Ref
       doc: >
-           The descriptor of the process that provides a product or a waste treatment.
+           The descriptor of the process or product system that provides a
+           product or a waste treatment.
 
     - name: flow
       type: Ref[Flow]
@@ -20,8 +21,9 @@ class:
       doc: The descriptor of the process that is linked to the provider.
 
     - name: exchange
-      type: Exchange
+      type: ExchangeRef
       doc: >
-           The exchange of the linked process (this is useful if the linked process has multiple exchanges with the
-           same flow that are linked to different provides, e.g. in an electricity mix).
+           The exchange of the linked process (this is useful if the linked
+           process has multiple exchanges with the same flow that are linked to
+           different provides, e.g. in an electricity mix).
 
