@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>DQScore</title>
+    <style type="text/css">
+        body {
+            font-family: 'Courier New';
+            font-weight:bold;
+            font-size: 130%;
+        }
+        td { padding: 15px; }
+        pre {font-weight:normal; color: #2F4F4F;}
+        .comment { color: #888888; }
+        .property { border-bottom: 1px dotted; }
+        a { text-decoration: none; color: #8A084B; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body style="padding:20px;">
+    <h1>Class <a href="#">DQScore</a></h1>
+    <p class="comment">An score value of an indicator (<a href="./DQIndicator.html">DQIndicator</a>) in a data quality system (<a href="./DQSystem.html">DQSystem</a>).
+</p>
+    
+    <p>~</p>
+    <p class="comment">Properties:</p>
+    <table>
+        
+        <tr>
+            <td><span class="property">position</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#int">int</a></td>
+            <td class="comment"></td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">label</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment"></td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">description</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
+            <td class="comment"></td>
+        </tr>
+        
+        <tr>
+            <td><span class="property">uncertainty</span></td>
+            <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
+            <td class="comment"></td>
+        </tr>
+        
+    </table>
+    
+    
+    
+    
+    
+    <p>~</p>
+    <p>JSON-LD Example</p>
+    <pre>{
+    "@type": "DQScore",
+    "position": 5,
+    "description": "Data from unknown or distinctly different area (North America instead of Middle East, OECD-Europe instead of Russia)",
+    "uncertainty": 1.1
+}</pre>
+    
+</body>
+</html>
