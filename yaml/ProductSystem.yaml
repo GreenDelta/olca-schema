@@ -17,8 +17,9 @@ class:
     - name: referenceExchange
       type: Exchange
       doc: >
-           The exchange of the reference processes (typically the product output) that provides the flow of the
-           functional unit of the product system.
+           The exchange of the reference processes (typically the product
+           output) that provides the flow of the functional unit of the product
+           system.
 
     - name: targetAmount
       type: double
@@ -35,3 +36,10 @@ class:
     - name: processLinks
       type: List[ProcessLink]
       doc: The process links of the product system.
+    
+    - name: parameterSets
+      type: List[ParameterRedefSet]
+      doc: >
+           A list of possible sets of parameter redefinitions for this product
+           system.
+

@@ -5,8 +5,9 @@ based data exchange format of [openLCA](http://www.openlca.org/).
 The different data types are defined in simple [YAML](http://yaml.org/) files
 with a file for each type in the [yaml folder](./yaml). An HTML documentation
 can be generated via the `scripts/yaml_to_html.py` script. The script uses
-[PyYAML](https://pypi.org/project/PyYAML/) which you need to install before
-running it (e.g. via `pip install PyYAML`).
+[PyYAML](https://pypi.org/project/PyYAML/) and 
+[Jinja2](https://pypi.org/project/Jinja2/) which you need to install before
+running it (e.g. via `pip install PyYAML Jinja`).
 
 You can also browse the [HTML documentation online](http://greendelta.github.io/olca-schema).
 

@@ -5,17 +5,31 @@ class:
   doc: A redefinition of a parameter in a product system.
 
   properties:
-    - name: name
-      type: string
-      doc: The parameter name.
-    
-    - name: value
-      type: double
-      doc: The (new) value of the parameter.
-    
     - name: context
       type: Ref
       doc: >
            The context of the paramater (a process or LCIA method). If no
            context is provided it is assumed that this is a redefinition of a
            global parameter.
+
+    - name: description
+      type: string
+      doc: A description of this parameter redefinition.
+    
+    - name: name
+      type: string
+      doc: >
+           The name of the redefined parameter. Note that parameter names are
+           used in formulas so they need to follow specific syntax rules. A
+           redefinition replaces a bound parameter in a specific context and
+           thus has to exactly match the respective name.
+
+    - name: uncertainty
+      type: Uncertainty
+      doc: >
+           An uncertainty distribution for the redefined parameter value.
+
+    - name: value
+      type: double
+      doc: The value of the redefined parameter.
+
