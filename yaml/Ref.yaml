@@ -16,6 +16,14 @@ class:
       doc: >
            The full path of the category of the referenced entity from top to
            bottom, e.g. `"Elementary flows", "Emissions to air", "unspecified"`.
+    
+    - name: library
+      type: string
+      doc: >
+           If the entity that is described by this reference is part of a
+           library, this field contains the identifier of that library. The
+           identifier is typically just the combination of the library name and
+           version.
 
      
     

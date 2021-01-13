@@ -7,10 +7,10 @@ class:
 
   properties:
     - name: processes
-      type: List[ProcessRef]
+      type: List[Ref]
       doc: >
-           The descriptors of all processes that are contained in the product
-           system.
+           The descriptors of all processes and sub-systems that are contained
+           in the product system.
 
     - name: referenceProcess
       type: ProcessRef

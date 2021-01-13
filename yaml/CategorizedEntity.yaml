@@ -20,5 +20,5 @@ class:
       doc: >
            If this entity is part of a library, this field contains the
            identifier of that library. The identifier is typically just the
-           comination of the library name and version.
+           combination of the library name and version.
  
