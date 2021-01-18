@@ -23,6 +23,15 @@ class:
           Indicates whether life cycle costs should be also calculated
           (optional).
     
+    - name: withRegionalization
+      type: boolean
+      doc: >
+           Indicates whether a regionalized result should be calculated or not.
+           If this is set to true, the intervention matrix is indexed by
+           (elementary flow, location) - pairs instead of just elementary flows.
+           The LCI result then contains results for these pairs which can be
+           then used in regionalized impact assessments.
+    
     - name: nwSet
       type: Ref[NwSet]
       doc: The normalisation and weighting set for the calculation (optional).

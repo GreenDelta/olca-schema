@@ -17,3 +17,9 @@ class:
     - name: value
       type: double
       doc: The value of the flow amount.
+    
+    - name: location
+      type: Ref[Location]
+      doc: >
+           The (reference to the) location of this flow result in case of a
+           regionalized result.
