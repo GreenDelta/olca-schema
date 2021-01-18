@@ -10,7 +10,7 @@ class:
   
   properties:
     - name: impactCategory
-      type: ImpactCategoryRef
+      type: Ref[ImpactCategory]
     
     - name: normalisationFactor
       type: double

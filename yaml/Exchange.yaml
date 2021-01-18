@@ -36,7 +36,7 @@ class:
             same flow are allowed). The value should be >= 1.
 
     - name: flow
-      type: FlowRef
+      type: Ref[Flow]
       doc: The reference to the flow of the exchange.
 
     - name: flowProperty
@@ -56,7 +56,7 @@ class:
       type: double
 
     - name: defaultProvider
-      type: ProcessRef
+      type: Ref[Process]
       doc: >
            A default provider is a [Process] that is linked as the provider of a
            product input or the waste treatment provider of a waste output. It

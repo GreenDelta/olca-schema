@@ -13,7 +13,7 @@ class:
            in the product system.
 
     - name: referenceProcess
-      type: ProcessRef
+      type: Ref[Process]
       doc: >
            The descriptor of the process that provides the flow of the
            functional unit of the product system.

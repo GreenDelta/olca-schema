@@ -11,7 +11,7 @@ class:
   
   properties:
     - name: flow
-      type: FlowRef
+      type: Ref[Flow]
       doc: The reference to the flow data set.
     
     - name: flowProperty
@@ -27,7 +27,7 @@ class:
            valid
     
     - name: provider
-      type: ProcessRef
+      type: Ref[Process]
       doc: >
            In case of a product or waste flow a flow mapping can contain a
            provider which is the process that produces the product or a waste

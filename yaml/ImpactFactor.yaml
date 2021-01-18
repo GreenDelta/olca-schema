@@ -7,7 +7,7 @@ class:
 
   properties:
     - name: flow
-      type: FlowRef
+      type: Ref[Flow]
       doc: The [Flow] of the impact assessment factor.
     
     - name: location

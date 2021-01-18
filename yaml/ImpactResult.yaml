@@ -7,7 +7,7 @@ class:
 
   properties:
     - name: impactCategory
-      type: ImpactCategoryRef
+      type: Ref[ImpactCategory]
       doc: The reference to the impact assessment category.
     
     - name: value

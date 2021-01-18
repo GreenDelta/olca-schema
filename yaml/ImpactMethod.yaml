@@ -6,7 +6,7 @@ class:
 
   properties:
     - name: impactCategories
-      type: List[ImpactCategoryRef]
+      type: List[Ref[ImpactCategory]]
       doc: The impact categories of the method.
 
     - name: nwSets
