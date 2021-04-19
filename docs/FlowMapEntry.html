@@ -19,7 +19,7 @@
 </head>
 <body style="padding:20px;">
     <h1>Class <a href="#">FlowMapEntry</a></h1>
-    <p class="comment">A mapping from one flow to another.</p>
+    <p class="comment">A mapping from a source flow to a target flow.</p>
     
     <p>~</p>
     <p class="comment">Properties:</p>
@@ -28,52 +28,20 @@
         <tr>
             <td><span class="property">from</span></td>
             <td><a href="./FlowMapRef.html">FlowMapRef</a></td>
-            <td class="comment">The flow, flow property, and unit of the source flow.</td>
+            <td class="comment">Describes the source flow of the mapping.</td>
         </tr>
         
         <tr>
             <td><span class="property">to</span></td>
             <td><a href="./FlowMapRef.html">FlowMapRef</a></td>
-            <td class="comment">The flow, flow property, and unit of the target flow.</td>
+            <td class="comment">Describes the target of the mapping.</td>
         </tr>
         
         <tr>
             <td><span class="property">conversionFactor</span></td>
             <td><a href="http://www.w3.org/TR/xmlschema-2/#double">double</a></td>
-            <td class="comment">The factor to convert the original source flow to the target flow.</td>
-        </tr>
-        
-    </table>
-    
-    
-    
-    <p>~</p>
-    <p class="comment">Properties from <a href="./RootEntity.html">RootEntity</a>:</p>
-    <table>
-        
-        <tr>
-            <td><span class="property">name</span></td>
-            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
-            <td class="comment">The name of the entity.</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">description</span></td>
-            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
-            <td class="comment">The description of the entity.</td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">version</span></td>
-            <td><a href="http://www.w3.org/TR/xmlschema-2/#string">string</a></td>
-            <td class="comment">A version number in MAJOR.MINOR.PATCH format where the MINOR and PATCH fields are optional and the fields may have leading zeros (so 01.00.00 is the same as 1.0.0 or 1).
+            <td class="comment">The conversion factor to convert the amount of 1 unit of the source flow into the corresponding quantity of the target flow.
 </td>
-        </tr>
-        
-        <tr>
-            <td><span class="property">lastChange</span></td>
-            <td><a href="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</a></td>
-            <td class="comment">The timestamp when the entity was changed the last time.</td>
         </tr>
         
     </table>

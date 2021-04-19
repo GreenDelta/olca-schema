@@ -1,19 +1,21 @@
 
 class:
   name: FlowMapEntry
-  superClass: RootEntity
+  superClass: Entity
   example: #none yet
-  doc: A mapping from one flow to another.
+  doc: A mapping from a source flow to a target flow.
 
   properties:
     - name: from
       type: FlowMapRef
-      doc: The flow, flow property, and unit of the source flow.
+      doc: Describes the source flow of the mapping.
 
     - name: to
       type: FlowMapRef
-      doc: The flow, flow property, and unit of the target flow.
+      doc: Describes the target of the mapping.
 
     - name: conversionFactor
       type: double
-      doc: The factor to convert the original source flow to the target flow.
+      doc: >
+           The conversion factor to convert the amount of 1 unit of the source
+           flow into the corresponding quantity of the target flow.
