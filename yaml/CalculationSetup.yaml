@@ -1,9 +1,8 @@
-
 class:
   name: CalculationSetup
   superClass: Entity
   doc: A setup for a product system calculation.
-  
+
   properties:
     - name: calculationType
       type: CalculationType
@@ -11,49 +10,52 @@ class:
 
     - name: productSystem
       type: Ref[ProductSystem]
-      doc: The product system that should be calculated (required).
-    
+      doc: The product system that should be calculated.
+
+    - name: process
+      type: Ref[Process]
+      doc: The process that should be calculated.
+
     - name: impactMethod
       type: Ref[ImpactMethod]
-      doc: The LCIA method for the calculation (optional).
-    
+      doc: The LCIA method for the calculation.
+
+    - name: nwSet
+      type: Ref[NwSet]
+      doc: The normalisation and weighting set for the calculation.
+
+    - name: parameters
+      type: List[ParameterRedef]
+      doc: >
+           A list of parameter redefinitions that should be used in the
+           calculation.
+
+    - name: allocation
+      type: AllocationType
+      doc: The calculation type to be used in the calculation.
+
     - name: withCosts
       type: boolean
       doc: >
-          Indicates whether life cycle costs should be also calculated
-          (optional).
-    
+           Indicates whether life cycle costs should be also calculated.
+
     - name: withRegionalization
       type: boolean
       doc: >
-           Indicates whether a regionalized result should be calculated or not.
-           If this is set to true, the intervention matrix is indexed by
-           (elementary flow, location) - pairs instead of just elementary flows.
-           The LCI result then contains results for these pairs which can be
-           then used in regionalized impact assessments.
-    
-    - name: nwSet
-      type: Ref[NwSet]
-      doc: The normalisation and weighting set for the calculation (optional).
-    
-    - name: allocationMethod
-      type: AllocationType
-      doc: The calculation type to be used in the calculation (optional).
-    
-    - name: parameterRedefs
-      type: List[ParameterRedef]
-      doc: >
-           A list of parameter redefinitions to be used in the calculation
-           (optional).
-    
-    - name: amount
-      type: double
-      doc: (optional)
+           Indicates whether a regionalized result should be calculated or
+           not.
 
     - name: unit
       type: Ref[Unit]
-      doc: (optional)
-    
+
+    - name: amount
+      type: double
+
     - name: flowProperty
       type: Ref[FlowProperty]
-      doc: (optional)
+
+    - name: numberOfRuns
+      type: integer
+      doc: >
+           This field is only valid when this setup describes a Monte Carlo
+           simulation and contains the number of simulation runs in that case.
