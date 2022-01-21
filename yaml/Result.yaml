@@ -11,10 +11,14 @@ class:
 
     - name: impactMethod
       type: Ref[ImpactMethod]
-      doc: The impact assessment method that was used to calculate the result.
+      doc: >
+           A reference to the `ImpactMethod` that was used to calculate the
+           result.
     
     - name: flowResults
       type: List[FlowResult]
+      doc: An array of `FlowResult` objects.
     
     - name: impactResults
       type: List[ImpactResult]
+      doc: An array of `ImpactResult` objects.

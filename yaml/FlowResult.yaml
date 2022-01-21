@@ -15,7 +15,7 @@ class:
 
     - name: isReferenceFlow
       type: boolean
-      doc: `true` if this is the quantitative reference flow of the result.
+      doc: "`true` if this is the quantitative reference flow of the result."
 
     - name: amount
       type: double
