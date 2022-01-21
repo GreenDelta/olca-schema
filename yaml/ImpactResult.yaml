@@ -2,14 +2,16 @@
 class:
   name: ImpactResult
   superClass: Entity
-  doc: >
-       A result value for an impact assessment category.
+  doc: A calculation result of an impact assessment category.
 
   properties:
-    - name: impactCategory
+    - name: indicator
       type: Ref[ImpactCategory]
-      doc: The reference to the impact assessment category.
+      doc: The impact assessment category.
     
-    - name: value
+    - name: amount
       type: double
-      doc: The value of the flow amount.
+      doc: The value the result.
+    
+    - name: description
+      type: string

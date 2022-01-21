@@ -1,0 +1,20 @@
+class:
+  name: Result
+  superClass: CategorizedEntity
+  doc: A calculation result of a product system.
+
+  properties:
+
+    - name: urn
+      type: string
+      doc: A URN that points to the origin of the result.
+
+    - name: impactMethod
+      type: Ref[ImpactMethod]
+      doc: The impact assessment method that was used to calculate the result.
+    
+    - name: flowResults
+      type: List[FlowResult]
+    
+    - name: impactResults
+      type: List[ImpactResult]

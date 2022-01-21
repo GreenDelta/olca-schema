@@ -8,13 +8,9 @@ class:
       type: CalculationType
       doc: The type of calculation that should be performed.
 
-    - name: productSystem
-      type: Ref[ProductSystem]
-      doc: The product system that should be calculated.
-
-    - name: process
-      type: Ref[Process]
-      doc: The process that should be calculated.
+    - name: target
+      type: Ref
+      doc: The product system or process that should be calculated.
 
     - name: impactMethod
       type: Ref[ImpactMethod]

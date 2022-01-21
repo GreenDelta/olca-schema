@@ -2,24 +2,42 @@
 class:
   name: FlowResult
   superClass: Entity
-  doc: >
-       A result value for a flow; given in the reference unit of the flow.
+  doc: A calculation result of a flow.
 
   properties:
     - name: flow
       type: Ref[Flow]
       doc: The flow reference.
     
-    - name: input
+    - name: isInput
       type: boolean
       doc: Indicates whether the flow is an input or not.
 
-    - name: value
+    - name: isReferenceFlow
+      type: boolean
+      doc: `true` if this is the quantitative reference flow of the result.
+
+    - name: amount
       type: double
-      doc: The value of the flow amount.
     
+    - name: flowProperty
+      type: Ref[FlowProperty]
+      doc: >
+           The flow property in which the amount of the result is given. If
+           missing, the amount is expected to be given in the reference flow
+           property of the flow.
+    
+    - name: unit
+      type: Ref[Unit]
+      doc: >
+           The unit in which the amount of the result is given. If missing,
+           the amount is expected to be given in the reference unit of the
+           flow.
+
     - name: location
       type: Ref[Location]
       doc: >
-           The (reference to the) location of this flow result in case of a
-           regionalized result.
+           The location of this flow result in case of a regionalized result.
+    
+    - name: description
+      type: string
