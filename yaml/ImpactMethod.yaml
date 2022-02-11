@@ -5,6 +5,9 @@ class:
   doc: An impact assessment method.
 
   properties:
+    - name: source
+      type: Ref[Source]
+
     - name: impactCategories
       type: List[Ref[ImpactCategory]]
       doc: The impact categories of the method.
