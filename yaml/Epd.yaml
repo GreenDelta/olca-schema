@@ -1,0 +1,34 @@
+class:
+  name: Epd
+  superClass: CategorizedEntity
+  doc: >
+       The results and some meta-data of an environmental product declarartion,
+       EPD.
+  
+  properties:
+
+    - name: urn
+      type: string
+      doc: >
+           An universal resource name (URN) that identifies where the EPD comes
+           from, e.g. `openEPD:ec3yznau`.
+
+    - name: product
+      type: EpdProduct
+      doc: The declared product of the EPD.
+
+    - name: manufacturer
+      type: Ref[Actor]
+
+    - name: verifier
+      type: Ref[Actor]
+    
+    - name: programOperator
+      type: Ref[Actor]
+    
+    - name: pcr
+      type: Ref[Source]
+    
+    - name: modules
+      type: List[EpdModule]
+      doc: The results of this EPD structured in modules.

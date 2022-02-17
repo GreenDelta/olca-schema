@@ -1,0 +1,30 @@
+class:
+  name: EpdProduct
+  superClass: Entity
+  doc: The declared product of an EPD.
+
+  properties:
+
+    - name: flow
+      type: Ref[Flow]
+      doc: The reference to the product flow.
+    
+    - name: flowProperty
+      type: Ref[FlowProperty]
+      doc: >
+           The reference to the flow property (quantity) in which the amount
+           of the declared product is given for the respective EPD. A missing
+           flow property reference means that the amount is given in the
+           reference flow property of the respective product flow.
+
+    - name: unit
+      type: Ref[Unit]
+      doc: >
+           The reference to the unit in which the amount of the declared product
+           is given for the respective EPD. A missing unit reference means that
+           the amount is given in the reference unit of the respective product
+           flow.
+    
+    - name: amount
+      type: double
+      doc: The amount of the declared product.

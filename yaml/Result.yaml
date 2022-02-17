@@ -5,9 +5,11 @@ class:
 
   properties:
 
-    - name: urn
-      type: string
-      doc: A URN that points to the origin of the result.
+    - name: productSystem
+      type: Ref[ProductSystem]
+      doc: >
+           A reference to the `ProductSystem` from which this result was
+           calculated.
 
     - name: impactMethod
       type: Ref[ImpactMethod]
