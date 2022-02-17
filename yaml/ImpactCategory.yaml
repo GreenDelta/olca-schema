@@ -9,6 +9,9 @@ class:
       type: string
       doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
 
+    - name: source
+      type: Ref[Source]
+
     - name: parameters
       type: List[Parameter]
       doc: >
