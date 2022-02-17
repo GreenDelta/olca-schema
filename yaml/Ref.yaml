@@ -3,19 +3,19 @@ class:
   name: Ref
   superClass: RootEntity
   doc: >
-       A Ref is a reference to a [RootEntity]. When serializing an entity (e.g.
-       a [Process]) that references another standalone entity (e.g. a [Flow] in
-       an [Exchange]) we do not want to write the complete referenced entity
+       A `Ref` is a reference to some entity. When serializing an entity (e.g.
+       a `Process`) that references another standalone entity (e.g. a `Flow` in
+       an `Exchange`) we do not want to write the complete referenced entity
        into the serialized JSON object but just a reference. However, the
        reference contains some meta-data like name, category path etc. that are
        useful to display.
 
   properties:
-    - name: categoryPath
-      type: List[string]
+    - name: category
+      type: string
       doc: >
-           The full path of the category of the referenced entity from top to
-           bottom, e.g. `"Elementary flows", "Emissions to air", "unspecified"`.
+           The category path of the referenced entity, e.g.
+           `Elementary flows/Emissions to air/unspecified`.
     
     - name: library
       type: string
@@ -28,9 +28,8 @@ class:
     - name: refUnit
       type: string
       doc: >
-           This field is only valid for references of flows or impact categories
-           and contains the name (symbol) of the reference unit of that
-           respective flow or impact category.
+           This field is valid for references to entities which can have a
+           (reference) unit, like flows, impact categories, or flow properties.
     
     - name: location
       type: string
