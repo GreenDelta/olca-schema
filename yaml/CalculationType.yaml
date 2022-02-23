@@ -6,11 +6,13 @@ enum:
 
   items:
     - name: SIMPLE_CALCULATION
+      index: 1
       doc: >
            Calculates the total results for elementary flows, LCIA indicators,
            costs, etc. of a product system.
 
     - name: CONTRIBUTION_ANALYSIS
+      index: 2
       doc: >
            Includes the total result vectors of a simple calculation but
            calculates also the direct contributions of each process (or better
@@ -18,6 +20,7 @@ enum:
            results.
 
     - name: UPSTREAM_ANALYSIS
+      index: 3
       doc: >
            Extends the contribution analysis by providing also the upstream
            results of each process (process product) in the product system. The
@@ -26,6 +29,7 @@ enum:
            scaled to the demand of the process in the product system.
 
     - name: MONTE_CARLO_SIMULATION
+      index: 4
       doc: >
            A Monte Carlo simulation generates for each run, of a given number of
            a given number of iterations, random values according to the

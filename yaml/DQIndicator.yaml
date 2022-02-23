@@ -7,10 +7,13 @@ class:
 
   properties:
     - name: name
+      index: 2
       type: string
 
     - name: position
+      index: 3
       type: int
 
     - name: scores
+      index: 4
       type: List[DQScore]

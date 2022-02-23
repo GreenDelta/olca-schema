@@ -1,7 +1,7 @@
 
 class:
   name: Category
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: category.json
   doc: >
        A category is used for the categorisation of types like processes, flows,
@@ -11,5 +11,7 @@ class:
 
   properties:
     - name: modelType
+      index: 10
+      required: true
       type: ModelType
       doc: The type of models that can be linked to the category.

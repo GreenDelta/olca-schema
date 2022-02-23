@@ -5,52 +5,80 @@ class:
 
   properties:
     - name: calculationType
+      index: 2
       type: CalculationType
       doc: The type of calculation that should be performed.
 
     - name: target
+      index: 3
+      required: true
       type: Ref
-      doc: The product system or process that should be calculated.
+      doc: >
+           The product system or process that should be calculated. Note that
+           a result is calculated for the reference flow of that calculation
+           target (i.e. the reference flow of the product system or process). 
 
     - name: impactMethod
+      index: 4
       type: Ref[ImpactMethod]
       doc: The LCIA method for the calculation.
 
     - name: nwSet
+      index: 5
       type: Ref[NwSet]
       doc: The normalisation and weighting set for the calculation.
 
     - name: parameters
+      index: 6
       type: List[ParameterRedef]
       doc: >
            A list of parameter redefinitions that should be used in the
            calculation.
 
     - name: allocation
+      index: 7
       type: AllocationType
       doc: The calculation type to be used in the calculation.
 
     - name: withCosts
+      index: 8
       type: boolean
       doc: >
            Indicates whether life cycle costs should be also calculated.
 
     - name: withRegionalization
+      index: 9
       type: boolean
       doc: >
            Indicates whether a regionalized result should be calculated or
            not.
 
-    - name: unit
-      type: Ref[Unit]
-
     - name: amount
+      index: 10
+      required: true
       type: double
+      doc: >
+           The amount of the reference flow of the calculation target for which
+           the result should be calculated.
+
+    - name: unit
+      index: 11
+      type: Ref[Unit]
+      doc: >
+           The unit of the amount of the reference flow for which a result
+           should be calculated. If no unit is provided it defaults to the
+           reference unit of the respective flow.
 
     - name: flowProperty
+      index: 12
       type: Ref[FlowProperty]
+      doc: >
+           The flow property of the amount of the reference flow for which a
+           result should be calculated. If no flow property is provided it
+           defaults to the reference flow property of the respective flow.
 
     - name: numberOfRuns
+      index: 13
       type: integer
       doc: >
            This field is only valid when this setup describes a Monte Carlo

@@ -7,10 +7,14 @@ class:
   properties:
 
     - name: allocationType
+      index: 2
+      required: true
       type: AllocationType
       doc: The type of allocation.
 
     - name: product
+      index: 3
+      required: true
       type: Ref[Flow]
       doc: >
            The output product (or waste input) to which this allocation factor
@@ -18,16 +22,20 @@ class:
            waste input) in this process.
 
     - name: value
+      index: 4
+      required: true
       type: double
       doc: The value of the allocation factor.
 
     - name: formula
+      index: 5
       type: string
       doc: >
            An optional formula from which the value of the allocation factor
            is calculated.
 
     - name: exchange
+      index: 6
       type: ExchangeRef
       doc: >
            A product input, waste output, or elementary flow exchange which is

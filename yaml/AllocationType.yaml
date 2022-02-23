@@ -9,11 +9,16 @@ enum:
 
   items:
     - name: PHYSICAL_ALLOCATION
+      index: 1
 
     - name: ECONOMIC_ALLOCATION
+      index: 2
 
     - name: CAUSAL_ALLOCATION
+      index: 3
 
     - name: USE_DEFAULT_ALLOCATION
+      index: 4
 
     - name: NO_ALLOCATION
+      index: 5
