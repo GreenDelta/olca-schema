@@ -1,0 +1,29 @@
+
+class:
+  name: RefEntity
+  superClass: Entity
+  doc: >
+       A `RefEntity` is an entity that can be identified by a reference ID (or
+       UUID). In most cases this is a stand-alone entity (`RootEntity`) but
+       there are also entities (e.g. `Unit`, `NwSet`) that need a unique ID,
+       e.g. for reference data lists or mapping files.
+
+  properties:
+    - name: @id
+      index: 2
+      type: string
+      required: true
+      doc: >
+           The reference ID (or UUID) of this entity.
+
+    - name: name
+      index: 3
+      type: string
+      required: true
+      doc: The name of the entity.
+
+    - name: description
+      index: 4
+      type: string
+      doc: The description of the entity.
+    

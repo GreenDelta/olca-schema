@@ -1,22 +1,12 @@
 
 class:
   name: RootEntity
-  superClass: Entity
-  doc: >
-       A standalone item in a database like a location, unit group, flow, or
-       process. A root entity can be unambiguously identified by its id (the
-       JSON-LD @id field), version, and lastChange fields.
+  superClass: RefEntity
+  doc: A `RootEntity` is a stand-alone data set (like a `Flow` or `Process`).
 
   properties:
-    - name: name
-      type: string
-      doc: The name of the entity.
-
-    - name: description
-      type: string
-      doc: The description of the entity.
-
     - name: version
+      index: 5
       type: string
       doc: >
            A version number in MAJOR.MINOR.PATCH format where the MINOR and
@@ -24,5 +14,30 @@ class:
            (so 01.00.00 is the same as 1.0.0 or 1).
 
     - name: lastChange
+      index: 6
       type: dateTime
       doc: The timestamp when the entity was changed the last time.
+
+    - name: category
+      index: 7
+      type: string
+      doc: >
+           A full path of the category. Forward slashes are used to separate the
+           segments of this path, e.g.
+           `Elementary flows/emissions/air/unspecified`.
+    
+    - name: tags
+      type: List[string]
+      index: 8
+      doc: >
+           A list of optional tags. A tag is just a string which should not
+           contain commas (and other special characters).
+    
+    - name: library
+      type: string
+      index: 9
+      doc: >
+           If this entity is part of a library, this field contains the
+           identifier of that library. The identifier is typically just the
+           combination of the library name and version.
+ 

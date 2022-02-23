@@ -2,3 +2,14 @@
 class:
   name: Entity
   doc: The most generic type of the openLCA data model.
+
+  properties:
+
+    - name: @type
+      index: 1
+      type: string
+      doc: >
+           The type of the entity. This field is only required when different
+           types can occur in a given context (e.g. in a process link when a
+           product input of a process can be linked to the output of process or
+           a sub-system).
