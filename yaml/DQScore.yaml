@@ -9,13 +9,17 @@ class:
 
   properties:
     - name: position
+      index: 2
       type: int
 
     - name: label
+      index: 3
       type: string
 
     - name: description
+      index: 4
       type: string
 
     - name: uncertainty
+      index: 5
       type: double

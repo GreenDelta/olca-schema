@@ -1,7 +1,7 @@
 
 class:
   name: UnitGroup
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: unit_group.json
   doc: A group of units that can be converted into each other.
 

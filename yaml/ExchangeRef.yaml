@@ -10,6 +10,8 @@ class:
   properties:
 
     - name: internalId
+      index: 2
+      required: true
       type: int
       doc: The internal ID of the exchange.
     

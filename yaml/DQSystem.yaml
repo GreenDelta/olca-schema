@@ -1,7 +1,7 @@
 
 class:
   name: DQSystem
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: dq_system.json
   doc: >
        A data quality system (DQS) in openLCA describes a pedigree matrix of $m$
@@ -35,10 +35,13 @@ class:
 
   properties:
     - name: hasUncertainties
+      index: 10
       type: boolean
 
     - name: source
+      index: 11
       type: Ref[Source]
 
     - name: indicators
+      index: 12
       type: List[DQIndicator]

@@ -1,7 +1,7 @@
 
 class:
   name: ImpactCategory
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: impact_category.json
 
   properties:

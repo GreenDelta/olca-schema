@@ -9,7 +9,7 @@ class:
        e.g. for reference data lists or mapping files.
 
   properties:
-    - name: @id
+    - name: "@id"
       index: 2
       type: string
       required: true

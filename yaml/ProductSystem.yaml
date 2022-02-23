@@ -1,7 +1,7 @@
 
 class:
   name: ProductSystem
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: product_system.json
   doc: A product system describes the supply chain of a product (the functional unit) ...
 

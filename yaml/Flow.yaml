@@ -1,7 +1,7 @@
 
 class:
   name: Flow
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: flow.json
   doc: >
        Everything that can be an input or output of a process (e.g. a substance,
@@ -9,20 +9,24 @@ class:
 
   properties:
     - name: flowType
+      index: 10
       type: FlowType
       doc: >
            The type of the flow. Note that this type is more a descriptor of
            how the flow is handled in calculations.
 
     - name: cas
+      index: 11
       type: string
       doc: A CAS number of the flow.
 
     - name: formula
+      index: 12
       type: string
       doc: A chemical formula of the flow.
 
     - name: flowProperties
+      index: 13
       type: List[FlowPropertyFactor]
       doc: >
            The flow properties (quantities) in which amounts of the flow can
@@ -30,6 +34,7 @@ class:
            flow properties.
 
     - name: location
+      index: 14
       type: Ref[Location]
       doc: >
            The location of the flow. Normally the location of a flow is defined
@@ -37,13 +42,15 @@ class:
            some data formats define a location as a property of a flow.
     
     - name: synonyms
+      index: 15
       type: string
       doc: >
            A list of synonyms but packed into a single field. Best is to use
            semicolons as separator as commas are sometimes used in names of
            chemicals.
     
-    - name: infrastructureFlow
+    - name: isInfrastructureFlow
+      index: 16
       type: boolean
       doc: >
            Indicates whether this flow describes an infrastructure product. This

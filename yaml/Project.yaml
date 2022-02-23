@@ -1,7 +1,7 @@
 
 class:
   name: Project
-  superClass: CategorizedEntity
+  superClass: RootEntity
 
   properties:
     - name: impactMethod

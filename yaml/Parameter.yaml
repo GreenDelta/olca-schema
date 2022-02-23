@@ -1,7 +1,7 @@
 
 class:
   name: Parameter
-  superClass: CategorizedEntity
+  superClass: RootEntity
   doc: >
         In openLCA, parameters can be defined in different scopes: global,
         process, or LCIA method. The parameter name can be used in formulas and,

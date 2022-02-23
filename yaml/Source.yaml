@@ -1,7 +1,7 @@
 
 class:
   name: Source
-  superClass: CategorizedEntity
+  superClass: RootEntity
   doc: A source is a literature reference.
 
   properties:

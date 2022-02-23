@@ -1,7 +1,7 @@
 
 class:
   name: Process
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: process.json
   doc:
 

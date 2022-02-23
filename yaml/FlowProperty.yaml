@@ -1,7 +1,7 @@
 
 class:
   name: FlowProperty
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: flow_property.json
   doc: A flow property is a quantity that can be used to express amounts of a flow.
 

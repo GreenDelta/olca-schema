@@ -1,6 +1,6 @@
 class:
   name: Result
-  superClass: CategorizedEntity
+  superClass: RootEntity
   doc: A calculation result of a product system.
 
   properties:

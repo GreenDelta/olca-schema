@@ -5,7 +5,7 @@ class:
 
   properties:
 
-    - name: @type
+    - name: "@type"
       index: 1
       type: string
       doc: >

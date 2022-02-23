@@ -11,23 +11,28 @@ class:
         that flow (see also the [FlowPropertyFactor] type). 
 
   properties:
-    - name: avoidedProduct
+    - name: isAvoidedProduct
+      index: 2
       type: boolean
       doc: Indicates whether this exchange is an avoided product.
 
     - name: costFormula
+      index: 3
       type: string
       doc: A formula for calculating the costs of this exchange.
     
     - name: costValue
+      index: 4
       type: double
       doc: The costs of this exchange.
     
     - name: currency
+      index: 5
       type: Ref[Currency]
       doc: The currency in which the costs of this exchange are given.
 
     - name: internalId
+      index: 6
       type: int
       doc: >
             The process internal ID of the exchange. This is used to identify
@@ -36,26 +41,32 @@ class:
             same flow are allowed). The value should be >= 1.
 
     - name: flow
+      index: 7
       type: Ref[Flow]
       doc: The reference to the flow of the exchange.
 
     - name: flowProperty
+      index: 8
       type: Ref[FlowProperty]
       doc: The quantity in which the amount is given.
 
-    - name: input
+    - name: isInput
+      index: 9
       type: boolean
 
-    - name: quantitativeReference
+    - name: isQuantitativeReference
+      index: 10
       type: boolean
       doc: >
            Indicates whether the exchange is the quantitative reference of the
            process.
 
     - name: baseUncertainty
+      index: 11
       type: double
 
     - name: defaultProvider
+      index: 12
       type: Ref[Process]
       doc: >
            A default provider is a [Process] that is linked as the provider of a
@@ -66,15 +77,19 @@ class:
            and flow directions have to match of course).
 
     - name: amount
+      index: 13
       type: double
 
     - name: amountFormula
+      index: 14
       type: string
 
     - name: unit
+      index: 15
       type: Ref[Unit]
 
     - name: dqEntry
+      index: 16
       type: string
       doc: >
            A data quality entry like `(1;3;2;5;1)`. The entry is a vector of
@@ -84,8 +99,10 @@ class:
            respective values in the `dqEntry` vector map to these positions.
 
     - name: uncertainty
+      index: 17
       type: Uncertainty
 
     - name: description
+      index: 18
       type: string
       doc: A general comment about the input or output.

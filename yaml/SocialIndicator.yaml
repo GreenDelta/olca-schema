@@ -1,7 +1,7 @@
 
 class:
   name: SocialIndicator
-  superClass: CategorizedEntity
+  superClass: RootEntity
   example: social_indicator.json
   doc:
 

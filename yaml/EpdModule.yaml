@@ -6,10 +6,12 @@ class:
   properties:
 
     - name: name
+      index: 2
       type: string
       doc: The name or identifier of the module, like `A1`.
     
     - result: result
+      index: 3
       type: Ref[Result]
       doc: >
            A reference to the module's result. Note that results are stand-alone
