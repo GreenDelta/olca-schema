@@ -8,21 +8,26 @@ class:
   properties:
 
     - name: activityQuantity
+      index: 10
       type: Ref[FlowProperty]
       doc: The quantity of the activity variable.
 
     - name: activityUnit
+      index: 11
       type: Ref[Unit]
       doc: The unit of the activity variable.
 
     - name: activityVariable
+      index: 12
       type: string
       doc: The name of the activity variable of the indicator.
 
     - name: evaluationScheme
+      index: 13
       type: string
       doc: Documentation of the evaluation scheme of the indicator.
 
     - name: unitOfMeasurement
+      index: 14
       type: string
       doc: The unit in which the indicator is measured.

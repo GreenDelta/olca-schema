@@ -1,18 +1,20 @@
 
 class:
   name: Unit
-  superClass: RootEntity
+  superClass: RefEntity
   example: unit.json
   doc: An unit of measure
 
   properties:
     - name: conversionFactor
+      index: 5
       type: double
       doc: >
            The conversion factor to the reference unit of the unit group to
            which this unit belongs.
 
     - name: isReferenceUnit
+      index: 6
       type: boolean
       doc: >
            Indicates whether the unit is the reference unit of the unit group to
@@ -23,5 +25,6 @@ class:
            group.
 
     - name: synonyms
+      index: 7
       type: List[string]
       doc: A list of synonyms for the unit.

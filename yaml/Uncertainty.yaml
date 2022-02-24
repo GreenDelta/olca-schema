@@ -9,61 +9,76 @@ class:
 
   properties:
     - name: distributionType
+      index: 2
       type: UncertaintyType
       doc: The uncertainty distribution type
 
     - name: geomMean
+      index: 3
       type: double
       doc: The geometric mean value (used for log-normal distributions).
 
     - name: geomMeanFormula
+      index: 4
       type: string
       doc: A mathematical formula for the geometric mean.
 
     - name: geomSd
+      index: 5
       type: double
       doc: The geometric standard deviation (used for log-normal distributions).
 
     - name: geomSdFormula
+      index: 6
       type: string
       doc: A mathematical formula for the geometric standard deviation.
 
     - name: maximum
+      index: 7
       type: double
       doc: The maximum value (used for uniform and triangle distributions).
 
     - name: maximumFormula
+      index: 8
       type: string
       doc: A mathematical formula for the maximum value.
 
     - name: mean
+      index: 9
       type: double
       doc: The arithmetic mean (used for normal distributions).
 
     - name: meanFormula
+      index: 10
       type: string
       doc: A mathematical formula for the arithmetic mean.
 
     - name: minimum
+      index: 11
       type: double
       doc: The minimum value (used for uniform and triangle distributions).
 
     - name: minimumFormula
+      index: 12
       type: string
       doc: A mathematical formula for the minimum value.
 
     - name: mode
+      index: 13
       type: double
       doc: The most likely value (used for triangle distributions).
 
     - name: modeFormula
+      index: 14
       type: string
       doc: A mathematical formula for the most likely value.
 
     - name: sd
+      index: 15
       type: double
       doc: The arithmetic standard deviation  (used for normal distributions).
 
     - name: sdFormula
+      index: 16
       type: string
       doc: A mathematical formula for the arithmetic standard deviation.

@@ -7,17 +7,21 @@ class:
   properties:
 
     - name: externalFile
+      index: 10
       type: string
       doc: A direct link (relative or absolute URL) to the source file.
 
     - name: textReference
+      index: 11
       type: string
       doc: The full text reference of the source.
 
     - name: url
+      index: 12
       type: string
       doc: A URL that points to the source.
 
     - name: year
+      index: 13
       type: integer
       doc: The publication year of the source.

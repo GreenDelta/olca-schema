@@ -5,12 +5,12 @@ class:
 
   properties:
     - name: allocation
-      index: 7
+      index: 2
       type: AllocationType
       doc: The calculation type to be used in the calculation.
 
     - name: amount
-      index: 10
+      index: 3
       required: true
       type: double
       doc: >
@@ -18,50 +18,50 @@ class:
            the result should be calculated.
 
     - name: calculationType
-      index: 2
+      index: 4
       type: CalculationType
       doc: The type of calculation that should be performed.
 
-
-
-    - name: target
-      index: 3
-      required: true
-      type: Ref
+    - name: flowProperty
+      index: 5
+      type: Ref[FlowProperty]
       doc: >
-           The product system or process that should be calculated. Note that
-           a result is calculated for the reference flow of that calculation
-           target (i.e. the reference flow of the product system or process). 
+           The flow property of the amount of the reference flow for which a
+           result should be calculated. If no flow property is provided it
+           defaults to the reference flow property of the respective flow.
 
     - name: impactMethod
-      index: 4
+      index: 6
       type: Ref[ImpactMethod]
       doc: The LCIA method for the calculation.
 
+    - name: numberOfRuns
+      index: 7
+      type: integer
+      doc: >
+           This field is only valid when this setup describes a Monte Carlo
+           simulation and contains the number of simulation runs in that case.
+
     - name: nwSet
-      index: 5
+      index: 8
       type: Ref[NwSet]
       doc: The normalisation and weighting set for the calculation.
 
     - name: parameters
-      index: 6
+      index: 9
       type: List[ParameterRedef]
       doc: >
            A list of parameter redefinitions that should be used in the
            calculation.
 
-    - name: withCosts
-      index: 8
-      type: boolean
+    - name: target
+      index: 10
+      required: true
+      type: Ref
       doc: >
-           Indicates whether life cycle costs should be also calculated.
-
-    - name: withRegionalization
-      index: 9
-      type: boolean
-      doc: >
-           Indicates whether a regionalized result should be calculated or
-           not.
+           The product system or process that should be calculated. Note that
+           a result is calculated for the reference flow of that calculation
+           target (i.e. the reference flow of the product system or process).
 
     - name: unit
       index: 11
@@ -71,17 +71,15 @@ class:
            should be calculated. If no unit is provided it defaults to the
            reference unit of the respective flow.
 
-    - name: flowProperty
+    - name: withCosts
       index: 12
-      type: Ref[FlowProperty]
+      type: boolean
       doc: >
-           The flow property of the amount of the reference flow for which a
-           result should be calculated. If no flow property is provided it
-           defaults to the reference flow property of the respective flow.
+           Indicates whether life cycle costs should be also calculated.
 
-    - name: numberOfRuns
+    - name: withRegionalization
       index: 13
-      type: integer
+      type: boolean
       doc: >
-           This field is only valid when this setup describes a Monte Carlo
-           simulation and contains the number of simulation runs in that case.
+           Indicates whether a regionalized result should be calculated or
+           not.

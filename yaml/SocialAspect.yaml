@@ -5,30 +5,37 @@ class:
   doc: >
        An instance of this class describes a social aspect related to a social
        indicator in a process.
-  
+
   properties:
     - name: activityValue
+      index: 2
       type: double
       doc: The value of the activity variable of the related indicator.
-    
+
     - name: comment
+      index: 3
       type: string
-    
+
     - name: quality
+      index: 4
       type: string
       doc: A data quality entry, e.g. `(3,1,2,4,1)`.
-    
+
     - name: rawAmount
+      index: 5
       type: string
       doc: >
            The raw amount of the indicator's unit of measurement (not required
            to be numeric currently)
-    
+
     - name: riskLevel
+      index: 6
       type: RiskLevel
-    
+
     - name: socialIndicator
+      index: 7
       type: Ref[SocialIndicator]
-    
+
     - name: source
+      index: 8
       type: Ref[Source]
