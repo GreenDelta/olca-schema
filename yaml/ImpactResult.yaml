@@ -7,12 +7,15 @@ class:
   properties:
 
     - name: amount
+      index: 2
       type: double
       doc: The value the result.
 
     - name: description
+      index: 3
       type: string
 
     - name: indicator
+      index: 4
       type: Ref[ImpactCategory]
       doc: The impact assessment category.

@@ -8,16 +8,19 @@ class:
   properties:
 
     - name: conversionFactor
+      index: 2
       type: double
       doc: >
            The conversion factor to convert the amount of 1 unit of the source
            flow into the corresponding quantity of the target flow.
 
     - name: from
+      index: 3
       type: FlowMapRef
       doc: Describes the source flow of the mapping.
 
     - name: to
+      index: 4
       type: FlowMapRef
       doc: Describes the target of the mapping.
 

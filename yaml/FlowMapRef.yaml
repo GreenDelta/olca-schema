@@ -8,25 +8,29 @@ class:
        property (quantity) for which the mapping is valid. If the unit or
        quantity is not given, the mapping is based on the respective reference
        unit and reference flow property of the flow.
-  
+
   properties:
     - name: flow
+      index: 2
       type: Ref[Flow]
       doc: The reference to the flow data set.
-    
+
     - name: flowProperty
+      index: 3
       type: Ref[FlowProperty]
       doc: >
            An optional reference to a flow property of the flow for which the
            mapping is valid.
-    
+
     - name: unit
+      index: 4
       type: Ref[Unit]
       doc: >
            An optional reference to a unit of the flow for which the mapping is
            valid
-    
+
     - name: provider
+      index: 5
       type: Ref[Process]
       doc: >
            In case of a product or waste flow a flow mapping can contain a

@@ -7,13 +7,16 @@ class:
        category. Depending on the purpose of the [NwSet] (normalization,
        weighting, or both) the normalization and weighting factor can be
        present or not.
-  
+
   properties:
     - name: impactCategory
+      index: 2
       type: Ref[ImpactCategory]
-    
+
     - name: normalisationFactor
+      index: 3
       type: double
-    
+
     - name: weightingFactor
+      index: 4
       type: double

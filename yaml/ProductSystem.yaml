@@ -7,22 +7,26 @@ class:
 
   properties:
     - name: parameterSets
+      index: 10
       type: List[ParameterRedefSet]
       doc: >
            A list of possible sets of parameter redefinitions for this product
            system.
 
     - name: processLinks
+      index: 11
       type: List[ProcessLink]
       doc: The process links of the product system.
 
     - name: processes
+      index: 12
       type: List[Ref]
       doc: >
            The descriptors of all processes and sub-systems that are contained
            in the product system.
 
     - name: referenceExchange
+      index: 13
       type: ExchangeRef
       doc: >
            The exchange of the reference processes (typically the product
@@ -30,21 +34,25 @@ class:
            system.
 
     - name: referenceProcess
+      index: 14
       type: Ref[Process]
       doc: >
            The descriptor of the process that provides the flow of the
            functional unit of the product system.
 
     - name: targetAmount
+      index: 15
       type: double
       doc: The flow amount of the functional unit of the product system.
 
     - name: targetFlowProperty
+      index: 16
       type: Ref[FlowProperty]
       doc: >
            The flow property in which the flow amount of the functional unit is
            given.
 
     - name: targetUnit
+      index: 17
       type: Ref[Unit]
       doc: The unit in which the flow amount of the functional unit is given.

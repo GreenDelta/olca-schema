@@ -7,97 +7,121 @@ class:
   properties:
 
     - name: completenessDescription
+      index: 2
       type: string
       doc:
 
     - name: creationDate
+      index: 3
       type: dateTime
       doc:
 
     - name: dataCollectionDescription
+      index: 4
       type: string
       doc:
 
     - name: dataDocumentor
+      index: 5
       type: Ref[Actor]
       doc:
 
     - name: dataGenerator
+      index: 6
       type: Ref[Actor]
       doc:
 
     - name: dataSelectionDescription
+      index: 7
       type: string
       doc:
 
     - name: dataSetOwner
+      index: 8
       type: Ref[Actor]
       doc:
 
     - name: dataTreatmentDescription
+      index: 9
       type: string
       doc:
 
     - name: geographyDescription
+      index: 10
       type: string
       doc:
 
     - name: hasCopyright
+      index: 11
       type: boolean
       doc:
 
     - name: intendedApplication
+      index: 12
       type: string
       doc:
 
     - name: inventoryMethodDescription
+      index: 13
       type: string
       doc:
 
     - name: modelingConstantsDescription
+      index: 14
       type: string
       doc:
 
     - name: projectDescription
+      index: 15
       type: string
       doc:
 
     - name: publication
+      index: 16
       type: Ref[Source]
       doc:
 
     - name: restrictionsDescription
+      index: 17
       type: string
       doc:
 
     - name: reviewDetails
+      index: 18
       type: string
       doc:
 
     - name: reviewer
+      index: 19
       type: Ref[Actor]
       doc:
 
     - name: samplingDescription
+      index: 20
       type: string
       doc:
 
     - name: sources
+      index: 21
       type: List[Ref[Source]]
       doc:
 
     - name: technologyDescription
+      index: 22
       type: string
       doc:
 
     - name: timeDescription
+      index: 23
       type: string
       doc:
 
     - name: validFrom
+      index: 24
       type: date
       doc:
 
     - name: validUntil
+      index: 25
       type: date
       doc:

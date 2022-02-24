@@ -8,6 +8,7 @@ class:
   properties:
 
     - name: exchange
+      index: 2
       type: ExchangeRef
       doc: >
            The exchange of the linked process (this is useful if the linked
@@ -15,14 +16,17 @@ class:
            different provides, e.g. in an electricity mix).
 
     - name: flow
+      index: 3
       type: Ref[Flow]
       doc: The descriptor of the flow that is exchanged between the two processes.
 
     - name: process
+      index: 4
       type: Ref[Process]
       doc: The descriptor of the process that is linked to the provider.
 
     - name: provider
+      index: 5
       type: Ref
       doc: >
            The descriptor of the process or product system that provides a

@@ -7,17 +7,21 @@ class:
 
   properties:
     - name: code
+      index: 10
       type: string
       doc: The code of the location (e.g. an ISO 2-letter country code).
 
     - name: latitude
+      index: 11
       type: double
       doc: The average latitude of the location.
 
     - name: longitude
+      index: 12
       type: double
       doc: The average longitude of the location.
 
     - name: geometry
+      index: 13
       type: GeoJSON
       doc: A GeoJSON object.

@@ -6,20 +6,24 @@ class:
   properties:
 
     - name: flowResults
+      index: 10
       type: List[FlowResult]
       doc: An array of `FlowResult` objects.
 
     - name: impactMethod
+      index: 11
       type: Ref[ImpactMethod]
       doc: >
            A reference to the `ImpactMethod` that was used to calculate the
            result.
 
     - name: impactResults
+      index: 12
       type: List[ImpactResult]
       doc: An array of `ImpactResult` objects.1
 
     - name: productSystem
+      index: 13
       type: Ref[ProductSystem]
       doc: >
            A reference to the `ProductSystem` from which this result was

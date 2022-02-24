@@ -30,10 +30,12 @@ class:
   properties:
 
     - name: conversionFactor
+      index: 2
       type: double
       doc: The value of the conversion factor.
 
     - name: isReferenceFlowProperty
+      index: 3
       type: boolean
       doc: >
            Indicates whether the flow property of the factor is the reference
@@ -42,5 +44,6 @@ class:
            flow property.
 
     - name: flowProperty
+      index: 4
       type: Ref[FlowProperty]
       doc: The flow property (quantity) of the factor.

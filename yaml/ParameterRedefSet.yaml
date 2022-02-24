@@ -10,19 +10,23 @@ class:
 
   properties:
     - name: description
+      index: 2
       type: string
       doc: A description of the parameter set.
 
     - name: isBaseline
+      index: 3
       type: boolean
       doc: >
            Indicates if this set of parameter redefinitions is the baseline for
            a product system.
 
     - name: name
+      index: 4
       type: string
       doc: The name of the parameter set.
 
     - name: parameters
+      index: 5
       type: List[ParameterRedef]
       doc: The parameter redefinitions of this redefinition set.

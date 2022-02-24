@@ -5,7 +5,9 @@ class:
 
   properties:
     - name: impactMethod
+      index: 10
       type: Ref[ImpactMethod]
 
     - name: nwSet
+      index: 11
       type: NwSet

@@ -16,10 +16,12 @@ class:
   properties:
 
     - name: formula
+      index: 10
       type: string
       doc: A mathematical expression to calculate the parameter value.
 
     - name: isInputParameter
+      index: 11
       type: boolean
       doc: >
            Indicates whether the parameter is an input parameter (true) or a
@@ -27,15 +29,18 @@ class:
            if it is not an input parameter.
 
     - name: parameterScope
+      index: 12
       type: ParameterScope
       doc: The scope where the parameter is valid.
 
     - name: uncertainty
+      index: 13
       type: Uncertainty
       doc: >
            An uncertainty distribution of the parameter value. This is only
            valid for input parameters.
 
     - name: value
+      index: 14
       type: double
       doc: The parameter value.

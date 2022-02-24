@@ -6,6 +6,7 @@ class:
 
   properties:
     - name: context
+      index: 2
       type: Ref
       doc: >
            The context of the paramater (a process or LCIA method). If no
@@ -13,10 +14,12 @@ class:
            global parameter.
 
     - name: description
+      index: 3
       type: string
       doc: A description of this parameter redefinition.
-    
+
     - name: name
+      index: 4
       type: string
       doc: >
            The name of the redefined parameter. Note that parameter names are
@@ -25,11 +28,12 @@ class:
            thus has to exactly match the respective name.
 
     - name: uncertainty
+      index: 5
       type: Uncertainty
       doc: >
            An uncertainty distribution for the redefined parameter value.
 
     - name: value
+      index: 6
       type: double
       doc: The value of the redefined parameter.
-

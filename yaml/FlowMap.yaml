@@ -7,16 +7,19 @@ class:
   properties:
 
   - name: mappings
+    index: 10
     type: List[FlowMapEntry]
     doc: >
           A list of flow mappings from flows in a source flow list to flows in
           a target flow list.
 
   - name: source
+    index: 11
     type: Ref
     doc: The reference (id, name, description) of the source flow list.
 
   - name: target
+    index: 12
     type: Ref
     doc: The reference (id, name, description) of the target flow list.
 

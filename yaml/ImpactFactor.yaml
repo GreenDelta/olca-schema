@@ -7,33 +7,40 @@ class:
 
   properties:
     - name: flow
+      index: 2
       type: Ref[Flow]
       doc: The [Flow] of the impact assessment factor.
-    
+
     - name: location
+      index: 3
       type: Ref[Location]
       doc: >
            In case of a regionalized impact category, this field can contain
-           the location for which this factor is valid. 
+           the location for which this factor is valid.
 
     - name: flowProperty
+      index: 4
       type: Ref[FlowProperty]
       doc: >
            The quantity of the flow to which the LCIA factor is related (e.g.
            Mass).
 
     - name: unit
+      index: 5
       type: Ref[Unit]
       doc: The flow unit to which the LCIA factor is related (e.g. kg).
 
     - name: value
+      index: 6
       type: double
       doc: The value of the impact assessment factor.
 
     - name: formula
+      index: 7
       type: string
       doc: A mathematical formula for calculating the value of the LCIA factor.
 
     - name: uncertainty
+      index: 8
       type: Uncertainty
       doc: The uncertainty distribution of the factors' value.
