@@ -12,8 +12,23 @@ class:
       type: AllocationType
       doc: The type of allocation.
 
-    - name: product
+    - name: exchange
       index: 3
+      type: ExchangeRef
+      doc: >
+           A product input, waste output, or elementary flow exchange which is
+           allocated by this factor. This is only valid for causal allocation
+           where allocation factors can be assigned to single exchanges.
+
+    - name: formula
+      index: 4
+      type: string
+      doc: >
+           An optional formula from which the value of the allocation factor
+           is calculated.
+
+    - name: product
+      index: 5
       required: true
       type: Ref[Flow]
       doc: >
@@ -22,23 +37,7 @@ class:
            waste input) in this process.
 
     - name: value
-      index: 4
+      index: 6
       required: true
       type: double
       doc: The value of the allocation factor.
-
-    - name: formula
-      index: 5
-      type: string
-      doc: >
-           An optional formula from which the value of the allocation factor
-           is calculated.
-
-    - name: exchange
-      index: 6
-      type: ExchangeRef
-      doc: >
-           A product input, waste output, or elementary flow exchange which is
-           allocated by this factor. This is only valid for causal allocation
-           where allocation factors can be assigned to single exchanges.
-

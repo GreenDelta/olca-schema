@@ -6,9 +6,6 @@ class:
   doc:
 
   properties:
-    - name: activityVariable
-      type: string
-      doc: The name of the activity variable of the indicator.
 
     - name: activityQuantity
       type: Ref[FlowProperty]
@@ -18,11 +15,14 @@ class:
       type: Ref[Unit]
       doc: The unit of the activity variable.
 
-    - name: unitOfMeasurement
+    - name: activityVariable
       type: string
-      doc: The unit in which the indicator is measured.
+      doc: The name of the activity variable of the indicator.
 
     - name: evaluationScheme
       type: string
       doc: Documentation of the evaluation scheme of the indicator.
 
+    - name: unitOfMeasurement
+      type: string
+      doc: The unit in which the indicator is measured.

@@ -4,10 +4,25 @@ class:
   doc: A setup for a product system calculation.
 
   properties:
+    - name: allocation
+      index: 7
+      type: AllocationType
+      doc: The calculation type to be used in the calculation.
+
+    - name: amount
+      index: 10
+      required: true
+      type: double
+      doc: >
+           The amount of the reference flow of the calculation target for which
+           the result should be calculated.
+
     - name: calculationType
       index: 2
       type: CalculationType
       doc: The type of calculation that should be performed.
+
+
 
     - name: target
       index: 3
@@ -35,11 +50,6 @@ class:
            A list of parameter redefinitions that should be used in the
            calculation.
 
-    - name: allocation
-      index: 7
-      type: AllocationType
-      doc: The calculation type to be used in the calculation.
-
     - name: withCosts
       index: 8
       type: boolean
@@ -52,14 +62,6 @@ class:
       doc: >
            Indicates whether a regionalized result should be calculated or
            not.
-
-    - name: amount
-      index: 10
-      required: true
-      type: double
-      doc: >
-           The amount of the reference flow of the calculation target for which
-           the result should be calculated.
 
     - name: unit
       index: 11

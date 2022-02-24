@@ -6,18 +6,18 @@ class:
 
   properties:
 
-    - name: url
+    - name: externalFile
       type: string
-      doc: A URL that points to the source.
+      doc: A direct link (relative or absolute URL) to the source file.
 
     - name: textReference
       type: string
       doc: The full text reference of the source.
 
+    - name: url
+      type: string
+      doc: A URL that points to the source.
+
     - name: year
       type: integer
       doc: The publication year of the source.
-
-    - name: externalFile
-      type: string
-      doc: A direct link (relative or absolute URL) to the source file.

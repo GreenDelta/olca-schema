@@ -12,14 +12,6 @@ class:
       type: UncertaintyType
       doc: The uncertainty distribution type
 
-    - name: mean
-      type: double
-      doc: The arithmetic mean (used for normal distributions).
-
-    - name: meanFormula
-      type: string
-      doc: A mathematical formula for the arithmetic mean.
-
     - name: geomMean
       type: double
       doc: The geometric mean value (used for log-normal distributions).
@@ -27,22 +19,6 @@ class:
     - name: geomMeanFormula
       type: string
       doc: A mathematical formula for the geometric mean.
-
-    - name: minimum
-      type: double
-      doc: The minimum value (used for uniform and triangle distributions).
-
-    - name: minimumFormula
-      type: string
-      doc: A mathematical formula for the minimum value.
-
-    - name: sd
-      type: double
-      doc: The arithmetic standard deviation  (used for normal distributions).
-
-    - name: sdFormula
-      type: string
-      doc: A mathematical formula for the arithmetic standard deviation.
 
     - name: geomSd
       type: double
@@ -52,6 +28,30 @@ class:
       type: string
       doc: A mathematical formula for the geometric standard deviation.
 
+    - name: maximum
+      type: double
+      doc: The maximum value (used for uniform and triangle distributions).
+
+    - name: maximumFormula
+      type: string
+      doc: A mathematical formula for the maximum value.
+
+    - name: mean
+      type: double
+      doc: The arithmetic mean (used for normal distributions).
+
+    - name: meanFormula
+      type: string
+      doc: A mathematical formula for the arithmetic mean.
+
+    - name: minimum
+      type: double
+      doc: The minimum value (used for uniform and triangle distributions).
+
+    - name: minimumFormula
+      type: string
+      doc: A mathematical formula for the minimum value.
+
     - name: mode
       type: double
       doc: The most likely value (used for triangle distributions).
@@ -60,10 +60,10 @@ class:
       type: string
       doc: A mathematical formula for the most likely value.
 
-    - name: maximum
+    - name: sd
       type: double
-      doc: The maximum value (used for uniform and triangle distributions).
+      doc: The arithmetic standard deviation  (used for normal distributions).
 
-    - name: maximumFormula
+    - name: sdFormula
       type: string
-      doc: A mathematical formula for the maximum value.
+      doc: A mathematical formula for the arithmetic standard deviation.
