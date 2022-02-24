@@ -6,11 +6,13 @@ class:
   doc: A process link is a connection between two processes in a product system.
 
   properties:
-    - name: provider
-      type: Ref
+
+    - name: exchange
+      type: ExchangeRef
       doc: >
-           The descriptor of the process or product system that provides a
-           product or a waste treatment.
+           The exchange of the linked process (this is useful if the linked
+           process has multiple exchanges with the same flow that are linked to
+           different provides, e.g. in an electricity mix).
 
     - name: flow
       type: Ref[Flow]
@@ -20,10 +22,8 @@ class:
       type: Ref[Process]
       doc: The descriptor of the process that is linked to the provider.
 
-    - name: exchange
-      type: ExchangeRef
+    - name: provider
+      type: Ref
       doc: >
-           The exchange of the linked process (this is useful if the linked
-           process has multiple exchanges with the same flow that are linked to
-           different provides, e.g. in an electricity mix).
-
+           The descriptor of the process or product system that provides a
+           product or a waste treatment.

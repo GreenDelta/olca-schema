@@ -6,17 +6,21 @@ class:
   doc: A product system describes the supply chain of a product (the functional unit) ...
 
   properties:
+    - name: parameterSets
+      type: List[ParameterRedefSet]
+      doc: >
+           A list of possible sets of parameter redefinitions for this product
+           system.
+
+    - name: processLinks
+      type: List[ProcessLink]
+      doc: The process links of the product system.
+
     - name: processes
       type: List[Ref]
       doc: >
            The descriptors of all processes and sub-systems that are contained
            in the product system.
-
-    - name: referenceProcess
-      type: Ref[Process]
-      doc: >
-           The descriptor of the process that provides the flow of the
-           functional unit of the product system.
 
     - name: referenceExchange
       type: ExchangeRef
@@ -25,13 +29,15 @@ class:
            output) that provides the flow of the functional unit of the product
            system.
 
+    - name: referenceProcess
+      type: Ref[Process]
+      doc: >
+           The descriptor of the process that provides the flow of the
+           functional unit of the product system.
+
     - name: targetAmount
       type: double
       doc: The flow amount of the functional unit of the product system.
-
-    - name: targetUnit
-      type: Ref[Unit]
-      doc: The unit in which the flow amount of the functional unit is given.
 
     - name: targetFlowProperty
       type: Ref[FlowProperty]
@@ -39,13 +45,6 @@ class:
            The flow property in which the flow amount of the functional unit is
            given.
 
-    - name: processLinks
-      type: List[ProcessLink]
-      doc: The process links of the product system.
-    
-    - name: parameterSets
-      type: List[ParameterRedefSet]
-      doc: >
-           A list of possible sets of parameter redefinitions for this product
-           system.
-
+    - name: targetUnit
+      type: Ref[Unit]
+      doc: The unit in which the flow amount of the functional unit is given.

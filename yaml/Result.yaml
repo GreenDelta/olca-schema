@@ -5,22 +5,22 @@ class:
 
   properties:
 
-    - name: productSystem
-      type: Ref[ProductSystem]
-      doc: >
-           A reference to the `ProductSystem` from which this result was
-           calculated.
+    - name: flowResults
+      type: List[FlowResult]
+      doc: An array of `FlowResult` objects.
 
     - name: impactMethod
       type: Ref[ImpactMethod]
       doc: >
            A reference to the `ImpactMethod` that was used to calculate the
            result.
-    
-    - name: flowResults
-      type: List[FlowResult]
-      doc: An array of `FlowResult` objects.
-    
+
     - name: impactResults
       type: List[ImpactResult]
-      doc: An array of `ImpactResult` objects.
+      doc: An array of `ImpactResult` objects.1
+
+    - name: productSystem
+      type: Ref[ProductSystem]
+      doc: >
+           A reference to the `ProductSystem` from which this result was
+           calculated.
