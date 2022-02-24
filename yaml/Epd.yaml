@@ -4,38 +4,38 @@ class:
   doc: >
        The results and some meta-data of an environmental product declarartion,
        EPD.
-  
+
   properties:
 
-    - name: urn
+    - name: manufacturer
       index: 10
+      type: Ref[Actor]
+
+    - name: modules
+      index: 11
+      type: List[EpdModule]
+      doc: The results of this EPD structured in modules.
+
+    - name: pcr
+      index: 12
+      type: Ref[Source]
+
+    - name: product
+      index: 13
+      type: EpdProduct
+      doc: The declared product of the EPD.
+
+    - name: programOperator
+      index: 14
+      type: Ref[Actor]
+
+    - name: urn
+      index: 15
       type: string
       doc: >
            An universal resource name (URN) that identifies where the EPD comes
            from, e.g. `openEPD:ec3yznau`.
 
-    - name: product
-      index: 11
-      type: EpdProduct
-      doc: The declared product of the EPD.
-
-    - name: manufacturer
-      index: 12
-      type: Ref[Actor]
-
     - name: verifier
-      index: 13
-      type: Ref[Actor]
-    
-    - name: programOperator
-      index: 14
-      type: Ref[Actor]
-    
-    - name: pcr
-      index: 15
-      type: Ref[Source]
-    
-    - name: modules
       index: 16
-      type: List[EpdModule]
-      doc: The results of this EPD structured in modules.
+      type: Ref[Actor]

@@ -2,10 +2,16 @@
 class:
   name: FlowMap
   superClass: RootEntity
-  example: #none yet
   doc: A crosswalk of flows from a source flow list to a target flow list.
 
   properties:
+
+  - name: mappings
+    type: List[FlowMapEntry]
+    doc: >
+          A list of flow mappings from flows in a source flow list to flows in
+          a target flow list.
+
   - name: source
     type: Ref
     doc: The reference (id, name, description) of the source flow list.
@@ -14,8 +20,3 @@ class:
     type: Ref
     doc: The reference (id, name, description) of the target flow list.
 
-  - name: mappings
-    type: List[FlowMapEntry]
-    doc: >
-          A list of flow mappings from flows in a source flow list to flows in
-          a target flow list.

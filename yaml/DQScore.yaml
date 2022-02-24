@@ -8,17 +8,18 @@ class:
        system ([DQSystem]).
 
   properties:
-    - name: position
+
+    - name: description
       index: 2
-      type: int
+      type: string
 
     - name: label
       index: 3
       type: string
 
-    - name: description
+    - name: position
       index: 4
-      type: string
+      type: int
 
     - name: uncertainty
       index: 5

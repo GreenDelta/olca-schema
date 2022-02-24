@@ -28,9 +28,6 @@ class:
        lower calorific value.)
 
   properties:
-    - name: flowProperty
-      type: Ref[FlowProperty]
-      doc: The flow property (quantity) of the factor.
 
     - name: conversionFactor
       type: double
@@ -44,3 +41,6 @@ class:
            a conversion factor of 1.0 and there should be only one reference
            flow property.
 
+    - name: flowProperty
+      type: Ref[FlowProperty]
+      doc: The flow property (quantity) of the factor.

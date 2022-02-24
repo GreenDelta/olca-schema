@@ -10,10 +10,6 @@ class:
       type: string
       doc:
 
-    - name: hasCopyright
-      type: boolean
-      doc:
-
     - name: creationDate
       type: dateTime
       doc:
@@ -44,6 +40,10 @@ class:
 
     - name: geographyDescription
       type: string
+      doc:
+
+    - name: hasCopyright
+      type: boolean
       doc:
 
     - name: intendedApplication

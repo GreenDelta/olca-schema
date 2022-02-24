@@ -5,10 +5,24 @@ class:
   doc: A calculation result of a flow.
 
   properties:
+
+    - name: amount
+      type: double
+
+    - name: description
+      type: string
+
     - name: flow
       type: Ref[Flow]
       doc: The flow reference.
-    
+
+    - name: flowProperty
+      type: Ref[FlowProperty]
+      doc: >
+           The flow property in which the amount of the result is given. If
+           missing, the amount is expected to be given in the reference flow
+           property of the flow.
+
     - name: isInput
       type: boolean
       doc: Indicates whether the flow is an input or not.
@@ -17,27 +31,14 @@ class:
       type: boolean
       doc: "`true` if this is the quantitative reference flow of the result."
 
-    - name: amount
-      type: double
-    
-    - name: flowProperty
-      type: Ref[FlowProperty]
+    - name: location
+      type: Ref[Location]
       doc: >
-           The flow property in which the amount of the result is given. If
-           missing, the amount is expected to be given in the reference flow
-           property of the flow.
-    
+           The location of this flow result in case of a regionalized result.
+
     - name: unit
       type: Ref[Unit]
       doc: >
            The unit in which the amount of the result is given. If missing,
            the amount is expected to be given in the reference unit of the
            flow.
-
-    - name: location
-      type: Ref[Location]
-      doc: >
-           The location of this flow result in case of a regionalized result.
-    
-    - name: description
-      type: string

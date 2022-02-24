@@ -9,8 +9,8 @@ class:
       index: 2
       type: string
       doc: The name or identifier of the module, like `A1`.
-    
-    - result: result
+
+    - name: result
       index: 3
       type: Ref[Result]
       doc: >
