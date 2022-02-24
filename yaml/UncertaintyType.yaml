@@ -7,9 +7,13 @@ enum:
 
   items:
     - name: LOG_NORMAL_DISTRIBUTION
+      index: 1
 
     - name: NORMAL_DISTRIBUTION
+      index: 2
 
     - name: TRIANGLE_DISTRIBUTION
+      index: 3
 
     - name: UNIFORM_DISTRIBUTION
+      index: 4

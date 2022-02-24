@@ -4,25 +4,37 @@ enum:
 
   items:
     - name: NO_OPPORTUNITY
+      index: 1
 
     - name: HIGH_OPPORTUNITY
+      index: 2
 
     - name: MEDIUM_OPPORTUNITY
+      index: 3
 
     - name: LOW_OPPORTUNITY
+      index: 4
 
     - name: NO_RISK
+      index: 5
 
     - name: VERY_LOW_RISK
+      index: 6
 
     - name: LOW_RISK
+      index: 7
 
     - name: MEDIUM_RISK
+      index: 8
 
     - name: HIGH_RISK
+      index: 9
 
     - name: VERY_HIGH_RISK
+      index: 10
 
     - name: NO_DATA
+      index: 11
 
     - name: NOT_APPLICABLE
+      index: 12

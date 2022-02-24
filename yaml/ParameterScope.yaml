@@ -1,7 +1,7 @@
 
 enum:
   name: ParameterScope
-  doc: > 
+  doc: >
       The possible scopes of parameters. Parameters can be defined globally, in
       processes, or impact categories. They can be redefined in calculation
       setups on the project and product system level, but the initial definition
@@ -9,16 +9,19 @@ enum:
 
   items:
     - name: PROCESS_SCOPE
+      index: 1
       doc: >
            Indicates that the evaluation scope of a parameter is the process
            where it is defined.
 
     - name: IMPACT_SCOPE
+      index: 2
       doc: >
            Indicates that the evaluation scope of a parameter is the impact
            category where it is defined.
 
     - name: GLOBAL_SCOPE
+      index: 3
       doc: >
            Indicates that the evaluation scope of a parameter is the global
            scope.

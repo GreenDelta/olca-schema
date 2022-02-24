@@ -5,5 +5,7 @@ enum:
 
   items:
     - name: ECONOMIC_QUANTITY
+      index: 1
 
     - name: PHYSICAL_QUANTITY
+      index: 2

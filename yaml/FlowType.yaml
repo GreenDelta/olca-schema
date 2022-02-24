@@ -5,5 +5,10 @@ enum:
 
   items:
     - name: ELEMENTARY_FLOW
+      index: 1
+
     - name: PRODUCT_FLOW
+      index: 2
+
     - name: WASTE_FLOW
+      index: 3

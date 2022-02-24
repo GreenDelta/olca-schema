@@ -5,37 +5,55 @@ enum:
 
   items:
     - name: ACTOR
+      index: 1
 
     - name: CATEGORY
+      index: 2
 
     - name: CURRENCY
+      index: 3
 
     - name: DQ_SYSTEM
+      index: 4
+
+    - name: EPD
+      index: 5
 
     - name: FLOW
+      index: 6
 
     - name: FLOW_PROPERTY
+      index: 7
 
     - name: IMPACT_CATEGORY
+      index: 8
 
     - name: IMPACT_METHOD
+      index: 9
 
     - name: LOCATION
-
-    - name: NW_SET
+      index: 10
 
     - name: PARAMETER
+      index: 11
 
     - name: PROCESS
+      index: 12
 
     - name: PRODUCT_SYSTEM
+      index: 13
 
     - name: PROJECT
+      index: 14
+
+    - name: RESULT
+      index: 15
 
     - name: SOCIAL_INDICATOR
+      index: 16
 
     - name: SOURCE
-
-    - name: UNIT
+      index: 17
 
     - name: UNIT_GROUP
+      index: 18

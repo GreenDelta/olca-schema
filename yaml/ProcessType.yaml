@@ -5,5 +5,7 @@ enum:
 
   items:
     - name: LCI_RESULT
+      index: 1
 
     - name: UNIT_PROCESS
+      index: 2
