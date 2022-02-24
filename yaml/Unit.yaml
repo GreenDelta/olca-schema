@@ -12,7 +12,7 @@ class:
            The conversion factor to the reference unit of the unit group to
            which this unit belongs.
 
-    - name: referenceUnit
+    - name: isReferenceUnit
       type: boolean
       doc: >
            Indicates whether the unit is the reference unit of the unit group to

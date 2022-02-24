@@ -5,13 +5,14 @@ class:
   doc: A calculation result of an impact assessment category.
 
   properties:
-    - name: indicator
-      type: Ref[ImpactCategory]
-      doc: The impact assessment category.
-    
+
     - name: amount
       type: double
       doc: The value the result.
-    
+
     - name: description
       type: string
+
+    - name: indicator
+      type: Ref[ImpactCategory]
+      doc: The impact assessment category.

@@ -10,7 +10,7 @@ class:
       type: string
       doc:
 
-    - name: copyright
+    - name: hasCopyright
       type: boolean
       doc:
 

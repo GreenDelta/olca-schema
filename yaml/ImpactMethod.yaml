@@ -5,8 +5,6 @@ class:
   doc: An impact assessment method.
 
   properties:
-    - name: source
-      type: Ref[Source]
 
     - name: impactCategories
       type: List[Ref[ImpactCategory]]
@@ -15,3 +13,6 @@ class:
     - name: nwSets
       type: List[NwSet]
       doc: The normalization and weighting sets of the method.
+
+    - name: source
+      type: Ref[Source]

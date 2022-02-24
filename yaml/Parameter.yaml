@@ -14,27 +14,28 @@ class:
         uncertainty distribution.
 
   properties:
-    - name: parameterScope
-      type: ParameterScope
-      doc: The scope where the parameter is valid.
 
-    - name: inputParameter
+    - name: formula
+      type: string
+      doc: A mathematical expression to calculate the parameter value.
+
+    - name: isInputParameter
       type: boolean
       doc: >
            Indicates whether the parameter is an input parameter (true) or a
            dependent/calculated parameter (false). A parameter can have a formula
            if it is not an input parameter.
 
-    - name: value
-      type: double
-      doc: The parameter value.
-
-    - name: formula
-      type: string
-      doc: A mathematical expression to calculate the parameter value.
+    - name: parameterScope
+      type: ParameterScope
+      doc: The scope where the parameter is valid.
 
     - name: uncertainty
       type: Uncertainty
       doc: >
            An uncertainty distribution of the parameter value. This is only
            valid for input parameters.
+
+    - name: value
+      type: double
+      doc: The parameter value.

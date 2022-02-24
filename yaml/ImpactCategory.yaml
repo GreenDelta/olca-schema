@@ -5,12 +5,10 @@ class:
   example: impact_category.json
 
   properties:
-    - name: referenceUnitName
-      type: string
-      doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
 
-    - name: source
-      type: Ref[Source]
+    - name: impactFactors
+      type: List[ImpactFactor]
+      doc: The characterisation factors of the LCIA category.
 
     - name: parameters
       type: List[Parameter]
@@ -18,6 +16,9 @@ class:
            A set of parameters which can be used in formulas of the
            characterisation factors in this impact category.
 
-    - name: impactFactors
-      type: List[ImpactFactor]
-      doc: The characterisation factors of the LCIA category.
+    - name: referenceUnitName
+      type: string
+      doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
+
+    - name: source
+      type: Ref[Source]

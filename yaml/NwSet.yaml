@@ -5,13 +5,13 @@ class:
   doc: A normalization and weighting set.
 
   properties:
+    - name: factors
+      type: List[NwFactor]
+      doc: The list of normalization and weighting factors of this set.
+
     - name: weightedScoreUnit
       type: string
       doc: >
            This is the optional unit of the (normalized and) weighted score
            when this normalization and weighting set was applied on a LCIA
            result.
-    
-    - name: factors
-      type: List[NwFactor]
-      doc: The list of normalization and weighting factors of this set.

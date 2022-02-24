@@ -36,7 +36,7 @@ class:
       type: double
       doc: The value of the conversion factor.
 
-    - name: referenceFlowProperty
+    - name: isReferenceFlowProperty
       type: boolean
       doc: >
            Indicates whether the flow property of the factor is the reference

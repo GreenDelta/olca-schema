@@ -9,19 +9,19 @@ class:
        system. In the calculation the baseline set is then taken by default.
 
   properties:
-    - name: name
-      type: string
-      doc: The name of the parameter set.
-    
     - name: description
       type: string
       doc: A description of the parameter set.
-    
+
     - name: isBaseline
       type: boolean
       doc: >
            Indicates if this set of parameter redefinitions is the baseline for
            a product system.
+
+    - name: name
+      type: string
+      doc: The name of the parameter set.
 
     - name: parameters
       type: List[ParameterRedef]
