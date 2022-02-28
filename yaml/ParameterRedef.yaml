@@ -18,8 +18,12 @@ class:
       type: string
       doc: A description of this parameter redefinition.
 
-    - name: name
+    - name: isProtected
       index: 4
+      type: boolean
+
+    - name: name
+      index: 5
       type: string
       doc: >
            The name of the redefined parameter. Note that parameter names are
@@ -28,12 +32,12 @@ class:
            thus has to exactly match the respective name.
 
     - name: uncertainty
-      index: 5
+      index: 6
       type: Uncertainty
       doc: >
            An uncertainty distribution for the redefined parameter value.
 
     - name: value
-      index: 6
+      index: 7
       type: double
       doc: The value of the redefined parameter.

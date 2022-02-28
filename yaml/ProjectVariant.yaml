@@ -1,0 +1,38 @@
+
+class:
+  name: ProjectVariant
+  superClass: Entity
+
+  properties:
+
+    - name: allocationMethod
+      index: 1
+      type: AllocationType
+
+    - name: amount
+      index: 2
+      type: double
+
+    - name: description
+      index: 3
+      type: string
+
+    - name: isDisabled
+      index: 4
+      type: boolean
+
+    - name: name
+      index: 5
+      type: string
+
+    - name: parameterRedefs
+      index: 6
+      type: List[ParameterRedef]
+
+    - name: productSystem
+      index: 7
+      type: Ref[ProductSystem]
+
+    - name: unit
+      index: 8
+      type: Ref[Unit]

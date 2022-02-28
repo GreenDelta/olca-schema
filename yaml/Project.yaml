@@ -8,6 +8,18 @@ class:
       index: 10
       type: Ref[ImpactMethod]
 
+    - name: isWithCosts
+      index: 11
+      type: boolean
+
+    - name: isWithRegionalization
+      index: 12
+      type: boolean
+
     - name: nwSet
       index: 11
       type: NwSet
+
+    - name: variants
+      index: 12
+      type: List[ProjectVariant]

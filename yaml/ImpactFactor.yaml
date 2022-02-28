@@ -11,19 +11,19 @@ class:
       type: Ref[Flow]
       doc: The [Flow] of the impact assessment factor.
 
-    - name: location
-      index: 3
-      type: Ref[Location]
-      doc: >
-           In case of a regionalized impact category, this field can contain
-           the location for which this factor is valid.
-
     - name: flowProperty
-      index: 4
+      index: 3
       type: Ref[FlowProperty]
       doc: >
            The quantity of the flow to which the LCIA factor is related (e.g.
            Mass).
+
+    - name: location
+      index: 4
+      type: Ref[Location]
+      doc: >
+           In case of a regionalized impact category, this field can contain
+           the location for which this factor is valid.
 
     - name: unit
       index: 5

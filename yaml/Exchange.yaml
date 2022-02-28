@@ -100,10 +100,14 @@ class:
            Indicates whether the exchange is the quantitative reference of the
            process.
 
-    - name: uncertainty
+    - name: location
       index: 17
+      type: Ref[Location]
+
+    - name: uncertainty
+      index: 18
       type: Uncertainty
 
     - name: unit
-      index: 18
+      index: 19
       type: Ref[Unit]
