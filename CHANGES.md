@@ -36,7 +36,11 @@ The following fields were added to existing classes:
 ## Renamed fields
 
 | class                  | old name                | new name
-|----------------------  |-------------------------|---------------------------
+|------------------------|-------------------------|---------------------------
+| `Exchange`             | `avoidedProduct`        | `isAvoidedProduct`
+| `Exchange`             | `input`                 | `isInput`
+| `Exchange`             | `quantitativeReference` | `isQuantitativeReference`
+| `Flow`                 | `infrastructureFlow`    | `isInfrastructureFlow`
 | `FlowPropertyFactor`   | `referenceFlowProperty` | `isReferenceFlowProperty`
 | `ImpactCategory`       | `referenceUnitName`     | `refUnit`
 | `Parameter`            | `inputParameter`        | `isIputParameter`
