@@ -17,9 +17,9 @@ class:
       type: boolean
 
     - name: nwSet
-      index: 11
+      index: 13
       type: NwSet
 
     - name: variants
-      index: 12
+      index: 14
       type: List[ProjectVariant]
