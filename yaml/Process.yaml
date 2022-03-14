@@ -58,22 +58,22 @@ class:
       index: 18
       type: Ref[DQSystem]
       doc: >
-           A reference to a data quality system ([DQSystem]) with which the
+           A reference to a data quality system (`DQSystem`) with which the
            overall quality of the process can be assessed.
 
     - name: exchangeDqSystem
       index: 19
       type: Ref[DQSystem]
       doc: >
-           A reference to a data quality system ([DQSystem]) with which the
-           quality of individual inputs and outputs ([Exchange]s) of the process
+           A reference to a data quality system (`DQSystem`) with which the
+           quality of individual inputs and outputs (`Exchange`) of the process
            can be assessed.
 
     - name: socialDqSystem
       index: 20
       type: Ref[DQSystem]
       doc: >
-           A reference to a data quality system ([DQSystem]) with which the
+           A reference to a data quality system (`DQSystem`) with which the
            quality of individual social aspects of the process can be assessed.
 
     - name: dqEntry

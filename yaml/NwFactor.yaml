@@ -3,10 +3,10 @@ class:
   name: NwFactor
   superClass: Entity
   doc: >
-       A normalization and weighting factor of a [NwSet] related to an impact
-       category. Depending on the purpose of the [NwSet] (normalization,
-       weighting, or both) the normalization and weighting factor can be
-       present or not.
+       A normalization and weighting factor of a `NwSet` related to an impact
+       category. Depending on the purpose of the `NwSet` (normalization,
+       weighting, or both) the normalization and weighting factor can be present
+       or not.
 
   properties:
     - name: impactCategory

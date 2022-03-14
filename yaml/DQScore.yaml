@@ -4,8 +4,8 @@ class:
   superClass: Entity
   example: dq_score.json
   doc: >
-       An score value of an indicator ([DQIndicator]) in a data quality
-       system ([DQSystem]).
+       An score value of an indicator (`DQIndicator`) in a data quality system
+       (`DQSystem`).
 
   properties:
 

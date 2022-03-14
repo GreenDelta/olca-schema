@@ -4,28 +4,26 @@ class:
   superClass: Entity
   example: flow_property_factor.json
   doc: >
-       A FlowPropertyFactor is a conversion factor between
-       <a href="./FlowProperty.html">flow properties (quantities)</a>
-       of a <a href="./Flow.html">flow</a>. As an example the amount of the
-       flow 'water' in a process could be expressed in 'kg' mass or 'm3' volume.
-       In this case the flow water would have two flow property factors: one for
-       the flow property 'mass' and one for 'volume'. Each of these flow
-       properties has a reference to a <a href="./UnitGroup.html">unit group</a>
-       which again has a reference unit. In the example the flow property 'mass'
-       could reference the unit group 'units of mass' with 'kg' as reference
-       unit and volume could reference the unit group 'units of volume' with
-       'm3' as reference unit. The flow property factor is now the conversion
-       factor between these two reference units where the factor of the
-       reference flow property of the flow is 1. If the reference flow property
-       of 'water' in the example would be 'mass' the respective flow property
-       factor would be 1 and the factor for 'volume' would be 0.001 (as 1 kg
-       water is 0.001 m3). The amount of water in a process can now be also given
-       in liter, tons, grams etc. For this, the unit conversion factor of the
-       respective unit group can be used to convert into the reference unit
-       (which then can be used to convert to the reference unit of another
-       flow property). Another thing to note is that different flow properties
-       can refer to the same unit group (e.g. MJ upper calorific value and MJ
-       lower calorific value.)
+       A `FlowPropertyFactor` is a conversion factor between flow properties
+       (quantities; `FlowProperty`) of a flow (`Flow`). As an example the amount
+       of the flow 'water' in a process could be expressed in 'kg' mass or 'm3'
+       volume. In this case the flow water would have two flow property factors:
+       one for the flow property 'mass' and one for 'volume'. Each of these flow
+       properties has a reference to a unit group (`UnitGroup`) which again has
+       a reference unit. In the example the flow property 'mass' could reference
+       the unit group 'units of mass' with 'kg' as reference unit and volume
+       could reference the unit group 'units of volume' with 'm3' as reference
+       unit. The flow property factor is now the conversion factor between these
+       two reference units where the factor of the reference flow property of
+       the flow is 1. If the reference flow property of 'water' in the example
+       would be 'mass' the respective flow property factor would be 1 and the
+       factor for 'volume' would be 0.001 (as 1 kg water is 0.001 m3). The
+       amount of water in a process can now be also given in liter, tons, grams
+       etc. For this, the unit conversion factor of the respective unit group
+       can be used to convert into the reference unit (which then can be used to
+       convert to the reference unit of another flow property). Another thing to
+       note is that different flow properties can refer to the same unit group
+       (e.g. MJ upper calorific value and MJ lower calorific value.)
 
   properties:
 

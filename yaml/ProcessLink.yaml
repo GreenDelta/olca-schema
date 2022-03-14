@@ -29,5 +29,5 @@ class:
       index: 5
       type: Ref
       doc: >
-           The descriptor of the process or product system that provides a
-           product or a waste treatment.
+           A reference to a process, product system, or result that provides the
+           product or a waste (treatment) flow.

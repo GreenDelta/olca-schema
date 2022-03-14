@@ -4,10 +4,12 @@ class:
   superClass: RootEntity
   example: category.json
   doc: >
+      __this class will be may removed from the schema in version 2__
+
        A category is used for the categorisation of types like processes, flows,
-       etc. The tricky thing is that the `Category` class inherits also from
-       the [CategorizedEntity] type so that a category can have a category
-       attribute which is then the parent category of this category (uff).
+       etc. The tricky thing is that the `Category` class inherits also from the
+       `RootEntity` type so that a category can have a category attribute which
+       is then the parent category of this category.
 
   properties:
     - name: modelType

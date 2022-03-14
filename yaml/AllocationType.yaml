@@ -3,9 +3,9 @@ enum:
   name: AllocationType
   doc: >
        An enumeration type for allocation methods. This type is used to define
-       the type of an [AllocationFactor], the default allocation method of a
-       multi-functional [Process], or the allocation method in a
-       [CalculationSetup]. 
+       the type of an `AllocationFactor`, the default allocation method of a
+       multi-functional `Process`, or the allocation method in a
+       `CalculationSetup`.
 
   items:
     - name: PHYSICAL_ALLOCATION
