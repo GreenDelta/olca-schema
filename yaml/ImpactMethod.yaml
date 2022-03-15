@@ -6,16 +6,20 @@ class:
 
   properties:
 
-    - name: impactCategories
+    - name: code
       index: 10
+      type: string
+
+    - name: impactCategories
+      index: 11
       type: List[Ref[ImpactCategory]]
       doc: The impact categories of the method.
 
     - name: nwSets
-      index: 11
+      index: 12
       type: List[NwSet]
       doc: The normalization and weighting sets of the method.
 
     - name: source
-      index: 12
+      index: 13
       type: Ref[Source]
