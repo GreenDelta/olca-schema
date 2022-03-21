@@ -199,22 +199,22 @@
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 10</li>
 </ul>
-<h3 id="hascopyright"><a class="header" href="#hascopyright"><code>hasCopyright</code></a></h3>
-<ul>
-<li><em>is optional</em></li>
-<li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
-<li><em>Proto-Index:</em> 11</li>
-</ul>
 <h3 id="intendedapplication"><a class="header" href="#intendedapplication"><code>intendedApplication</code></a></h3>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
-<li><em>Proto-Index:</em> 12</li>
+<li><em>Proto-Index:</em> 11</li>
 </ul>
 <h3 id="inventorymethoddescription"><a class="header" href="#inventorymethoddescription"><code>inventoryMethodDescription</code></a></h3>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 12</li>
+</ul>
+<h3 id="iscopyrightprotected"><a class="header" href="#iscopyrightprotected"><code>isCopyrightProtected</code></a></h3>
+<ul>
+<li><em>is optional</em></li>
+<li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
 <li><em>Proto-Index:</em> 13</li>
 </ul>
 <h3 id="modelingconstantsdescription"><a class="header" href="#modelingconstantsdescription"><code>modelingConstantsDescription</code></a></h3>
@@ -306,9 +306,9 @@ class ProcessDocumentation:
   data_set_owner: Ref
   data_treatment_description: str
   geography_description: str
-  has_copyright: bool
   intended_application: str
   inventory_method_description: str
+  is_copyright_protected: bool
   modeling_constants_description: str
   project_description: str
   publication: Ref

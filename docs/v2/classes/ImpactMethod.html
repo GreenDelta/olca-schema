@@ -202,25 +202,31 @@
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 9</li>
 </ul>
+<h3 id="code"><a class="header" href="#code"><code>code</code></a></h3>
+<ul>
+<li><em>is optional</em></li>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 10</li>
+</ul>
 <h3 id="impactcategories"><a class="header" href="#impactcategories"><code>impactCategories</code></a></h3>
 <p>The impact categories of the method.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>List</code> of <a href="./Ref.html">Ref</a> of <a href="./ImpactCategory.html">ImpactCategory</a></li>
-<li><em>Proto-Index:</em> 10</li>
+<li><em>Proto-Index:</em> 11</li>
 </ul>
 <h3 id="nwsets"><a class="header" href="#nwsets"><code>nwSets</code></a></h3>
 <p>The normalization and weighting sets of the method.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>List</code> of <a href="./NwSet.html">NwSet</a></li>
-<li><em>Proto-Index:</em> 11</li>
+<li><em>Proto-Index:</em> 12</li>
 </ul>
 <h3 id="source"><a class="header" href="#source"><code>source</code></a></h3>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <a href="./Ref.html">Ref</a> of <a href="./Source.html">Source</a></li>
-<li><em>Proto-Index:</em> 12</li>
+<li><em>Proto-Index:</em> 13</li>
 </ul>
 <h2 id="python-class-stub"><a class="header" href="#python-class-stub">Python class stub</a></h2>
 <p>The snippet below shows the names of the properties of the corresponding
@@ -232,6 +238,7 @@ the names of the class and its properties.</p>
 class ImpactMethod:
   id: str
   category: str
+  code: str
   description: str
   impact_categories: List[Ref]
   last_change: str

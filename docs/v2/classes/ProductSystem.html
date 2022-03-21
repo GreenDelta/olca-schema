@@ -223,14 +223,14 @@
 <li><em>Type:</em> <code>List</code> of <a href="./Ref.html">Ref</a></li>
 <li><em>Proto-Index:</em> 12</li>
 </ul>
-<h3 id="referenceexchange"><a class="header" href="#referenceexchange"><code>referenceExchange</code></a></h3>
+<h3 id="refexchange"><a class="header" href="#refexchange"><code>refExchange</code></a></h3>
 <p>The exchange of the reference processes (typically the product output) that provides the flow of the functional unit of the product system.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <a href="./ExchangeRef.html">ExchangeRef</a></li>
 <li><em>Proto-Index:</em> 13</li>
 </ul>
-<h3 id="referenceprocess"><a class="header" href="#referenceprocess"><code>referenceProcess</code></a></h3>
+<h3 id="refprocess"><a class="header" href="#refprocess"><code>refProcess</code></a></h3>
 <p>The descriptor of the process that provides the flow of the functional unit of the product system.</p>
 <ul>
 <li><em>is optional</em></li>
@@ -275,8 +275,8 @@ class ProductSystem:
   parameter_sets: List[ParameterRedefSet]
   process_links: List[ProcessLink]
   processes: List[Ref]
-  reference_exchange: ExchangeRef
-  reference_process: Ref
+  ref_exchange: ExchangeRef
+  ref_process: Ref
   tags: List[str]
   target_amount: float
   target_flow_property: Ref

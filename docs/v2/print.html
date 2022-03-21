@@ -218,16 +218,19 @@ Dedication</a>.</p>
 </tbody></table>
 <h2 id="renamed-fields"><a class="header" href="#renamed-fields">Renamed fields</a></h2>
 <table><thead><tr><th>class</th><th>old name</th><th>new name</th></tr></thead><tbody>
+<tr><td><code>Currency</code></td><td><code>referenceCurrency</code></td><td><code>refCurrency</code></td></tr>
 <tr><td><code>Exchange</code></td><td><code>avoidedProduct</code></td><td><code>isAvoidedProduct</code></td></tr>
 <tr><td><code>Exchange</code></td><td><code>input</code></td><td><code>isInput</code></td></tr>
 <tr><td><code>Exchange</code></td><td><code>quantitativeReference</code></td><td><code>isQuantitativeReference</code></td></tr>
 <tr><td><code>Flow</code></td><td><code>infrastructureFlow</code></td><td><code>isInfrastructureFlow</code></td></tr>
-<tr><td><code>FlowPropertyFactor</code></td><td><code>referenceFlowProperty</code></td><td><code>isReferenceFlowProperty</code></td></tr>
+<tr><td><code>FlowPropertyFactor</code></td><td><code>referenceFlowProperty</code></td><td><code>isRefFlowProperty</code></td></tr>
 <tr><td><code>ImpactCategory</code></td><td><code>referenceUnitName</code></td><td><code>refUnit</code></td></tr>
 <tr><td><code>Parameter</code></td><td><code>inputParameter</code></td><td><code>isIputParameter</code></td></tr>
 <tr><td><code>Process</code></td><td><code>infrastructureProcess</code></td><td><code>isInfrastructureProcess</code></td></tr>
-<tr><td><code>ProcessDocumentation</code></td><td><code>copyright</code></td><td><code>hasCopyright</code></td></tr>
-<tr><td><code>Unit</code></td><td><code>referenceUnit</code></td><td><code>isReferenceUnit</code></td></tr>
+<tr><td><code>ProcessDocumentation</code></td><td><code>copyright</code></td><td><code>isCopyrightProtected</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>referenceExchange</code></td><td><code>refExchange</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>referenceProcess</code></td><td><code>refProcess</code></td></tr>
+<tr><td><code>Unit</code></td><td><code>referenceUnit</code></td><td><code>isRefUnit</code></td></tr>
 </tbody></table>
 <h2 id="type-changes"><a class="header" href="#type-changes">Type changes</a></h2>
 <ul>
@@ -566,8 +569,8 @@ class Category:
 <li><em>Type:</em> <code>double</code> (<a href="http://www.w3.org/TR/xmlschema-2/#double">external doc</a>)</li>
 <li><em>Proto-Index:</em> 11</li>
 </ul>
-<h3 id="referencecurrency"><a class="header" href="#referencecurrency"><code>referenceCurrency</code></a></h3>
-<p>A reference to the currency to which the conversion factor is related.</p>
+<h3 id="refcurrency"><a class="header" href="#refcurrency"><code>refCurrency</code></a></h3>
+<p>The reference currency to which the conversion factor is related.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <a href="classes/./Ref.html">Ref</a> of <a href="classes/./Currency.html">Currency</a></li>
@@ -589,7 +592,7 @@ class Currency:
   last_change: str
   library: str
   name: str
-  reference_currency: Ref
+  ref_currency: Ref
   tags: List[str]
   version: str
 
@@ -1124,7 +1127,7 @@ class Flow:
 <li><em>Type:</em> <code>double</code> (<a href="http://www.w3.org/TR/xmlschema-2/#double">external doc</a>)</li>
 <li><em>Proto-Index:</em> 2</li>
 </ul>
-<h3 id="isreferenceflowproperty"><a class="header" href="#isreferenceflowproperty"><code>isReferenceFlowProperty</code></a></h3>
+<h3 id="isrefflowproperty"><a class="header" href="#isrefflowproperty"><code>isRefFlowProperty</code></a></h3>
 <p>Indicates whether the flow property of the factor is the reference flow property of the flow. The reference flow property must have a conversion factor of 1.0 and there should be only one reference flow property.</p>
 <ul>
 <li><em>is optional</em></li>
@@ -1148,7 +1151,7 @@ the names of the class and its properties.</p>
 class FlowPropertyFactor:
   conversion_factor: float
   flow_property: Ref
-  is_reference_flow_property: bool
+  is_ref_flow_property: bool
 
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="flowmap"><a class="header" href="#flowmap">FlowMap</a></h1>
@@ -1666,25 +1669,31 @@ class ImpactFactor:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 9</li>
 </ul>
+<h3 id="code-2"><a class="header" href="#code-2"><code>code</code></a></h3>
+<ul>
+<li><em>is optional</em></li>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 10</li>
+</ul>
 <h3 id="impactcategories"><a class="header" href="#impactcategories"><code>impactCategories</code></a></h3>
 <p>The impact categories of the method.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>List</code> of <a href="classes/./Ref.html">Ref</a> of <a href="classes/./ImpactCategory.html">ImpactCategory</a></li>
-<li><em>Proto-Index:</em> 10</li>
+<li><em>Proto-Index:</em> 11</li>
 </ul>
 <h3 id="nwsets"><a class="header" href="#nwsets"><code>nwSets</code></a></h3>
 <p>The normalization and weighting sets of the method.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>List</code> of <a href="classes/./NwSet.html">NwSet</a></li>
-<li><em>Proto-Index:</em> 11</li>
+<li><em>Proto-Index:</em> 12</li>
 </ul>
 <h3 id="source-3"><a class="header" href="#source-3"><code>source</code></a></h3>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <a href="classes/./Ref.html">Ref</a> of <a href="classes/./Source.html">Source</a></li>
-<li><em>Proto-Index:</em> 12</li>
+<li><em>Proto-Index:</em> 13</li>
 </ul>
 <h2 id="python-class-stub-15"><a class="header" href="#python-class-stub-15">Python class stub</a></h2>
 <p>The snippet below shows the names of the properties of the corresponding
@@ -1696,6 +1705,7 @@ the names of the class and its properties.</p>
 class ImpactMethod:
   id: str
   category: str
+  code: str
   description: str
   impact_categories: List[Ref]
   last_change: str
@@ -1773,7 +1783,7 @@ class ImpactMethod:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 9</li>
 </ul>
-<h3 id="code-2"><a class="header" href="#code-2"><code>code</code></a></h3>
+<h3 id="code-3"><a class="header" href="#code-3"><code>code</code></a></h3>
 <p>The code of the location (e.g. an ISO 2-letter country code).</p>
 <ul>
 <li><em>is optional</em></li>
@@ -2417,22 +2427,22 @@ class Exchange:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 10</li>
 </ul>
-<h3 id="hascopyright"><a class="header" href="#hascopyright"><code>hasCopyright</code></a></h3>
-<ul>
-<li><em>is optional</em></li>
-<li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
-<li><em>Proto-Index:</em> 11</li>
-</ul>
 <h3 id="intendedapplication"><a class="header" href="#intendedapplication"><code>intendedApplication</code></a></h3>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
-<li><em>Proto-Index:</em> 12</li>
+<li><em>Proto-Index:</em> 11</li>
 </ul>
 <h3 id="inventorymethoddescription"><a class="header" href="#inventorymethoddescription"><code>inventoryMethodDescription</code></a></h3>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 12</li>
+</ul>
+<h3 id="iscopyrightprotected"><a class="header" href="#iscopyrightprotected"><code>isCopyrightProtected</code></a></h3>
+<ul>
+<li><em>is optional</em></li>
+<li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
 <li><em>Proto-Index:</em> 13</li>
 </ul>
 <h3 id="modelingconstantsdescription"><a class="header" href="#modelingconstantsdescription"><code>modelingConstantsDescription</code></a></h3>
@@ -2524,9 +2534,9 @@ class ProcessDocumentation:
   data_set_owner: Ref
   data_treatment_description: str
   geography_description: str
-  has_copyright: bool
   intended_application: str
   inventory_method_description: str
+  is_copyright_protected: bool
   modeling_constants_description: str
   project_description: str
   publication: Ref
@@ -2700,14 +2710,14 @@ class SocialAspect:
 <li><em>Type:</em> <code>List</code> of <a href="classes/./Ref.html">Ref</a></li>
 <li><em>Proto-Index:</em> 12</li>
 </ul>
-<h3 id="referenceexchange"><a class="header" href="#referenceexchange"><code>referenceExchange</code></a></h3>
+<h3 id="refexchange"><a class="header" href="#refexchange"><code>refExchange</code></a></h3>
 <p>The exchange of the reference processes (typically the product output) that provides the flow of the functional unit of the product system.</p>
 <ul>
 <li><em>is optional</em></li>
 <li><em>Type:</em> <a href="classes/./ExchangeRef.html">ExchangeRef</a></li>
 <li><em>Proto-Index:</em> 13</li>
 </ul>
-<h3 id="referenceprocess"><a class="header" href="#referenceprocess"><code>referenceProcess</code></a></h3>
+<h3 id="refprocess"><a class="header" href="#refprocess"><code>refProcess</code></a></h3>
 <p>The descriptor of the process that provides the flow of the functional unit of the product system.</p>
 <ul>
 <li><em>is optional</em></li>
@@ -2752,8 +2762,8 @@ class ProductSystem:
   parameter_sets: List[ParameterRedefSet]
   process_links: List[ProcessLink]
   processes: List[Ref]
-  reference_exchange: ExchangeRef
-  reference_process: Ref
+  ref_exchange: ExchangeRef
+  ref_process: Ref
   tags: List[str]
   target_amount: float
   target_flow_property: Ref
@@ -3217,7 +3227,7 @@ class Result:
 <li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
 <li><em>Proto-Index:</em> 6</li>
 </ul>
-<h3 id="isreferenceflow"><a class="header" href="#isreferenceflow"><code>isReferenceFlow</code></a></h3>
+<h3 id="isrefflow"><a class="header" href="#isrefflow"><code>isRefFlow</code></a></h3>
 <p><code>true</code> if this is the quantitative reference flow of the result.</p>
 <ul>
 <li><em>is optional</em></li>
@@ -3251,7 +3261,7 @@ class FlowResult:
   flow: Ref
   flow_property: Ref
   is_input: bool
-  is_reference_flow: bool
+  is_ref_flow: bool
   location: Ref
   unit: Ref
 
@@ -4368,7 +4378,7 @@ class Uncertainty:
 <li><em>Type:</em> <code>double</code> (<a href="http://www.w3.org/TR/xmlschema-2/#double">external doc</a>)</li>
 <li><em>Proto-Index:</em> 5</li>
 </ul>
-<h3 id="isreferenceunit"><a class="header" href="#isreferenceunit"><code>isReferenceUnit</code></a></h3>
+<h3 id="isrefunit"><a class="header" href="#isrefunit"><code>isRefUnit</code></a></h3>
 <p>Indicates whether the unit is the reference unit of the unit group to which this unit belongs. If it is the reference unit the conversion factor must be 1.0. There should be always only one reference unit in a unit group. The reference unit is used to convert amounts given in one unit to amounts given in another unit of the respective unit group.</p>
 <ul>
 <li><em>is optional</em></li>
@@ -4393,7 +4403,7 @@ class Unit:
   id: str
   conversion_factor: float
   description: str
-  is_reference_unit: bool
+  is_ref_unit: bool
   name: str
   synonyms: List[str]
 
