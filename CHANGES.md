@@ -37,16 +37,19 @@ The following fields were added to existing classes:
 
 | class                  | old name                | new name
 |------------------------|-------------------------|---------------------------
+| `Currency`             | `referenceCurrency`     | `refCurrency`
 | `Exchange`             | `avoidedProduct`        | `isAvoidedProduct`
 | `Exchange`             | `input`                 | `isInput`
 | `Exchange`             | `quantitativeReference` | `isQuantitativeReference`
 | `Flow`                 | `infrastructureFlow`    | `isInfrastructureFlow`
-| `FlowPropertyFactor`   | `referenceFlowProperty` | `isReferenceFlowProperty`
+| `FlowPropertyFactor`   | `referenceFlowProperty` | `isRefFlowProperty`
 | `ImpactCategory`       | `referenceUnitName`     | `refUnit`
 | `Parameter`            | `inputParameter`        | `isIputParameter`
 | `Process`              | `infrastructureProcess` | `isInfrastructureProcess`
-| `ProcessDocumentation` | `copyright`             | `hasCopyright`
-| `Unit`                 | `referenceUnit`         | `isReferenceUnit`
+| `ProcessDocumentation` | `copyright`             | `isCopyrightProtected`
+| `ProductSystem`        | `referenceExchange`     | `refExchange`
+| `ProductSystem`        | `referenceProcess`      | `refProcess`
+| `Unit`                 | `referenceUnit`         | `isRefUnit`
 
 
 ## Type changes

@@ -32,7 +32,7 @@ class:
       type: boolean
       doc: Indicates whether the flow is an input or not.
 
-    - name: isReferenceFlow
+    - name: isRefFlow
       index: 7
       type: boolean
       doc: "`true` if this is the quantitative reference flow of the result."

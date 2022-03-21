@@ -32,7 +32,7 @@ class:
       type: double
       doc: The value of the conversion factor.
 
-    - name: isReferenceFlowProperty
+    - name: isRefFlowProperty
       index: 3
       type: boolean
       doc: >

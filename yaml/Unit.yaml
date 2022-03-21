@@ -13,7 +13,7 @@ class:
            The conversion factor to the reference unit of the unit group to
            which this unit belongs.
 
-    - name: isReferenceUnit
+    - name: isRefUnit
       index: 6
       type: boolean
       doc: >

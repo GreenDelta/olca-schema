@@ -7,14 +7,13 @@ class:
     - name: code
       index: 10
       type: string
-    
+
     - name: conversionFactor
       index: 11
       type: double
-    
-    - name: referenceCurrency
+
+    - name: refCurrency
       index: 12
       type: Ref[Currency]
       doc: >
-           A reference to the currency to which the conversion factor is
-           related.
+           The reference currency to which the conversion factor is related.

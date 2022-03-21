@@ -51,19 +51,19 @@ class:
       type: string
       doc:
 
-    - name: hasCopyright
-      index: 11
-      type: boolean
-      doc:
-
     - name: intendedApplication
-      index: 12
+      index: 11
       type: string
       doc:
 
     - name: inventoryMethodDescription
-      index: 13
+      index: 12
       type: string
+      doc:
+
+    - name: isCopyrightProtected
+      index: 13
+      type: boolean
       doc:
 
     - name: modelingConstantsDescription
