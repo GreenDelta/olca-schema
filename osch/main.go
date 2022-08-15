@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 func main() {
@@ -43,17 +44,12 @@ func check(err error, msg ...interface{}) {
 func proto(args *args) {
 	yamlModel, err := ReadYamlModel(args)
 	check(err)
-
-	proto := GenProto(yamlModel)
-
-	// print to console or write to file
-	if len(os.Args) < 3 {
-		fmt.Println(proto)
-	} else {
-		outFile := os.Args[2]
-		err := ioutil.WriteFile(outFile, []byte(proto), os.ModePerm)
-		check(err, "failed to write to file", outFile)
-	}
+	proto := generateProto(yamlModel)
+	buildDir := filepath.Join(args.home, "build")
+	mkdir(buildDir)
+	outFile := filepath.Join(buildDir, "olca.proto")
+	err = ioutil.WriteFile(outFile, []byte(proto), os.ModePerm)
+	check(err, "failed to write to file", outFile)
 }
 
 func printHelp() {

@@ -89,7 +89,7 @@ enum ProtoType {
 }
 `
 
-func GenProto(yaml *YamlModel) string {
+func generateProto(yaml *YamlModel) string {
 	var buff bytes.Buffer
 	buff.WriteString(FileHeader)
 

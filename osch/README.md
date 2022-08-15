@@ -26,3 +26,15 @@ With the `mdbook` command, the documentation can be then generated in the
 ```
 $ mdbook build -d ../../docs ../build/docs
 ```
+
+### Protocol Buffers
+
+The `proto` command will generate a `olca.proto` file in the `build` folder:
+
+```
+$ osch proto
+```
+
+This contains then the Protocol Buffers schema. This schema is used in the
+[olca-proto project](https://github.com/GreenDelta/olca-proto) and can be
+used for data exchange with openLCA via Protocol Buffers.
