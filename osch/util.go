@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 	"unicode"
 )
@@ -89,6 +90,16 @@ func mkdir(path string) {
 		err = os.MkdirAll(path, os.ModePerm)
 	}
 	check(err, "could not create folder: "+path)
+}
+
+func cleanDir(path ...string) string {
+	dir := filepath.Join(path...)
+	_, err := os.Stat(dir)
+	if err == nil {
+		os.RemoveAll(dir)
+	}
+	mkdir(dir)
+	return dir
 }
 
 func startsWithLower(s string) bool {

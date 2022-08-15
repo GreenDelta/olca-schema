@@ -1,36 +1,28 @@
 # The `osch` tool
 
 The `osch` tool takes the schema definition and converts it to a defined target.
-Currently, the following targets are implemented:
-
-* ...
-
-### Building
+It is a command line tool written in Go:
 
 ```bash
-cd oschgo ; go build -o ../osch ; cd ..
+cd olca-schema/osch # in the following, all commands are executed in this folder
+go build   # comile the tool
+osch help  # prints the help of the tool
+osch check # validates the schema definition
 ```
 
-or on Windows:
+### Generating the schema documentation
 
-```batch
-cd oschgo && go build -o ..\osch.exe && cd ..
-```
-
-### Usage
+The following command generates the
+[mdBook](https://github.com/rust-lang/mdBook) sources from the schema
+definition in the `build/docs` folder:
 
 ```
-usage:
-
-$ osch [command] [options]
-
-commands:
-
-  check  - checks the schema
-  doc    - generates the schema documentation
-  help   - prints this help
-  proto  - converts the schema to ProtocolBuffers
-  python - generates a Python class model for the schema
-
+$ osch doc
 ```
 
+With the `mdbook` command, the documentation can be then generated in the
+`docs` folder (relative to the book sources) via the following command:
+
+```
+$ mdbook build -d ../../docs ../build/docs
+```
