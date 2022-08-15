@@ -44,7 +44,7 @@ mathjax-support = true
 	// try to copy the schema README and CHANGES
 	mds := []string{"README.md", "CHANGES.md"}
 	for _, md := range mds {
-		mdPath := filepath.Join(filepath.Dir(w.args.home), md)
+		mdPath := filepath.Join(w.args.home, md)
 		if _, err := os.Stat(mdPath); err == nil {
 			if text, err := os.ReadFile(mdPath); err == nil {
 				w.file("src/"+md, string(text))

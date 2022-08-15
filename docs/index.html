@@ -136,7 +136,54 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+                        <h1 id="openlca-schema"><a class="header" href="#openlca-schema">openLCA Schema</a></h1>
+<p>openLCA schema describes the data exchange format of
+<a href="http://www.openlca.org/">openLCA</a>. Currently, openLCA supports
+<a href="https://www.json.org">JSON</a> and <a href="https://developers.google.com/protocol-buffers">Protocol
+Buffers</a> as serialization
+formats over files, REST/IPC services, or <a href="https://grpc.io/">gRPC</a>. In addition,
+a <a href="https://json-ld.org/">JSON-LD</a> context is provided so that it can be used as
+a Linked Data format. openLCA schema is based on a few primitive building blocks
+like strings, numbers, lists and structured data types that can be easily
+implemented in different programming languages or serialization formats. For
+custom structured data types, we use the term <code>class</code>. These start with an
+uppercase letter and map to structures in the respective implementation (e.g.
+objects in JSON, messages in Protocol Buffers, classes in Python etc.).
+Primitive data types, which start with a lower case letter, as well as lists
+(type <code>List</code>) are typically directly provided by the respective format
+implementation. Classes have properties (or fields) which can hold values of a
+specific type. In addition there are a few enumeration types.</p>
+<p>The different data types are defined in simple <a href="http://yaml.org/">YAML</a> files
+with a file for each type in the <a href="./yaml">yaml folder</a>... You can also browse
+the <a href="http://greendelta.github.io/olca-schema">HTML documentation online</a>.</p>
+<h2 id="zip-packages"><a class="header" href="#zip-packages">Zip packages</a></h2>
+<pre><code>+ actors
+  - 23af...e4.json
+  - 1e32...f1.json
+  - ...
++ currencies
++ dq_systems
++ epds
++ flows
++ flow_properties
++ lcia_categories
++ lcia_methods
++ locations
++ parameters
++ processes
++ product_systems
++ projects
++ results
++ social_indicators
++ sources
++ unit_groups
+- olca-schema.json
+</code></pre>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
+<p>This openLCA Schema is in the worldwide public domain, released under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0
+1.0 Universal Public Domain
+Dedication</a>.</p>
+<p><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" alt="Public Domain Dedication" /></p>
 
                     </main>
 

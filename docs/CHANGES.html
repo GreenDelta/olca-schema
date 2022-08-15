@@ -136,8 +136,80 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="changes"><a class="header" href="#changes">Changes</a></h1>
-
+                        <h1 id="changes-in-version-2"><a class="header" href="#changes-in-version-2">Changes in version 2</a></h1>
+<h2 id="new-types"><a class="header" href="#new-types">New types</a></h2>
+<p>The following new types were added to the schema:</p>
+<ul>
+<li><code>Epd</code></li>
+<li><code>ParameterRedefSet</code></li>
+<li><code>Result</code>
+<ul>
+<li><code>ImpactResult</code></li>
+<li><code>FlowResult</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="new-fields"><a class="header" href="#new-fields">New fields</a></h2>
+<p>The following fields were added to existing classes:</p>
+<div class="table-wrapper"><table><thead><tr><th>class</th><th>field</th><th>type</th></tr></thead><tbody>
+<tr><td><code>AllocationFactor</code></td><td><code>formula</code></td><td><code>string</code></td></tr>
+<tr><td><code>Exchange</code></td><td><code>location</code></td><td><code>Ref[Location]</code></td></tr>
+<tr><td><code>ImpactCategory</code></td><td><code>code</code></td><td><code>string</code></td></tr>
+<tr><td><code>ImpactCategory</code></td><td><code>parameters</code></td><td><code>List[Parameter</code></td></tr>
+<tr><td><code>ImpactCategory</code></td><td><code>source</code></td><td><code>Ref[Source]</code></td></tr>
+<tr><td><code>ImpactFactor</code></td><td><code>location</code></td><td><code>Ref[Location]</code></td></tr>
+<tr><td><code>ImpactMethod</code></td><td><code>code</code></td><td><code>string</code></td></tr>
+<tr><td><code>ImpactMethod</code></td><td><code>source</code></td><td><code>Ref[Source]</code></td></tr>
+<tr><td><code>ParameterRedef</code></td><td><code>isProtected</code></td><td><code>boolean</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>parameterSets</code></td><td><code>List[ParameterRedefSet]</code></td></tr>
+<tr><td><code>Project</code></td><td><code>isWithCosts</code></td><td><code>boolean</code></td></tr>
+<tr><td><code>Project</code></td><td><code>isWithRegionalization</code></td><td><code>boolean</code></td></tr>
+<tr><td><code>ProjectVariant</code></td><td><code>description</code></td><td><code>string</code></td></tr>
+<tr><td><code>ProjectVariant</code></td><td><code>isDisabled</code></td><td><code>boolean</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="renamed-fields"><a class="header" href="#renamed-fields">Renamed fields</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>class</th><th>old name</th><th>new name</th></tr></thead><tbody>
+<tr><td><code>Currency</code></td><td><code>referenceCurrency</code></td><td><code>refCurrency</code></td></tr>
+<tr><td><code>Exchange</code></td><td><code>avoidedProduct</code></td><td><code>isAvoidedProduct</code></td></tr>
+<tr><td><code>Exchange</code></td><td><code>input</code></td><td><code>isInput</code></td></tr>
+<tr><td><code>Exchange</code></td><td><code>quantitativeReference</code></td><td><code>isQuantitativeReference</code></td></tr>
+<tr><td><code>Flow</code></td><td><code>infrastructureFlow</code></td><td><code>isInfrastructureFlow</code></td></tr>
+<tr><td><code>FlowPropertyFactor</code></td><td><code>referenceFlowProperty</code></td><td><code>isRefFlowProperty</code></td></tr>
+<tr><td><code>ImpactCategory</code></td><td><code>referenceUnitName</code></td><td><code>refUnit</code></td></tr>
+<tr><td><code>Parameter</code></td><td><code>inputParameter</code></td><td><code>isIputParameter</code></td></tr>
+<tr><td><code>Process</code></td><td><code>infrastructureProcess</code></td><td><code>isInfrastructureProcess</code></td></tr>
+<tr><td><code>ProcessDocumentation</code></td><td><code>copyright</code></td><td><code>isCopyrightProtected</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>referenceExchange</code></td><td><code>refExchange</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>referenceProcess</code></td><td><code>refProcess</code></td></tr>
+<tr><td><code>Unit</code></td><td><code>referenceUnit</code></td><td><code>isRefUnit</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="type-changes"><a class="header" href="#type-changes">Type changes</a></h2>
+<ul>
+<li>the field <code>category</code> in <code>RootEntity</code> is now a string of the full category path
+instead of a reference to a category</li>
+<li>the abstract class <code>RootEntity</code> was renamed to <code>RefEntity</code>; the abstract
+class <code>CategorizedEntity</code> to <code>RootEntity</code></li>
+</ul>
+<h2 id="removed-fields"><a class="header" href="#removed-fields">Removed fields</a></h2>
+<p>The following fields were removed:</p>
+<div class="table-wrapper"><table><thead><tr><th>class</th><th>field</th></tr></thead><tbody>
+<tr><td><code>ImpactMethod</code></td><td><code>parameterMean</code></td></tr>
+<tr><td><code>ImpactMethod</code></td><td><code>parameters</code></td></tr>
+<tr><td><code>ImpactMethod</code></td><td><code>parameters</code></td></tr>
+<tr><td><code>Parameter</code></td><td><code>externalSource</code></td></tr>
+<tr><td><code>Parameter</code></td><td><code>sourceType</code></td></tr>
+<tr><td><code>ProcessLink</code></td><td><code>isSystemLink</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>parameterRedefs</code></td></tr>
+<tr><td><code>ProductSystem</code></td><td><code>parameterRedefs</code></td></tr>
+<tr><td><code>Project</code></td><td><code>creationDate</code></td></tr>
+<tr><td><code>Project</code></td><td><code>functionalUnit</code></td></tr>
+<tr><td><code>Project</code></td><td><code>goal</code></td></tr>
+<tr><td><code>Project</code></td><td><code>lastModificationDate</code></td></tr>
+<tr><td><code>Project</code></td><td><code>author</code></td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
