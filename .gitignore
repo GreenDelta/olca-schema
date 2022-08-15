@@ -2,3 +2,5 @@
 .vscode/
 generated/
 scripts/__pycache__/
+
+build/

@@ -2,8 +2,8 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"log"
+	"path/filepath"
 	"strings"
 )
 
@@ -18,7 +18,7 @@ const pyInd2 = pyInd1 + pyInd1
 const pyInd3 = pyInd1 + pyInd1 + pyInd1
 
 func writePythonModule(args *args) {
-	model, err := ReadYamlModel(args.yamlDir)
+	model, err := ReadYamlModel(args)
 	check(err, "could not read YAML model")
 
 	var buffer bytes.Buffer
@@ -28,11 +28,10 @@ func writePythonModule(args *args) {
 	}
 	writer.writeModel()
 
-	if args.target != "" {
-		writeFile(args.target, buffer.String())
-	} else {
-		fmt.Println(buffer.String())
-	}
+	modDir := filepath.Join(args.home, "py", "olca_schema")
+	mkdir(modDir)
+	modFile := filepath.Join(modDir, "schema.py")
+	writeFile(modFile, buffer.String())
 }
 
 func (w *pyWriter) writeModel() {

@@ -17,9 +17,9 @@ type mdWriter struct {
 }
 
 func writeMarkdownBook(args *args) {
-	model, err := ReadYamlModel(args.yamlDir)
+	model, err := ReadYamlModel(args)
 	check(err, "could not read YAML model")
-	target := args.target
+	target := filepath.Join(args.home, "build", "docs")
 	mkdir(target)
 	writer := &mdWriter{
 		model:  model,
@@ -46,7 +46,7 @@ mathjax-support = true
 	// try to copy the schema README and CHANGES
 	mds := []string{"README.md", "CHANGES.md"}
 	for _, md := range mds {
-		mdPath := filepath.Join(filepath.Dir(w.args.yamlDir), md)
+		mdPath := filepath.Join(filepath.Dir(w.args.home), md)
 		if _, err := os.Stat(mdPath); err == nil {
 			if text, err := ioutil.ReadFile(mdPath); err == nil {
 				w.file("src/"+md, string(text))

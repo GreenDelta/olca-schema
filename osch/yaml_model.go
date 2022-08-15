@@ -117,8 +117,9 @@ func (model *YamlModel) IsEmpty() bool {
 	return len(model.Types) == 0
 }
 
-func ReadYamlModel(dir string) (*YamlModel, error) {
+func ReadYamlModel(args *args) (*YamlModel, error) {
 
+	dir := filepath.Join(args.home, "yaml")
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return nil, err

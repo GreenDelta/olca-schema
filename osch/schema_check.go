@@ -7,7 +7,7 @@ import (
 )
 
 func checkSchema(args *args) {
-	model, err := ReadYamlModel(args.yamlDir)
+	model, err := ReadYamlModel(args)
 	if err != nil {
 		fmt.Println("ERROR: Failed to parse YAML model:", err)
 		return

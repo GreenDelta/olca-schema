@@ -20,7 +20,7 @@ func main() {
 	switch args.command {
 	case "proto":
 		proto(args)
-	case "md", "mdbook", "markdown":
+	case "doc", "docs", "md", "mdbook", "markdown":
 		writeMarkdownBook(args)
 	case "py", "python":
 		writePythonModule(args)
@@ -41,7 +41,7 @@ func check(err error, msg ...interface{}) {
 }
 
 func proto(args *args) {
-	yamlModel, err := ReadYamlModel(args.yamlDir)
+	yamlModel, err := ReadYamlModel(args)
 	check(err)
 
 	proto := GenProto(yamlModel)
