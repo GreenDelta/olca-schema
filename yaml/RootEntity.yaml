@@ -17,7 +17,7 @@ class:
       index: 6
       type: dateTime
       doc: The timestamp when the entity was changed the last time.
-    
+
     - name: library
       type: string
       index: 7
@@ -25,14 +25,14 @@ class:
            If this entity is part of a library, this field contains the
            identifier of that library. The identifier is typically just the
            combination of the library name and version.
-    
+
     - name: tags
       type: List[string]
       index: 8
       doc: >
            A list of optional tags. A tag is just a string which should not
            contain commas (and other special characters).
-    
+
     - name: version
       index: 9
       type: string
@@ -40,4 +40,3 @@ class:
            A version number in MAJOR.MINOR.PATCH format where the MINOR and
            PATCH fields are optional and the fields may have leading zeros
            (so 01.00.00 is the same as 1.0.0 or 1).
-       
