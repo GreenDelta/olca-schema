@@ -18,24 +18,15 @@ class:
            The category path of the referenced entity, e.g.
            `Elementary flows/Emissions to air/unspecified`.
 
-    - name: library
-      index: 6
-      type: string
-      doc: >
-           If the entity that is described by this reference is part of a
-           library, this field contains the identifier of that library. The
-           identifier is typically just the combination of the library name and
-           version.
-
     - name: refUnit
-      index: 7
+      index: 6
       type: string
       doc: >
            This field is valid for references to entities which can have a
            (reference) unit, like flows, impact categories, or flow properties.
 
     - name: location
-      index: 8
+      index: 7
       type: string
       doc: >
            This field is only valid for references of processes or flows and
@@ -43,14 +34,14 @@ class:
            flow.
 
     - name: flowType
-      index: 9
+      index: 8
       type: FlowType
       doc: >
            In case of a reference to a flow, this field can contain the type of
            flow that is referenced.
 
     - name: processType
-      index: 10
+      index: 9
       type: ProcessType
       doc: >
            In case of a reference to a process, this fiel can contain the type

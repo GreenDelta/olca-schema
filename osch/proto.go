@@ -51,14 +51,16 @@ enum ProtoType {
   ImpactCategory = 7;
   ImpactMethod = 8;
   Location = 9;
-  Parameter = 10;
-  Process = 11;
-  ProductSystem = 12;
-  Project = 13;
-  Result = 14;
-  SocialIndicator = 15;
-  Source = 16;
-  UnitGroup = 17;
+  NwSet = 10;
+  Parameter = 11;
+  Process = 12;
+  ProductSystem = 13;
+  Project = 14;
+  Result = 15;
+  SocialIndicator = 16;
+  Source = 17;
+  Unit = 18;
+  UnitGroup = 19;
 }
 `
 
@@ -138,7 +140,7 @@ func writeProtoFields(class *YamlClass, buff *bytes.Buffer, types map[string]*Ya
 	}
 
 	// @id field
-	if class.Name == "Ref" || class.Name == "RefEntity" {
+	if class.Name == "RefEntity" {
 		buff.WriteString("  // The reference ID (typically an UUID) of the entity.\n")
 		buff.WriteString("  string id = 2 [json_name = \"@id\"];\n\n")
 	}
