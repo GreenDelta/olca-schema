@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -48,7 +47,7 @@ func proto(args *args) {
 	buildDir := filepath.Join(args.home, "build")
 	mkdir(buildDir)
 	outFile := filepath.Join(buildDir, "olca.proto")
-	err = ioutil.WriteFile(outFile, []byte(proto), os.ModePerm)
+	err = os.WriteFile(outFile, []byte(proto), os.ModePerm)
 	check(err, "failed to write to file", outFile)
 }
 

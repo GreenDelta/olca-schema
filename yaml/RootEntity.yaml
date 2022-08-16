@@ -18,23 +18,15 @@ class:
       type: dateTime
       doc: The timestamp when the entity was changed the last time.
 
-    - name: library
-      type: string
-      index: 7
-      doc: >
-           If this entity is part of a library, this field contains the
-           identifier of that library. The identifier is typically just the
-           combination of the library name and version.
-
     - name: tags
       type: List[string]
-      index: 8
+      index: 7
       doc: >
            A list of optional tags. A tag is just a string which should not
            contain commas (and other special characters).
 
     - name: version
-      index: 9
+      index: 8
       type: string
       doc: >
            A version number in MAJOR.MINOR.PATCH format where the MINOR and
