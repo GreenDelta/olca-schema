@@ -16,7 +16,9 @@ class:
     - name: normalisationFactor
       index: 3
       type: double
+      optional: true
 
     - name: weightingFactor
       index: 4
       type: double
+      optional: true

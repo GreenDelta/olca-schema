@@ -79,3 +79,10 @@ The following fields were removed:
 | `Project`          | `goal`
 | `Project`          | `lastModificationDate`
 | `Project`          | `author`
+| `Uncertainty`      | `geomMeanFormula`
+| `Uncertainty`      | `geomSdFormula`
+| `Uncertainty`      | `maximumFormula`
+| `Uncertainty`      | `meanFormula`
+| `Uncertainty`      | `minimumFormula`
+| `Uncertainty`      | `modeFormula`
+| `Uncertainty`      | `sdFormula`

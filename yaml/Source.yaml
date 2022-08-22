@@ -24,4 +24,5 @@ class:
     - name: year
       index: 13
       type: integer
+      optional: true
       doc: The publication year of the source.

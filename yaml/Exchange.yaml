@@ -23,6 +23,7 @@ class:
     - name: baseUncertainty
       index: 4
       type: double
+      optional: true
 
     - name: costFormula
       index: 5
@@ -32,6 +33,7 @@ class:
     - name: costValue
       index: 6
       type: double
+      optional: true
       doc: The costs of this exchange.
 
     - name: currency

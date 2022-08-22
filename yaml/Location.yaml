@@ -14,11 +14,13 @@ class:
     - name: latitude
       index: 11
       type: double
+      optional: true
       doc: The average latitude of the location.
 
     - name: longitude
       index: 12
       type: double
+      optional: true
       doc: The average longitude of the location.
 
     - name: geometry
