@@ -188,11 +188,12 @@ the names of the class and its properties.
 
 func (w *mdWriter) docPropOf(prop *YamlProp) string {
 	var buff bytes.Buffer
+	buff.WriteString("* _Type:_ ")
 	if prop.IsOptional {
-		buff.WriteString("* _Type:_ optional " + w.docTypeOf(prop.Type) + "\n")
-	} else {
-		buff.WriteString("* _Type:_ " + w.docTypeOf(prop.Type) + "\n")
+		buff.WriteString("`optional` ")
 	}
+	buff.WriteString(w.docTypeOf(prop.Type) + "\n")
+
 	buff.WriteString("* _Proto-Index:_ " + strconv.Itoa(prop.Index) + "\n")
 	return buff.String()
 }
