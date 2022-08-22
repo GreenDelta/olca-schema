@@ -1,0 +1,10 @@
+
+enum:
+  name: Direction
+
+  items:
+    - name: INPUT
+      index: 1
+
+    - name: OUTPUT
+      index: 2

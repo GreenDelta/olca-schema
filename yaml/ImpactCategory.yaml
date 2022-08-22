@@ -27,6 +27,11 @@ class:
       type: string
       doc: The name of the reference unit of the LCIA category (e.g. kg CO2-eq.).
 
-    - name: source
+    - name: direction
       index: 14
+      type: Direction
+      doc: The impact direction of this impact category.
+
+    - name: source
+      index: 15
       type: Ref[Source]

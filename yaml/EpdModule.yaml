@@ -10,8 +10,13 @@ class:
       type: string
       doc: The name or identifier of the module, like `A1`.
 
-    - name: result
+    - name: multiplier
       index: 3
+      type: double
+      doc: Scales the linked result to the required amount for this module.
+
+    - name: result
+      index: 4
       type: Ref[Result]
       doc: >
            A reference to the module's result. Note that results are stand-alone
