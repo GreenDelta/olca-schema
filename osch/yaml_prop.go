@@ -6,11 +6,11 @@ import (
 )
 
 type YamlProp struct {
-	Name     string `yaml:"name"`
-	Index    int    `yaml:"index"`
-	Type     string `yaml:"type"`
-	Doc      string `yaml:"doc"`
-	Required bool   `yaml:"required"`
+	Name       string `yaml:"name"`
+	Index      int    `yaml:"index"`
+	Type       string `yaml:"type"`
+	Doc        string `yaml:"doc"`
+	IsOptional bool   `yaml:"optional"`
 }
 
 func (p *YamlProp) PropType() YamlPropType {

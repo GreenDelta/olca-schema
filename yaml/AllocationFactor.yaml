@@ -8,7 +8,6 @@ class:
 
     - name: allocationType
       index: 2
-      required: true
       type: AllocationType
       doc: The type of allocation.
 
@@ -29,7 +28,6 @@ class:
 
     - name: product
       index: 5
-      required: true
       type: Ref[Flow]
       doc: >
            The output product (or waste input) to which this allocation factor
@@ -38,6 +36,5 @@ class:
 
     - name: value
       index: 6
-      required: true
       type: double
       doc: The value of the allocation factor.

@@ -165,7 +165,11 @@ func writeProtoFields(class *YamlClass, buff *bytes.Buffer, types map[string]*Ya
 			protoField += "_bytes"
 		}
 
-		buff.WriteString("  " + protoType + " " + protoField +
+		buff.WriteString("  ")
+		if field.IsOptional {
+			buff.WriteString("optional ")
+		}
+		buff.WriteString(protoType + " " + protoField +
 			" = " + strconv.Itoa(field.Index) + ";\n\n")
 	}
 
