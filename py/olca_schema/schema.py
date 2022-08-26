@@ -22,12 +22,10 @@ class AllocationType(Enum):
     NO_ALLOCATION = 'NO_ALLOCATION'
 
 
-class CalculationType(Enum):
+class Direction(Enum):
 
-    SIMPLE_CALCULATION = 'SIMPLE_CALCULATION'
-    CONTRIBUTION_ANALYSIS = 'CONTRIBUTION_ANALYSIS'
-    UPSTREAM_ANALYSIS = 'UPSTREAM_ANALYSIS'
-    MONTE_CARLO_SIMULATION = 'MONTE_CARLO_SIMULATION'
+    INPUT = 'INPUT'
+    OUTPUT = 'OUTPUT'
 
 
 class FlowPropertyType(Enum):
@@ -197,7 +195,6 @@ class Ref:
     category: Optional[str] = None
     description: Optional[str] = None
     flow_type: Optional[FlowType] = None
-    library: Optional[str] = None
     location: Optional[str] = None
     name: Optional[str] = None
     process_type: Optional[ProcessType] = None
@@ -215,8 +212,6 @@ class Ref:
             d['description'] = self.description
         if self.flow_type:
             d['flowType'] = self.flow_type.value
-        if self.library:
-            d['library'] = self.library
         if self.location:
             d['location'] = self.location
         if self.name:
@@ -241,8 +236,6 @@ class Ref:
             ref.description = v
         if v := d.get('flowType'):
             ref.flow_type = v
-        if v := d.get('library'):
-            ref.library = v
         if v := d.get('location'):
             ref.location = v
         if v := d.get('name'):
@@ -265,7 +258,6 @@ class Actor:
     description: Optional[str] = None
     email: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     tags: Optional[List[str]] = None
     telefax: Optional[str] = None
@@ -301,8 +293,6 @@ class Actor:
             d['email'] = self.email
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.tags:
@@ -349,8 +339,6 @@ class Actor:
             actor.email = v
         if v := d.get('lastChange'):
             actor.last_change = v
-        if v := d.get('library'):
-            actor.library = v
         if v := d.get('name'):
             actor.name = v
         if v := d.get('tags'):
@@ -414,89 +402,6 @@ class AllocationFactor:
 
 
 @dataclass
-class Category:
-
-    id: Optional[str] = None
-    category: Optional[str] = None
-    description: Optional[str] = None
-    last_change: Optional[str] = None
-    library: Optional[str] = None
-    model_type: Optional[ModelType] = None
-    name: Optional[str] = None
-    tags: Optional[List[str]] = None
-    version: Optional[str] = None
-
-    def __post_init__(self):
-        if self.id is None:
-            self.id = str(uuid.uuid4())
-        if self.version is None:
-            self.version = '01.00.000'
-        if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
-
-    def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Category'
-        if self.id:
-            d['@id'] = self.id
-        if self.category:
-            d['category'] = self.category
-        if self.description:
-            d['description'] = self.description
-        if self.last_change:
-            d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
-        if self.model_type:
-            d['modelType'] = self.model_type.value
-        if self.name:
-            d['name'] = self.name
-        if self.tags:
-            d['tags'] = self.tags
-        if self.version:
-            d['version'] = self.version
-        return d
-
-    def to_json(self) -> str:
-        return json.dumps(self.to_dict(), indent=2)
-
-    def to_ref(self) -> 'Ref':
-        ref = Ref(id=self.id, name=self.name)
-        ref.category = self.category
-        ref.model_type = 'Category'
-        return ref
-
-    @staticmethod
-    def from_dict(d: Dict[str, Any]) -> 'Category':
-        category = Category()
-        if v := d.get('@type'):
-            category.schema_type = v
-        if v := d.get('@id'):
-            category.id = v
-        if v := d.get('category'):
-            category.category = v
-        if v := d.get('description'):
-            category.description = v
-        if v := d.get('lastChange'):
-            category.last_change = v
-        if v := d.get('library'):
-            category.library = v
-        if v := d.get('modelType'):
-            category.model_type = v
-        if v := d.get('name'):
-            category.name = v
-        if v := d.get('tags'):
-            category.tags = v
-        if v := d.get('version'):
-            category.version = v
-        return category
-
-    @staticmethod
-    def from_json(data: Union[str, bytes]) -> 'Category':
-        return Category.from_dict(json.loads(data))
-
-
-@dataclass
 class Currency:
 
     id: Optional[str] = None
@@ -505,7 +410,6 @@ class Currency:
     conversion_factor: Optional[float] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     ref_currency: Optional[Ref] = None
     tags: Optional[List[str]] = None
@@ -534,8 +438,6 @@ class Currency:
             d['description'] = self.description
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.ref_currency:
@@ -572,8 +474,6 @@ class Currency:
             currency.description = v
         if v := d.get('lastChange'):
             currency.last_change = v
-        if v := d.get('library'):
-            currency.library = v
         if v := d.get('name'):
             currency.name = v
         if v := d.get('refCurrency'):
@@ -598,7 +498,6 @@ class DQSystem:
     has_uncertainties: Optional[bool] = None
     indicators: Optional[List[DQIndicator]] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     source: Optional[Ref] = None
     tags: Optional[List[str]] = None
@@ -627,8 +526,6 @@ class DQSystem:
             d['indicators'] = [e.to_dict() for e in self.indicators]
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.source:
@@ -665,8 +562,6 @@ class DQSystem:
             d_q_system.indicators = [DQIndicator.from_dict(e) for e in v]
         if v := d.get('lastChange'):
             d_q_system.last_change = v
-        if v := d.get('library'):
-            d_q_system.library = v
         if v := d.get('name'):
             d_q_system.name = v
         if v := d.get('source'):
@@ -685,11 +580,14 @@ class DQSystem:
 @dataclass
 class EpdModule:
 
+    multiplier: Optional[float] = None
     name: Optional[str] = None
     result: Optional[Ref] = None
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
+        if self.multiplier:
+            d['multiplier'] = self.multiplier
         if self.name:
             d['name'] = self.name
         if self.result:
@@ -701,6 +599,8 @@ class EpdModule:
         epd_module = EpdModule()
         if v := d.get('@type'):
             epd_module.schema_type = v
+        if v := d.get('multiplier'):
+            epd_module.multiplier = v
         if v := d.get('name'):
             epd_module.name = v
         if v := d.get('result'):
@@ -751,7 +651,6 @@ class Epd:
     category: Optional[str] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     manufacturer: Optional[Ref] = None
     modules: Optional[List[EpdModule]] = None
     name: Optional[str] = None
@@ -782,8 +681,6 @@ class Epd:
             d['description'] = self.description
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.manufacturer:
             d['manufacturer'] = self.manufacturer.to_dict()
         if self.modules:
@@ -828,8 +725,6 @@ class Epd:
             epd.description = v
         if v := d.get('lastChange'):
             epd.last_change = v
-        if v := d.get('library'):
-            epd.library = v
         if v := d.get('manufacturer'):
             epd.manufacturer = Ref[Actor].from_dict(v)
         if v := d.get('modules'):
@@ -931,7 +826,6 @@ class FlowMap:
     category: Optional[str] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     mappings: Optional[List[FlowMapEntry]] = None
     name: Optional[str] = None
     source: Optional[Ref] = None
@@ -958,8 +852,6 @@ class FlowMap:
             d['description'] = self.description
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.mappings:
             d['mappings'] = [e.to_dict() for e in self.mappings]
         if self.name:
@@ -996,8 +888,6 @@ class FlowMap:
             flow_map.description = v
         if v := d.get('lastChange'):
             flow_map.last_change = v
-        if v := d.get('library'):
-            flow_map.library = v
         if v := d.get('mappings'):
             flow_map.mappings = [FlowMapEntry.from_dict(e) for e in v]
         if v := d.get('name'):
@@ -1025,7 +915,6 @@ class FlowProperty:
     description: Optional[str] = None
     flow_property_type: Optional[FlowPropertyType] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     tags: Optional[List[str]] = None
     unit_group: Optional[Ref] = None
@@ -1052,8 +941,6 @@ class FlowProperty:
             d['flowPropertyType'] = self.flow_property_type.value
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.tags:
@@ -1088,8 +975,6 @@ class FlowProperty:
             flow_property.flow_property_type = v
         if v := d.get('lastChange'):
             flow_property.last_change = v
-        if v := d.get('library'):
-            flow_property.library = v
         if v := d.get('name'):
             flow_property.name = v
         if v := d.get('tags'):
@@ -1148,7 +1033,6 @@ class Flow:
     formula: Optional[str] = None
     is_infrastructure_flow: Optional[bool] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     location: Optional[Ref] = None
     name: Optional[str] = None
     synonyms: Optional[str] = None
@@ -1184,8 +1068,6 @@ class Flow:
             d['isInfrastructureFlow'] = self.is_infrastructure_flow
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.location:
             d['location'] = self.location.to_dict()
         if self.name:
@@ -1230,8 +1112,6 @@ class Flow:
             flow.is_infrastructure_flow = v
         if v := d.get('lastChange'):
             flow.last_change = v
-        if v := d.get('library'):
-            flow.library = v
         if v := d.get('location'):
             flow.location = Ref[Location].from_dict(v)
         if v := d.get('name'):
@@ -1346,7 +1226,6 @@ class Location:
     geometry: Optional[Dict[str, Any]] = None
     last_change: Optional[str] = None
     latitude: Optional[float] = None
-    library: Optional[str] = None
     longitude: Optional[float] = None
     name: Optional[str] = None
     tags: Optional[List[str]] = None
@@ -1377,8 +1256,6 @@ class Location:
             d['lastChange'] = self.last_change
         if self.latitude:
             d['latitude'] = self.latitude
-        if self.library:
-            d['library'] = self.library
         if self.longitude:
             d['longitude'] = self.longitude
         if self.name:
@@ -1417,8 +1294,6 @@ class Location:
             location.last_change = v
         if v := d.get('latitude'):
             location.latitude = v
-        if v := d.get('library'):
-            location.library = v
         if v := d.get('longitude'):
             location.longitude = v
         if v := d.get('name'):
@@ -1515,7 +1390,6 @@ class ImpactMethod:
     description: Optional[str] = None
     impact_categories: Optional[List[Ref]] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     nw_sets: Optional[List[NwSet]] = None
     source: Optional[Ref] = None
@@ -1545,8 +1419,6 @@ class ImpactMethod:
             d['impactCategories'] = [e.to_dict() for e in self.impact_categories]
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.nw_sets:
@@ -1585,8 +1457,6 @@ class ImpactMethod:
             impact_method.impact_categories = [Ref[ImpactCategory].from_dict(e) for e in v]
         if v := d.get('lastChange'):
             impact_method.last_change = v
-        if v := d.get('library'):
-            impact_method.library = v
         if v := d.get('name'):
             impact_method.name = v
         if v := d.get('nwSets'):
@@ -1786,7 +1656,6 @@ class Result:
     impact_method: Optional[Ref] = None
     impact_results: Optional[List[ImpactResult]] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     product_system: Optional[Ref] = None
     tags: Optional[List[str]] = None
@@ -1817,8 +1686,6 @@ class Result:
             d['impactResults'] = [e.to_dict() for e in self.impact_results]
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.product_system:
@@ -1857,8 +1724,6 @@ class Result:
             result.impact_results = [ImpactResult.from_dict(e) for e in v]
         if v := d.get('lastChange'):
             result.last_change = v
-        if v := d.get('library'):
-            result.library = v
         if v := d.get('name'):
             result.name = v
         if v := d.get('productSystem'):
@@ -1936,7 +1801,6 @@ class SocialIndicator:
     description: Optional[str] = None
     evaluation_scheme: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     tags: Optional[List[str]] = None
     unit_of_measurement: Optional[str] = None
@@ -1969,8 +1833,6 @@ class SocialIndicator:
             d['evaluationScheme'] = self.evaluation_scheme
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.tags:
@@ -2011,8 +1873,6 @@ class SocialIndicator:
             social_indicator.evaluation_scheme = v
         if v := d.get('lastChange'):
             social_indicator.last_change = v
-        if v := d.get('library'):
-            social_indicator.library = v
         if v := d.get('name'):
             social_indicator.name = v
         if v := d.get('tags'):
@@ -2036,7 +1896,6 @@ class Source:
     description: Optional[str] = None
     external_file: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     tags: Optional[List[str]] = None
     text_reference: Optional[str] = None
@@ -2065,8 +1924,6 @@ class Source:
             d['externalFile'] = self.external_file
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.tags:
@@ -2105,8 +1962,6 @@ class Source:
             source.external_file = v
         if v := d.get('lastChange'):
             source.last_change = v
-        if v := d.get('library'):
-            source.library = v
         if v := d.get('name'):
             source.name = v
         if v := d.get('tags'):
@@ -2131,19 +1986,12 @@ class Uncertainty:
 
     distribution_type: Optional[UncertaintyType] = None
     geom_mean: Optional[float] = None
-    geom_mean_formula: Optional[str] = None
     geom_sd: Optional[float] = None
-    geom_sd_formula: Optional[str] = None
     maximum: Optional[float] = None
-    maximum_formula: Optional[str] = None
     mean: Optional[float] = None
-    mean_formula: Optional[str] = None
     minimum: Optional[float] = None
-    minimum_formula: Optional[str] = None
     mode: Optional[float] = None
-    mode_formula: Optional[str] = None
     sd: Optional[float] = None
-    sd_formula: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
@@ -2151,32 +1999,18 @@ class Uncertainty:
             d['distributionType'] = self.distribution_type.value
         if self.geom_mean:
             d['geomMean'] = self.geom_mean
-        if self.geom_mean_formula:
-            d['geomMeanFormula'] = self.geom_mean_formula
         if self.geom_sd:
             d['geomSd'] = self.geom_sd
-        if self.geom_sd_formula:
-            d['geomSdFormula'] = self.geom_sd_formula
         if self.maximum:
             d['maximum'] = self.maximum
-        if self.maximum_formula:
-            d['maximumFormula'] = self.maximum_formula
         if self.mean:
             d['mean'] = self.mean
-        if self.mean_formula:
-            d['meanFormula'] = self.mean_formula
         if self.minimum:
             d['minimum'] = self.minimum
-        if self.minimum_formula:
-            d['minimumFormula'] = self.minimum_formula
         if self.mode:
             d['mode'] = self.mode
-        if self.mode_formula:
-            d['modeFormula'] = self.mode_formula
         if self.sd:
             d['sd'] = self.sd
-        if self.sd_formula:
-            d['sdFormula'] = self.sd_formula
         return d
 
     @staticmethod
@@ -2188,32 +2022,18 @@ class Uncertainty:
             uncertainty.distribution_type = v
         if v := d.get('geomMean'):
             uncertainty.geom_mean = v
-        if v := d.get('geomMeanFormula'):
-            uncertainty.geom_mean_formula = v
         if v := d.get('geomSd'):
             uncertainty.geom_sd = v
-        if v := d.get('geomSdFormula'):
-            uncertainty.geom_sd_formula = v
         if v := d.get('maximum'):
             uncertainty.maximum = v
-        if v := d.get('maximumFormula'):
-            uncertainty.maximum_formula = v
         if v := d.get('mean'):
             uncertainty.mean = v
-        if v := d.get('meanFormula'):
-            uncertainty.mean_formula = v
         if v := d.get('minimum'):
             uncertainty.minimum = v
-        if v := d.get('minimumFormula'):
-            uncertainty.minimum_formula = v
         if v := d.get('mode'):
             uncertainty.mode = v
-        if v := d.get('modeFormula'):
-            uncertainty.mode_formula = v
         if v := d.get('sd'):
             uncertainty.sd = v
-        if v := d.get('sdFormula'):
-            uncertainty.sd_formula = v
         return uncertainty
 
 
@@ -2383,7 +2203,6 @@ class Parameter:
     formula: Optional[str] = None
     is_input_parameter: Optional[bool] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     parameter_scope: Optional[ParameterScope] = None
     tags: Optional[List[str]] = None
@@ -2414,8 +2233,6 @@ class Parameter:
             d['isInputParameter'] = self.is_input_parameter
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.parameter_scope:
@@ -2456,8 +2273,6 @@ class Parameter:
             parameter.is_input_parameter = v
         if v := d.get('lastChange'):
             parameter.last_change = v
-        if v := d.get('library'):
-            parameter.library = v
         if v := d.get('name'):
             parameter.name = v
         if v := d.get('parameterScope'):
@@ -2484,9 +2299,9 @@ class ImpactCategory:
     category: Optional[str] = None
     code: Optional[str] = None
     description: Optional[str] = None
+    direction: Optional[Direction] = None
     impact_factors: Optional[List[ImpactFactor]] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     parameters: Optional[List[Parameter]] = None
     ref_unit: Optional[str] = None
@@ -2513,12 +2328,12 @@ class ImpactCategory:
             d['code'] = self.code
         if self.description:
             d['description'] = self.description
+        if self.direction:
+            d['direction'] = self.direction.value
         if self.impact_factors:
             d['impactFactors'] = [e.to_dict() for e in self.impact_factors]
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.parameters:
@@ -2555,12 +2370,12 @@ class ImpactCategory:
             impact_category.code = v
         if v := d.get('description'):
             impact_category.description = v
+        if v := d.get('direction'):
+            impact_category.direction = v
         if v := d.get('impactFactors'):
             impact_category.impact_factors = [ImpactFactor.from_dict(e) for e in v]
         if v := d.get('lastChange'):
             impact_category.last_change = v
-        if v := d.get('library'):
-            impact_category.library = v
         if v := d.get('name'):
             impact_category.name = v
         if v := d.get('parameters'):
@@ -2627,82 +2442,6 @@ class ParameterRedef:
 
 
 @dataclass
-class CalculationSetup:
-
-    allocation: Optional[AllocationType] = None
-    amount: Optional[float] = None
-    calculation_type: Optional[CalculationType] = None
-    flow_property: Optional[Ref] = None
-    impact_method: Optional[Ref] = None
-    number_of_runs: Optional[int] = None
-    nw_set: Optional[Ref] = None
-    parameters: Optional[List[ParameterRedef]] = None
-    target: Optional[Ref] = None
-    unit: Optional[Ref] = None
-    with_costs: Optional[bool] = None
-    with_regionalization: Optional[bool] = None
-
-    def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        if self.allocation:
-            d['allocation'] = self.allocation.value
-        if self.amount:
-            d['amount'] = self.amount
-        if self.calculation_type:
-            d['calculationType'] = self.calculation_type.value
-        if self.flow_property:
-            d['flowProperty'] = self.flow_property.to_dict()
-        if self.impact_method:
-            d['impactMethod'] = self.impact_method.to_dict()
-        if self.number_of_runs:
-            d['numberOfRuns'] = self.number_of_runs
-        if self.nw_set:
-            d['nwSet'] = self.nw_set.to_dict()
-        if self.parameters:
-            d['parameters'] = [e.to_dict() for e in self.parameters]
-        if self.target:
-            d['target'] = self.target.to_dict()
-        if self.unit:
-            d['unit'] = self.unit.to_dict()
-        if self.with_costs:
-            d['withCosts'] = self.with_costs
-        if self.with_regionalization:
-            d['withRegionalization'] = self.with_regionalization
-        return d
-
-    @staticmethod
-    def from_dict(d: Dict[str, Any]) -> 'CalculationSetup':
-        calculation_setup = CalculationSetup()
-        if v := d.get('@type'):
-            calculation_setup.schema_type = v
-        if v := d.get('allocation'):
-            calculation_setup.allocation = v
-        if v := d.get('amount'):
-            calculation_setup.amount = v
-        if v := d.get('calculationType'):
-            calculation_setup.calculation_type = v
-        if v := d.get('flowProperty'):
-            calculation_setup.flow_property = Ref[FlowProperty].from_dict(v)
-        if v := d.get('impactMethod'):
-            calculation_setup.impact_method = Ref[ImpactMethod].from_dict(v)
-        if v := d.get('numberOfRuns'):
-            calculation_setup.number_of_runs = v
-        if v := d.get('nwSet'):
-            calculation_setup.nw_set = Ref[NwSet].from_dict(v)
-        if v := d.get('parameters'):
-            calculation_setup.parameters = [ParameterRedef.from_dict(e) for e in v]
-        if v := d.get('target'):
-            calculation_setup.target = Ref.from_dict(v)
-        if v := d.get('unit'):
-            calculation_setup.unit = Ref[Unit].from_dict(v)
-        if v := d.get('withCosts'):
-            calculation_setup.with_costs = v
-        if v := d.get('withRegionalization'):
-            calculation_setup.with_regionalization = v
-        return calculation_setup
-
-
-@dataclass
 class ParameterRedefSet:
 
     description: Optional[str] = None
@@ -2753,7 +2492,6 @@ class Process:
     is_infrastructure_process: Optional[bool] = None
     last_change: Optional[str] = None
     last_internal_id: Optional[int] = None
-    library: Optional[str] = None
     location: Optional[Ref] = None
     name: Optional[str] = None
     parameters: Optional[List[Parameter]] = None
@@ -2799,8 +2537,6 @@ class Process:
             d['lastChange'] = self.last_change
         if self.last_internal_id:
             d['lastInternalId'] = self.last_internal_id
-        if self.library:
-            d['library'] = self.library
         if self.location:
             d['location'] = self.location.to_dict()
         if self.name:
@@ -2859,8 +2595,6 @@ class Process:
             process.last_change = v
         if v := d.get('lastInternalId'):
             process.last_internal_id = v
-        if v := d.get('library'):
-            process.library = v
         if v := d.get('location'):
             process.location = Ref[Location].from_dict(v)
         if v := d.get('name'):
@@ -2893,7 +2627,6 @@ class ProductSystem:
     category: Optional[str] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     parameter_sets: Optional[List[ParameterRedefSet]] = None
     process_links: Optional[List[ProcessLink]] = None
@@ -2925,8 +2658,6 @@ class ProductSystem:
             d['description'] = self.description
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.parameter_sets:
@@ -2973,8 +2704,6 @@ class ProductSystem:
             product_system.description = v
         if v := d.get('lastChange'):
             product_system.last_change = v
-        if v := d.get('library'):
-            product_system.library = v
         if v := d.get('name'):
             product_system.name = v
         if v := d.get('parameterSets'):
@@ -3070,7 +2799,6 @@ class Project:
     is_with_costs: Optional[bool] = None
     is_with_regionalization: Optional[bool] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     nw_set: Optional[NwSet] = None
     tags: Optional[List[str]] = None
@@ -3102,8 +2830,6 @@ class Project:
             d['isWithRegionalization'] = self.is_with_regionalization
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.nw_set:
@@ -3144,8 +2870,6 @@ class Project:
             project.is_with_regionalization = v
         if v := d.get('lastChange'):
             project.last_change = v
-        if v := d.get('library'):
-            project.library = v
         if v := d.get('name'):
             project.name = v
         if v := d.get('nwSet'):
@@ -3223,7 +2947,6 @@ class UnitGroup:
     default_flow_property: Optional[Ref] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
-    library: Optional[str] = None
     name: Optional[str] = None
     tags: Optional[List[str]] = None
     units: Optional[List[Unit]] = None
@@ -3250,8 +2973,6 @@ class UnitGroup:
             d['description'] = self.description
         if self.last_change:
             d['lastChange'] = self.last_change
-        if self.library:
-            d['library'] = self.library
         if self.name:
             d['name'] = self.name
         if self.tags:
@@ -3286,8 +3007,6 @@ class UnitGroup:
             unit_group.description = v
         if v := d.get('lastChange'):
             unit_group.last_change = v
-        if v := d.get('library'):
-            unit_group.library = v
         if v := d.get('name'):
             unit_group.name = v
         if v := d.get('tags'):
@@ -3305,7 +3024,6 @@ class UnitGroup:
 
 RootEntity = Union[
     Actor,
-    Category,
     Currency,
     DQSystem,
     Epd,

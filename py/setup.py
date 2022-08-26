@@ -9,12 +9,13 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='olca_schema',
-    version='0.0.2',
-    description='A package for reading and writing data sets in the openLCA schema.',
+    version='0.0.3',
+    description='A package for reading and writing data sets in the openLCA schema format.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/GreenDelta/olca-schema',
-    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+    packages=find_packages(exclude=[
+        "tests", "*.tests", "*.tests.*", "tests.*"]),
     keywords=['openLCA', 'life cycle assessment', 'LCA'],
     license="CC0",
     classifiers=[
