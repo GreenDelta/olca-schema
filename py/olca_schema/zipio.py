@@ -56,6 +56,55 @@ class ZipReader:
     def read_actor(self, uid: str) -> Optional[schema.Actor]:
         return self.read(schema.Actor, uid)
 
+    def read_currency(self, uid: str) -> Optional[schema.Currency]:
+        return self.read(schema.Currency, uid)
+
+    def read_dq_system(self, uid: str) -> Optional[schema.DQSystem]:
+        return self.read(schema.DQSystem, uid)
+
+    def read_epd(self, uid: str) -> Optional[schema.Epd]:
+        return self.read(schema.Epd, uid)
+
+    def read_flow(self, uid: str) -> Optional[schema.Flow]:
+        return self.read(schema.Flow, uid)
+
+    def read_flow_property(self, uid: str) -> Optional[schema.FlowProperty]:
+        return self.read(schema.FlowProperty, uid)
+
+    def read_impact_category(self, uid: str) -> Optional[schema.ImpactCategory]:
+        return self.read(schema.ImpactCategory, uid)
+
+    def read_impact_method(self, uid: str) -> Optional[schema.ImpactMethod]:
+        return self.read(schema.ImpactMethod, uid)
+
+    def read_location(self, uid: str) -> Optional[schema.Location]:
+        return self.read(schema.Location, uid)
+
+    def read_parameter(self, uid: str) -> Optional[schema.Parameter]:
+        return self.read(schema.Parameter, uid)
+
+    def read_process(self, uid: str) -> Optional[schema.Process]:
+        return self.read(schema.Process, uid)
+
+    def read_product_system(self, uid: str) -> Optional[schema.ProductSystem]:
+        return self.read(schema.ProductSystem, uid)
+
+    def read_project(self, uid: str) -> Optional[schema.Project]:
+        return self.read(schema.Project, uid)
+
+    def read_result(self, uid: str) -> Optional[schema.Result]:
+        return self.read(schema.Result, uid)
+
+    def read_social_indicator(self, uid: str) -> Optional[
+        schema.SocialIndicator]:
+        return self.read(schema.SocialIndicator, uid)
+
+    def read_source(self, uid: str) -> Optional[schema.Source]:
+        return self.read(schema.Source, uid)
+
+    def read_unit_group(self, uid: str) -> Optional[schema.UnitGroup]:
+        return self.read(schema.UnitGroup, uid)
+
 
 def _folder_of_entity(entity: schema.RootEntity) -> str:
     if entity is None:
