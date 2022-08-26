@@ -160,7 +160,9 @@ func (model *YamlModel) ToPyClass(class *YamlClass) string {
 	if model.IsRoot(class) || class.Name == "Unit" {
 		b.Writeln(pyInd1 + "def to_ref(self) -> 'Ref':")
 		b.Writeln(pyInd2 + "ref = Ref(id=self.id, name=self.name)")
-		b.Writeln(pyInd2 + "ref.category = self.category")
+		if model.IsRoot(class) {
+			b.Writeln(pyInd2 + "ref.category = self.category")
+		}
 		b.Writeln(pyInd2 + "ref.model_type = '" + class.Name + "'")
 		b.Writeln(pyInd2 + "return ref")
 		b.Writeln()

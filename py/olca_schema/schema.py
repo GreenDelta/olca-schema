@@ -2915,7 +2915,6 @@ class Unit:
 
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
-        ref.category = self.category
         ref.model_type = 'Unit'
         return ref
 

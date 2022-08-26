@@ -12,4 +12,4 @@ print(steel.to_json())
 
 process = lca.process_of('Steel production')
 lca.output_of(process, steel, 1, kg)
-print(process)
+print(process.to_json())

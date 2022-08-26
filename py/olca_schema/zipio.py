@@ -2,7 +2,7 @@ import zipfile
 
 import olca_schema as schema
 
-from typing import Optional
+from typing import Optional, Type
 
 
 class ZipWriter:
@@ -44,7 +44,8 @@ class ZipReader:
     def close(self):
         self.__zip.close()
 
-    def read(self, class_type: type, uid: str) -> Optional[schema.RootEntity]:
+    def read(self, class_type: Type[schema.RootEntity],
+             uid: str) -> Optional[schema.RootEntity]:
         folder = _folder_of_class(class_type)
         path = f'{folder}/{uid}.json'
         if path not in self.__zip.namelist():
@@ -58,7 +59,7 @@ class ZipReader:
 
 def _folder_of_entity(entity: schema.RootEntity) -> str:
     if entity is None:
-        raise ValueError("unknown root entity type: " + entity)
+        raise ValueError("unknown root entity type")
     return _folder_of_class(type(entity))
 
 
