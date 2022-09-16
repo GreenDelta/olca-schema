@@ -4,7 +4,7 @@ The openLCA schema is the data exchange format for openLCA. It is the only
 format that supports all modeling features of openLCA and thus, a lossless data
 exchange.
 
-## Why another LCA format?
+## Why another LCA data exchange format?
 
 There are other LCA data formats, but the concepts of these formats are
 sometimes quite different or they are missing features that are important for
@@ -68,14 +68,42 @@ openLCA and the openLCA schema:
 * ... and more
 
 
-## Concepts
+## Format concepts
 
-TODO
+The openLCA schema is a typed data format with the type `Entity` as starting
+point. An `Entity` is basically a set of key-value pairs, also called fields.
+Every field has its specific type which can be:
+
+* a number (integer or floating point number),
+* a Boolean value (`true` or `false`),
+* a string,
+* again an `Entity`,
+* or a list of such values.
+
+An entity type can inherit the fields from another entity type where the root of
+this inheritance tree is always `Entity`. The type `RefEntity` describes
+entities that can be referenced by a unique ID, stored in the field `@id`.
+Another data set can point to such a `RefEntity` via a `Ref` that contains that
+`@id`. With this, we do not need to repeat the information when the same data
+set is referenced multiple times (e.g. when the same flow is used in different
+processes).
+
+A `RootEntity` describes a stand-alone data set, like a `Flow` or `Process`.
+These data set types form the root of an entity tree. All other entity types are
+always part of such an entity tree. For example, a `Unit` is not a `RootEntity`,
+it always lives within a `UnitGroup`. But it is a `RefEntity` because it can be
+referenced from other entities, e.g. in an `Exchange` of a process.
+
+It should be quite easy to implement these concepts in common programming
+languages an serialization formats. In fact, such implementations can be
+directly generated from the schema definition.
+
 
 ## Zip packages
 
-openLCA schema data are typically packed in zip files for data exchange. The
-different root entity types map to the following folders within such a zip file:
+For the data exchange with openLCA, openLCA schema data sets are typically
+packed as JSON serialized files in zip files. Data sets of the different root
+entity types are then stored in the following folders within such a zip file:
 
 | type              | folder              |
 |-------------------|---------------------|
@@ -97,18 +125,16 @@ different root entity types map to the following folders within such a zip file:
 | `Source`          | `sources`           |
 | `UnitGroup`       | `unit_groups`       |
 
-The respective data sets are directly stored as files in the respective folder
-of their type with the respective data set ID as the file name followed by the
-file extension: `<id>.{'json'|'proto'}`
+The name of the file is then the ID of the data set followed by the `.json`
+extension. At the root level, such a zip-file contains a `olca-schema.json` file
+that contains the version of the package format and possibly some other
+meta-data:
 
 ```
 + actors
   - 23af...e4.json
   - 1e32...f1.json
   - ...
++ ...
 - olca-schema.json
 ```
-
-In addition, such a zip-file contains a `olca-schema.json` file at the root
-level that defines the version of the package format and can contain other
-meta-data.
