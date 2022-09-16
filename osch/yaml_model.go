@@ -1,8 +1,8 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -120,7 +120,7 @@ func (model *YamlModel) IsEmpty() bool {
 func ReadYamlModel(args *args) (*YamlModel, error) {
 
 	dir := filepath.Join(args.home, "yaml")
-	files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func ReadYamlModel(args *args) (*YamlModel, error) {
 
 		log.Println("Parse YAML file", name)
 		path := filepath.Join(dir, name)
-		data, err := ioutil.ReadFile(path)
+		data, err := os.ReadFile(path)
 		if err != nil {
 			return nil, err
 		}

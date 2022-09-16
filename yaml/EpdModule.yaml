@@ -5,15 +5,15 @@ class:
 
   properties:
 
-    - name: name
-      index: 2
-      type: string
-      doc: The name or identifier of the module, like `A1`.
-
     - name: multiplier
-      index: 3
+      index: 2
       type: double
       doc: Scales the linked result to the required amount for this module.
+
+    - name: name
+      index: 3
+      type: string
+      doc: The name or identifier of the module, like `A1`.
 
     - name: result
       index: 4

@@ -32,7 +32,7 @@ func (w *mdWriter) writeBook() {
 language = "en"
 multilingual = false
 src = "src"
-title = "openLCA Schema"
+title = "openLCA schema"
 
 [output.html]
 mathjax-support = true
@@ -42,7 +42,7 @@ mathjax-support = true
 	w.file("src/SUMMARY.md", w.summary())
 
 	// try to copy the schema README and CHANGES
-	mds := []string{"README.md", "CHANGES.md"}
+	mds := []string{"intro.md", "CHANGES.md"}
 	for _, md := range mds {
 		mdPath := filepath.Join(w.args.home, md)
 		if _, err := os.Stat(mdPath); err == nil {
@@ -87,7 +87,7 @@ func (w *mdWriter) summary() string {
 
 	buff := NewBuffer()
 	buff.Writeln("# Summary\n")
-	buff.Writeln("[Introduction](./README.md)")
+	buff.Writeln("[Introduction](./intro.md)")
 	buff.Writeln("[Changes](./CHANGES.md)")
 
 	buff.Writeln("# Root entities\n")

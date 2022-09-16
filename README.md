@@ -1,7 +1,28 @@
-# openLCA Schema
+# openLCA schema
 
-openLCA schema describes the data exchange format of
-[openLCA](http://www.openlca.org/). Currently, openLCA supports
+The openLCA schema is the data exchange format of
+[openLCA](http://www.openlca.org/). This repository contains the specification
+of this format. The best way to read this specification is to:
+
+[__Read the documentation online__](http://greendelta.github.io/olca-schema)
+
+
+## Contributing
+
+The openLCA schema reflects the openLCA model. If we change the schema, we need
+to change the openLCA software. This can be quite some effort. However, format
+extensions in form of additional fields are easy and could be added if they
+are useful (as they could be just ignored if not supported by the software yet).
+What needs to be improved always, is the documentation of the format. The data
+set types and fields are specified and documented in their respective files in
+the [yaml](./yaml) folder. Pull requests are welcome.
+
+
+## Building the artifacts
+
+
+
+Currently, openLCA supports
 [JSON](https://www.json.org) and [Protocol
 Buffers](https://developers.google.com/protocol-buffers) as serialization
 formats over files, REST/IPC services, or [gRPC](https://grpc.io/). In addition,
@@ -20,47 +41,6 @@ specific type. In addition, there are a few enumeration types.
 The different data types are defined in simple [YAML](http://yaml.org/) files
 with a file for each type in the [yaml folder](./yaml)... You can also browse
 the [HTML documentation online](http://greendelta.github.io/olca-schema).
-
-## Zip packages
-
-openLCA schema data are typically packed in zip files for data exchange. The
-different root entity types map to the following folders within such a zip file:
-
-| type              | folder              |
-|-------------------|---------------------|
-| `Actor`           | `actors`            |
-| `Currency`        | `currencies`        |
-| `DQSystem`        | `dq_systems`        |
-| `Epd`             | `epds`              |
-| `Flow`            | `flows`             |
-| `FlowProperty`    | `flow_properties`   |
-| `ImpactCategory`  | `lcia_categories`   |
-| `ImpactMethod`    | `lcia_methods`      |
-| `Location`        | `locations`         |
-| `Parameter`       | `parameters`        |
-| `Process`         | `processes`         |
-| `ProductSystem`   | `product_systems`   |
-| `Project`         | `projects`          |
-| `Result`          | `results`           |
-| `SocialIndicator` | `social_indicators` |
-| `Source`          | `sources`           |
-| `UnitGroup`       | `unit_groups`       |
-
-The respective data sets are directly stored as files in the respective folder
-of their type with the respective data set ID as the file name followed by the
-file extension: `<id>.{'json'|'proto'}`
-
-```
-+ actors
-  - 23af...e4.json
-  - 1e32...f1.json
-  - ...
-- olca-schema.json
-```
-
-In addition, such a zip-file contains a `olca-schema.json` file at the root
-level that defines the version of the package format and can contain other
-meta-data.
 
 ## License
 This openLCA Schema is in the worldwide public domain, released under the [CC0

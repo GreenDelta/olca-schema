@@ -70,3 +70,45 @@ openLCA and the openLCA schema:
 
 ## Concepts
 
+TODO
+
+## Zip packages
+
+openLCA schema data are typically packed in zip files for data exchange. The
+different root entity types map to the following folders within such a zip file:
+
+| type              | folder              |
+|-------------------|---------------------|
+| `Actor`           | `actors`            |
+| `Currency`        | `currencies`        |
+| `DQSystem`        | `dq_systems`        |
+| `Epd`             | `epds`              |
+| `Flow`            | `flows`             |
+| `FlowProperty`    | `flow_properties`   |
+| `ImpactCategory`  | `lcia_categories`   |
+| `ImpactMethod`    | `lcia_methods`      |
+| `Location`        | `locations`         |
+| `Parameter`       | `parameters`        |
+| `Process`         | `processes`         |
+| `ProductSystem`   | `product_systems`   |
+| `Project`         | `projects`          |
+| `Result`          | `results`           |
+| `SocialIndicator` | `social_indicators` |
+| `Source`          | `sources`           |
+| `UnitGroup`       | `unit_groups`       |
+
+The respective data sets are directly stored as files in the respective folder
+of their type with the respective data set ID as the file name followed by the
+file extension: `<id>.{'json'|'proto'}`
+
+```
++ actors
+  - 23af...e4.json
+  - 1e32...f1.json
+  - ...
+- olca-schema.json
+```
+
+In addition, such a zip-file contains a `olca-schema.json` file at the root
+level that defines the version of the package format and can contain other
+meta-data.

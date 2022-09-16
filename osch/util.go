@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -67,7 +66,7 @@ func formatComment(comment string, indent string) string {
 }
 
 func writeFile(file, content string) {
-	err := ioutil.WriteFile(file, []byte(content), os.ModePerm)
+	err := os.WriteFile(file, []byte(content), os.ModePerm)
 	check(err, "failed to write file: "+file)
 }
 
