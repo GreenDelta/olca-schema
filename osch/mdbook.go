@@ -183,6 +183,14 @@ the names of the class and its properties.
 	}
 	buff.WriteString("\n```\n")
 
+	example := w.getJsonExample(class)
+	if example != "" {
+		buff.WriteString("\n\n## JSON example\n\n")
+		buff.WriteString("```json\n")
+		buff.WriteString(example)
+		buff.WriteString("\n```\n")
+	}
+
 	return buff.String()
 }
 
@@ -308,4 +316,17 @@ func (w *mdWriter) innerTypes() map[string]string {
 	}
 
 	return m
+}
+
+func (w *mdWriter) getJsonExample(class *YamlClass) string {
+	file := strings.ToLower(toSnakeCase(class.Name)) + ".json"
+	path := filepath.Join(w.args.home, "examples", file)
+	if _, err := os.Stat(path); err != nil {
+		return ""
+	}
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return ""
+	}
+	return string(data)
 }
