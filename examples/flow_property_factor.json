@@ -1,7 +1,6 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "FlowPropertyFactor",
-  "referenceFlowProperty": true,
+  "isRefFlowProperty": true,
   "conversionFactor": 1.0,
   "flowProperty": {
     "@type": "FlowProperty",

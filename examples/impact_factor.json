@@ -1,5 +1,4 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "ImpactFactor",
   "value": 1.0943318963E-9,
   "flow": {

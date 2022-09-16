@@ -1,11 +1,10 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "Exchange",
   "internalId": 1,
-  "avoidedProduct": false,
-  "input": false,
   "amount": 1.0,
-  "quantitativeReference": true,
+  "isAvoidedProduct": false,
+  "isInput": false,
+  "isQuantitativeReference": true,
   "flow": {
     "@type": "Flow",
     "@id": "54290a29-8baa-495c-84b3-db212c75f7b7",

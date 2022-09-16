@@ -1,9 +1,8 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "Unit",
   "@id": "52765a6c-3896-43c2-b2f4-c679acf13efe",
   "name": "MJ",
   "description": "Megajoule",
-  "referenceUnit": true,
+  "isRefUnit": true,
   "conversionFactor": 1.0
 }

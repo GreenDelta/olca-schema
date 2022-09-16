@@ -1,13 +1,8 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "SocialIndicator",
   "@id": "685bea55-61bf-44e5-87c3-71038cebd0b0",
   "name": "Gender wage gap",
-  "category": {
-    "@type": "Category",
-    "@id": "35bc9654-5499-4fae-9e1c-df5aba1de9ec",
-    "name": "Discrimination"
-  },
+  "category": "Discrimination",
   "activityVariable": "Worker hours",
   "activityQuantity": {
     "@type": "FlowProperty",

@@ -1,5 +1,4 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "ImpactCategory",
   "@id": "3a08605b-d7c9-4f40-a17e-74cece1dde8b",
   "name": "Depletion of abiotic resources - elements, ultimate reserves",
@@ -13,25 +12,6 @@
         "@type": "Flow",
         "@id": "0305b169-255d-4041-8f5d-6e095bcb6358",
         "name": "Aluminium"
-      },
-      "unit": {
-        "@type": "Unit",
-        "@id": "20aadc24-a391-41cf-b340-3e4529f44bde",
-        "name": "kg"
-      },
-      "flowProperty": {
-        "@type": "FlowProperty",
-        "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
-        "name": "Mass"
-      }
-    },
-    {
-      "@type": "ImpactFactor",
-      "value": 5.5155314778E-6,
-      "flow": {
-        "@type": "Flow",
-        "@id": "041f5cea-6556-11dd-ad8b-0800200c9a66",
-        "name": "Phosphorus"
       },
       "unit": {
         "@type": "Unit",

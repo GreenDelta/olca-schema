@@ -1,5 +1,4 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "ProcessLink",
   "provider": {
     "@type": "Process",
@@ -17,7 +16,7 @@
     "name": "Ingot casting"
   },
   "exchange": {
-    "@type": "Exchange",
-    "@id": "1c2dd916-8c4e-3e1a-bdfc-4e4b214b97b3"
+    "@type": "ExchangeRef",
+    "internalId": 1
   }
 }

@@ -1,19 +1,17 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "ProductSystem",
   "@id": "e673be33-b071-4ba2-9097-5b77a9c3ced2",
   "name": "Ingot casting",
-  "description": "",
-  "version": "01.00.000",
-  "referenceProcess": {
+  "refProcess": {
     "@type": "Process",
     "@id": "55fd27b1-c73d-4a76-b560-cfc461e81efd",
     "name": "Ingot casting"
   },
-  "referenceExchange": {
-    "@type": "Exchange",
-    "@id": "e4649009-ddb9-3c85-be99-1d635ffd3030"
+  "refExchange": {
+    "@type": "ExchangeRef",
+    "internalId": 1
   },
+  "targetAmount": 1.0,
   "targetFlowProperty": {
     "@type": "FlowProperty",
     "@id": "93a60a56-a3c8-11da-a746-0800200b9a66",
@@ -24,7 +22,6 @@
     "@id": "20aadc24-a391-41cf-b340-3e4529f44bde",
     "name": "kg"
   },
-  "targetAmount": 1.0,
   "processes": [
     {
       "@type": "Process",
@@ -56,8 +53,8 @@
         "name": "Ingot casting"
       },
       "exchange": {
-        "@type": "Exchange",
-        "@id": "1c2dd916-8c4e-3e1a-bdfc-4e4b214b97b3"
+        "@type": "ExchangeRef",
+        "internalId": 2
       }
     }
   ]

@@ -1,13 +1,8 @@
 {
-  "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
   "@type": "UnitGroup",
   "@id": "93a60a57-a3c8-11da-a746-0800200c9a66",
   "name": "Units of energy",
-  "category": {
-    "@type": "Category",
-    "@id": "e38f841d-bc83-49a3-ab86-2783de8cebfb",
-    "name": "Technical unit groups"
-  },
+  "category": "Technical unit groups",
   "defaultFlowProperty": {
     "@type": "FlowProperty",
     "@id": "f6811440-ee37-11de-8a39-0800200c9a66",
@@ -16,60 +11,11 @@
   "units": [
     {
       "@type": "Unit",
-      "@id": "010f811e-3cc2-4b14-a901-337da9b3e49c",
-      "name": "kcal",
-      "description": "Kilocalorie (International table)",
-      "conversionFactor": 0.0041867
-    },
-    {
-      "@type": "Unit",
-      "@id": "01e58eb9-0aba-4c76-ba0c-03f6f3be1353",
-      "name": "GJ",
-      "description": "Gigajoule",
-      "conversionFactor": 1000.0
-    },
-    {
-      "@type": "Unit",
-      "@id": "425aff51-b7e5-4561-aa5a-562ec103a79e",
-      "name": "TOE",
-      "description": "Ton oil equivalent",
-      "conversionFactor": 41868.0
-    },
-    {
-      "@type": "Unit",
-      "@id": "469d61f1-3bc4-4841-8adf-873825c1bc11",
-      "name": "J",
-      "description": "Joule",
-      "conversionFactor": 1.0E-6
-    },
-    {
-      "@type": "Unit",
       "@id": "52765a6c-3896-43c2-b2f4-c679acf13efe",
       "name": "MJ",
       "description": "Megajoule",
-      "referenceUnit": true,
+      "isRefUnit": true,
       "conversionFactor": 1.0
-    },
-    {
-      "@type": "Unit",
-      "@id": "55244053-94ba-404e-9172-cb279d905e00",
-      "name": "btu",
-      "description": "British thermal unit (International table)",
-      "conversionFactor": 0.001055056
-    },
-    {
-      "@type": "Unit",
-      "@id": "57c492e7-d94b-4fcc-98df-cdc4163b754c",
-      "name": "TJ",
-      "description": "Terajoule",
-      "conversionFactor": 1000000.0
-    },
-    {
-      "@type": "Unit",
-      "@id": "787f2ac9-7bcd-4a91-9fab-55bfe414138f",
-      "name": "TCE",
-      "description": "Ton coal equivalent",
-      "conversionFactor": 29307.6
     },
     {
       "@type": "Unit",
@@ -77,27 +23,6 @@
       "name": "kWh",
       "description": "Kilowatt times hour",
       "conversionFactor": 3.6
-    },
-    {
-      "@type": "Unit",
-      "@id": "92e3bd49-8ed5-4885-9db6-fc88c7afcfcb",
-      "name": "MWh",
-      "description": "Megawatt times hour",
-      "conversionFactor": 3600.0
-    },
-    {
-      "@type": "Unit",
-      "@id": "f4119718-2d50-47fe-9154-cab6fd2d30eb",
-      "name": "kJ",
-      "description": "Kilojoule",
-      "conversionFactor": 0.001
-    },
-    {
-      "@type": "Unit",
-      "@id": "fc3604f7-aa93-4aa3-8ae9-8f822874da5f",
-      "name": "Wh",
-      "description": "Watt times hour",
-      "conversionFactor": 0.0036
     }
   ]
 }
