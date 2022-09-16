@@ -20,31 +20,18 @@ the [yaml](./yaml) folder. Pull requests are welcome.
 
 ## Building the artifacts
 
+The data types are defined in simple YAML format. The following things can be
+generated from the files in the [yaml](./yaml) folder with the [osch](./osch)
+tool:
 
+* the [schema documentation](http://greendelta.github.io/olca-schema)
+* a [Python package](https://pypi.org/project/olca-schema/) for reading and
+  writing openLCA schema data sets in Json
+* a [Protocol Buffers schema](https://github.com/GreenDelta/olca-proto/blob/master/proto/olca.proto)
 
-Currently, openLCA supports
-[JSON](https://www.json.org) and [Protocol
-Buffers](https://developers.google.com/protocol-buffers) as serialization
-formats over files, REST/IPC services, or [gRPC](https://grpc.io/). In addition,
-a [JSON-LD](https://json-ld.org/) context is provided so that it can be used as
-a Linked Data format. openLCA schema is based on a few primitive building blocks
-like strings, numbers, lists and structured data types that can be easily
-implemented in different programming languages or serialization formats. For
-custom structured data types, we use the term `class`. These start with an
-uppercase letter and map to structures in the respective implementation (e.g.
-objects in JSON, messages in Protocol Buffers, classes and instances in Python etc.).
-Primitive data types, which start with a lower case letter, as well as lists
-(type `List`) are typically directly provided by the respective format
-implementation. Classes have properties (or fields) which can hold values of a
-specific type. In addition, there are a few enumeration types.
-
-The different data types are defined in simple [YAML](http://yaml.org/) files
-with a file for each type in the [yaml folder](./yaml)... You can also browse
-the [HTML documentation online](http://greendelta.github.io/olca-schema).
 
 ## License
-This openLCA Schema is in the worldwide public domain, released under the [CC0
-1.0 Universal Public Domain
-Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+The openLCA schema is in the worldwide public domain, released under the
+[CC0 1.0 Universal Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ![Public Domain Dedication](https://licensebuttons.net/p/zero/1.0/88x31.png)

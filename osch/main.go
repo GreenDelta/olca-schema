@@ -57,13 +57,14 @@ osch
 
 usage:
 
-$ osch [command] [options]
+$ osch [command]
 
 commands:
 
   help  - prints this help
   check - checks the schema
-  proto - converts the schema to ProtocolBuffers
-
+	doc   - generates the schema documentation
+  proto - generates the Protocol Buffers schema
+	py    - generates the Python classes
   `)
 }

@@ -38,3 +38,13 @@ $ osch proto
 This contains then the Protocol Buffers schema. This schema is used in the
 [olca-proto project](https://github.com/GreenDelta/olca-proto) and can be
 used for data exchange with openLCA via Protocol Buffers.
+
+
+### Python
+
+The class defintions of the Python package can be generated via the `py`
+command:
+
+```bash
+$ osch py
+```
