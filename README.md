@@ -20,13 +20,13 @@ the [yaml](./yaml) folder. Pull requests are welcome.
 
 ## Building the artifacts
 
-The data types are defined in simple YAML format. The following things can be
+The data types are defined in a simple YAML format. The following things can be
 generated from the files in the [yaml](./yaml) folder with the [osch](./osch)
 tool:
 
 * the [schema documentation](http://greendelta.github.io/olca-schema)
 * a [Python package](https://pypi.org/project/olca-schema/) for reading and
-  writing openLCA schema data sets in Json
+  writing openLCA schema data sets in Json, also from and to zip packages
 * a [Protocol Buffers schema](https://github.com/GreenDelta/olca-proto/blob/master/proto/olca.proto)
 
 
