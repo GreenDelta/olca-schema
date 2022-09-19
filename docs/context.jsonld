@@ -1,0 +1,36 @@
+{
+  "@context": {
+    "@base": "http://openlca.org/schema/v2.0/",
+    "@vocab": "http://openlca.org/schema/v2.0/",
+    "allocationMethod": {
+      "@type": "@vocab"
+    },
+    "allocationType": {
+      "@type": "@vocab"
+    },
+    "defaultAllocationMethod": {
+      "@type": "@vocab"
+    },
+    "direction": {
+      "@type": "@vocab"
+    },
+    "distributionType": {
+      "@type": "@vocab"
+    },
+    "flowPropertyType": {
+      "@type": "@vocab"
+    },
+    "flowType": {
+      "@type": "@vocab"
+    },
+    "parameterScope": {
+      "@type": "@vocab"
+    },
+    "processType": {
+      "@type": "@vocab"
+    },
+    "riskLevel": {
+      "@type": "@vocab"
+    }
+  }
+}
