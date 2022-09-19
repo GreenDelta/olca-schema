@@ -1,6 +1,6 @@
 # openLCA schema
 
-The openLCA schema is the data exchange format for openLCA. It is the only
+The openLCA schema is the data exchange format of openLCA. It is the only
 format that supports all modeling features of openLCA and thus, a lossless data
 exchange.
 
@@ -8,7 +8,7 @@ exchange.
 
 There are other LCA data formats, but the concepts of these formats are
 sometimes quite different or they are missing features that are important for
-openLCA. However, whenever possible we try to be compatible to these formats:
+openLCA. However, whenever possible we try to be compatible with these formats:
 
 * __EcoSpold 1__: It was one of the first standardized LCA data formats but it
   is not really used anymore. The format is nice and simple but quite some
@@ -32,22 +32,22 @@ openLCA. However, whenever possible we try to be compatible to these formats:
   data sets of this format was adopted for the openLCA schema. For data exchange
   (e.g. over web APIs), it has quite some advantages when not everything is
   stored in a single file. The openLCA schema has the same general concepts as
-  the ILCD format. However, there are still quite some things missing, like
-  stand-alone global parameters, and other things are a bit strange (e.g. it has
-  unit groups with unit conversions but there is no possibility for using these
-  units for inputs and output amounts; LCIA method data sets in this format are
-  in fact LCIA categories; etc.). With the extended ILCD format eILCD, it is now
-  possible to also define linked product systems in this format, but eILCD has a
-  concept of process instances (means copies of processes) in product systems
-  which is not so practical for matrix based LCA software. Also, the linking is
-  limited in eILCD: the same flow in two different exchanges of a process can be
-  only linked to different processes when the location is different (a direct
-  linking of exchanges is missing).
+  the ILCD format. However, there are still quite some things missing in the
+  ILCD format, like stand-alone global parameters, and other things are a bit
+  strange (e.g. it has unit groups with unit conversions but there is no
+  possibility for using these units for input and output amounts; LCIA method
+  data sets in this format are in fact LCIA categories; etc.). With the extended
+  ILCD format eILCD, it is now possible to also define linked product systems in
+  this format, but eILCD has a concept of process instances (means copies of
+  processes) in product systems which is not so practical for matrix based LCA
+  software. Also, the linking is limited in eILCD: the same flow in two
+  different exchanges of a process can be only linked to different processes
+  when the location is different (a direct linking of exchanges is missing).
 * __EcoSpold II__: This format solves some problems of the EcoSpold I format
-  (e.g. supports parameters and formulas, unique IDs of things, etc.). However,
-  it reflects more the structure and needs of the ecoinvent database (e.g. has a
-  concept of parent and child activities) and thus, is rarely used in other
-  contexts.
+  (e.g. supports parameters and formulas, provides unique IDs for entities,
+  etc.). However, it reflects more the structure and needs of the ecoinvent
+  database (e.g. has a concept of parent and child activities) and thus, is
+  rarely used in other contexts.
 
 Finally, there are things that are not covered by these formats but supported in
 openLCA and the openLCA schema:
