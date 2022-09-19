@@ -24,6 +24,8 @@ func main() {
 		writeMarkdownBook(args)
 	case "py", "python":
 		writePythonModule(args)
+	case "context":
+		writeContextJson(args)
 	case "check":
 		checkSchema(args)
 	default:
@@ -61,10 +63,11 @@ $ osch [command]
 
 commands:
 
-  help  - prints this help
-  check - checks the schema
-	doc   - generates the schema documentation
-  proto - generates the Protocol Buffers schema
-	py    - generates the Python classes
+  help    - prints this help
+  check   - checks the schema
+	doc     - generates the schema documentation
+  proto   - generates the Protocol Buffers schema
+	py      - generates the Python classes
+	context - writes the docs/context.jsonld file
   `)
 }
