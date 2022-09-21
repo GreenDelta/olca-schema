@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "olca_schema"
+version = "0.0.4"
+description = "A package for reading and writing data sets in the openLCA schema format."
+readme = "README.md"
+requires-python = ">=3.8"
+keywords=["openLCA", "life cycle assessment", "LCA"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/GreenDelta/olca-schema"
+"Bug Tracker" = "https://github.com/GreenDelta/olca-schema/issues"
+
+[tool.setuptools.packages.find]
+include = ["olca_schema"]
+exclude = ["tests"]
