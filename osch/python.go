@@ -44,7 +44,7 @@ func (w *pyWriter) writeAll() {
 		if w.model.IsAbstract(class) {
 			continue
 		}
-		w.writeln(w.model.ToPyClass(class))
+		w.writeClass(class)
 	}
 
 	// write RootEntity type
@@ -99,109 +99,107 @@ func (w *pyWriter) writeEnum(enum *YamlEnum) {
 	w.writeln()
 }
 
-func (model *YamlModel) ToPyClass(class *YamlClass) string {
-	b := NewBuffer()
-	b.Writeln("@dataclass")
-	b.Writeln("class", class.Name+":")
-	b.Writeln()
+func (w *pyWriter) writeClass(class *YamlClass) {
+	w.writeln("@dataclass")
+	w.writeln("class", class.Name+":")
+	w.writeln()
 
 	// properties
-	props := model.AllPropsOf(class)
-	for _, prop := range props {
+	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
 		propType := YamlPropType(prop.Type)
-		b.Writeln(pyInd1 + prop.PyName() +
+		w.writeln(pyInd1 + prop.PyName() +
 			": Optional[" + propType.ToPython() + "] = None")
 	}
 	if class.Name == "Ref" {
-		b.Writeln("    model_type: str = ''")
+		w.writeln("    model_type: str = ''")
 	}
-	b.Writeln()
+	w.writeln()
 
 	// __post_init__
-	if model.IsRoot(class) {
+	if w.model.IsRoot(class) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
 			"datetime.datetime.utcnow().isoformat() + 'Z'"}
-		b.Writeln(pyInd1 + "def __post_init__(self):")
+		w.writeln(pyInd1 + "def __post_init__(self):")
 		for i, field := range fields {
-			b.Writeln(pyInd2 + "if self." + field + " is None:")
-			b.Writeln(pyInd3 + "self." + field + " = " + inits[i])
+			w.writeln(pyInd2 + "if self." + field + " is None:")
+			w.writeln(pyInd3 + "self." + field + " = " + inits[i])
 		}
-		b.Writeln()
+		w.writeln()
 	}
 
 	// to_dict
-	b.Writeln(pyInd1 + "def to_dict(self) -> Dict[str, Any]:")
-	b.Writeln(pyInd2 + "d: Dict[str, Any] = {}")
-	if model.IsRoot(class) {
-		b.Writeln(pyInd2 + "d['@type'] = '" + class.Name + "'")
+	w.writeln(pyInd1 + "def to_dict(self) -> Dict[str, Any]:")
+	w.writeln(pyInd2 + "d: Dict[str, Any] = {}")
+	if w.model.IsRoot(class) {
+		w.writeln(pyInd2 + "d['@type'] = '" + class.Name + "'")
 	}
 	if class.Name == "Ref" {
-		b.Writeln(pyInd2 + "d['@type'] = self.model_type")
+		w.writeln(pyInd2 + "d['@type'] = self.model_type")
 	}
-	for _, prop := range props {
+	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
 		selfProp := "self." + prop.PyName()
 		dictProp := pyInd3 + "d['" + prop.Name + "']"
 		propType := prop.PropType()
-		b.Writeln("        if " + selfProp + ":")
+		w.writeln("        if " + selfProp + ":")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
-			b.Writeln(dictProp + " = " + selfProp)
-		} else if propType.IsEnumOf(model) {
-			b.Writeln(dictProp + " = " + selfProp + ".value")
+			w.writeln(dictProp + " = " + selfProp)
+		} else if propType.IsEnumOf(w.model) {
+			w.writeln(dictProp + " = " + selfProp + ".value")
 		} else if propType.IsList() {
-			b.Writeln(dictProp + " = [e.to_dict() for e in " + selfProp + "]")
+			w.writeln(dictProp + " = [e.to_dict() for e in " + selfProp + "]")
 		} else {
-			b.Writeln(dictProp + " = " + selfProp + ".to_dict()")
+			w.writeln(dictProp + " = " + selfProp + ".to_dict()")
 		}
 	}
-	b.Writeln(pyInd2 + "return d")
-	b.Writeln()
+	w.writeln(pyInd2 + "return d")
+	w.writeln()
 
 	// to_json
-	if model.IsRoot(class) {
-		b.Writeln(pyInd1 + "def to_json(self) -> str:")
-		b.Writeln(pyInd2 + "return json.dumps(self.to_dict(), indent=2)")
-		b.Writeln()
+	if w.model.IsRoot(class) {
+		w.writeln(pyInd1 + "def to_json(self) -> str:")
+		w.writeln(pyInd2 + "return json.dumps(self.to_dict(), indent=2)")
+		w.writeln()
 	}
 
 	// to_ref
-	if model.IsRoot(class) || class.Name == "Unit" {
-		b.Writeln(pyInd1 + "def to_ref(self) -> 'Ref':")
-		b.Writeln(pyInd2 + "ref = Ref(id=self.id, name=self.name)")
-		if model.IsRoot(class) {
-			b.Writeln(pyInd2 + "ref.category = self.category")
+	if w.model.IsRoot(class) || class.Name == "Unit" {
+		w.writeln(pyInd1 + "def to_ref(self) -> 'Ref':")
+		w.writeln(pyInd2 + "ref = Ref(id=self.id, name=self.name)")
+		if w.model.IsRoot(class) {
+			w.writeln(pyInd2 + "ref.category = self.category")
 		}
-		b.Writeln(pyInd2 + "ref.model_type = '" + class.Name + "'")
-		b.Writeln(pyInd2 + "return ref")
-		b.Writeln()
+		w.writeln(pyInd2 + "ref.model_type = '" + class.Name + "'")
+		w.writeln(pyInd2 + "return ref")
+		w.writeln()
 	}
 
 	// from_dict
-	b.Writeln(pyInd1 + "@staticmethod")
-	b.Writeln(pyInd1 + "def from_dict(d: Dict[str, Any]) -> '" + class.Name + "':")
+	w.writeln(pyInd1 + "@staticmethod")
+	w.writeln(pyInd1 + "def from_dict(d: Dict[str, Any]) -> '" + class.Name + "':")
 	instance := strings.ToLower(toSnakeCase(class.Name))
-	b.Writeln(pyInd2 + instance + " = " + class.Name + "()")
+	w.writeln(pyInd2 + instance + " = " + class.Name + "()")
 	if class.Name == "Ref" {
-		b.Writeln(pyInd2 + instance + ".model_type = d.get('@type', '')")
+		w.writeln(pyInd2 + instance + ".model_type = d.get('@type', '')")
 	}
-	for _, prop := range props {
-		b.Writeln("        if v := d.get('" + prop.Name + "'):")
+	for _, prop := range w.model.AllPropsOf(class) {
+		w.writeln("        if v := d.get('" + prop.Name + "'):")
 		propType := prop.PropType()
 		modelProp := "            " + instance + "." + prop.PyName()
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
-			b.Writeln(modelProp + " = v")
-		} else if propType.IsEnumOf(model) {
-			b.Writeln(modelProp + " = " + prop.Type + ".get(v)")
+			w.writeln(modelProp + " = v")
+		} else if propType.IsEnumOf(w.model) {
+			w.writeln(modelProp + " = " + prop.Type + ".get(v)")
 		} else if propType.IsList() {
 			u := propType.UnpackList()
 			var typeStr string
@@ -210,24 +208,24 @@ func (model *YamlModel) ToPyClass(class *YamlClass) string {
 			} else {
 				typeStr = string(u)
 			}
-			b.Writeln(modelProp + " = [" + typeStr + ".from_dict(e) for e in v]")
+			w.writeln(modelProp + " = [" + typeStr + ".from_dict(e) for e in v]")
 		} else {
-			b.Writeln(modelProp + " = " + string(propType) + ".from_dict(v)")
+			w.writeln(modelProp + " = " + string(propType) + ".from_dict(v)")
 		}
 	}
-	b.Writeln("        return " + instance)
-	b.Writeln()
+	w.writeln("        return " + instance)
+	w.writeln()
 
 	// from_json
-	if model.IsRoot(class) {
-		b.Writeln("    @staticmethod")
-		b.Writeln("    def from_json(data: Union[str, bytes]) -> '" +
+	if w.model.IsRoot(class) {
+		w.writeln("    @staticmethod")
+		w.writeln("    def from_json(data: Union[str, bytes]) -> '" +
 			class.Name + "':")
-		b.Writeln("        return " + class.Name + ".from_dict(json.loads(data))")
-		b.Writeln()
+		w.writeln("        return " + class.Name + ".from_dict(json.loads(data))")
+		w.writeln()
 	}
 
-	return b.String()
+	w.writeln()
 }
 
 func (w *pyWriter) writeln(args ...string) {
