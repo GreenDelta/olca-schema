@@ -11,12 +11,6 @@ type pyWriter struct {
 	model *YamlModel
 }
 
-// indentation levels
-const pyInd1 = "    "
-const pyInd2 = pyInd1 + pyInd1
-const pyInd3 = pyInd2 + pyInd1
-const pyInd4 = pyInd3 + pyInd1
-
 func writePythonModule(args *args) {
 	model, err := ReadYamlModel(args)
 	check(err, "could not read YAML model")
@@ -51,7 +45,7 @@ func (w *pyWriter) writeAll() {
 	w.writeln("RootEntity = Union[")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRoot(class) {
-			w.writeln(pyInd1 + class.Name + ",")
+			w.wrind1ln(class.Name + ",")
 		}
 	})
 	w.writeln("]")
@@ -79,29 +73,29 @@ func (w *pyWriter) writeHeader() {
 
 func (w *pyWriter) writeEnum(enum *YamlEnum) {
 	n := enum.Name
-	w.writeln("class", n+"(Enum):")
+	w.writeln("class " + n + "(Enum):")
 	w.writeln()
 
 	// write the items
 	for _, item := range enum.Items {
-		w.writeln(pyInd1 + item.Name + " = '" + item.Name + "'")
+		w.wrind1ln(item.Name + " = '" + item.Name + "'")
 	}
 	w.writeln()
 
 	// writer the get-method
-	w.writeln(pyInd1 + "def get(v: Union[str, '" + n + "'],\n" +
-		pyInd3 + "default: Optional['" + n + "'] = None) -> '" + n + "':")
-	w.writeln(pyInd2 + "for i in " + n + ":")
-	w.writeln(pyInd3 + "if i == v or i.value == v or i.name == v:")
-	w.writeln(pyInd4 + "return i")
-	w.writeln(pyInd2 + "return default")
+	w.wrind1ln("def get(v: Union[str, '" + n + "'],")
+	w.wrind3ln("default: Optional['" + n + "'] = None) -> '" + n + "':")
+	w.wrind2ln("for i in " + n + ":")
+	w.wrind3ln("if i == v or i.value == v or i.name == v:")
+	w.wrind4ln("return i")
+	w.wrind2ln("return default")
 	w.writeln()
 	w.writeln()
 }
 
 func (w *pyWriter) writeClass(class *YamlClass) {
 	w.writeln("@dataclass")
-	w.writeln("class", class.Name+":")
+	w.writeln("class " + class.Name + ":")
 	w.writeln()
 
 	// properties
@@ -110,7 +104,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 			continue
 		}
 		propType := YamlPropType(prop.Type)
-		w.writeln(pyInd1 + prop.PyName() +
+		w.wrind1ln(prop.PyName() +
 			": Optional[" + propType.ToPython() + "] = None")
 	}
 	if class.Name == "Ref" {
@@ -123,73 +117,89 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
 			"datetime.datetime.utcnow().isoformat() + 'Z'"}
-		w.writeln(pyInd1 + "def __post_init__(self):")
+		w.wrind1ln("def __post_init__(self):")
 		for i, field := range fields {
-			w.writeln(pyInd2 + "if self." + field + " is None:")
-			w.writeln(pyInd3 + "self." + field + " = " + inits[i])
+			w.wrind2ln("if self." + field + " is None:")
+			w.wrind3ln("self." + field + " = " + inits[i])
 		}
 		w.writeln()
 	}
 
 	// to_dict
-	w.writeln(pyInd1 + "def to_dict(self) -> Dict[str, Any]:")
-	w.writeln(pyInd2 + "d: Dict[str, Any] = {}")
+	w.wrind1ln("def to_dict(self) -> Dict[str, Any]:")
+	w.wrind2ln("d: Dict[str, Any] = {}")
 	if w.model.IsRoot(class) {
-		w.writeln(pyInd2 + "d['@type'] = '" + class.Name + "'")
+		w.wrind2ln("d['@type'] = '" + class.Name + "'")
 	}
 	if class.Name == "Ref" {
-		w.writeln(pyInd2 + "d['@type'] = self.model_type")
+		w.wrind2ln("d['@type'] = self.model_type")
 	}
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
 		selfProp := "self." + prop.PyName()
-		dictProp := pyInd3 + "d['" + prop.Name + "']"
+		dictProp := "d['" + prop.Name + "']"
 		propType := prop.PropType()
 		w.writeln("        if " + selfProp + ":")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
-			w.writeln(dictProp + " = " + selfProp)
+			w.wrind3ln(dictProp + " = " + selfProp)
 		} else if propType.IsEnumOf(w.model) {
-			w.writeln(dictProp + " = " + selfProp + ".value")
+			w.wrind3ln(dictProp + " = " + selfProp + ".value")
 		} else if propType.IsList() {
-			w.writeln(dictProp + " = [e.to_dict() for e in " + selfProp + "]")
+			w.wrind3ln(dictProp + " = [e.to_dict() for e in " + selfProp + "]")
 		} else {
-			w.writeln(dictProp + " = " + selfProp + ".to_dict()")
+			w.wrind3ln(dictProp + " = " + selfProp + ".to_dict()")
 		}
 	}
-	w.writeln(pyInd2 + "return d")
+	w.wrind2ln("return d")
 	w.writeln()
 
 	// to_json
 	if w.model.IsRoot(class) {
-		w.writeln(pyInd1 + "def to_json(self) -> str:")
-		w.writeln(pyInd2 + "return json.dumps(self.to_dict(), indent=2)")
+		w.wrind1ln("def to_json(self) -> str:")
+		w.wrind2ln("return json.dumps(self.to_dict(), indent=2)")
 		w.writeln()
 	}
 
 	// to_ref
 	if w.model.IsRoot(class) || class.Name == "Unit" {
-		w.writeln(pyInd1 + "def to_ref(self) -> 'Ref':")
-		w.writeln(pyInd2 + "ref = Ref(id=self.id, name=self.name)")
+		w.wrind1ln("def to_ref(self) -> 'Ref':")
+		w.wrind2ln("ref = Ref(id=self.id, name=self.name)")
 		if w.model.IsRoot(class) {
-			w.writeln(pyInd2 + "ref.category = self.category")
+			w.wrind2ln("ref.category = self.category")
 		}
-		w.writeln(pyInd2 + "ref.model_type = '" + class.Name + "'")
-		w.writeln(pyInd2 + "return ref")
+		w.wrind2ln("ref.model_type = '" + class.Name + "'")
+		w.wrind2ln("return ref")
 		w.writeln()
 	}
 
-	// from_dict
-	w.writeln(pyInd1 + "@staticmethod")
-	w.writeln(pyInd1 + "def from_dict(d: Dict[str, Any]) -> '" + class.Name + "':")
-	instance := strings.ToLower(toSnakeCase(class.Name))
-	w.writeln(pyInd2 + instance + " = " + class.Name + "()")
-	if class.Name == "Ref" {
-		w.writeln(pyInd2 + instance + ".model_type = d.get('@type', '')")
+	w.writeFromDict(class)
+
+	// from_json
+	if w.model.IsRoot(class) {
+		w.writeln("    @staticmethod")
+		w.writeln("    def from_json(data: Union[str, bytes]) -> '" +
+			class.Name + "':")
+		w.writeln("        return " + class.Name + ".from_dict(json.loads(data))")
+		w.writeln()
 	}
+
+	w.writeln()
+}
+
+func (w *pyWriter) writeFromDict(class *YamlClass) {
+
+	w.wrind1ln("@staticmethod")
+	w.wrind1ln("def from_dict(d: Dict[str, Any]) -> '" + class.Name + "':")
+	instance := strings.ToLower(toSnakeCase(class.Name))
+	w.wrind2ln(instance + " = " + class.Name + "()")
+	if class.Name == "Ref" {
+		w.wrind2ln(instance + ".model_type = d.get('@type', '')")
+	}
+
 	for _, prop := range w.model.AllPropsOf(class) {
 		w.writeln("        if v := d.get('" + prop.Name + "'):")
 		propType := prop.PropType()
@@ -215,29 +225,27 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	}
 	w.writeln("        return " + instance)
 	w.writeln()
-
-	// from_json
-	if w.model.IsRoot(class) {
-		w.writeln("    @staticmethod")
-		w.writeln("    def from_json(data: Union[str, bytes]) -> '" +
-			class.Name + "':")
-		w.writeln("        return " + class.Name + ".from_dict(json.loads(data))")
-		w.writeln()
-	}
-
-	w.writeln()
 }
 
-func (w *pyWriter) writeln(args ...string) {
-	w.write(args...)
+func (w *pyWriter) wrind1ln(s string) {
+	w.writeln("    ", s)
+}
+
+func (w *pyWriter) wrind2ln(s string) {
+	w.writeln("        ", s)
+}
+
+func (w *pyWriter) wrind3ln(s string) {
+	w.writeln("            ", s)
+}
+
+func (w *pyWriter) wrind4ln(s string) {
+	w.writeln("                ", s)
+}
+
+func (w *pyWriter) writeln(xs ...string) {
+	for _, x := range xs {
+		w.buff.WriteString(x)
+	}
 	w.buff.WriteRune('\n')
-}
-
-func (w *pyWriter) write(args ...string) {
-	for i, arg := range args {
-		if i > 0 {
-			w.buff.WriteRune(' ')
-		}
-		w.buff.WriteString(arg)
-	}
 }
