@@ -108,7 +108,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 			": Optional[" + propType.ToPython() + "] = None")
 	}
 	if class.Name == "Ref" {
-		w.writeln("    model_type: str = ''")
+		w.wrind1ln("model_type: str = ''")
 	}
 	w.writeln()
 
@@ -141,7 +141,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 		selfProp := "self." + prop.PyName()
 		dictProp := "d['" + prop.Name + "']"
 		propType := prop.PropType()
-		w.writeln("        if " + selfProp + ":")
+		w.wrind2ln("if " + selfProp + ":")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
@@ -180,10 +180,10 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 
 	// from_json
 	if w.model.IsRoot(class) {
-		w.writeln("    @staticmethod")
-		w.writeln("    def from_json(data: Union[str, bytes]) -> '" +
+		w.wrind1ln("@staticmethod")
+		w.wrind1ln("def from_json(data: Union[str, bytes]) -> '" +
 			class.Name + "':")
-		w.writeln("        return " + class.Name + ".from_dict(json.loads(data))")
+		w.wrind2ln("return " + class.Name + ".from_dict(json.loads(data))")
 		w.writeln()
 	}
 
@@ -191,6 +191,14 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 }
 
 func (w *pyWriter) writeFromDict(class *YamlClass) {
+
+	classOf := func(propType YamlPropType) string {
+		if propType.IsRef() {
+			return "Ref"
+		} else {
+			return string(propType)
+		}
+	}
 
 	w.wrind1ln("@staticmethod")
 	w.wrind1ln("def from_dict(d: Dict[str, Any]) -> '" + class.Name + "':")
@@ -201,29 +209,36 @@ func (w *pyWriter) writeFromDict(class *YamlClass) {
 	}
 
 	for _, prop := range w.model.AllPropsOf(class) {
-		w.writeln("        if v := d.get('" + prop.Name + "'):")
+		w.wrind2ln("if v := d.get('" + prop.Name + "'):")
 		propType := prop.PropType()
-		modelProp := "            " + instance + "." + prop.PyName()
+		modelProp := instance + "." + prop.PyName()
+
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
-			w.writeln(modelProp + " = v")
+
+			// direct assignments for primitives, list of primitives, or GeoJson
+			// objects
+			w.wrind3ln(modelProp + " = v")
+
 		} else if propType.IsEnumOf(w.model) {
-			w.writeln(modelProp + " = " + prop.Type + ".get(v)")
+
+			// enum getters
+			w.wrind3ln(modelProp + " = " + prop.Type + ".get(v)")
+
 		} else if propType.IsList() {
+
+			// list conversion for non-primitive types
 			u := propType.UnpackList()
-			var typeStr string
-			if u.IsRef() {
-				typeStr = "Ref"
-			} else {
-				typeStr = string(u)
-			}
-			w.writeln(modelProp + " = [" + typeStr + ".from_dict(e) for e in v]")
+			w.wrind3ln(modelProp + " = [" + classOf(u) + ".from_dict(e) for e in v]")
+
 		} else {
-			w.writeln(modelProp + " = " + string(propType) + ".from_dict(v)")
+
+			// from-dict calls for entity types
+			w.wrind3ln(modelProp + " = " + classOf(propType) + ".from_dict(v)")
 		}
 	}
-	w.writeln("        return " + instance)
+	w.wrind2ln("return " + instance)
 	w.writeln()
 }
 

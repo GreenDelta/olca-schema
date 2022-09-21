@@ -458,7 +458,7 @@ class AllocationFactor:
         if v := d.get('formula'):
             allocation_factor.formula = v
         if v := d.get('product'):
-            allocation_factor.product = Ref[Flow].from_dict(v)
+            allocation_factor.product = Ref.from_dict(v)
         if v := d.get('value'):
             allocation_factor.value = v
         return allocation_factor
@@ -540,7 +540,7 @@ class Currency:
         if v := d.get('name'):
             currency.name = v
         if v := d.get('refCurrency'):
-            currency.ref_currency = Ref[Currency].from_dict(v)
+            currency.ref_currency = Ref.from_dict(v)
         if v := d.get('tags'):
             currency.tags = v
         if v := d.get('version'):
@@ -628,7 +628,7 @@ class DQSystem:
         if v := d.get('name'):
             d_q_system.name = v
         if v := d.get('source'):
-            d_q_system.source = Ref[Source].from_dict(v)
+            d_q_system.source = Ref.from_dict(v)
         if v := d.get('tags'):
             d_q_system.tags = v
         if v := d.get('version'):
@@ -667,7 +667,7 @@ class EpdModule:
         if v := d.get('name'):
             epd_module.name = v
         if v := d.get('result'):
-            epd_module.result = Ref[Result].from_dict(v)
+            epd_module.result = Ref.from_dict(v)
         return epd_module
 
 
@@ -699,11 +699,11 @@ class EpdProduct:
         if v := d.get('amount'):
             epd_product.amount = v
         if v := d.get('flow'):
-            epd_product.flow = Ref[Flow].from_dict(v)
+            epd_product.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
-            epd_product.flow_property = Ref[FlowProperty].from_dict(v)
+            epd_product.flow_property = Ref.from_dict(v)
         if v := d.get('unit'):
-            epd_product.unit = Ref[Unit].from_dict(v)
+            epd_product.unit = Ref.from_dict(v)
         return epd_product
 
 
@@ -789,23 +789,23 @@ class Epd:
         if v := d.get('lastChange'):
             epd.last_change = v
         if v := d.get('manufacturer'):
-            epd.manufacturer = Ref[Actor].from_dict(v)
+            epd.manufacturer = Ref.from_dict(v)
         if v := d.get('modules'):
             epd.modules = [EpdModule.from_dict(e) for e in v]
         if v := d.get('name'):
             epd.name = v
         if v := d.get('pcr'):
-            epd.pcr = Ref[Source].from_dict(v)
+            epd.pcr = Ref.from_dict(v)
         if v := d.get('product'):
             epd.product = EpdProduct.from_dict(v)
         if v := d.get('programOperator'):
-            epd.program_operator = Ref[Actor].from_dict(v)
+            epd.program_operator = Ref.from_dict(v)
         if v := d.get('tags'):
             epd.tags = v
         if v := d.get('urn'):
             epd.urn = v
         if v := d.get('verifier'):
-            epd.verifier = Ref[Actor].from_dict(v)
+            epd.verifier = Ref.from_dict(v)
         if v := d.get('version'):
             epd.version = v
         return epd
@@ -841,13 +841,13 @@ class FlowMapRef:
         if v := d.get('@type'):
             flow_map_ref.schema_type = v
         if v := d.get('flow'):
-            flow_map_ref.flow = Ref[Flow].from_dict(v)
+            flow_map_ref.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
-            flow_map_ref.flow_property = Ref[FlowProperty].from_dict(v)
+            flow_map_ref.flow_property = Ref.from_dict(v)
         if v := d.get('provider'):
-            flow_map_ref.provider = Ref[Process].from_dict(v)
+            flow_map_ref.provider = Ref.from_dict(v)
         if v := d.get('unit'):
-            flow_map_ref.unit = Ref[Unit].from_dict(v)
+            flow_map_ref.unit = Ref.from_dict(v)
         return flow_map_ref
 
 
@@ -1043,7 +1043,7 @@ class FlowProperty:
         if v := d.get('tags'):
             flow_property.tags = v
         if v := d.get('unitGroup'):
-            flow_property.unit_group = Ref[UnitGroup].from_dict(v)
+            flow_property.unit_group = Ref.from_dict(v)
         if v := d.get('version'):
             flow_property.version = v
         return flow_property
@@ -1078,7 +1078,7 @@ class FlowPropertyFactor:
         if v := d.get('conversionFactor'):
             flow_property_factor.conversion_factor = v
         if v := d.get('flowProperty'):
-            flow_property_factor.flow_property = Ref[FlowProperty].from_dict(v)
+            flow_property_factor.flow_property = Ref.from_dict(v)
         if v := d.get('isRefFlowProperty'):
             flow_property_factor.is_ref_flow_property = v
         return flow_property_factor
@@ -1176,7 +1176,7 @@ class Flow:
         if v := d.get('lastChange'):
             flow.last_change = v
         if v := d.get('location'):
-            flow.location = Ref[Location].from_dict(v)
+            flow.location = Ref.from_dict(v)
         if v := d.get('name'):
             flow.name = v
         if v := d.get('synonyms'):
@@ -1234,17 +1234,17 @@ class FlowResult:
         if v := d.get('description'):
             flow_result.description = v
         if v := d.get('flow'):
-            flow_result.flow = Ref[Flow].from_dict(v)
+            flow_result.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
-            flow_result.flow_property = Ref[FlowProperty].from_dict(v)
+            flow_result.flow_property = Ref.from_dict(v)
         if v := d.get('isInput'):
             flow_result.is_input = v
         if v := d.get('isRefFlow'):
             flow_result.is_ref_flow = v
         if v := d.get('location'):
-            flow_result.location = Ref[Location].from_dict(v)
+            flow_result.location = Ref.from_dict(v)
         if v := d.get('unit'):
-            flow_result.unit = Ref[Unit].from_dict(v)
+            flow_result.unit = Ref.from_dict(v)
         return flow_result
 
 
@@ -1275,7 +1275,7 @@ class ImpactResult:
         if v := d.get('description'):
             impact_result.description = v
         if v := d.get('indicator'):
-            impact_result.indicator = Ref[ImpactCategory].from_dict(v)
+            impact_result.indicator = Ref.from_dict(v)
         return impact_result
 
 
@@ -1395,7 +1395,7 @@ class NwFactor:
         if v := d.get('@type'):
             nw_factor.schema_type = v
         if v := d.get('impactCategory'):
-            nw_factor.impact_category = Ref[ImpactCategory].from_dict(v)
+            nw_factor.impact_category = Ref.from_dict(v)
         if v := d.get('normalisationFactor'):
             nw_factor.normalisation_factor = v
         if v := d.get('weightingFactor'):
@@ -1525,7 +1525,7 @@ class ImpactMethod:
         if v := d.get('nwSets'):
             impact_method.nw_sets = [NwSet.from_dict(e) for e in v]
         if v := d.get('source'):
-            impact_method.source = Ref[Source].from_dict(v)
+            impact_method.source = Ref.from_dict(v)
         if v := d.get('tags'):
             impact_method.tags = v
         if v := d.get('version'):
@@ -1629,13 +1629,13 @@ class ProcessDocumentation:
         if v := d.get('dataCollectionDescription'):
             process_documentation.data_collection_description = v
         if v := d.get('dataDocumentor'):
-            process_documentation.data_documentor = Ref[Actor].from_dict(v)
+            process_documentation.data_documentor = Ref.from_dict(v)
         if v := d.get('dataGenerator'):
-            process_documentation.data_generator = Ref[Actor].from_dict(v)
+            process_documentation.data_generator = Ref.from_dict(v)
         if v := d.get('dataSelectionDescription'):
             process_documentation.data_selection_description = v
         if v := d.get('dataSetOwner'):
-            process_documentation.data_set_owner = Ref[Actor].from_dict(v)
+            process_documentation.data_set_owner = Ref.from_dict(v)
         if v := d.get('dataTreatmentDescription'):
             process_documentation.data_treatment_description = v
         if v := d.get('geographyDescription'):
@@ -1651,13 +1651,13 @@ class ProcessDocumentation:
         if v := d.get('projectDescription'):
             process_documentation.project_description = v
         if v := d.get('publication'):
-            process_documentation.publication = Ref[Source].from_dict(v)
+            process_documentation.publication = Ref.from_dict(v)
         if v := d.get('restrictionsDescription'):
             process_documentation.restrictions_description = v
         if v := d.get('reviewDetails'):
             process_documentation.review_details = v
         if v := d.get('reviewer'):
-            process_documentation.reviewer = Ref[Actor].from_dict(v)
+            process_documentation.reviewer = Ref.from_dict(v)
         if v := d.get('samplingDescription'):
             process_documentation.sampling_description = v
         if v := d.get('sources'):
@@ -1701,9 +1701,9 @@ class ProcessLink:
         if v := d.get('exchange'):
             process_link.exchange = ExchangeRef.from_dict(v)
         if v := d.get('flow'):
-            process_link.flow = Ref[Flow].from_dict(v)
+            process_link.flow = Ref.from_dict(v)
         if v := d.get('process'):
-            process_link.process = Ref[Process].from_dict(v)
+            process_link.process = Ref.from_dict(v)
         if v := d.get('provider'):
             process_link.provider = Ref.from_dict(v)
         return process_link
@@ -1782,7 +1782,7 @@ class Result:
         if v := d.get('flowResults'):
             result.flow_results = [FlowResult.from_dict(e) for e in v]
         if v := d.get('impactMethod'):
-            result.impact_method = Ref[ImpactMethod].from_dict(v)
+            result.impact_method = Ref.from_dict(v)
         if v := d.get('impactResults'):
             result.impact_results = [ImpactResult.from_dict(e) for e in v]
         if v := d.get('lastChange'):
@@ -1790,7 +1790,7 @@ class Result:
         if v := d.get('name'):
             result.name = v
         if v := d.get('productSystem'):
-            result.product_system = Ref[ProductSystem].from_dict(v)
+            result.product_system = Ref.from_dict(v)
         if v := d.get('tags'):
             result.tags = v
         if v := d.get('version'):
@@ -1847,9 +1847,9 @@ class SocialAspect:
         if v := d.get('riskLevel'):
             social_aspect.risk_level = RiskLevel.get(v)
         if v := d.get('socialIndicator'):
-            social_aspect.social_indicator = Ref[SocialIndicator].from_dict(v)
+            social_aspect.social_indicator = Ref.from_dict(v)
         if v := d.get('source'):
-            social_aspect.source = Ref[Source].from_dict(v)
+            social_aspect.source = Ref.from_dict(v)
         return social_aspect
 
 
@@ -1923,9 +1923,9 @@ class SocialIndicator:
         if v := d.get('@id'):
             social_indicator.id = v
         if v := d.get('activityQuantity'):
-            social_indicator.activity_quantity = Ref[FlowProperty].from_dict(v)
+            social_indicator.activity_quantity = Ref.from_dict(v)
         if v := d.get('activityUnit'):
-            social_indicator.activity_unit = Ref[Unit].from_dict(v)
+            social_indicator.activity_unit = Ref.from_dict(v)
         if v := d.get('activityVariable'):
             social_indicator.activity_variable = v
         if v := d.get('category'):
@@ -2178,17 +2178,17 @@ class Exchange:
         if v := d.get('costValue'):
             exchange.cost_value = v
         if v := d.get('currency'):
-            exchange.currency = Ref[Currency].from_dict(v)
+            exchange.currency = Ref.from_dict(v)
         if v := d.get('defaultProvider'):
-            exchange.default_provider = Ref[Process].from_dict(v)
+            exchange.default_provider = Ref.from_dict(v)
         if v := d.get('description'):
             exchange.description = v
         if v := d.get('dqEntry'):
             exchange.dq_entry = v
         if v := d.get('flow'):
-            exchange.flow = Ref[Flow].from_dict(v)
+            exchange.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
-            exchange.flow_property = Ref[FlowProperty].from_dict(v)
+            exchange.flow_property = Ref.from_dict(v)
         if v := d.get('internalId'):
             exchange.internal_id = v
         if v := d.get('isAvoidedProduct'):
@@ -2198,11 +2198,11 @@ class Exchange:
         if v := d.get('isQuantitativeReference'):
             exchange.is_quantitative_reference = v
         if v := d.get('location'):
-            exchange.location = Ref[Location].from_dict(v)
+            exchange.location = Ref.from_dict(v)
         if v := d.get('uncertainty'):
             exchange.uncertainty = Uncertainty.from_dict(v)
         if v := d.get('unit'):
-            exchange.unit = Ref[Unit].from_dict(v)
+            exchange.unit = Ref.from_dict(v)
         return exchange
 
 
@@ -2241,17 +2241,17 @@ class ImpactFactor:
         if v := d.get('@type'):
             impact_factor.schema_type = v
         if v := d.get('flow'):
-            impact_factor.flow = Ref[Flow].from_dict(v)
+            impact_factor.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
-            impact_factor.flow_property = Ref[FlowProperty].from_dict(v)
+            impact_factor.flow_property = Ref.from_dict(v)
         if v := d.get('formula'):
             impact_factor.formula = v
         if v := d.get('location'):
-            impact_factor.location = Ref[Location].from_dict(v)
+            impact_factor.location = Ref.from_dict(v)
         if v := d.get('uncertainty'):
             impact_factor.uncertainty = Uncertainty.from_dict(v)
         if v := d.get('unit'):
-            impact_factor.unit = Ref[Unit].from_dict(v)
+            impact_factor.unit = Ref.from_dict(v)
         if v := d.get('value'):
             impact_factor.value = v
         return impact_factor
@@ -2446,7 +2446,7 @@ class ImpactCategory:
         if v := d.get('refUnit'):
             impact_category.ref_unit = v
         if v := d.get('source'):
-            impact_category.source = Ref[Source].from_dict(v)
+            impact_category.source = Ref.from_dict(v)
         if v := d.get('tags'):
             impact_category.tags = v
         if v := d.get('version'):
@@ -2647,9 +2647,9 @@ class Process:
         if v := d.get('dqEntry'):
             process.dq_entry = v
         if v := d.get('dqSystem'):
-            process.dq_system = Ref[DQSystem].from_dict(v)
+            process.dq_system = Ref.from_dict(v)
         if v := d.get('exchangeDqSystem'):
-            process.exchange_dq_system = Ref[DQSystem].from_dict(v)
+            process.exchange_dq_system = Ref.from_dict(v)
         if v := d.get('exchanges'):
             process.exchanges = [Exchange.from_dict(e) for e in v]
         if v := d.get('isInfrastructureProcess'):
@@ -2659,7 +2659,7 @@ class Process:
         if v := d.get('lastInternalId'):
             process.last_internal_id = v
         if v := d.get('location'):
-            process.location = Ref[Location].from_dict(v)
+            process.location = Ref.from_dict(v)
         if v := d.get('name'):
             process.name = v
         if v := d.get('parameters'):
@@ -2671,7 +2671,7 @@ class Process:
         if v := d.get('socialAspects'):
             process.social_aspects = [SocialAspect.from_dict(e) for e in v]
         if v := d.get('socialDqSystem'):
-            process.social_dq_system = Ref[DQSystem].from_dict(v)
+            process.social_dq_system = Ref.from_dict(v)
         if v := d.get('tags'):
             process.tags = v
         if v := d.get('version'):
@@ -2778,15 +2778,15 @@ class ProductSystem:
         if v := d.get('refExchange'):
             product_system.ref_exchange = ExchangeRef.from_dict(v)
         if v := d.get('refProcess'):
-            product_system.ref_process = Ref[Process].from_dict(v)
+            product_system.ref_process = Ref.from_dict(v)
         if v := d.get('tags'):
             product_system.tags = v
         if v := d.get('targetAmount'):
             product_system.target_amount = v
         if v := d.get('targetFlowProperty'):
-            product_system.target_flow_property = Ref[FlowProperty].from_dict(v)
+            product_system.target_flow_property = Ref.from_dict(v)
         if v := d.get('targetUnit'):
-            product_system.target_unit = Ref[Unit].from_dict(v)
+            product_system.target_unit = Ref.from_dict(v)
         if v := d.get('version'):
             product_system.version = v
         return product_system
@@ -2846,9 +2846,9 @@ class ProjectVariant:
         if v := d.get('parameterRedefs'):
             project_variant.parameter_redefs = [ParameterRedef.from_dict(e) for e in v]
         if v := d.get('productSystem'):
-            project_variant.product_system = Ref[ProductSystem].from_dict(v)
+            project_variant.product_system = Ref.from_dict(v)
         if v := d.get('unit'):
-            project_variant.unit = Ref[Unit].from_dict(v)
+            project_variant.unit = Ref.from_dict(v)
         return project_variant
 
 
@@ -2926,7 +2926,7 @@ class Project:
         if v := d.get('description'):
             project.description = v
         if v := d.get('impactMethod'):
-            project.impact_method = Ref[ImpactMethod].from_dict(v)
+            project.impact_method = Ref.from_dict(v)
         if v := d.get('isWithCosts'):
             project.is_with_costs = v
         if v := d.get('isWithRegionalization'):
@@ -3064,7 +3064,7 @@ class UnitGroup:
         if v := d.get('category'):
             unit_group.category = v
         if v := d.get('defaultFlowProperty'):
-            unit_group.default_flow_property = Ref[FlowProperty].from_dict(v)
+            unit_group.default_flow_property = Ref.from_dict(v)
         if v := d.get('description'):
             unit_group.description = v
         if v := d.get('lastChange'):
