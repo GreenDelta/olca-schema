@@ -6,7 +6,7 @@ import uuid
 import olca_schema as lca
 import olca_schema.zipio as zio
 
-from typing import Type
+from typing import Tuple, Type
 
 
 class ZipTest(unittest.TestCase):
@@ -50,7 +50,7 @@ class ZipTest(unittest.TestCase):
         os.unlink(f)
 
 
-def _write(spec: tuple[Type[lca.RootEntity], str], writer: zio.ZipWriter):
+def _write(spec: Tuple[Type[lca.RootEntity], str], writer: zio.ZipWriter):
     (root_type, uid) = spec
     entity = root_type()
     entity.id = uid

@@ -21,11 +21,25 @@ class AllocationType(Enum):
     USE_DEFAULT_ALLOCATION = 'USE_DEFAULT_ALLOCATION'
     NO_ALLOCATION = 'NO_ALLOCATION'
 
+    def get(v: Union[str, 'AllocationType'],
+            default: Optional['AllocationType'] = None) -> 'AllocationType':
+        for i in AllocationType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
 
 class Direction(Enum):
 
     INPUT = 'INPUT'
     OUTPUT = 'OUTPUT'
+
+    def get(v: Union[str, 'Direction'],
+            default: Optional['Direction'] = None) -> 'Direction':
+        for i in Direction:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
 
 
 class FlowPropertyType(Enum):
@@ -33,12 +47,26 @@ class FlowPropertyType(Enum):
     ECONOMIC_QUANTITY = 'ECONOMIC_QUANTITY'
     PHYSICAL_QUANTITY = 'PHYSICAL_QUANTITY'
 
+    def get(v: Union[str, 'FlowPropertyType'],
+            default: Optional['FlowPropertyType'] = None) -> 'FlowPropertyType':
+        for i in FlowPropertyType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
 
 class FlowType(Enum):
 
     ELEMENTARY_FLOW = 'ELEMENTARY_FLOW'
     PRODUCT_FLOW = 'PRODUCT_FLOW'
     WASTE_FLOW = 'WASTE_FLOW'
+
+    def get(v: Union[str, 'FlowType'],
+            default: Optional['FlowType'] = None) -> 'FlowType':
+        for i in FlowType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
 
 
 class ModelType(Enum):
@@ -62,6 +90,13 @@ class ModelType(Enum):
     SOURCE = 'SOURCE'
     UNIT_GROUP = 'UNIT_GROUP'
 
+    def get(v: Union[str, 'ModelType'],
+            default: Optional['ModelType'] = None) -> 'ModelType':
+        for i in ModelType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
 
 class ParameterScope(Enum):
 
@@ -69,11 +104,25 @@ class ParameterScope(Enum):
     IMPACT_SCOPE = 'IMPACT_SCOPE'
     GLOBAL_SCOPE = 'GLOBAL_SCOPE'
 
+    def get(v: Union[str, 'ParameterScope'],
+            default: Optional['ParameterScope'] = None) -> 'ParameterScope':
+        for i in ParameterScope:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
 
 class ProcessType(Enum):
 
     LCI_RESULT = 'LCI_RESULT'
     UNIT_PROCESS = 'UNIT_PROCESS'
+
+    def get(v: Union[str, 'ProcessType'],
+            default: Optional['ProcessType'] = None) -> 'ProcessType':
+        for i in ProcessType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
 
 
 class RiskLevel(Enum):
@@ -91,6 +140,13 @@ class RiskLevel(Enum):
     NO_DATA = 'NO_DATA'
     NOT_APPLICABLE = 'NOT_APPLICABLE'
 
+    def get(v: Union[str, 'RiskLevel'],
+            default: Optional['RiskLevel'] = None) -> 'RiskLevel':
+        for i in RiskLevel:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
 
 class UncertaintyType(Enum):
 
@@ -98,6 +154,13 @@ class UncertaintyType(Enum):
     NORMAL_DISTRIBUTION = 'NORMAL_DISTRIBUTION'
     TRIANGLE_DISTRIBUTION = 'TRIANGLE_DISTRIBUTION'
     UNIFORM_DISTRIBUTION = 'UNIFORM_DISTRIBUTION'
+
+    def get(v: Union[str, 'UncertaintyType'],
+            default: Optional['UncertaintyType'] = None) -> 'UncertaintyType':
+        for i in UncertaintyType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
 
 
 @dataclass
@@ -235,13 +298,13 @@ class Ref:
         if v := d.get('description'):
             ref.description = v
         if v := d.get('flowType'):
-            ref.flow_type = v
+            ref.flow_type = FlowType[v]
         if v := d.get('location'):
             ref.location = v
         if v := d.get('name'):
             ref.name = v
         if v := d.get('processType'):
-            ref.process_type = v
+            ref.process_type = ProcessType[v]
         if v := d.get('refUnit'):
             ref.ref_unit = v
         return ref
@@ -389,7 +452,7 @@ class AllocationFactor:
         if v := d.get('@type'):
             allocation_factor.schema_type = v
         if v := d.get('allocationType'):
-            allocation_factor.allocation_type = v
+            allocation_factor.allocation_type = AllocationType[v]
         if v := d.get('exchange'):
             allocation_factor.exchange = ExchangeRef.from_dict(v)
         if v := d.get('formula'):
@@ -972,7 +1035,7 @@ class FlowProperty:
         if v := d.get('description'):
             flow_property.description = v
         if v := d.get('flowPropertyType'):
-            flow_property.flow_property_type = v
+            flow_property.flow_property_type = FlowPropertyType[v]
         if v := d.get('lastChange'):
             flow_property.last_change = v
         if v := d.get('name'):
@@ -1105,7 +1168,7 @@ class Flow:
         if v := d.get('flowProperties'):
             flow.flow_properties = [FlowPropertyFactor.from_dict(e) for e in v]
         if v := d.get('flowType'):
-            flow.flow_type = v
+            flow.flow_type = FlowType[v]
         if v := d.get('formula'):
             flow.formula = v
         if v := d.get('isInfrastructureFlow'):
@@ -1782,7 +1845,7 @@ class SocialAspect:
         if v := d.get('rawAmount'):
             social_aspect.raw_amount = v
         if v := d.get('riskLevel'):
-            social_aspect.risk_level = v
+            social_aspect.risk_level = RiskLevel[v]
         if v := d.get('socialIndicator'):
             social_aspect.social_indicator = Ref[SocialIndicator].from_dict(v)
         if v := d.get('source'):
@@ -2019,7 +2082,7 @@ class Uncertainty:
         if v := d.get('@type'):
             uncertainty.schema_type = v
         if v := d.get('distributionType'):
-            uncertainty.distribution_type = v
+            uncertainty.distribution_type = UncertaintyType[v]
         if v := d.get('geomMean'):
             uncertainty.geom_mean = v
         if v := d.get('geomSd'):
@@ -2276,7 +2339,7 @@ class Parameter:
         if v := d.get('name'):
             parameter.name = v
         if v := d.get('parameterScope'):
-            parameter.parameter_scope = v
+            parameter.parameter_scope = ParameterScope[v]
         if v := d.get('tags'):
             parameter.tags = v
         if v := d.get('uncertainty'):
@@ -2371,7 +2434,7 @@ class ImpactCategory:
         if v := d.get('description'):
             impact_category.description = v
         if v := d.get('direction'):
-            impact_category.direction = v
+            impact_category.direction = Direction[v]
         if v := d.get('impactFactors'):
             impact_category.impact_factors = [ImpactFactor.from_dict(e) for e in v]
         if v := d.get('lastChange'):
@@ -2578,7 +2641,7 @@ class Process:
         if v := d.get('category'):
             process.category = v
         if v := d.get('defaultAllocationMethod'):
-            process.default_allocation_method = v
+            process.default_allocation_method = AllocationType[v]
         if v := d.get('description'):
             process.description = v
         if v := d.get('dqEntry'):
@@ -2604,7 +2667,7 @@ class Process:
         if v := d.get('processDocumentation'):
             process.process_documentation = ProcessDocumentation.from_dict(v)
         if v := d.get('processType'):
-            process.process_type = v
+            process.process_type = ProcessType[v]
         if v := d.get('socialAspects'):
             process.social_aspects = [SocialAspect.from_dict(e) for e in v]
         if v := d.get('socialDqSystem'):
@@ -2771,7 +2834,7 @@ class ProjectVariant:
         if v := d.get('@type'):
             project_variant.schema_type = v
         if v := d.get('allocationMethod'):
-            project_variant.allocation_method = v
+            project_variant.allocation_method = AllocationType[v]
         if v := d.get('amount'):
             project_variant.amount = v
         if v := d.get('description'):

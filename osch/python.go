@@ -15,7 +15,8 @@ type pyWriter struct {
 // indentation levels
 const pyInd1 = "    "
 const pyInd2 = pyInd1 + pyInd1
-const pyInd3 = pyInd1 + pyInd1 + pyInd1
+const pyInd3 = pyInd2 + pyInd1
+const pyInd4 = pyInd3 + pyInd1
 
 func writePythonModule(args *args) {
 	model, err := ReadYamlModel(args)
@@ -74,11 +75,23 @@ func (w *pyWriter) writeModel() {
 }
 
 func (w *pyWriter) writeEnum(enum *YamlEnum) {
-	w.writeln("class", enum.Name+"(Enum):")
+	n := enum.Name
+	w.writeln("class", n+"(Enum):")
 	w.writeln()
+
+	// write the items
 	for _, item := range enum.Items {
 		w.writeln(pyInd1 + item.Name + " = '" + item.Name + "'")
 	}
+	w.writeln()
+
+	// writer the get-method
+	w.writeln(pyInd1 + "def get(v: Union[str, '" + n + "'],\n" +
+		pyInd3 + "default: Optional['" + n + "'] = None) -> '" + n + "':")
+	w.writeln(pyInd2 + "for i in " + n + ":")
+	w.writeln(pyInd3 + "if i == v or i.value == v or i.name == v:")
+	w.writeln(pyInd4 + "return i")
+	w.writeln(pyInd2 + "return default")
 	w.writeln()
 	w.writeln()
 }
@@ -181,10 +194,11 @@ func (model *YamlModel) ToPyClass(class *YamlClass) string {
 		propType := prop.PropType()
 		modelProp := "            " + instance + "." + prop.PyName()
 		if propType.IsPrimitive() ||
-			propType.IsEnumOf(model) ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
 			b.Writeln(modelProp + " = v")
+		} else if propType.IsEnumOf(model) {
+			b.Writeln(modelProp + " = " + prop.Type + "[v]")
 		} else if propType.IsList() {
 			u := propType.UnpackList()
 			b.Writeln(modelProp + " = [" + string(u) + ".from_dict(e) for e in v]")
