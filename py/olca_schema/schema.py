@@ -298,13 +298,13 @@ class Ref:
         if v := d.get('description'):
             ref.description = v
         if v := d.get('flowType'):
-            ref.flow_type = FlowType[v]
+            ref.flow_type = FlowType.get(v)
         if v := d.get('location'):
             ref.location = v
         if v := d.get('name'):
             ref.name = v
         if v := d.get('processType'):
-            ref.process_type = ProcessType[v]
+            ref.process_type = ProcessType.get(v)
         if v := d.get('refUnit'):
             ref.ref_unit = v
         return ref
@@ -452,7 +452,7 @@ class AllocationFactor:
         if v := d.get('@type'):
             allocation_factor.schema_type = v
         if v := d.get('allocationType'):
-            allocation_factor.allocation_type = AllocationType[v]
+            allocation_factor.allocation_type = AllocationType.get(v)
         if v := d.get('exchange'):
             allocation_factor.exchange = ExchangeRef.from_dict(v)
         if v := d.get('formula'):
@@ -1035,7 +1035,7 @@ class FlowProperty:
         if v := d.get('description'):
             flow_property.description = v
         if v := d.get('flowPropertyType'):
-            flow_property.flow_property_type = FlowPropertyType[v]
+            flow_property.flow_property_type = FlowPropertyType.get(v)
         if v := d.get('lastChange'):
             flow_property.last_change = v
         if v := d.get('name'):
@@ -1168,7 +1168,7 @@ class Flow:
         if v := d.get('flowProperties'):
             flow.flow_properties = [FlowPropertyFactor.from_dict(e) for e in v]
         if v := d.get('flowType'):
-            flow.flow_type = FlowType[v]
+            flow.flow_type = FlowType.get(v)
         if v := d.get('formula'):
             flow.formula = v
         if v := d.get('isInfrastructureFlow'):
@@ -1517,7 +1517,7 @@ class ImpactMethod:
         if v := d.get('description'):
             impact_method.description = v
         if v := d.get('impactCategories'):
-            impact_method.impact_categories = [Ref[ImpactCategory].from_dict(e) for e in v]
+            impact_method.impact_categories = [Ref.from_dict(e) for e in v]
         if v := d.get('lastChange'):
             impact_method.last_change = v
         if v := d.get('name'):
@@ -1661,7 +1661,7 @@ class ProcessDocumentation:
         if v := d.get('samplingDescription'):
             process_documentation.sampling_description = v
         if v := d.get('sources'):
-            process_documentation.sources = [Ref[Source].from_dict(e) for e in v]
+            process_documentation.sources = [Ref.from_dict(e) for e in v]
         if v := d.get('technologyDescription'):
             process_documentation.technology_description = v
         if v := d.get('timeDescription'):
@@ -1845,7 +1845,7 @@ class SocialAspect:
         if v := d.get('rawAmount'):
             social_aspect.raw_amount = v
         if v := d.get('riskLevel'):
-            social_aspect.risk_level = RiskLevel[v]
+            social_aspect.risk_level = RiskLevel.get(v)
         if v := d.get('socialIndicator'):
             social_aspect.social_indicator = Ref[SocialIndicator].from_dict(v)
         if v := d.get('source'):
@@ -2082,7 +2082,7 @@ class Uncertainty:
         if v := d.get('@type'):
             uncertainty.schema_type = v
         if v := d.get('distributionType'):
-            uncertainty.distribution_type = UncertaintyType[v]
+            uncertainty.distribution_type = UncertaintyType.get(v)
         if v := d.get('geomMean'):
             uncertainty.geom_mean = v
         if v := d.get('geomSd'):
@@ -2339,7 +2339,7 @@ class Parameter:
         if v := d.get('name'):
             parameter.name = v
         if v := d.get('parameterScope'):
-            parameter.parameter_scope = ParameterScope[v]
+            parameter.parameter_scope = ParameterScope.get(v)
         if v := d.get('tags'):
             parameter.tags = v
         if v := d.get('uncertainty'):
@@ -2434,7 +2434,7 @@ class ImpactCategory:
         if v := d.get('description'):
             impact_category.description = v
         if v := d.get('direction'):
-            impact_category.direction = Direction[v]
+            impact_category.direction = Direction.get(v)
         if v := d.get('impactFactors'):
             impact_category.impact_factors = [ImpactFactor.from_dict(e) for e in v]
         if v := d.get('lastChange'):
@@ -2641,7 +2641,7 @@ class Process:
         if v := d.get('category'):
             process.category = v
         if v := d.get('defaultAllocationMethod'):
-            process.default_allocation_method = AllocationType[v]
+            process.default_allocation_method = AllocationType.get(v)
         if v := d.get('description'):
             process.description = v
         if v := d.get('dqEntry'):
@@ -2667,7 +2667,7 @@ class Process:
         if v := d.get('processDocumentation'):
             process.process_documentation = ProcessDocumentation.from_dict(v)
         if v := d.get('processType'):
-            process.process_type = ProcessType[v]
+            process.process_type = ProcessType.get(v)
         if v := d.get('socialAspects'):
             process.social_aspects = [SocialAspect.from_dict(e) for e in v]
         if v := d.get('socialDqSystem'):
@@ -2834,7 +2834,7 @@ class ProjectVariant:
         if v := d.get('@type'):
             project_variant.schema_type = v
         if v := d.get('allocationMethod'):
-            project_variant.allocation_method = AllocationType[v]
+            project_variant.allocation_method = AllocationType.get(v)
         if v := d.get('amount'):
             project_variant.amount = v
         if v := d.get('description'):

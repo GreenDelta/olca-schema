@@ -188,3 +188,107 @@ func (model *YamlModel) IsRoot(class *YamlClass) bool {
 		c = parent
 	}
 }
+
+// TopoSortClasses returns the classes of the given Yaml model in topological
+// order: A class X that has a dependency to a class Y, comes after Y in the
+// returned slice.
+func (model *YamlModel) TopoSortClasses() []*YamlClass {
+
+	// check if there is a link between a class A and another class B where B is
+	// dependent from A. B is dependent from A if it has a property of type A.
+	isLinked := func(class, dependent *YamlClass) bool {
+		if class == dependent {
+			return false
+		}
+		for _, prop := range dependent.Props {
+			propType := YamlPropType(prop.Type)
+			if propType.IsList() {
+				propType = propType.UnpackList()
+			}
+			if propType.ToPython() == class.Name {
+				return true
+			}
+		}
+		return false
+	}
+
+	// collect the dependencies
+	dependencyCount := make(map[string]int)
+	dependents := make(map[string][]string)
+	model.EachClass(func(class *YamlClass) {
+		if _, ok := dependencyCount[class.Name]; !ok {
+			dependencyCount[class.Name] = 0
+		}
+		model.EachClass(func(dependent *YamlClass) {
+			if isLinked(class, dependent) {
+				c := class.Name
+				d := dependent.Name
+				dependencyCount[d] += 1
+				dependents[c] = append(dependents[c], d)
+			}
+		})
+	})
+
+	// make sure that every RootEntity is dependent from 'Ref' as we generate a
+	// to_ref method where the Ref type should be known
+	refDeps, ok := dependents["Ref"]
+	if !ok {
+		refDeps = make([]string, 0)
+	}
+	model.EachClass(func(class *YamlClass) {
+		if !model.IsRoot(class) && class.Name != "Unit" {
+			return
+		}
+		contains := false
+		for _, dep := range refDeps {
+			if class.Name == dep {
+				contains = true
+				break
+			}
+		}
+		if !contains {
+			refDeps = append(refDeps, class.Name)
+			dependencyCount[class.Name] += 1
+		}
+	})
+	dependents["Ref"] = refDeps
+
+	// sort dependencies in topological order
+	order := make([]string, 0)
+	for len(dependencyCount) > 0 {
+
+		// find next node with no dependencies; if there are multiple options, try
+		// to do this in alphabetical order so that we get a stable sort order
+		node := ""
+		for n, count := range dependencyCount {
+			if count > 0 {
+				continue
+			}
+			if node == "" ||
+				strings.Compare(strings.ToLower(n), strings.ToLower(node)) < 0 {
+				node = n
+			}
+		}
+
+		if node == "" {
+			log.Println("ERROR: could not sort classes in topological order")
+			break
+		}
+		delete(dependencyCount, node)
+		order = append(order, node)
+
+		// remove the handled dependency from its dependents
+		for _, dependent := range dependents[node] {
+			dependencyCount[dependent] -= 1
+		}
+	}
+
+	sorted := make([]*YamlClass, 0, len(order))
+	for _, name := range order {
+		next := model.TypeMap[name]
+		if next != nil && next.IsClass() {
+			sorted = append(sorted, next.Class)
+		}
+	}
+	return sorted
+}
