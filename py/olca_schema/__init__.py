@@ -1,225 +1,211 @@
-import uuid
-
 from .schema import *
-
 from typing import Optional, Union
 
 
-def unit_of(name='', conversion_factor=1.0) -> Unit:
-    """
-    Creates a new unit.
+def new_unit(name: str, conversion_factor=1.0) -> Unit:
+    """Creates a new unit.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the unit, e.g. 'kg'
-    conversion_factor: float, optional
-        An optional conversion factor to the reference unit
-        of the unit group where this unit lives. Defaults
-        to 1.0
+    conversion_factor:
+        An optional conversion factor to the reference unit of the unit group
+        where this unit is defined. Defaults to 1.0.
+
     Example
     -------
     ```python
-    kg = olca.unit_of('kg')
+    unit = new_unit('kg')
     ```
     """
-    unit = Unit(name=name, id=str(uuid.uuid4()))
-    unit.conversion_factor = conversion_factor
-    unit.reference_unit = conversion_factor == 1.0
-    return unit
+    return Unit(
+        id=str(uuid.uuid4()),
+        name=name,
+        conversion_factor=1.0,
+        is_ref_unit=conversion_factor == 1.0)
 
 
-def unit_group_of(name: str, unit: Union[str, Unit]) -> UnitGroup:
-    """
-    Creates a new unit group.
+def new_unit_group(name: str, ref_unit: Union[str, Unit]) -> UnitGroup:
+    """Creates a new unit group.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new unit group.
-    unit: Union[str, Unit]
-        The reference unit or the name of the reference unit of
-        the new unit group.
+    ref_unit:
+        The reference unit of the new unit group.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
+    group = new_unit_group('Mass units', 'kg')
     ```
     """
-    u: Unit = unit if isinstance(unit, Unit) else unit_of(unit)
-    u.reference_unit = True
-    group = UnitGroup(name=name)
-    group.units = [u]
+    unit: Unit = new_unit(ref_unit) \
+        if isinstance(ref_unit, str) else ref_unit
+    group = UnitGroup(name=name, units=[unit])
     return group
 
 
-def flow_property_of(name: str,
-                     unit_group: Union[Ref, UnitGroup]) -> FlowProperty:
-    """
-    Creates a new flow property (quantity).
+def new_flow_property(name: str,
+                      unit_group: Union[Ref, UnitGroup]) -> FlowProperty:
+    """Creates a new flow property (quantity).
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new flow property
-    unit_group: Union[Ref, UnitGroup]
+    unit_group:
         The unit group or reference to the unit group if this flow property.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    fp = olca.flow_property_of('Mass', units)
+    group = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', group)
     ```
     """
-    fp = FlowProperty(name=name)
-    fp.unit_group = _as_ref(unit_group)
-    return fp
+    return FlowProperty(name=name, unit_group=_as_ref(unit_group))
 
 
-def flow_of(name: str, flow_type: FlowType,
-            flow_property: Union[Ref, FlowProperty]):
-    """
-    Creates a new flow.
-    See also the more convenient methods:
-    * product_flow_of
-    * waste_flow_of
-    * elementary_flow_of
+def new_flow(name: str, flow_type: FlowType,
+             flow_property: Union[Ref, FlowProperty]) -> Flow:
+    """Creates a new flow.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new flow.
-    flow_type: FlowType
+    flow_type:
         The type of the new flow (product, waste, or elementary flow).
-    flow_property: Union[Ref, FlowProperty]
-        The (reference to the) flow property (quantity) of the flow.
+    flow_property:
+        The reference flow property of the flow.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    steel = olca.flow_of('Steel', olca.FlowType.PRODUCT_FLOW, mass)
+    group = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', group)
+    steel = new_flow('Steel', FlowType.PRODUCT_FLOW, mass)
     ```
     """
-
-    flow = Flow(name=name)
-    flow.flow_type = flow_type
-
-    prop = FlowPropertyFactor()
-    prop.conversion_factor = 1.0
-    prop.reference_flow_property = True
-    prop.flow_property = _as_ref(flow_property)
-    flow.flow_properties = [prop]
-    return flow
+    factor = FlowPropertyFactor(
+        flow_property=_as_ref(flow_property),
+        conversion_factor=1.0,
+        is_ref_flow_property=True)
+    return Flow(name=name, flow_type=flow_type, flow_properties=[factor])
 
 
-def product_flow_of(name: str, flow_property: Union[Ref, FlowProperty]) -> Flow:
-    """
-    Creates a new product flow.
+def new_product(name: str, flow_property: Union[Ref, FlowProperty]) -> Flow:
+    """Creates a new product flow.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new flow.
-    flow_property: Union[Ref, FlowProperty]
-        The (reference to the) flow property (quantity) of the flow.
+    flow_property:
+        The reference flow property of the flow.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    steel = olca.product_flow_of('Steel', mass)
+    group = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', group)
+    steel = new_product('Steel', FlowType.PRODUCT_FLOW, mass)
     ```
     """
-    return flow_of(name, FlowType.PRODUCT_FLOW, flow_property)
+    return new_flow(name, FlowType.PRODUCT_FLOW, flow_property)
 
 
-def waste_flow_of(name: str, flow_property: Union[Ref, FlowProperty]) -> Flow:
-    """
-    Creates a new waste flow.
+def new_waste(name: str, flow_property: Union[Ref, FlowProperty]) -> Flow:
+    """Creates a new waste flow.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new flow.
-    flow_property: Union[Ref, FlowProperty]
-        The (reference to the) flow property (quantity) of the flow.
+    flow_property:
+        The reference flow property of the flow.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    scrap = olca.waste_flow_of('Scrap', mass)
+    group = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', group)
+    scrap = new_waste('Scrap', FlowType.PRODUCT_FLOW, mass)
     ```
     """
-    return flow_of(name, FlowType.WASTE_FLOW, flow_property)
+    return new_flow(name, FlowType.WASTE_FLOW, flow_property)
 
 
-def elementary_flow_of(name: str, flow_property: Union[Ref, FlowProperty]) -> Flow:
-    """
-    Creates a new elementary flow.
+def new_elementary_flow(name: str,
+                        flow_property: Union[Ref, FlowProperty]) -> Flow:
+    """Creates a new elementary flow.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new flow.
-    flow_property: Union[Ref, FlowProperty]
-        The (reference to the) flow property (quantity) of the flow.
+    flow_property:
+        The reference flow property of the flow.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    co2 = olca.elementary_flow_of('CO2', mass)
+    group = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', group)
+    co2 = new_elementary_flow('CO2', FlowType.PRODUCT_FLOW, mass)
     ```
     """
-    return flow_of(name, FlowType.ELEMENTARY_FLOW, flow_property)
+    return new_flow(name, FlowType.WASTE_FLOW, flow_property)
 
 
-def process_of(name: str) -> Process:
-    """
-    Creates a new process.
+def new_process(name: str) -> Process:
+    """Creates a new process.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new process.
+
     Example
     -------
     ```python
-    process = olca.process_of('Steel production')
+    process = new_process('Steel production')
     ```
     """
-    process = Process(name)
-    process.process_type = ProcessType.UNIT_PROCESS
-    return process
+    return Process(name=name, process_type=ProcessType.UNIT_PROCESS)
 
 
-def exchange_of(process: Process,
-                flow: Union[Ref, Flow],
-                amount: Union[str, float] = 1.0,
-                unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
-    """
-    Creates a new exchange.
-    See the more convenient functions:
-    * input_of
-    * output_of
+def new_exchange(process: Process, flow: Union[Ref, Flow],
+                 amount: Union[str, float] = 1.0,
+                 unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
+    """Creates a new exchange.
+
     Parameters
     ----------
-    process: Process
+    process:
         The process of the new exchange.
-
-    flow: Union[Ref, Flow]
-        The flow or reference to the flow of this exchange.
-    amount: Union[str, float], optional
+    flow:
+        The flow of this exchange.
+    amount:
         The amount of the exchange; defaults to 1.0. Strings a floating point
         numbers are allowed. If a string is passed as amount, we assume that
         it is a valid formula.
-    unit: Union[Ref, Unit], optional
+    unit:
         The unit of the exchange. If not provided the exchange amount is given
         in the reference unit of the linked flow.
 
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    steel = olca.product_flow_of('Steel', mass)
-    process = olca.process_of('Steel production')
-    output = exchange_of(process, steel, 1.0)
-    output.quantitative_reference = True
+    units = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', units)
+    steel = new_product('Steel', FlowType.PRODUCT_FLOW, mass)
+    process = new_process('Steel production')
+    exchange = new_exchange(process, steel, 1.0)
+    exchange.quantitative_reference = True
     ```
     """
     if process.last_internal_id is None:
@@ -227,13 +213,13 @@ def exchange_of(process: Process,
     else:
         internal_id = process.last_internal_id + 1
     process.last_internal_id = internal_id
-    exchange = Exchange()
-    exchange.internal_id = internal_id
+    exchange = Exchange(
+        internal_id=internal_id,
+        flow=_as_ref(flow))
     if isinstance(amount, str):
         exchange.amount_formula = amount
     else:
         exchange.amount = amount
-    exchange.flow = _as_ref(flow)
     if unit:
         exchange.unit = _as_ref(unit)
     if process.exchanges is None:
@@ -243,113 +229,100 @@ def exchange_of(process: Process,
     return exchange
 
 
-def output_of(process: Process,
-              flow: Union[Ref, Flow],
+def new_input(process: Process, flow: Union[Ref, Flow],
               amount: Union[str, float] = 1.0,
               unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
-    """
-    Creates a new output.
-    This is the same as `exchange_of` but it sets the the exchange as an
-    output additionally.
+    """Creates a new input.
+
     Example
     -------
     ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    steel = olca.product_flow_of('Steel', mass)
-    process = olca.process_of('Steel production')
-    output = olca.output_of(process, steel, 1.0)
+    units = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', units)
+    process = new_process('Steel production')
+    scrap = new_waste('Scrap', FlowType.PRODUCT_FLOW, mass)
+    input = new_input(process, scrap, 0.1)
+    ```
+    """
+    exchange = new_exchange(process, flow, amount, unit)
+    exchange.is_input = True
+    return exchange
+
+
+def new_output(process: Process, flow: Union[Ref, Flow],
+               amount: Union[str, float] = 1.0,
+               unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
+    """Creates a new output.
+
+    Example
+    -------
+    ```python
+    units = new_unit_group('Mass units', 'kg')
+    mass = new_flow_property('Mass', units)
+    steel = new_product('Steel', FlowType.PRODUCT_FLOW, mass)
+    process = new_process('Steel production')
+    output = new_output(process, steel, 1.0)
     output.quantitative_reference = True
     ```
     """
-    exchange = exchange_of(process, flow, amount, unit)
-    exchange.input = False
+    exchange = new_exchange(process, flow, amount, unit)
+    exchange.is_input = False
     return exchange
 
 
-def input_of(process: Process,
-             flow: Union[Ref, Flow],
-             amount: Union[str, float] = 1.0,
-             unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
-    """
-    Creates a new input.
-    This is the same as `exchange_of` but it sets the the exchange as an
-    input additionally.
-    Example
-    -------
-    ```python
-    units = olca.unit_group_of('Units of mass', 'kg')
-    mass = olca.flow_property_of('Mass', units)
-    scrap = olca.waste_flow_of('Scrap', mass)
-    process = olca.process_of('Steel production')
-    input = olca.input_of(process, scrap, 0.1)
-    ```
-    """
-    exchange = exchange_of(process, flow, amount, unit)
-    exchange.input = True
-    return exchange
+def new_location(name: str, code: Optional[str] = None) -> Location:
+    """Creates a new location.
 
-
-def location_of(name: str, code: Optional[str] = None) -> Location:
-    """
-    Creates a new location.
     Parameters
     ----------
-    name: str
+    name:
         The name of the new location.
-    code: Optional[str]
+    code:
         An optional location code.
+
     Example
     -------
     ```python
-    de = olca.location_of('Germany', 'DE')
+    location = new_location('Germany', 'DE')
     ```
     """
-    location = Location(name)
-    location.code = code or name
-    return location
+    return Location(name=name, code=code or name)
 
 
-def parameter_of(name: str, value: Union[str, float],
-                 scope=ParameterScope.GLOBAL_SCOPE) -> Parameter:
-    """
-    Creates a new parameter.
+def new_parameter(name: str, value: Union[str, float],
+                  scope=ParameterScope.GLOBAL_SCOPE) -> Parameter:
+    """Creates a new parameter.
+
     Parameters
     ----------
-    name: str
+    name:
         The name of the new parameter. Note that parameters can be used
         in formulas. So that the name of the parameter has to follow
         specific syntax rules, i.e. it cannot contain whitespaces or
         special characters.
-    value: Union[str, float]
+    value:
         The parameter value. If a string is passed as value into this
-        function we assume that this is a formula and we will create
-        a dependent, calculated parameter. Otherwise we create an
+        function we assume that this is a formula, and we will create
+        a dependent, calculated parameter. Otherwise, we create an
         input parameter
-    scope: ParameterScope, optional
+    scope:
         The scope of the parameter. If not specified otherwise this
         defaults to global scope.
     Example
     -------
     ```python
-    import olca
     # create a global input parameter
-    global_scrap_rate = olca.parameter_of('global_scrap_rate', 1.0)
+    global_scrap_rate = new_parameter('global_scrap_rate', 1.0)
     # create a local calculated parameter of a process
-    local_scrap_rate = olca.parameter_of(
+    local_scrap_rate = new_parameter(
         'local_scrap_rate',
         'global_scrap_rate * 0.9',
-        olca.ParameterScope.PROCESS_SCOPE)
-    process = olca.process_of('Steel production')
+        ParameterScope.PROCESS_SCOPE)
+    process = new_process('Steel production')
     process.parameters = [local_scrap_rate]
-    # insert this in a database
-    with olca.Client() as client:
-        client.insert(global_scrap_rate)
-        client.insert(process)
     ```
     """
-    param = Parameter(name=name)
-    param.parameter_scope = scope
+    param = Parameter(name=name, parameter_scope=scope)
     if isinstance(value, str):
         param.formula = value
         param.input_parameter = False
@@ -359,36 +332,35 @@ def parameter_of(name: str, value: Union[str, float],
     return param
 
 
-def physical_allocation_of(
-        process: Process,
-        product: Union[Ref, Flow],
+def new_physical_allocation_factor(
+        process: Process, product: Union[Ref, Flow],
         amount: Union[str, float]) -> AllocationFactor:
-    f = _allocation_of(process, product, amount)
+    f = _new_allocation_factor(process, product, amount)
     f.allocation_type = AllocationType.PHYSICAL_ALLOCATION
     return f
 
 
-def economic_allocation_of(
+def new_economic_allocation_factor(
         process: Process,
         product: Union[Ref, Flow],
         amount: Union[str, float]) -> AllocationFactor:
-    f = _allocation_of(process, product, amount)
+    f = _new_allocation_factor(process, product, amount)
     f.allocation_type = AllocationType.ECONOMIC_ALLOCATION
     return f
 
 
-def causal_allocation_of(
+def new_causal_allocation_factor(
         process: Process,
         product: Union[Ref, Flow],
         amount: Union[str, float],
         exchange: Union[Exchange, ExchangeRef]) -> AllocationFactor:
-    f = _allocation_of(process, product, amount)
+    f = _new_allocation_factor(process, product, amount)
     f.allocation_type = AllocationType.CAUSAL_ALLOCATION
     f.exchange = ExchangeRef(internal_id=exchange.internal_id)
     return f
 
 
-def _allocation_of(
+def _new_allocation_factor(
         process: Process,
         product: Union[Ref, Flow],
         amount: Union[str, float]) -> AllocationFactor:
