@@ -6,7 +6,7 @@ import unittest
 class EnumConvTest(unittest.TestCase):
 
     def test_flow_type(self):
-        val = lca.FlowType.ELEMENTARY_FLOW.value
+        val: str = lca.FlowType.ELEMENTARY_FLOW.value
         self.assertEqual('ELEMENTARY_FLOW', val)
         self.assertEqual(lca.FlowType.ELEMENTARY_FLOW, lca.FlowType[val])
         self.assertEqual(lca.FlowType.ELEMENTARY_FLOW, lca.FlowType.get(val))
@@ -17,7 +17,7 @@ class EnumConvTest(unittest.TestCase):
         self.assertEqual(lca.FlowType.ELEMENTARY_FLOW, flow.flow_type)
 
     def test_process_type(self):
-        val = lca.ProcessType.UNIT_PROCESS.value
+        val: str = lca.ProcessType.UNIT_PROCESS.value
         self.assertEqual('UNIT_PROCESS', val)
         self.assertEqual(lca.ProcessType.UNIT_PROCESS, lca.ProcessType[val])
         self.assertEqual(lca.ProcessType.UNIT_PROCESS,
