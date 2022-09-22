@@ -158,7 +158,7 @@ def new_elementary_flow(name: str,
     co2 = new_elementary_flow('CO2', FlowType.PRODUCT_FLOW, mass)
     ```
     """
-    return new_flow(name, FlowType.WASTE_FLOW, flow_property)
+    return new_flow(name, FlowType.ELEMENTARY_FLOW, flow_property)
 
 
 def new_process(name: str) -> Process:
