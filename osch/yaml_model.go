@@ -72,6 +72,24 @@ type YamlModel struct {
 	TypeMap map[string]*YamlType
 }
 
+// Packages returns the used package names of model. Note that the name of the
+// "root" or "core" package is just the empty string, and will be also returned
+// in that list.
+func (model *YamlModel) Packages() []string {
+	packs := make([]string, 0)
+	handled := make(map[string]bool)
+	for _, t := range model.Types {
+		pack := t.Package
+		if handled[pack] {
+			continue
+		}
+		handled[pack] = true
+		packs = append(packs, pack)
+	}
+	sort.Strings(packs)
+	return packs
+}
+
 func (model *YamlModel) EachEnum(consumer func(enum *YamlEnum)) {
 	for i := range model.Types {
 		t := model.Types[i]

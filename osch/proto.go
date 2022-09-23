@@ -2,28 +2,80 @@ package main
 
 import (
 	"bytes"
+	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"unicode"
 )
 
-// FileHeader is the file header that is written to the generated proto3 file.
-// This is the place where you want to define global options
-const FileHeader = `// Generated from olca-schema (https://github.com/GreenDelta/olca-schema).
-// DO NOT EDIT!
+type protoWriter struct {
+	buff  *bytes.Buffer
+	model *YamlModel
+	pack  string
+}
 
-syntax = "proto3";
+func writeProtos(args *args) {
+	model, err := ReadYamlModel(args)
+	check(err, "could not read YAML model")
 
-package protolca;
+	buildDir := filepath.Join(args.home, "build")
+	mkdir(buildDir)
 
-option csharp_namespace = "ProtoLCA";
-option go_package = ".;protolca";
-option java_package = "org.openlca.proto";
-option java_outer_classname = "Proto";
-option java_multiple_files = true;
+	for _, pack := range model.Packages() {
+		var buff bytes.Buffer
+		w := protoWriter{
+			buff:  &buff,
+			model: model,
+			pack:  pack,
+		}
+		w.writePack()
 
+		fileName := "olca.proto"
+		if pack != "" {
+			fileName = "olca." + pack + ".proto"
+		}
 
-`
+		outFile := filepath.Join(buildDir, fileName)
+		err = os.WriteFile(outFile, buff.Bytes(), os.ModePerm)
+		check(err, "failed to write to file", outFile)
+	}
+}
+
+func (w *protoWriter) writePack() {
+	w.writeFileHeader()
+}
+
+func (w *protoWriter) writeFileHeader() {
+	w.writeln("// Generated from olca-schema (https://github.com/GreenDelta/olca-schema)")
+	w.writeln("// DO NOT EDIT!")
+	w.writeln()
+	w.writeln("syntax = \"proto3\";")
+	w.writeln()
+
+	// package names
+	if w.pack == "" {
+		w.writeln("package protolca;")
+		w.writeln("option java_package = \"org.openlca.proto\";")
+	} else {
+		w.writeln("package protolca." + w.pack + ";")
+		w.writeln("option java_package = \"org.openlca.proto." + w.pack + "\";")
+	}
+
+	// other options
+	w.writeln("option java_outer_classname = \"Proto\";")
+	w.writeln("option go_package = \".;protolca\";")
+	w.writeln("option csharp_namespace = \"ProtoLCA\";")
+	w.writeln("option java_multiple_files = true;")
+	w.writeln()
+
+	// imports
+	if w.pack != "" {
+		w.writeln("import \"olca.proto\"")
+		w.writeln()
+	}
+	w.writeln()
+}
 
 // BytesHint is a comment we add to fields with `bytes` as data type.
 const BytesHint = `  // When we map to the bytes type it means that we have no matching message
@@ -66,6 +118,10 @@ enum ProtoType {
 
 func generateProto(yaml *YamlModel) string {
 	var buff bytes.Buffer
+	w := protoWriter{&buff, yaml}
+
+	w.writeFileHeader()
+
 	buff.WriteString(FileHeader)
 
 	// write the message and enumeration types
@@ -216,4 +272,15 @@ func protoUndefinedOf(enum *YamlEnum) string {
 		buff.WriteRune(char)
 	}
 	return "UNDEFINED" + strings.ToUpper(buff.String())
+}
+
+func (w *protoWriter) indln(s string) {
+	w.writeln("  ", s)
+}
+
+func (w *protoWriter) writeln(xs ...string) {
+	for _, x := range xs {
+		w.buff.WriteString(x)
+	}
+	w.buff.WriteRune('\n')
 }

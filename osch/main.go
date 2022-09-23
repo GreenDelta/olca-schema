@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 )
 
 func main() {
@@ -19,7 +17,7 @@ func main() {
 
 	switch args.command {
 	case "proto":
-		proto(args)
+		writeProtos(args)
 	case "doc", "docs", "md", "mdbook", "markdown":
 		writeMarkdownBook(args)
 	case "py", "python":
@@ -40,17 +38,6 @@ func check(err error, msg ...interface{}) {
 		fmt.Println(msg...)
 		panic(err)
 	}
-}
-
-func proto(args *args) {
-	yamlModel, err := ReadYamlModel(args)
-	check(err)
-	proto := generateProto(yamlModel)
-	buildDir := filepath.Join(args.home, "build")
-	mkdir(buildDir)
-	outFile := filepath.Join(buildDir, "olca.proto")
-	err = os.WriteFile(outFile, []byte(proto), os.ModePerm)
-	check(err, "failed to write to file", outFile)
 }
 
 func printHelp() {
