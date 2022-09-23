@@ -18,7 +18,7 @@ def main():
     output.is_quantitative_reference = True
     print(process.to_json())
 
-    with zipio.ZipWriter('../build/example.zip') as w:
+    with zipio.ZipWriter('../../build/example.zip') as w:
         for entity in [units, mass, steel, process]:
             w.write(entity)
 

@@ -1,0 +1,63 @@
+
+class:
+  name: CalculationSetup
+
+  properties:
+    - name: target
+      index: 1
+      type: Ref
+      doc: >
+           The calculation target. This can be a reference to a process or
+           product system.
+
+    - name: impactMethod
+      index: 2
+      type: Ref[ImpactMethod]
+      doc: >
+           The impact assessment method that should be used for the calculation.
+
+    - name: nwSet
+      index: 3
+      type: Ref[NwSet]
+      doc: >
+           A reference to a normalization and weighting set.
+
+    - name: parameters
+      index: 4
+      type: List[ParameterRedef]
+      doc: >
+           A list of parameter redefinitions that should be applied in the
+           calculation.
+
+    - name: allocation
+      index: 5
+      type: AllocationType
+      doc: >
+           The allocation method that should be applied.
+
+    - name: withCosts
+      index: 6
+      type: boolean
+      doc: Defines if cost results should be also calculated.
+
+    - name: withRegionalization
+      index: 7
+      type: boolean
+      doc: Defines if regionalization should be applied.
+
+    - name: amount
+      index: 8
+      type: double
+      doc: >
+           The amount of the reference flow of the calculation target for to
+           which the result should be scaled.
+
+    - name: unit
+      index: 9
+      type: Ref[Unit]
+      doc: The unit of the target amount.
+
+    - name: flowProperty
+      index: 10
+      type: Ref[FlowProperty]
+      doc: The flow property of the target amount.
