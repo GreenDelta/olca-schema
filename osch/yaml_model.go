@@ -11,8 +11,9 @@ import (
 )
 
 type YamlType struct {
-	Class *YamlClass `yaml:"class"`
-	Enum  *YamlEnum  `yaml:"enum"`
+	Class   *YamlClass `yaml:"class"`
+	Enum    *YamlEnum  `yaml:"enum"`
+	Package string
 }
 
 func (yt *YamlType) IsClass() bool {
@@ -21,6 +22,10 @@ func (yt *YamlType) IsClass() bool {
 
 func (yt *YamlType) IsEnum() bool {
 	return yt.Enum != nil
+}
+
+func (yt *YamlType) IsCoreType() bool {
+	return yt.Package == ""
 }
 
 func (yt *YamlType) String() string {
@@ -119,36 +124,61 @@ func (model *YamlModel) IsEmpty() bool {
 
 func ReadYamlModel(args *args) (*YamlModel, error) {
 
-	dir := filepath.Join(args.home, "yaml")
-	files, err := os.ReadDir(dir)
-	if err != nil {
-		return nil, err
-	}
 	types := make([]*YamlType, 0)
-	for _, file := range files {
-		name := file.Name()
-		if !strings.HasSuffix(name, ".yaml") {
-			continue
-		}
 
-		log.Println("Parse YAML file", name)
-		path := filepath.Join(dir, name)
-		data, err := os.ReadFile(path)
+	// collect Yaml definitions from the `yaml` folder and its sub-folders
+	yamlRoot := filepath.Join(args.home, "yaml")
+	dirQueue := make([]string, 1, 5)
+	dirQueue[0] = yamlRoot
+	for len(dirQueue) > 0 {
+		nextDir := dirQueue[0]
+		dirQueue = dirQueue[1:]
+
+		pack := ""
+		if nextDir != yamlRoot {
+			pack = filepath.Base(nextDir)
+		}
+		log.Println("parse folder:", nextDir)
+
+		files, err := os.ReadDir(nextDir)
 		if err != nil {
 			return nil, err
 		}
-		typeDef := &YamlType{}
-		if err := yaml.Unmarshal(data, typeDef); err != nil {
-			return nil, err
+
+		for _, file := range files {
+			name := file.Name()
+			if file.IsDir() {
+				dirQueue = append(dirQueue, filepath.Join(nextDir, name))
+				continue
+			}
+
+			log.Println("Parse YAML file", name)
+			path := filepath.Join(nextDir, name)
+			data, err := os.ReadFile(path)
+			if err != nil {
+				return nil, err
+			}
+			typeDef := &YamlType{}
+			if err := yaml.Unmarshal(data, typeDef); err != nil {
+				return nil, err
+			}
+			typeDef.Package = pack
+
+			types = append(types, typeDef)
 		}
 
-		types = append(types, typeDef)
 	}
+
 	log.Println("Collected", len(types), "YAML types")
 
 	typeMap := make(map[string]*YamlType)
 	for i := range types {
 		typeDef := types[i]
+		if typeMap[typeDef.Name()] != nil {
+			log.Fatalln("Duplicate type name: '"+typeDef.Name()+"'.",
+				"The name of each type must be unique.")
+		}
+
 		typeMap[typeDef.Name()] = typeDef
 	}
 
