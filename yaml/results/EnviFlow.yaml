@@ -1,0 +1,30 @@
+
+class:
+  name: EnviFlow
+  doc: >
+       Describes a flow that passes the boundaries of a system to the
+       environment. These are the flows that form the inventory result of a
+       calculated product system.
+
+  properties:
+    - name: index
+      index: 1
+      type: int
+      doc: The matrix index of the flow.
+
+    - name: flow
+      index: 2
+      type: Ref[Flow]
+      doc: The reference to flow.
+
+    - name: location
+      index: 3
+      type: Ref[Location]
+      doc: >
+           In case of regionalized calculations, an `EnviFlow` is a pair of
+           flow and location.
+
+    - name: isInput
+      index: 4
+      type: boolean
+      doc: Indicates whether this flow is an input or not.

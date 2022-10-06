@@ -1,0 +1,23 @@
+
+class:
+  name: TechFlow
+  doc: >
+       A technosphere flow. These are flows that can be linked to product
+       inputs are waste outputs. A technosphere flow has a provider, which
+       can be a `Process`, `ProductSystem`, or `Result`.
+
+  properties:
+    - name: index
+      index: 1
+      type: int
+      doc: The matrix index of the flow.
+
+    - name: provider
+      index: 2
+      type: Ref
+      doc: The reference to the provider of the flow.
+
+    - name: flow
+      index: 3
+      type: Ref[Flow]
+      doc: The reference to the flow.

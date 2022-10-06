@@ -1,0 +1,17 @@
+
+class:
+  name: EnviFlowValue
+  doc: An result related to an inventory flow.
+
+  properties:
+    - name: enviFlow
+      index: 1
+      type: EnviFlow
+
+    - name: amount
+      index: 2
+      type: double
+
+    - name: share
+      index: 3
+      type: double
