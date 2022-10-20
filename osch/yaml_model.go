@@ -90,6 +90,10 @@ func (model *YamlModel) Packages() []string {
 	return packs
 }
 
+func (model *YamlModel) IsRootPackage(pack string) bool {
+	return pack == ""
+}
+
 func (model *YamlModel) EachEnum(consumer func(enum *YamlEnum)) {
 	for i := range model.Types {
 		t := model.Types[i]
@@ -134,6 +138,24 @@ func (model *YamlModel) IsAbstract(class *YamlClass) bool {
 		}
 	}
 	return false
+}
+
+func (model *YamlModel) PackageOfClass(class *YamlClass) string {
+	for _, t := range model.Types {
+		if t.IsClass() && t.Class.Name == class.Name {
+			return t.Package
+		}
+	}
+	return ""
+}
+
+func (model *YamlModel) PackageOfEnum(enum *YamlEnum) string {
+	for _, t := range model.Types {
+		if t.IsEnum() && t.Enum.Name == enum.Name {
+			return t.Package
+		}
+	}
+	return ""
 }
 
 func (model *YamlModel) IsEmpty() bool {

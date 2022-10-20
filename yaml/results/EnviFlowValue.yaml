@@ -1,7 +1,7 @@
 
 class:
   name: EnviFlowValue
-  doc: An result related to an inventory flow.
+  doc: A result related to an intervention flow.
 
   properties:
     - name: enviFlow
@@ -10,8 +10,4 @@ class:
 
     - name: amount
       index: 2
-      type: double
-
-    - name: share
-      index: 3
       type: double

@@ -1,21 +1,13 @@
 
 class:
   name: EnviFlow
-  doc: >
-       Describes a flow that passes the boundaries of a system to the
-       environment. These are the flows that form the inventory result of a
-       calculated product system.
+  doc: An intervention flow.
 
   properties:
-    - name: index
-      index: 1
-      type: int
-      doc: The matrix index of the flow.
-
     - name: flow
       index: 2
       type: Ref[Flow]
-      doc: The reference to flow.
+      doc: The reference to the flow.
 
     - name: location
       index: 3

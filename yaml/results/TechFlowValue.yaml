@@ -1,0 +1,13 @@
+
+class:
+  name: TechFlowValue
+  doc: A value related to a technosphere flow.
+
+  properties:
+    - name: techFlow
+      index: 1
+      type: TechFlow
+
+    - name: amount
+      index: 2
+      type: double

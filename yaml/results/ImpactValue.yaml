@@ -1,0 +1,13 @@
+
+class:
+  name: ImpactValue
+  doc: A value linked to an impact assessment category.
+
+  properties:
+    - name: impactCategory
+      index: 1
+      type: Ref[ImpactCategory]
+
+    - name: amount
+      index: 2
+      type: double

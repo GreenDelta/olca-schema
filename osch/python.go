@@ -12,46 +12,67 @@ type pyWriter struct {
 }
 
 func writePythonModule(args *args) {
+
+	// read and check the model
 	model, err := ReadYamlModel(args)
 	check(err, "could not read YAML model")
 
-	var buffer bytes.Buffer
-	writer := pyWriter{
-		buff:  &buffer,
-		model: model,
-	}
-	writer.writeAll()
-
+	// prepare the package folder
 	modDir := filepath.Join(args.home, "py", "olca_schema")
 	mkdir(modDir)
-	modFile := filepath.Join(modDir, "schema.py")
-	writeFile(modFile, buffer.String())
+
+	// write the packages
+	for _, pack := range model.Packages() {
+
+		var buffer bytes.Buffer
+		writer := pyWriter{
+			buff:  &buffer,
+			model: model,
+		}
+		writer.writePackage(pack)
+
+		var fileName string
+		if model.IsRootPackage(pack) {
+			fileName = "schema.py"
+		} else {
+			fileName = pack + ".py"
+		}
+		modFile := filepath.Join(modDir, fileName)
+		writeFile(modFile, buffer.String())
+	}
 }
 
-func (w *pyWriter) writeAll() {
+func (w *pyWriter) writePackage(pack string) {
 
-	w.writeHeader()
+	w.writeHeader(pack)
 
 	// enums and classes
-	w.model.EachEnum(w.writeEnum)
+	w.model.EachEnum(func(enum *YamlEnum) {
+		if w.model.PackageOfEnum(enum) == pack {
+			w.writeEnum(enum)
+		}
+	})
+
 	for _, class := range w.model.TopoSortClasses() {
-		if w.model.IsAbstract(class) {
+		if w.model.PackageOfClass(class) != pack || w.model.IsAbstract(class) {
 			continue
 		}
 		w.writeClass(class)
 	}
 
 	// write RootEntity type
-	w.writeln("RootEntity = Union[")
-	w.model.EachClass(func(class *YamlClass) {
-		if w.model.IsRoot(class) {
-			w.wrind1ln(class.Name + ",")
-		}
-	})
-	w.writeln("]")
+	if w.model.IsRootPackage(pack) {
+		w.writeln("RootEntity = Union[")
+		w.model.EachClass(func(class *YamlClass) {
+			if w.model.IsRoot(class) {
+				w.wrind1ln(class.Name + ",")
+			}
+		})
+		w.writeln("]")
+	}
 }
 
-func (w *pyWriter) writeHeader() {
+func (w *pyWriter) writeHeader(pack string) {
 	w.writeln("# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
 	w.writeln(`
 # This module contains a Python API for reading and writing data sets in
@@ -60,13 +81,22 @@ func (w *pyWriter) writeHeader() {
 `)
 
 	// imports
-	w.writeln("import datetime")
-	w.writeln("import json")
-	w.writeln("import uuid")
-	w.writeln()
+	if w.model.IsRootPackage(pack) {
+		w.writeln("import datetime")
+		w.writeln("import json")
+		w.writeln("import uuid")
+		w.writeln()
+	}
+
 	w.writeln("from enum import Enum")
 	w.writeln("from dataclasses import dataclass")
 	w.writeln("from typing import Any, Dict, List, Optional, Union")
+
+	if !w.model.IsRootPackage(pack) {
+		w.writeln()
+		w.writeln("from .schema import *")
+	}
+
 	w.writeln()
 	w.writeln()
 }

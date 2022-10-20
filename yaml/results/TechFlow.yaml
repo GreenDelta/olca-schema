@@ -7,11 +7,6 @@ class:
        can be a `Process`, `ProductSystem`, or `Result`.
 
   properties:
-    - name: index
-      index: 1
-      type: int
-      doc: The matrix index of the flow.
-
     - name: provider
       index: 2
       type: Ref
