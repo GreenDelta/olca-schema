@@ -64,7 +64,7 @@ func (w *pyWriter) writePackage(pack string) {
 	if w.model.IsRootPackage(pack) {
 		w.writeln("RootEntity = Union[")
 		w.model.EachClass(func(class *YamlClass) {
-			if w.model.IsRoot(class) {
+			if w.model.IsRootEntity(class) {
 				w.wrind1ln(class.Name + ",")
 			}
 		})
@@ -143,7 +143,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	w.writeln()
 
 	// __post_init__
-	if w.model.IsRoot(class) {
+	if w.model.IsRootEntity(class) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
 			"datetime.datetime.utcnow().isoformat() + 'Z'"}
@@ -158,7 +158,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	// to_dict
 	w.wrind1ln("def to_dict(self) -> Dict[str, Any]:")
 	w.wrind2ln("d: Dict[str, Any] = {}")
-	if w.model.IsRoot(class) {
+	if w.model.IsRootEntity(class) {
 		w.wrind2ln("d['@type'] = '" + class.Name + "'")
 	}
 	if class.Name == "Ref" {
@@ -188,17 +188,17 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	w.writeln()
 
 	// to_json
-	if w.model.IsRoot(class) {
+	if w.model.IsRootEntity(class) {
 		w.wrind1ln("def to_json(self) -> str:")
 		w.wrind2ln("return json.dumps(self.to_dict(), indent=2)")
 		w.writeln()
 	}
 
 	// to_ref
-	if w.model.IsRoot(class) || class.Name == "Unit" {
+	if w.model.IsRootEntity(class) || class.Name == "Unit" {
 		w.wrind1ln("def to_ref(self) -> 'Ref':")
 		w.wrind2ln("ref = Ref(id=self.id, name=self.name)")
-		if w.model.IsRoot(class) {
+		if w.model.IsRootEntity(class) {
 			w.wrind2ln("ref.category = self.category")
 		}
 		w.wrind2ln("ref.model_type = '" + class.Name + "'")
@@ -209,7 +209,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	w.writeFromDict(class)
 
 	// from_json
-	if w.model.IsRoot(class) {
+	if w.model.IsRootEntity(class) {
 		w.wrind1ln("@staticmethod")
 		w.wrind1ln("def from_json(data: Union[str, bytes]) -> '" +
 			class.Name + "':")
