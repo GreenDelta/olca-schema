@@ -89,6 +89,45 @@ class ImpactValue:
 
 
 @dataclass
+class ResultState:
+
+    id: Optional[str] = None
+    error: Optional[str] = None
+    is_ready: Optional[bool] = None
+    is_scheduled: Optional[bool] = None
+    time: Optional[int] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.id:
+            d['@id'] = self.id
+        if self.error:
+            d['error'] = self.error
+        if self.is_ready:
+            d['isReady'] = self.is_ready
+        if self.is_scheduled:
+            d['isScheduled'] = self.is_scheduled
+        if self.time:
+            d['time'] = self.time
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'ResultState':
+        result_state = ResultState()
+        if v := d.get('@id'):
+            result_state.id = v
+        if v := d.get('error'):
+            result_state.error = v
+        if v := d.get('isReady'):
+            result_state.is_ready = v
+        if v := d.get('isScheduled'):
+            result_state.is_scheduled = v
+        if v := d.get('time'):
+            result_state.time = v
+        return result_state
+
+
+@dataclass
 class TechFlow:
 
     flow: Optional[Ref] = None
