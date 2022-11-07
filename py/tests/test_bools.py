@@ -7,8 +7,10 @@ class TestBools(unittest.TestCase):
 
     def test_false(self):
         p = lca.new_parameter('param', '1 + 1')
+        self.assertIsNotNone(p.is_input_parameter)
         self.assertFalse(p.is_input_parameter)
         p = lca.Parameter.from_json(p.to_json())
+        self.assertIsNotNone(p.is_input_parameter)
         self.assertFalse(p.is_input_parameter)
 
     def test_true(self):
