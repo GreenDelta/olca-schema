@@ -173,28 +173,28 @@ class DQScore:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.label:
+        if self.label is not None:
             d['label'] = self.label
-        if self.position:
+        if self.position is not None:
             d['position'] = self.position
-        if self.uncertainty:
+        if self.uncertainty is not None:
             d['uncertainty'] = self.uncertainty
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQScore':
         d_q_score = DQScore()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             d_q_score.schema_type = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             d_q_score.description = v
-        if v := d.get('label'):
+        if (v := d.get('label')) or v is not None:
             d_q_score.label = v
-        if v := d.get('position'):
+        if (v := d.get('position')) or v is not None:
             d_q_score.position = v
-        if v := d.get('uncertainty'):
+        if (v := d.get('uncertainty')) or v is not None:
             d_q_score.uncertainty = v
         return d_q_score
 
@@ -208,24 +208,24 @@ class DQIndicator:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.position:
+        if self.position is not None:
             d['position'] = self.position
-        if self.scores:
+        if self.scores is not None:
             d['scores'] = [e.to_dict() for e in self.scores]
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQIndicator':
         d_q_indicator = DQIndicator()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             d_q_indicator.schema_type = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             d_q_indicator.name = v
-        if v := d.get('position'):
+        if (v := d.get('position')) or v is not None:
             d_q_indicator.position = v
-        if v := d.get('scores'):
+        if (v := d.get('scores')) or v is not None:
             d_q_indicator.scores = [DQScore.from_dict(e) for e in v]
         return d_q_indicator
 
@@ -237,16 +237,16 @@ class ExchangeRef:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.internal_id:
+        if self.internal_id is not None:
             d['internalId'] = self.internal_id
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ExchangeRef':
         exchange_ref = ExchangeRef()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             exchange_ref.schema_type = v
-        if v := d.get('internalId'):
+        if (v := d.get('internalId')) or v is not None:
             exchange_ref.internal_id = v
         return exchange_ref
 
@@ -267,21 +267,21 @@ class Ref:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = self.model_type
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.flow_type:
+        if self.flow_type is not None:
             d['flowType'] = self.flow_type.value
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.process_type:
+        if self.process_type is not None:
             d['processType'] = self.process_type.value
-        if self.ref_unit:
+        if self.ref_unit is not None:
             d['refUnit'] = self.ref_unit
         return d
 
@@ -289,23 +289,23 @@ class Ref:
     def from_dict(d: Dict[str, Any]) -> 'Ref':
         ref = Ref()
         ref.model_type = d.get('@type', '')
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             ref.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             ref.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             ref.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             ref.description = v
-        if v := d.get('flowType'):
+        if (v := d.get('flowType')) or v is not None:
             ref.flow_type = FlowType.get(v)
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             ref.location = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             ref.name = v
-        if v := d.get('processType'):
+        if (v := d.get('processType')) or v is not None:
             ref.process_type = ProcessType.get(v)
-        if v := d.get('refUnit'):
+        if (v := d.get('refUnit')) or v is not None:
             ref.ref_unit = v
         return ref
 
@@ -340,35 +340,35 @@ class Actor:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Actor'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.address:
+        if self.address is not None:
             d['address'] = self.address
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.city:
+        if self.city is not None:
             d['city'] = self.city
-        if self.country:
+        if self.country is not None:
             d['country'] = self.country
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.email:
+        if self.email is not None:
             d['email'] = self.email
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.telefax:
+        if self.telefax is not None:
             d['telefax'] = self.telefax
-        if self.telephone:
+        if self.telephone is not None:
             d['telephone'] = self.telephone
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
-        if self.website:
+        if self.website is not None:
             d['website'] = self.website
-        if self.zip_code:
+        if self.zip_code is not None:
             d['zipCode'] = self.zip_code
         return d
 
@@ -384,37 +384,37 @@ class Actor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Actor':
         actor = Actor()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             actor.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             actor.id = v
-        if v := d.get('address'):
+        if (v := d.get('address')) or v is not None:
             actor.address = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             actor.category = v
-        if v := d.get('city'):
+        if (v := d.get('city')) or v is not None:
             actor.city = v
-        if v := d.get('country'):
+        if (v := d.get('country')) or v is not None:
             actor.country = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             actor.description = v
-        if v := d.get('email'):
+        if (v := d.get('email')) or v is not None:
             actor.email = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             actor.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             actor.name = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             actor.tags = v
-        if v := d.get('telefax'):
+        if (v := d.get('telefax')) or v is not None:
             actor.telefax = v
-        if v := d.get('telephone'):
+        if (v := d.get('telephone')) or v is not None:
             actor.telephone = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             actor.version = v
-        if v := d.get('website'):
+        if (v := d.get('website')) or v is not None:
             actor.website = v
-        if v := d.get('zipCode'):
+        if (v := d.get('zipCode')) or v is not None:
             actor.zip_code = v
         return actor
 
@@ -434,32 +434,32 @@ class AllocationFactor:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.allocation_type:
+        if self.allocation_type is not None:
             d['allocationType'] = self.allocation_type.value
-        if self.exchange:
+        if self.exchange is not None:
             d['exchange'] = self.exchange.to_dict()
-        if self.formula:
+        if self.formula is not None:
             d['formula'] = self.formula
-        if self.product:
+        if self.product is not None:
             d['product'] = self.product.to_dict()
-        if self.value:
+        if self.value is not None:
             d['value'] = self.value
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'AllocationFactor':
         allocation_factor = AllocationFactor()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             allocation_factor.schema_type = v
-        if v := d.get('allocationType'):
+        if (v := d.get('allocationType')) or v is not None:
             allocation_factor.allocation_type = AllocationType.get(v)
-        if v := d.get('exchange'):
+        if (v := d.get('exchange')) or v is not None:
             allocation_factor.exchange = ExchangeRef.from_dict(v)
-        if v := d.get('formula'):
+        if (v := d.get('formula')) or v is not None:
             allocation_factor.formula = v
-        if v := d.get('product'):
+        if (v := d.get('product')) or v is not None:
             allocation_factor.product = Ref.from_dict(v)
-        if v := d.get('value'):
+        if (v := d.get('value')) or v is not None:
             allocation_factor.value = v
         return allocation_factor
 
@@ -489,25 +489,25 @@ class Currency:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Currency'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.code:
+        if self.code is not None:
             d['code'] = self.code
-        if self.conversion_factor:
+        if self.conversion_factor is not None:
             d['conversionFactor'] = self.conversion_factor
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.ref_currency:
+        if self.ref_currency is not None:
             d['refCurrency'] = self.ref_currency.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -523,27 +523,27 @@ class Currency:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Currency':
         currency = Currency()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             currency.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             currency.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             currency.category = v
-        if v := d.get('code'):
+        if (v := d.get('code')) or v is not None:
             currency.code = v
-        if v := d.get('conversionFactor'):
+        if (v := d.get('conversionFactor')) or v is not None:
             currency.conversion_factor = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             currency.description = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             currency.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             currency.name = v
-        if v := d.get('refCurrency'):
+        if (v := d.get('refCurrency')) or v is not None:
             currency.ref_currency = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             currency.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             currency.version = v
         return currency
 
@@ -577,25 +577,25 @@ class DQSystem:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'DQSystem'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.has_uncertainties:
+        if self.has_uncertainties is not None:
             d['hasUncertainties'] = self.has_uncertainties
-        if self.indicators:
+        if self.indicators is not None:
             d['indicators'] = [e.to_dict() for e in self.indicators]
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.source:
+        if self.source is not None:
             d['source'] = self.source.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -611,27 +611,27 @@ class DQSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQSystem':
         d_q_system = DQSystem()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             d_q_system.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             d_q_system.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             d_q_system.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             d_q_system.description = v
-        if v := d.get('hasUncertainties'):
+        if (v := d.get('hasUncertainties')) or v is not None:
             d_q_system.has_uncertainties = v
-        if v := d.get('indicators'):
+        if (v := d.get('indicators')) or v is not None:
             d_q_system.indicators = [DQIndicator.from_dict(e) for e in v]
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             d_q_system.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             d_q_system.name = v
-        if v := d.get('source'):
+        if (v := d.get('source')) or v is not None:
             d_q_system.source = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             d_q_system.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             d_q_system.version = v
         return d_q_system
 
@@ -649,24 +649,24 @@ class EpdModule:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.multiplier:
+        if self.multiplier is not None:
             d['multiplier'] = self.multiplier
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.result:
+        if self.result is not None:
             d['result'] = self.result.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EpdModule':
         epd_module = EpdModule()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             epd_module.schema_type = v
-        if v := d.get('multiplier'):
+        if (v := d.get('multiplier')) or v is not None:
             epd_module.multiplier = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             epd_module.name = v
-        if v := d.get('result'):
+        if (v := d.get('result')) or v is not None:
             epd_module.result = Ref.from_dict(v)
         return epd_module
 
@@ -681,28 +681,28 @@ class EpdProduct:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EpdProduct':
         epd_product = EpdProduct()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             epd_product.schema_type = v
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             epd_product.amount = v
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             epd_product.flow = Ref.from_dict(v)
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             epd_product.flow_property = Ref.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             epd_product.unit = Ref.from_dict(v)
         return epd_product
 
@@ -736,33 +736,33 @@ class Epd:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Epd'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.manufacturer:
+        if self.manufacturer is not None:
             d['manufacturer'] = self.manufacturer.to_dict()
-        if self.modules:
+        if self.modules is not None:
             d['modules'] = [e.to_dict() for e in self.modules]
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.pcr:
+        if self.pcr is not None:
             d['pcr'] = self.pcr.to_dict()
-        if self.product:
+        if self.product is not None:
             d['product'] = self.product.to_dict()
-        if self.program_operator:
+        if self.program_operator is not None:
             d['programOperator'] = self.program_operator.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.urn:
+        if self.urn is not None:
             d['urn'] = self.urn
-        if self.verifier:
+        if self.verifier is not None:
             d['verifier'] = self.verifier.to_dict()
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -778,35 +778,35 @@ class Epd:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Epd':
         epd = Epd()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             epd.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             epd.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             epd.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             epd.description = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             epd.last_change = v
-        if v := d.get('manufacturer'):
+        if (v := d.get('manufacturer')) or v is not None:
             epd.manufacturer = Ref.from_dict(v)
-        if v := d.get('modules'):
+        if (v := d.get('modules')) or v is not None:
             epd.modules = [EpdModule.from_dict(e) for e in v]
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             epd.name = v
-        if v := d.get('pcr'):
+        if (v := d.get('pcr')) or v is not None:
             epd.pcr = Ref.from_dict(v)
-        if v := d.get('product'):
+        if (v := d.get('product')) or v is not None:
             epd.product = EpdProduct.from_dict(v)
-        if v := d.get('programOperator'):
+        if (v := d.get('programOperator')) or v is not None:
             epd.program_operator = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             epd.tags = v
-        if v := d.get('urn'):
+        if (v := d.get('urn')) or v is not None:
             epd.urn = v
-        if v := d.get('verifier'):
+        if (v := d.get('verifier')) or v is not None:
             epd.verifier = Ref.from_dict(v)
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             epd.version = v
         return epd
 
@@ -825,28 +825,28 @@ class FlowMapRef:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.provider:
+        if self.provider is not None:
             d['provider'] = self.provider.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMapRef':
         flow_map_ref = FlowMapRef()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow_map_ref.schema_type = v
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             flow_map_ref.flow = Ref.from_dict(v)
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             flow_map_ref.flow_property = Ref.from_dict(v)
-        if v := d.get('provider'):
+        if (v := d.get('provider')) or v is not None:
             flow_map_ref.provider = Ref.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             flow_map_ref.unit = Ref.from_dict(v)
         return flow_map_ref
 
@@ -860,24 +860,24 @@ class FlowMapEntry:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.conversion_factor:
+        if self.conversion_factor is not None:
             d['conversionFactor'] = self.conversion_factor
-        if self.from_:
+        if self.from_ is not None:
             d['from'] = self.from_.to_dict()
-        if self.to:
+        if self.to is not None:
             d['to'] = self.to.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMapEntry':
         flow_map_entry = FlowMapEntry()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow_map_entry.schema_type = v
-        if v := d.get('conversionFactor'):
+        if (v := d.get('conversionFactor')) or v is not None:
             flow_map_entry.conversion_factor = v
-        if v := d.get('from'):
+        if (v := d.get('from')) or v is not None:
             flow_map_entry.from_ = FlowMapRef.from_dict(v)
-        if v := d.get('to'):
+        if (v := d.get('to')) or v is not None:
             flow_map_entry.to = FlowMapRef.from_dict(v)
         return flow_map_entry
 
@@ -907,25 +907,25 @@ class FlowMap:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'FlowMap'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.mappings:
+        if self.mappings is not None:
             d['mappings'] = [e.to_dict() for e in self.mappings]
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.source:
+        if self.source is not None:
             d['source'] = self.source.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.target:
+        if self.target is not None:
             d['target'] = self.target.to_dict()
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -941,27 +941,27 @@ class FlowMap:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMap':
         flow_map = FlowMap()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow_map.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             flow_map.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             flow_map.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             flow_map.description = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             flow_map.last_change = v
-        if v := d.get('mappings'):
+        if (v := d.get('mappings')) or v is not None:
             flow_map.mappings = [FlowMapEntry.from_dict(e) for e in v]
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             flow_map.name = v
-        if v := d.get('source'):
+        if (v := d.get('source')) or v is not None:
             flow_map.source = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             flow_map.tags = v
-        if v := d.get('target'):
+        if (v := d.get('target')) or v is not None:
             flow_map.target = Ref.from_dict(v)
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             flow_map.version = v
         return flow_map
 
@@ -994,23 +994,23 @@ class FlowProperty:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'FlowProperty'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.flow_property_type:
+        if self.flow_property_type is not None:
             d['flowPropertyType'] = self.flow_property_type.value
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.unit_group:
+        if self.unit_group is not None:
             d['unitGroup'] = self.unit_group.to_dict()
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -1026,25 +1026,25 @@ class FlowProperty:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowProperty':
         flow_property = FlowProperty()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow_property.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             flow_property.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             flow_property.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             flow_property.description = v
-        if v := d.get('flowPropertyType'):
+        if (v := d.get('flowPropertyType')) or v is not None:
             flow_property.flow_property_type = FlowPropertyType.get(v)
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             flow_property.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             flow_property.name = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             flow_property.tags = v
-        if v := d.get('unitGroup'):
+        if (v := d.get('unitGroup')) or v is not None:
             flow_property.unit_group = Ref.from_dict(v)
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             flow_property.version = v
         return flow_property
 
@@ -1062,24 +1062,24 @@ class FlowPropertyFactor:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.conversion_factor:
+        if self.conversion_factor is not None:
             d['conversionFactor'] = self.conversion_factor
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.is_ref_flow_property:
+        if self.is_ref_flow_property is not None:
             d['isRefFlowProperty'] = self.is_ref_flow_property
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowPropertyFactor':
         flow_property_factor = FlowPropertyFactor()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow_property_factor.schema_type = v
-        if v := d.get('conversionFactor'):
+        if (v := d.get('conversionFactor')) or v is not None:
             flow_property_factor.conversion_factor = v
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             flow_property_factor.flow_property = Ref.from_dict(v)
-        if v := d.get('isRefFlowProperty'):
+        if (v := d.get('isRefFlowProperty')) or v is not None:
             flow_property_factor.is_ref_flow_property = v
         return flow_property_factor
 
@@ -1113,33 +1113,33 @@ class Flow:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Flow'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.cas:
+        if self.cas is not None:
             d['cas'] = self.cas
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.flow_properties:
+        if self.flow_properties is not None:
             d['flowProperties'] = [e.to_dict() for e in self.flow_properties]
-        if self.flow_type:
+        if self.flow_type is not None:
             d['flowType'] = self.flow_type.value
-        if self.formula:
+        if self.formula is not None:
             d['formula'] = self.formula
-        if self.is_infrastructure_flow:
+        if self.is_infrastructure_flow is not None:
             d['isInfrastructureFlow'] = self.is_infrastructure_flow
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location.to_dict()
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.synonyms:
+        if self.synonyms is not None:
             d['synonyms'] = self.synonyms
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -1155,35 +1155,35 @@ class Flow:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Flow':
         flow = Flow()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             flow.id = v
-        if v := d.get('cas'):
+        if (v := d.get('cas')) or v is not None:
             flow.cas = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             flow.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             flow.description = v
-        if v := d.get('flowProperties'):
+        if (v := d.get('flowProperties')) or v is not None:
             flow.flow_properties = [FlowPropertyFactor.from_dict(e) for e in v]
-        if v := d.get('flowType'):
+        if (v := d.get('flowType')) or v is not None:
             flow.flow_type = FlowType.get(v)
-        if v := d.get('formula'):
+        if (v := d.get('formula')) or v is not None:
             flow.formula = v
-        if v := d.get('isInfrastructureFlow'):
+        if (v := d.get('isInfrastructureFlow')) or v is not None:
             flow.is_infrastructure_flow = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             flow.last_change = v
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             flow.location = Ref.from_dict(v)
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             flow.name = v
-        if v := d.get('synonyms'):
+        if (v := d.get('synonyms')) or v is not None:
             flow.synonyms = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             flow.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             flow.version = v
         return flow
 
@@ -1206,44 +1206,44 @@ class FlowResult:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.is_input:
+        if self.is_input is not None:
             d['isInput'] = self.is_input
-        if self.is_ref_flow:
+        if self.is_ref_flow is not None:
             d['isRefFlow'] = self.is_ref_flow
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowResult':
         flow_result = FlowResult()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             flow_result.schema_type = v
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             flow_result.amount = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             flow_result.description = v
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             flow_result.flow = Ref.from_dict(v)
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             flow_result.flow_property = Ref.from_dict(v)
-        if v := d.get('isInput'):
+        if (v := d.get('isInput')) or v is not None:
             flow_result.is_input = v
-        if v := d.get('isRefFlow'):
+        if (v := d.get('isRefFlow')) or v is not None:
             flow_result.is_ref_flow = v
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             flow_result.location = Ref.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             flow_result.unit = Ref.from_dict(v)
         return flow_result
 
@@ -1257,24 +1257,24 @@ class ImpactResult:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.indicator:
+        if self.indicator is not None:
             d['indicator'] = self.indicator.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactResult':
         impact_result = ImpactResult()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             impact_result.schema_type = v
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             impact_result.amount = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             impact_result.description = v
-        if v := d.get('indicator'):
+        if (v := d.get('indicator')) or v is not None:
             impact_result.indicator = Ref.from_dict(v)
         return impact_result
 
@@ -1305,27 +1305,27 @@ class Location:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Location'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.code:
+        if self.code is not None:
             d['code'] = self.code
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.geometry:
+        if self.geometry is not None:
             d['geometry'] = self.geometry
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.latitude:
+        if self.latitude is not None:
             d['latitude'] = self.latitude
-        if self.longitude:
+        if self.longitude is not None:
             d['longitude'] = self.longitude
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -1341,29 +1341,29 @@ class Location:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Location':
         location = Location()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             location.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             location.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             location.category = v
-        if v := d.get('code'):
+        if (v := d.get('code')) or v is not None:
             location.code = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             location.description = v
-        if v := d.get('geometry'):
+        if (v := d.get('geometry')) or v is not None:
             location.geometry = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             location.last_change = v
-        if v := d.get('latitude'):
+        if (v := d.get('latitude')) or v is not None:
             location.latitude = v
-        if v := d.get('longitude'):
+        if (v := d.get('longitude')) or v is not None:
             location.longitude = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             location.name = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             location.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             location.version = v
         return location
 
@@ -1381,24 +1381,24 @@ class NwFactor:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.impact_category:
+        if self.impact_category is not None:
             d['impactCategory'] = self.impact_category.to_dict()
-        if self.normalisation_factor:
+        if self.normalisation_factor is not None:
             d['normalisationFactor'] = self.normalisation_factor
-        if self.weighting_factor:
+        if self.weighting_factor is not None:
             d['weightingFactor'] = self.weighting_factor
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'NwFactor':
         nw_factor = NwFactor()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             nw_factor.schema_type = v
-        if v := d.get('impactCategory'):
+        if (v := d.get('impactCategory')) or v is not None:
             nw_factor.impact_category = Ref.from_dict(v)
-        if v := d.get('normalisationFactor'):
+        if (v := d.get('normalisationFactor')) or v is not None:
             nw_factor.normalisation_factor = v
-        if v := d.get('weightingFactor'):
+        if (v := d.get('weightingFactor')) or v is not None:
             nw_factor.weighting_factor = v
         return nw_factor
 
@@ -1414,32 +1414,32 @@ class NwSet:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.factors:
+        if self.factors is not None:
             d['factors'] = [e.to_dict() for e in self.factors]
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.weighted_score_unit:
+        if self.weighted_score_unit is not None:
             d['weightedScoreUnit'] = self.weighted_score_unit
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'NwSet':
         nw_set = NwSet()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             nw_set.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             nw_set.id = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             nw_set.description = v
-        if v := d.get('factors'):
+        if (v := d.get('factors')) or v is not None:
             nw_set.factors = [NwFactor.from_dict(e) for e in v]
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             nw_set.name = v
-        if v := d.get('weightedScoreUnit'):
+        if (v := d.get('weightedScoreUnit')) or v is not None:
             nw_set.weighted_score_unit = v
         return nw_set
 
@@ -1470,27 +1470,27 @@ class ImpactMethod:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'ImpactMethod'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.code:
+        if self.code is not None:
             d['code'] = self.code
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.impact_categories:
+        if self.impact_categories is not None:
             d['impactCategories'] = [e.to_dict() for e in self.impact_categories]
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.nw_sets:
+        if self.nw_sets is not None:
             d['nwSets'] = [e.to_dict() for e in self.nw_sets]
-        if self.source:
+        if self.source is not None:
             d['source'] = self.source.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -1506,29 +1506,29 @@ class ImpactMethod:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactMethod':
         impact_method = ImpactMethod()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             impact_method.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             impact_method.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             impact_method.category = v
-        if v := d.get('code'):
+        if (v := d.get('code')) or v is not None:
             impact_method.code = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             impact_method.description = v
-        if v := d.get('impactCategories'):
+        if (v := d.get('impactCategories')) or v is not None:
             impact_method.impact_categories = [Ref.from_dict(e) for e in v]
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             impact_method.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             impact_method.name = v
-        if v := d.get('nwSets'):
+        if (v := d.get('nwSets')) or v is not None:
             impact_method.nw_sets = [NwSet.from_dict(e) for e in v]
-        if v := d.get('source'):
+        if (v := d.get('source')) or v is not None:
             impact_method.source = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             impact_method.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             impact_method.version = v
         return impact_method
 
@@ -1567,108 +1567,108 @@ class ProcessDocumentation:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.completeness_description:
+        if self.completeness_description is not None:
             d['completenessDescription'] = self.completeness_description
-        if self.creation_date:
+        if self.creation_date is not None:
             d['creationDate'] = self.creation_date
-        if self.data_collection_description:
+        if self.data_collection_description is not None:
             d['dataCollectionDescription'] = self.data_collection_description
-        if self.data_documentor:
+        if self.data_documentor is not None:
             d['dataDocumentor'] = self.data_documentor.to_dict()
-        if self.data_generator:
+        if self.data_generator is not None:
             d['dataGenerator'] = self.data_generator.to_dict()
-        if self.data_selection_description:
+        if self.data_selection_description is not None:
             d['dataSelectionDescription'] = self.data_selection_description
-        if self.data_set_owner:
+        if self.data_set_owner is not None:
             d['dataSetOwner'] = self.data_set_owner.to_dict()
-        if self.data_treatment_description:
+        if self.data_treatment_description is not None:
             d['dataTreatmentDescription'] = self.data_treatment_description
-        if self.geography_description:
+        if self.geography_description is not None:
             d['geographyDescription'] = self.geography_description
-        if self.intended_application:
+        if self.intended_application is not None:
             d['intendedApplication'] = self.intended_application
-        if self.inventory_method_description:
+        if self.inventory_method_description is not None:
             d['inventoryMethodDescription'] = self.inventory_method_description
-        if self.is_copyright_protected:
+        if self.is_copyright_protected is not None:
             d['isCopyrightProtected'] = self.is_copyright_protected
-        if self.modeling_constants_description:
+        if self.modeling_constants_description is not None:
             d['modelingConstantsDescription'] = self.modeling_constants_description
-        if self.project_description:
+        if self.project_description is not None:
             d['projectDescription'] = self.project_description
-        if self.publication:
+        if self.publication is not None:
             d['publication'] = self.publication.to_dict()
-        if self.restrictions_description:
+        if self.restrictions_description is not None:
             d['restrictionsDescription'] = self.restrictions_description
-        if self.review_details:
+        if self.review_details is not None:
             d['reviewDetails'] = self.review_details
-        if self.reviewer:
+        if self.reviewer is not None:
             d['reviewer'] = self.reviewer.to_dict()
-        if self.sampling_description:
+        if self.sampling_description is not None:
             d['samplingDescription'] = self.sampling_description
-        if self.sources:
+        if self.sources is not None:
             d['sources'] = [e.to_dict() for e in self.sources]
-        if self.technology_description:
+        if self.technology_description is not None:
             d['technologyDescription'] = self.technology_description
-        if self.time_description:
+        if self.time_description is not None:
             d['timeDescription'] = self.time_description
-        if self.valid_from:
+        if self.valid_from is not None:
             d['validFrom'] = self.valid_from
-        if self.valid_until:
+        if self.valid_until is not None:
             d['validUntil'] = self.valid_until
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProcessDocumentation':
         process_documentation = ProcessDocumentation()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             process_documentation.schema_type = v
-        if v := d.get('completenessDescription'):
+        if (v := d.get('completenessDescription')) or v is not None:
             process_documentation.completeness_description = v
-        if v := d.get('creationDate'):
+        if (v := d.get('creationDate')) or v is not None:
             process_documentation.creation_date = v
-        if v := d.get('dataCollectionDescription'):
+        if (v := d.get('dataCollectionDescription')) or v is not None:
             process_documentation.data_collection_description = v
-        if v := d.get('dataDocumentor'):
+        if (v := d.get('dataDocumentor')) or v is not None:
             process_documentation.data_documentor = Ref.from_dict(v)
-        if v := d.get('dataGenerator'):
+        if (v := d.get('dataGenerator')) or v is not None:
             process_documentation.data_generator = Ref.from_dict(v)
-        if v := d.get('dataSelectionDescription'):
+        if (v := d.get('dataSelectionDescription')) or v is not None:
             process_documentation.data_selection_description = v
-        if v := d.get('dataSetOwner'):
+        if (v := d.get('dataSetOwner')) or v is not None:
             process_documentation.data_set_owner = Ref.from_dict(v)
-        if v := d.get('dataTreatmentDescription'):
+        if (v := d.get('dataTreatmentDescription')) or v is not None:
             process_documentation.data_treatment_description = v
-        if v := d.get('geographyDescription'):
+        if (v := d.get('geographyDescription')) or v is not None:
             process_documentation.geography_description = v
-        if v := d.get('intendedApplication'):
+        if (v := d.get('intendedApplication')) or v is not None:
             process_documentation.intended_application = v
-        if v := d.get('inventoryMethodDescription'):
+        if (v := d.get('inventoryMethodDescription')) or v is not None:
             process_documentation.inventory_method_description = v
-        if v := d.get('isCopyrightProtected'):
+        if (v := d.get('isCopyrightProtected')) or v is not None:
             process_documentation.is_copyright_protected = v
-        if v := d.get('modelingConstantsDescription'):
+        if (v := d.get('modelingConstantsDescription')) or v is not None:
             process_documentation.modeling_constants_description = v
-        if v := d.get('projectDescription'):
+        if (v := d.get('projectDescription')) or v is not None:
             process_documentation.project_description = v
-        if v := d.get('publication'):
+        if (v := d.get('publication')) or v is not None:
             process_documentation.publication = Ref.from_dict(v)
-        if v := d.get('restrictionsDescription'):
+        if (v := d.get('restrictionsDescription')) or v is not None:
             process_documentation.restrictions_description = v
-        if v := d.get('reviewDetails'):
+        if (v := d.get('reviewDetails')) or v is not None:
             process_documentation.review_details = v
-        if v := d.get('reviewer'):
+        if (v := d.get('reviewer')) or v is not None:
             process_documentation.reviewer = Ref.from_dict(v)
-        if v := d.get('samplingDescription'):
+        if (v := d.get('samplingDescription')) or v is not None:
             process_documentation.sampling_description = v
-        if v := d.get('sources'):
+        if (v := d.get('sources')) or v is not None:
             process_documentation.sources = [Ref.from_dict(e) for e in v]
-        if v := d.get('technologyDescription'):
+        if (v := d.get('technologyDescription')) or v is not None:
             process_documentation.technology_description = v
-        if v := d.get('timeDescription'):
+        if (v := d.get('timeDescription')) or v is not None:
             process_documentation.time_description = v
-        if v := d.get('validFrom'):
+        if (v := d.get('validFrom')) or v is not None:
             process_documentation.valid_from = v
-        if v := d.get('validUntil'):
+        if (v := d.get('validUntil')) or v is not None:
             process_documentation.valid_until = v
         return process_documentation
 
@@ -1683,28 +1683,28 @@ class ProcessLink:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.exchange:
+        if self.exchange is not None:
             d['exchange'] = self.exchange.to_dict()
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.process:
+        if self.process is not None:
             d['process'] = self.process.to_dict()
-        if self.provider:
+        if self.provider is not None:
             d['provider'] = self.provider.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProcessLink':
         process_link = ProcessLink()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             process_link.schema_type = v
-        if v := d.get('exchange'):
+        if (v := d.get('exchange')) or v is not None:
             process_link.exchange = ExchangeRef.from_dict(v)
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             process_link.flow = Ref.from_dict(v)
-        if v := d.get('process'):
+        if (v := d.get('process')) or v is not None:
             process_link.process = Ref.from_dict(v)
-        if v := d.get('provider'):
+        if (v := d.get('provider')) or v is not None:
             process_link.provider = Ref.from_dict(v)
         return process_link
 
@@ -1735,27 +1735,27 @@ class Result:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Result'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.flow_results:
+        if self.flow_results is not None:
             d['flowResults'] = [e.to_dict() for e in self.flow_results]
-        if self.impact_method:
+        if self.impact_method is not None:
             d['impactMethod'] = self.impact_method.to_dict()
-        if self.impact_results:
+        if self.impact_results is not None:
             d['impactResults'] = [e.to_dict() for e in self.impact_results]
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.product_system:
+        if self.product_system is not None:
             d['productSystem'] = self.product_system.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -1771,29 +1771,29 @@ class Result:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Result':
         result = Result()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             result.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             result.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             result.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             result.description = v
-        if v := d.get('flowResults'):
+        if (v := d.get('flowResults')) or v is not None:
             result.flow_results = [FlowResult.from_dict(e) for e in v]
-        if v := d.get('impactMethod'):
+        if (v := d.get('impactMethod')) or v is not None:
             result.impact_method = Ref.from_dict(v)
-        if v := d.get('impactResults'):
+        if (v := d.get('impactResults')) or v is not None:
             result.impact_results = [ImpactResult.from_dict(e) for e in v]
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             result.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             result.name = v
-        if v := d.get('productSystem'):
+        if (v := d.get('productSystem')) or v is not None:
             result.product_system = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             result.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             result.version = v
         return result
 
@@ -1815,40 +1815,40 @@ class SocialAspect:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.activity_value:
+        if self.activity_value is not None:
             d['activityValue'] = self.activity_value
-        if self.comment:
+        if self.comment is not None:
             d['comment'] = self.comment
-        if self.quality:
+        if self.quality is not None:
             d['quality'] = self.quality
-        if self.raw_amount:
+        if self.raw_amount is not None:
             d['rawAmount'] = self.raw_amount
-        if self.risk_level:
+        if self.risk_level is not None:
             d['riskLevel'] = self.risk_level.value
-        if self.social_indicator:
+        if self.social_indicator is not None:
             d['socialIndicator'] = self.social_indicator.to_dict()
-        if self.source:
+        if self.source is not None:
             d['source'] = self.source.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialAspect':
         social_aspect = SocialAspect()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             social_aspect.schema_type = v
-        if v := d.get('activityValue'):
+        if (v := d.get('activityValue')) or v is not None:
             social_aspect.activity_value = v
-        if v := d.get('comment'):
+        if (v := d.get('comment')) or v is not None:
             social_aspect.comment = v
-        if v := d.get('quality'):
+        if (v := d.get('quality')) or v is not None:
             social_aspect.quality = v
-        if v := d.get('rawAmount'):
+        if (v := d.get('rawAmount')) or v is not None:
             social_aspect.raw_amount = v
-        if v := d.get('riskLevel'):
+        if (v := d.get('riskLevel')) or v is not None:
             social_aspect.risk_level = RiskLevel.get(v)
-        if v := d.get('socialIndicator'):
+        if (v := d.get('socialIndicator')) or v is not None:
             social_aspect.social_indicator = Ref.from_dict(v)
-        if v := d.get('source'):
+        if (v := d.get('source')) or v is not None:
             social_aspect.source = Ref.from_dict(v)
         return social_aspect
 
@@ -1880,29 +1880,29 @@ class SocialIndicator:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'SocialIndicator'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.activity_quantity:
+        if self.activity_quantity is not None:
             d['activityQuantity'] = self.activity_quantity.to_dict()
-        if self.activity_unit:
+        if self.activity_unit is not None:
             d['activityUnit'] = self.activity_unit.to_dict()
-        if self.activity_variable:
+        if self.activity_variable is not None:
             d['activityVariable'] = self.activity_variable
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.evaluation_scheme:
+        if self.evaluation_scheme is not None:
             d['evaluationScheme'] = self.evaluation_scheme
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.unit_of_measurement:
+        if self.unit_of_measurement is not None:
             d['unitOfMeasurement'] = self.unit_of_measurement
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -1918,31 +1918,31 @@ class SocialIndicator:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialIndicator':
         social_indicator = SocialIndicator()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             social_indicator.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             social_indicator.id = v
-        if v := d.get('activityQuantity'):
+        if (v := d.get('activityQuantity')) or v is not None:
             social_indicator.activity_quantity = Ref.from_dict(v)
-        if v := d.get('activityUnit'):
+        if (v := d.get('activityUnit')) or v is not None:
             social_indicator.activity_unit = Ref.from_dict(v)
-        if v := d.get('activityVariable'):
+        if (v := d.get('activityVariable')) or v is not None:
             social_indicator.activity_variable = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             social_indicator.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             social_indicator.description = v
-        if v := d.get('evaluationScheme'):
+        if (v := d.get('evaluationScheme')) or v is not None:
             social_indicator.evaluation_scheme = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             social_indicator.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             social_indicator.name = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             social_indicator.tags = v
-        if v := d.get('unitOfMeasurement'):
+        if (v := d.get('unitOfMeasurement')) or v is not None:
             social_indicator.unit_of_measurement = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             social_indicator.version = v
         return social_indicator
 
@@ -1977,27 +1977,27 @@ class Source:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Source'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.external_file:
+        if self.external_file is not None:
             d['externalFile'] = self.external_file
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.text_reference:
+        if self.text_reference is not None:
             d['textReference'] = self.text_reference
-        if self.url:
+        if self.url is not None:
             d['url'] = self.url
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
-        if self.year:
+        if self.year is not None:
             d['year'] = self.year
         return d
 
@@ -2013,29 +2013,29 @@ class Source:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Source':
         source = Source()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             source.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             source.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             source.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             source.description = v
-        if v := d.get('externalFile'):
+        if (v := d.get('externalFile')) or v is not None:
             source.external_file = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             source.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             source.name = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             source.tags = v
-        if v := d.get('textReference'):
+        if (v := d.get('textReference')) or v is not None:
             source.text_reference = v
-        if v := d.get('url'):
+        if (v := d.get('url')) or v is not None:
             source.url = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             source.version = v
-        if v := d.get('year'):
+        if (v := d.get('year')) or v is not None:
             source.year = v
         return source
 
@@ -2058,44 +2058,44 @@ class Uncertainty:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.distribution_type:
+        if self.distribution_type is not None:
             d['distributionType'] = self.distribution_type.value
-        if self.geom_mean:
+        if self.geom_mean is not None:
             d['geomMean'] = self.geom_mean
-        if self.geom_sd:
+        if self.geom_sd is not None:
             d['geomSd'] = self.geom_sd
-        if self.maximum:
+        if self.maximum is not None:
             d['maximum'] = self.maximum
-        if self.mean:
+        if self.mean is not None:
             d['mean'] = self.mean
-        if self.minimum:
+        if self.minimum is not None:
             d['minimum'] = self.minimum
-        if self.mode:
+        if self.mode is not None:
             d['mode'] = self.mode
-        if self.sd:
+        if self.sd is not None:
             d['sd'] = self.sd
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Uncertainty':
         uncertainty = Uncertainty()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             uncertainty.schema_type = v
-        if v := d.get('distributionType'):
+        if (v := d.get('distributionType')) or v is not None:
             uncertainty.distribution_type = UncertaintyType.get(v)
-        if v := d.get('geomMean'):
+        if (v := d.get('geomMean')) or v is not None:
             uncertainty.geom_mean = v
-        if v := d.get('geomSd'):
+        if (v := d.get('geomSd')) or v is not None:
             uncertainty.geom_sd = v
-        if v := d.get('maximum'):
+        if (v := d.get('maximum')) or v is not None:
             uncertainty.maximum = v
-        if v := d.get('mean'):
+        if (v := d.get('mean')) or v is not None:
             uncertainty.mean = v
-        if v := d.get('minimum'):
+        if (v := d.get('minimum')) or v is not None:
             uncertainty.minimum = v
-        if v := d.get('mode'):
+        if (v := d.get('mode')) or v is not None:
             uncertainty.mode = v
-        if v := d.get('sd'):
+        if (v := d.get('sd')) or v is not None:
             uncertainty.sd = v
         return uncertainty
 
@@ -2124,84 +2124,84 @@ class Exchange:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.amount_formula:
+        if self.amount_formula is not None:
             d['amountFormula'] = self.amount_formula
-        if self.base_uncertainty:
+        if self.base_uncertainty is not None:
             d['baseUncertainty'] = self.base_uncertainty
-        if self.cost_formula:
+        if self.cost_formula is not None:
             d['costFormula'] = self.cost_formula
-        if self.cost_value:
+        if self.cost_value is not None:
             d['costValue'] = self.cost_value
-        if self.currency:
+        if self.currency is not None:
             d['currency'] = self.currency.to_dict()
-        if self.default_provider:
+        if self.default_provider is not None:
             d['defaultProvider'] = self.default_provider.to_dict()
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.dq_entry:
+        if self.dq_entry is not None:
             d['dqEntry'] = self.dq_entry
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.internal_id:
+        if self.internal_id is not None:
             d['internalId'] = self.internal_id
-        if self.is_avoided_product:
+        if self.is_avoided_product is not None:
             d['isAvoidedProduct'] = self.is_avoided_product
-        if self.is_input:
+        if self.is_input is not None:
             d['isInput'] = self.is_input
-        if self.is_quantitative_reference:
+        if self.is_quantitative_reference is not None:
             d['isQuantitativeReference'] = self.is_quantitative_reference
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location.to_dict()
-        if self.uncertainty:
+        if self.uncertainty is not None:
             d['uncertainty'] = self.uncertainty.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Exchange':
         exchange = Exchange()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             exchange.schema_type = v
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             exchange.amount = v
-        if v := d.get('amountFormula'):
+        if (v := d.get('amountFormula')) or v is not None:
             exchange.amount_formula = v
-        if v := d.get('baseUncertainty'):
+        if (v := d.get('baseUncertainty')) or v is not None:
             exchange.base_uncertainty = v
-        if v := d.get('costFormula'):
+        if (v := d.get('costFormula')) or v is not None:
             exchange.cost_formula = v
-        if v := d.get('costValue'):
+        if (v := d.get('costValue')) or v is not None:
             exchange.cost_value = v
-        if v := d.get('currency'):
+        if (v := d.get('currency')) or v is not None:
             exchange.currency = Ref.from_dict(v)
-        if v := d.get('defaultProvider'):
+        if (v := d.get('defaultProvider')) or v is not None:
             exchange.default_provider = Ref.from_dict(v)
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             exchange.description = v
-        if v := d.get('dqEntry'):
+        if (v := d.get('dqEntry')) or v is not None:
             exchange.dq_entry = v
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             exchange.flow = Ref.from_dict(v)
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             exchange.flow_property = Ref.from_dict(v)
-        if v := d.get('internalId'):
+        if (v := d.get('internalId')) or v is not None:
             exchange.internal_id = v
-        if v := d.get('isAvoidedProduct'):
+        if (v := d.get('isAvoidedProduct')) or v is not None:
             exchange.is_avoided_product = v
-        if v := d.get('isInput'):
+        if (v := d.get('isInput')) or v is not None:
             exchange.is_input = v
-        if v := d.get('isQuantitativeReference'):
+        if (v := d.get('isQuantitativeReference')) or v is not None:
             exchange.is_quantitative_reference = v
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             exchange.location = Ref.from_dict(v)
-        if v := d.get('uncertainty'):
+        if (v := d.get('uncertainty')) or v is not None:
             exchange.uncertainty = Uncertainty.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             exchange.unit = Ref.from_dict(v)
         return exchange
 
@@ -2219,40 +2219,40 @@ class ImpactFactor:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.formula:
+        if self.formula is not None:
             d['formula'] = self.formula
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location.to_dict()
-        if self.uncertainty:
+        if self.uncertainty is not None:
             d['uncertainty'] = self.uncertainty.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
-        if self.value:
+        if self.value is not None:
             d['value'] = self.value
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactFactor':
         impact_factor = ImpactFactor()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             impact_factor.schema_type = v
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             impact_factor.flow = Ref.from_dict(v)
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             impact_factor.flow_property = Ref.from_dict(v)
-        if v := d.get('formula'):
+        if (v := d.get('formula')) or v is not None:
             impact_factor.formula = v
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             impact_factor.location = Ref.from_dict(v)
-        if v := d.get('uncertainty'):
+        if (v := d.get('uncertainty')) or v is not None:
             impact_factor.uncertainty = Uncertainty.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             impact_factor.unit = Ref.from_dict(v)
-        if v := d.get('value'):
+        if (v := d.get('value')) or v is not None:
             impact_factor.value = v
         return impact_factor
 
@@ -2284,29 +2284,29 @@ class Parameter:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Parameter'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.formula:
+        if self.formula is not None:
             d['formula'] = self.formula
-        if self.is_input_parameter:
+        if self.is_input_parameter is not None:
             d['isInputParameter'] = self.is_input_parameter
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.parameter_scope:
+        if self.parameter_scope is not None:
             d['parameterScope'] = self.parameter_scope.value
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.uncertainty:
+        if self.uncertainty is not None:
             d['uncertainty'] = self.uncertainty.to_dict()
-        if self.value:
+        if self.value is not None:
             d['value'] = self.value
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -2322,31 +2322,31 @@ class Parameter:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Parameter':
         parameter = Parameter()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             parameter.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             parameter.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             parameter.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             parameter.description = v
-        if v := d.get('formula'):
+        if (v := d.get('formula')) or v is not None:
             parameter.formula = v
-        if v := d.get('isInputParameter'):
+        if (v := d.get('isInputParameter')) or v is not None:
             parameter.is_input_parameter = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             parameter.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             parameter.name = v
-        if v := d.get('parameterScope'):
+        if (v := d.get('parameterScope')) or v is not None:
             parameter.parameter_scope = ParameterScope.get(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             parameter.tags = v
-        if v := d.get('uncertainty'):
+        if (v := d.get('uncertainty')) or v is not None:
             parameter.uncertainty = Uncertainty.from_dict(v)
-        if v := d.get('value'):
+        if (v := d.get('value')) or v is not None:
             parameter.value = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             parameter.version = v
         return parameter
 
@@ -2383,31 +2383,31 @@ class ImpactCategory:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'ImpactCategory'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.code:
+        if self.code is not None:
             d['code'] = self.code
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.direction:
+        if self.direction is not None:
             d['direction'] = self.direction.value
-        if self.impact_factors:
+        if self.impact_factors is not None:
             d['impactFactors'] = [e.to_dict() for e in self.impact_factors]
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.parameters:
+        if self.parameters is not None:
             d['parameters'] = [e.to_dict() for e in self.parameters]
-        if self.ref_unit:
+        if self.ref_unit is not None:
             d['refUnit'] = self.ref_unit
-        if self.source:
+        if self.source is not None:
             d['source'] = self.source.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -2423,33 +2423,33 @@ class ImpactCategory:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactCategory':
         impact_category = ImpactCategory()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             impact_category.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             impact_category.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             impact_category.category = v
-        if v := d.get('code'):
+        if (v := d.get('code')) or v is not None:
             impact_category.code = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             impact_category.description = v
-        if v := d.get('direction'):
+        if (v := d.get('direction')) or v is not None:
             impact_category.direction = Direction.get(v)
-        if v := d.get('impactFactors'):
+        if (v := d.get('impactFactors')) or v is not None:
             impact_category.impact_factors = [ImpactFactor.from_dict(e) for e in v]
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             impact_category.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             impact_category.name = v
-        if v := d.get('parameters'):
+        if (v := d.get('parameters')) or v is not None:
             impact_category.parameters = [Parameter.from_dict(e) for e in v]
-        if v := d.get('refUnit'):
+        if (v := d.get('refUnit')) or v is not None:
             impact_category.ref_unit = v
-        if v := d.get('source'):
+        if (v := d.get('source')) or v is not None:
             impact_category.source = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             impact_category.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             impact_category.version = v
         return impact_category
 
@@ -2470,36 +2470,36 @@ class ParameterRedef:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.context:
+        if self.context is not None:
             d['context'] = self.context.to_dict()
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.is_protected:
+        if self.is_protected is not None:
             d['isProtected'] = self.is_protected
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.uncertainty:
+        if self.uncertainty is not None:
             d['uncertainty'] = self.uncertainty.to_dict()
-        if self.value:
+        if self.value is not None:
             d['value'] = self.value
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ParameterRedef':
         parameter_redef = ParameterRedef()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             parameter_redef.schema_type = v
-        if v := d.get('context'):
+        if (v := d.get('context')) or v is not None:
             parameter_redef.context = Ref.from_dict(v)
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             parameter_redef.description = v
-        if v := d.get('isProtected'):
+        if (v := d.get('isProtected')) or v is not None:
             parameter_redef.is_protected = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             parameter_redef.name = v
-        if v := d.get('uncertainty'):
+        if (v := d.get('uncertainty')) or v is not None:
             parameter_redef.uncertainty = Uncertainty.from_dict(v)
-        if v := d.get('value'):
+        if (v := d.get('value')) or v is not None:
             parameter_redef.value = v
         return parameter_redef
 
@@ -2514,28 +2514,28 @@ class ParameterRedefSet:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.is_baseline:
+        if self.is_baseline is not None:
             d['isBaseline'] = self.is_baseline
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.parameters:
+        if self.parameters is not None:
             d['parameters'] = [e.to_dict() for e in self.parameters]
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ParameterRedefSet':
         parameter_redef_set = ParameterRedefSet()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             parameter_redef_set.schema_type = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             parameter_redef_set.description = v
-        if v := d.get('isBaseline'):
+        if (v := d.get('isBaseline')) or v is not None:
             parameter_redef_set.is_baseline = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             parameter_redef_set.name = v
-        if v := d.get('parameters'):
+        if (v := d.get('parameters')) or v is not None:
             parameter_redef_set.parameters = [ParameterRedef.from_dict(e) for e in v]
         return parameter_redef_set
 
@@ -2576,47 +2576,47 @@ class Process:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Process'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.allocation_factors:
+        if self.allocation_factors is not None:
             d['allocationFactors'] = [e.to_dict() for e in self.allocation_factors]
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.default_allocation_method:
+        if self.default_allocation_method is not None:
             d['defaultAllocationMethod'] = self.default_allocation_method.value
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.dq_entry:
+        if self.dq_entry is not None:
             d['dqEntry'] = self.dq_entry
-        if self.dq_system:
+        if self.dq_system is not None:
             d['dqSystem'] = self.dq_system.to_dict()
-        if self.exchange_dq_system:
+        if self.exchange_dq_system is not None:
             d['exchangeDqSystem'] = self.exchange_dq_system.to_dict()
-        if self.exchanges:
+        if self.exchanges is not None:
             d['exchanges'] = [e.to_dict() for e in self.exchanges]
-        if self.is_infrastructure_process:
+        if self.is_infrastructure_process is not None:
             d['isInfrastructureProcess'] = self.is_infrastructure_process
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.last_internal_id:
+        if self.last_internal_id is not None:
             d['lastInternalId'] = self.last_internal_id
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location.to_dict()
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.parameters:
+        if self.parameters is not None:
             d['parameters'] = [e.to_dict() for e in self.parameters]
-        if self.process_documentation:
+        if self.process_documentation is not None:
             d['processDocumentation'] = self.process_documentation.to_dict()
-        if self.process_type:
+        if self.process_type is not None:
             d['processType'] = self.process_type.value
-        if self.social_aspects:
+        if self.social_aspects is not None:
             d['socialAspects'] = [e.to_dict() for e in self.social_aspects]
-        if self.social_dq_system:
+        if self.social_dq_system is not None:
             d['socialDqSystem'] = self.social_dq_system.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -2632,49 +2632,49 @@ class Process:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Process':
         process = Process()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             process.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             process.id = v
-        if v := d.get('allocationFactors'):
+        if (v := d.get('allocationFactors')) or v is not None:
             process.allocation_factors = [AllocationFactor.from_dict(e) for e in v]
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             process.category = v
-        if v := d.get('defaultAllocationMethod'):
+        if (v := d.get('defaultAllocationMethod')) or v is not None:
             process.default_allocation_method = AllocationType.get(v)
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             process.description = v
-        if v := d.get('dqEntry'):
+        if (v := d.get('dqEntry')) or v is not None:
             process.dq_entry = v
-        if v := d.get('dqSystem'):
+        if (v := d.get('dqSystem')) or v is not None:
             process.dq_system = Ref.from_dict(v)
-        if v := d.get('exchangeDqSystem'):
+        if (v := d.get('exchangeDqSystem')) or v is not None:
             process.exchange_dq_system = Ref.from_dict(v)
-        if v := d.get('exchanges'):
+        if (v := d.get('exchanges')) or v is not None:
             process.exchanges = [Exchange.from_dict(e) for e in v]
-        if v := d.get('isInfrastructureProcess'):
+        if (v := d.get('isInfrastructureProcess')) or v is not None:
             process.is_infrastructure_process = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             process.last_change = v
-        if v := d.get('lastInternalId'):
+        if (v := d.get('lastInternalId')) or v is not None:
             process.last_internal_id = v
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             process.location = Ref.from_dict(v)
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             process.name = v
-        if v := d.get('parameters'):
+        if (v := d.get('parameters')) or v is not None:
             process.parameters = [Parameter.from_dict(e) for e in v]
-        if v := d.get('processDocumentation'):
+        if (v := d.get('processDocumentation')) or v is not None:
             process.process_documentation = ProcessDocumentation.from_dict(v)
-        if v := d.get('processType'):
+        if (v := d.get('processType')) or v is not None:
             process.process_type = ProcessType.get(v)
-        if v := d.get('socialAspects'):
+        if (v := d.get('socialAspects')) or v is not None:
             process.social_aspects = [SocialAspect.from_dict(e) for e in v]
-        if v := d.get('socialDqSystem'):
+        if (v := d.get('socialDqSystem')) or v is not None:
             process.social_dq_system = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             process.tags = v
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             process.version = v
         return process
 
@@ -2713,35 +2713,35 @@ class ProductSystem:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'ProductSystem'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.parameter_sets:
+        if self.parameter_sets is not None:
             d['parameterSets'] = [e.to_dict() for e in self.parameter_sets]
-        if self.process_links:
+        if self.process_links is not None:
             d['processLinks'] = [e.to_dict() for e in self.process_links]
-        if self.processes:
+        if self.processes is not None:
             d['processes'] = [e.to_dict() for e in self.processes]
-        if self.ref_exchange:
+        if self.ref_exchange is not None:
             d['refExchange'] = self.ref_exchange.to_dict()
-        if self.ref_process:
+        if self.ref_process is not None:
             d['refProcess'] = self.ref_process.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.target_amount:
+        if self.target_amount is not None:
             d['targetAmount'] = self.target_amount
-        if self.target_flow_property:
+        if self.target_flow_property is not None:
             d['targetFlowProperty'] = self.target_flow_property.to_dict()
-        if self.target_unit:
+        if self.target_unit is not None:
             d['targetUnit'] = self.target_unit.to_dict()
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -2757,37 +2757,37 @@ class ProductSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProductSystem':
         product_system = ProductSystem()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             product_system.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             product_system.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             product_system.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             product_system.description = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             product_system.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             product_system.name = v
-        if v := d.get('parameterSets'):
+        if (v := d.get('parameterSets')) or v is not None:
             product_system.parameter_sets = [ParameterRedefSet.from_dict(e) for e in v]
-        if v := d.get('processLinks'):
+        if (v := d.get('processLinks')) or v is not None:
             product_system.process_links = [ProcessLink.from_dict(e) for e in v]
-        if v := d.get('processes'):
+        if (v := d.get('processes')) or v is not None:
             product_system.processes = [Ref.from_dict(e) for e in v]
-        if v := d.get('refExchange'):
+        if (v := d.get('refExchange')) or v is not None:
             product_system.ref_exchange = ExchangeRef.from_dict(v)
-        if v := d.get('refProcess'):
+        if (v := d.get('refProcess')) or v is not None:
             product_system.ref_process = Ref.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             product_system.tags = v
-        if v := d.get('targetAmount'):
+        if (v := d.get('targetAmount')) or v is not None:
             product_system.target_amount = v
-        if v := d.get('targetFlowProperty'):
+        if (v := d.get('targetFlowProperty')) or v is not None:
             product_system.target_flow_property = Ref.from_dict(v)
-        if v := d.get('targetUnit'):
+        if (v := d.get('targetUnit')) or v is not None:
             product_system.target_unit = Ref.from_dict(v)
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             product_system.version = v
         return product_system
 
@@ -2810,44 +2810,44 @@ class ProjectVariant:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.allocation_method:
+        if self.allocation_method is not None:
             d['allocationMethod'] = self.allocation_method.value
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.is_disabled:
+        if self.is_disabled is not None:
             d['isDisabled'] = self.is_disabled
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.parameter_redefs:
+        if self.parameter_redefs is not None:
             d['parameterRedefs'] = [e.to_dict() for e in self.parameter_redefs]
-        if self.product_system:
+        if self.product_system is not None:
             d['productSystem'] = self.product_system.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProjectVariant':
         project_variant = ProjectVariant()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             project_variant.schema_type = v
-        if v := d.get('allocationMethod'):
+        if (v := d.get('allocationMethod')) or v is not None:
             project_variant.allocation_method = AllocationType.get(v)
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             project_variant.amount = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             project_variant.description = v
-        if v := d.get('isDisabled'):
+        if (v := d.get('isDisabled')) or v is not None:
             project_variant.is_disabled = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             project_variant.name = v
-        if v := d.get('parameterRedefs'):
+        if (v := d.get('parameterRedefs')) or v is not None:
             project_variant.parameter_redefs = [ParameterRedef.from_dict(e) for e in v]
-        if v := d.get('productSystem'):
+        if (v := d.get('productSystem')) or v is not None:
             project_variant.product_system = Ref.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             project_variant.unit = Ref.from_dict(v)
         return project_variant
 
@@ -2879,29 +2879,29 @@ class Project:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'Project'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.impact_method:
+        if self.impact_method is not None:
             d['impactMethod'] = self.impact_method.to_dict()
-        if self.is_with_costs:
+        if self.is_with_costs is not None:
             d['isWithCosts'] = self.is_with_costs
-        if self.is_with_regionalization:
+        if self.is_with_regionalization is not None:
             d['isWithRegionalization'] = self.is_with_regionalization
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.nw_set:
+        if self.nw_set is not None:
             d['nwSet'] = self.nw_set.to_dict()
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.variants:
+        if self.variants is not None:
             d['variants'] = [e.to_dict() for e in self.variants]
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -2917,31 +2917,31 @@ class Project:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Project':
         project = Project()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             project.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             project.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             project.category = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             project.description = v
-        if v := d.get('impactMethod'):
+        if (v := d.get('impactMethod')) or v is not None:
             project.impact_method = Ref.from_dict(v)
-        if v := d.get('isWithCosts'):
+        if (v := d.get('isWithCosts')) or v is not None:
             project.is_with_costs = v
-        if v := d.get('isWithRegionalization'):
+        if (v := d.get('isWithRegionalization')) or v is not None:
             project.is_with_regionalization = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             project.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             project.name = v
-        if v := d.get('nwSet'):
+        if (v := d.get('nwSet')) or v is not None:
             project.nw_set = NwSet.from_dict(v)
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             project.tags = v
-        if v := d.get('variants'):
+        if (v := d.get('variants')) or v is not None:
             project.variants = [ProjectVariant.from_dict(e) for e in v]
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             project.version = v
         return project
 
@@ -2962,17 +2962,17 @@ class Unit:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.conversion_factor:
+        if self.conversion_factor is not None:
             d['conversionFactor'] = self.conversion_factor
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.is_ref_unit:
+        if self.is_ref_unit is not None:
             d['isRefUnit'] = self.is_ref_unit
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.synonyms:
+        if self.synonyms is not None:
             d['synonyms'] = self.synonyms
         return d
 
@@ -2984,19 +2984,19 @@ class Unit:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Unit':
         unit = Unit()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             unit.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             unit.id = v
-        if v := d.get('conversionFactor'):
+        if (v := d.get('conversionFactor')) or v is not None:
             unit.conversion_factor = v
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             unit.description = v
-        if v := d.get('isRefUnit'):
+        if (v := d.get('isRefUnit')) or v is not None:
             unit.is_ref_unit = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             unit.name = v
-        if v := d.get('synonyms'):
+        if (v := d.get('synonyms')) or v is not None:
             unit.synonyms = v
         return unit
 
@@ -3025,23 +3025,23 @@ class UnitGroup:
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
         d['@type'] = 'UnitGroup'
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.category:
+        if self.category is not None:
             d['category'] = self.category
-        if self.default_flow_property:
+        if self.default_flow_property is not None:
             d['defaultFlowProperty'] = self.default_flow_property.to_dict()
-        if self.description:
+        if self.description is not None:
             d['description'] = self.description
-        if self.last_change:
+        if self.last_change is not None:
             d['lastChange'] = self.last_change
-        if self.name:
+        if self.name is not None:
             d['name'] = self.name
-        if self.tags:
+        if self.tags is not None:
             d['tags'] = self.tags
-        if self.units:
+        if self.units is not None:
             d['units'] = [e.to_dict() for e in self.units]
-        if self.version:
+        if self.version is not None:
             d['version'] = self.version
         return d
 
@@ -3057,25 +3057,25 @@ class UnitGroup:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'UnitGroup':
         unit_group = UnitGroup()
-        if v := d.get('@type'):
+        if (v := d.get('@type')) or v is not None:
             unit_group.schema_type = v
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             unit_group.id = v
-        if v := d.get('category'):
+        if (v := d.get('category')) or v is not None:
             unit_group.category = v
-        if v := d.get('defaultFlowProperty'):
+        if (v := d.get('defaultFlowProperty')) or v is not None:
             unit_group.default_flow_property = Ref.from_dict(v)
-        if v := d.get('description'):
+        if (v := d.get('description')) or v is not None:
             unit_group.description = v
-        if v := d.get('lastChange'):
+        if (v := d.get('lastChange')) or v is not None:
             unit_group.last_change = v
-        if v := d.get('name'):
+        if (v := d.get('name')) or v is not None:
             unit_group.name = v
-        if v := d.get('tags'):
+        if (v := d.get('tags')) or v is not None:
             unit_group.tags = v
-        if v := d.get('units'):
+        if (v := d.get('units')) or v is not None:
             unit_group.units = [Unit.from_dict(e) for e in v]
-        if v := d.get('version'):
+        if (v := d.get('version')) or v is not None:
             unit_group.version = v
         return unit_group
 

@@ -20,22 +20,22 @@ class EnviFlow:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.is_input:
+        if self.is_input is not None:
             d['isInput'] = self.is_input
-        if self.location:
+        if self.location is not None:
             d['location'] = self.location.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EnviFlow':
         envi_flow = EnviFlow()
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             envi_flow.flow = Ref.from_dict(v)
-        if v := d.get('isInput'):
+        if (v := d.get('isInput')) or v is not None:
             envi_flow.is_input = v
-        if v := d.get('location'):
+        if (v := d.get('location')) or v is not None:
             envi_flow.location = Ref.from_dict(v)
         return envi_flow
 
@@ -48,18 +48,18 @@ class EnviFlowValue:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.envi_flow:
+        if self.envi_flow is not None:
             d['enviFlow'] = self.envi_flow.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EnviFlowValue':
         envi_flow_value = EnviFlowValue()
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             envi_flow_value.amount = v
-        if v := d.get('enviFlow'):
+        if (v := d.get('enviFlow')) or v is not None:
             envi_flow_value.envi_flow = EnviFlow.from_dict(v)
         return envi_flow_value
 
@@ -72,18 +72,18 @@ class ImpactValue:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.impact_category:
+        if self.impact_category is not None:
             d['impactCategory'] = self.impact_category.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactValue':
         impact_value = ImpactValue()
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             impact_value.amount = v
-        if v := d.get('impactCategory'):
+        if (v := d.get('impactCategory')) or v is not None:
             impact_value.impact_category = Ref.from_dict(v)
         return impact_value
 
@@ -99,30 +99,30 @@ class ResultState:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.id:
+        if self.id is not None:
             d['@id'] = self.id
-        if self.error:
+        if self.error is not None:
             d['error'] = self.error
-        if self.is_ready:
+        if self.is_ready is not None:
             d['isReady'] = self.is_ready
-        if self.is_scheduled:
+        if self.is_scheduled is not None:
             d['isScheduled'] = self.is_scheduled
-        if self.time:
+        if self.time is not None:
             d['time'] = self.time
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ResultState':
         result_state = ResultState()
-        if v := d.get('@id'):
+        if (v := d.get('@id')) or v is not None:
             result_state.id = v
-        if v := d.get('error'):
+        if (v := d.get('error')) or v is not None:
             result_state.error = v
-        if v := d.get('isReady'):
+        if (v := d.get('isReady')) or v is not None:
             result_state.is_ready = v
-        if v := d.get('isScheduled'):
+        if (v := d.get('isScheduled')) or v is not None:
             result_state.is_scheduled = v
-        if v := d.get('time'):
+        if (v := d.get('time')) or v is not None:
             result_state.time = v
         return result_state
 
@@ -135,18 +135,18 @@ class TechFlow:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.flow:
+        if self.flow is not None:
             d['flow'] = self.flow.to_dict()
-        if self.provider:
+        if self.provider is not None:
             d['provider'] = self.provider.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'TechFlow':
         tech_flow = TechFlow()
-        if v := d.get('flow'):
+        if (v := d.get('flow')) or v is not None:
             tech_flow.flow = Ref.from_dict(v)
-        if v := d.get('provider'):
+        if (v := d.get('provider')) or v is not None:
             tech_flow.provider = Ref.from_dict(v)
         return tech_flow
 
@@ -159,18 +159,18 @@ class TechFlowValue:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.tech_flow:
+        if self.tech_flow is not None:
             d['techFlow'] = self.tech_flow.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'TechFlowValue':
         tech_flow_value = TechFlowValue()
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             tech_flow_value.amount = v
-        if v := d.get('techFlow'):
+        if (v := d.get('techFlow')) or v is not None:
             tech_flow_value.tech_flow = TechFlow.from_dict(v)
         return tech_flow_value
 
@@ -191,50 +191,50 @@ class CalculationSetup:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.allocation:
+        if self.allocation is not None:
             d['allocation'] = self.allocation.value
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.flow_property:
+        if self.flow_property is not None:
             d['flowProperty'] = self.flow_property.to_dict()
-        if self.impact_method:
+        if self.impact_method is not None:
             d['impactMethod'] = self.impact_method.to_dict()
-        if self.nw_set:
+        if self.nw_set is not None:
             d['nwSet'] = self.nw_set.to_dict()
-        if self.parameters:
+        if self.parameters is not None:
             d['parameters'] = [e.to_dict() for e in self.parameters]
-        if self.target:
+        if self.target is not None:
             d['target'] = self.target.to_dict()
-        if self.unit:
+        if self.unit is not None:
             d['unit'] = self.unit.to_dict()
-        if self.with_costs:
+        if self.with_costs is not None:
             d['withCosts'] = self.with_costs
-        if self.with_regionalization:
+        if self.with_regionalization is not None:
             d['withRegionalization'] = self.with_regionalization
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'CalculationSetup':
         calculation_setup = CalculationSetup()
-        if v := d.get('allocation'):
+        if (v := d.get('allocation')) or v is not None:
             calculation_setup.allocation = AllocationType.get(v)
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             calculation_setup.amount = v
-        if v := d.get('flowProperty'):
+        if (v := d.get('flowProperty')) or v is not None:
             calculation_setup.flow_property = Ref.from_dict(v)
-        if v := d.get('impactMethod'):
+        if (v := d.get('impactMethod')) or v is not None:
             calculation_setup.impact_method = Ref.from_dict(v)
-        if v := d.get('nwSet'):
+        if (v := d.get('nwSet')) or v is not None:
             calculation_setup.nw_set = Ref.from_dict(v)
-        if v := d.get('parameters'):
+        if (v := d.get('parameters')) or v is not None:
             calculation_setup.parameters = [ParameterRedef.from_dict(e) for e in v]
-        if v := d.get('target'):
+        if (v := d.get('target')) or v is not None:
             calculation_setup.target = Ref.from_dict(v)
-        if v := d.get('unit'):
+        if (v := d.get('unit')) or v is not None:
             calculation_setup.unit = Ref.from_dict(v)
-        if v := d.get('withCosts'):
+        if (v := d.get('withCosts')) or v is not None:
             calculation_setup.with_costs = v
-        if v := d.get('withRegionalization'):
+        if (v := d.get('withRegionalization')) or v is not None:
             calculation_setup.with_regionalization = v
         return calculation_setup
 
