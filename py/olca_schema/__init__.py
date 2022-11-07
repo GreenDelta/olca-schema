@@ -325,10 +325,10 @@ def new_parameter(name: str, value: Union[str, float],
     param = Parameter(name=name, parameter_scope=scope)
     if isinstance(value, str):
         param.formula = value
-        param.input_parameter = False
+        param.is_input_parameter = False
     else:
         param.value = value
-        param.input_parameter = True
+        param.is_input_parameter = True
     return param
 
 
