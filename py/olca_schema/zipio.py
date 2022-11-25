@@ -1,7 +1,7 @@
 import os
 import zipfile
 
-from typing import Iterator, Optional, Type, TypeVar, Union
+from typing import Iterator, List, Optional, Type, TypeVar, Union
 
 import olca_schema as schema
 
@@ -114,7 +114,7 @@ class ZipReader:
             if e is not None:
                 yield e
 
-    def ids_of(self, type_: Type[_E]) -> list[str]:
+    def ids_of(self, type_: Type[_E]) -> List[str]:
         folder = _folder_of_class(type_)
         ids = []
         for info in self.__zip.filelist:
