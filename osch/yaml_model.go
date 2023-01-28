@@ -243,9 +243,9 @@ func (model *YamlModel) AllPropsOf(class *YamlClass) []*YamlProp {
 	return props
 }
 
-// IsRoot returns true if the given class is a root entity. This is the case
+// IsRootEntity returns true if the given class is a root entity. This is the case
 // when `RootEntity` is a parent class of the given class.
-func (model *YamlModel) IsRoot(class *YamlClass) bool {
+func (model *YamlModel) IsRootEntity(class *YamlClass) bool {
 	c := class
 	for {
 		parent := model.ParentOf(c)
@@ -306,7 +306,7 @@ func (model *YamlModel) TopoSortClasses() []*YamlClass {
 		refDeps = make([]string, 0)
 	}
 	model.EachClass(func(class *YamlClass) {
-		if !model.IsRoot(class) && class.Name != "Unit" {
+		if !model.IsRootEntity(class) && class.Name != "Unit" {
 			return
 		}
 		contains := false

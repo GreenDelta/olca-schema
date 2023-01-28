@@ -85,46 +85,80 @@ func (w *mdWriter) file(path, content string) {
 
 func (w *mdWriter) summary() string {
 
+	outerTypeOf := w.directCompositions()
+
 	buff := NewBuffer()
 	buff.Writeln("# Summary\n")
 	buff.Writeln("[Introduction](./intro.md)")
 	buff.Writeln("[Changes](./CHANGES.md)")
 
-	buff.Writeln("# Root entities\n")
-	innerTypes := w.innerTypes()
-	w.model.EachClass(func(class *YamlClass) {
-		if !w.model.IsRoot(class) {
+	addClassLinks := func(class *YamlClass) {
+		if class == nil || outerTypeOf[class.Name] != "" {
 			return
 		}
 		buff.Writeln(" - [" + class.Name + "](./classes/" + class.Name + ".md)")
+		// write direct components
 		w.model.EachClass(func(inner *YamlClass) {
-			if innerTypes[inner.Name] == class.Name {
-				buff.Writeln("   - [" + inner.Name + "](./classes/" +
-					inner.Name + ".md)\n")
+			if outerTypeOf[inner.Name] == class.Name {
+				buff.Writeln(
+					"   - [" + inner.Name + "](./classes/" + inner.Name + ".md)")
 			}
 		})
+	}
+
+	// root entities and their direct components (the can only exist in
+	// the root package)
+	buff.Writeln("# Root entities\n")
+	w.model.EachClass(func(class *YamlClass) {
+		if w.model.IsRootEntity(class) {
+			addClassLinks(class)
+		}
 	})
 
+	// other shared components in the root package
 	buff.Writeln("# Other components\n")
 	w.model.EachClass(func(class *YamlClass) {
-		if w.model.IsRoot(class) || innerTypes[class.Name] != "" {
+		if w.model.IsRootEntity(class) ||
+			!w.model.IsRootPackage(w.model.PackageOfClass(class)) {
 			return
 		}
-		buff.Writeln(" - [" + class.Name + "](./classes/" + class.Name + ".md)")
-		w.model.EachClass(func(inner *YamlClass) {
-			if innerTypes[inner.Name] == class.Name {
-				buff.Writeln("   - [" + inner.Name + "](./classes/" +
-					inner.Name + ".md)\n")
-			}
-		})
+		addClassLinks(class)
 	})
 
+	// write the enumerations of the root package
 	buff.Writeln("\n# Enumerations\n")
 	for _, t := range w.model.Types {
-		if t.IsClass() {
+		if t.IsClass() || !w.model.IsRootPackage(t.Package) {
 			continue
 		}
 		buff.Writeln(" - [" + t.Name() + "](./enums/" + t.Name() + ".md)")
+	}
+
+	// write types in other packages
+	for _, pack := range w.model.Packages() {
+		if w.model.IsRootPackage(pack) {
+			continue
+		}
+		buff.Writeln("\n# Package: ", pack)
+		buff.Writeln("\n## Classes")
+		for _, t := range w.model.Types {
+			if !t.IsClass() || t.Package != pack {
+				continue
+			}
+			addClassLinks(t.Class)
+		}
+
+		hasEnums := false
+		for _, t := range w.model.Types {
+			if !t.IsEnum() || t.Package != pack {
+				continue
+			}
+			if !hasEnums {
+				hasEnums = true
+				buff.Writeln("\n## Enumerations")
+			}
+			buff.Writeln(" - [" + t.Name() + "](./enums/" + t.Name() + ".md)")
+		}
 	}
 
 	return buff.String()
@@ -264,19 +298,23 @@ func (w *mdWriter) docTypeOf(yamlType string) string {
 
 // Returns a map `inner type -> outer type` of types that are only used in
 // in a specific outer type (like Exchange in Processes).
-func (w *mdWriter) innerTypes() map[string]string {
+func (w *mdWriter) directCompositions() map[string]string {
 	m := make(map[string]string)
-	for _, inner := range w.model.Types {
-		if inner.IsEnum() {
+	for _, innerType := range w.model.Types {
+
+		// filter out enums and root entitities
+		if innerType.IsEnum() {
 			continue
 		}
-		parent := w.model.ParentOf(inner.Class)
+		parent := w.model.ParentOf(innerType.Class)
 		if parent == nil || parent.Name == "RootEntity" {
 			continue
 		}
 
-		matches := func(outer *YamlClass) bool {
-			for _, prop := range outer.Props {
+		// checks if the given outer type has a property that
+		// references the inner type
+		hasInner := func(outerType *YamlClass) bool {
+			for _, prop := range outerType.Props {
 				propType := prop.Type
 				if strings.HasPrefix(propType, "List[") {
 					propType = strings.TrimPrefix(
@@ -286,19 +324,21 @@ func (w *mdWriter) innerTypes() map[string]string {
 					propType = strings.TrimPrefix(
 						strings.TrimSuffix(propType, "]"), "Ref[")
 				}
-				if propType == inner.Name() {
+				if propType == innerType.Name() {
 					return true
 				}
 			}
 			return false
 		}
 
+		// search for a single outer class that references
+		// the inner type
 		candidate := ""
 		for _, outer := range w.model.Types {
 			if outer.IsEnum() {
 				continue
 			}
-			if !matches(outer.Class) {
+			if !hasInner(outer.Class) {
 				continue
 			}
 			if candidate == "" {
@@ -308,9 +348,8 @@ func (w *mdWriter) innerTypes() map[string]string {
 				break
 			}
 		}
-
 		if candidate != "" {
-			m[inner.Name()] = candidate
+			m[innerType.Name()] = candidate
 		}
 
 	}
