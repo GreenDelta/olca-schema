@@ -22,6 +22,8 @@ func main() {
 		writeMarkdownBook(args)
 	case "py", "python":
 		writePythonModule(args)
+	case "st", "tonel":
+		writeTonelFiles(args)
 	case "context":
 		writeContextJson(args)
 	case "check":

@@ -103,7 +103,7 @@ func (model *YamlModel) EachEnum(consumer func(enum *YamlEnum)) {
 	}
 }
 
-func (model *YamlModel) EachClass(consumer func(enum *YamlClass)) {
+func (model *YamlModel) EachClass(consumer func(class *YamlClass)) {
 	for i := range model.Types {
 		t := model.Types[i]
 		if t.IsClass() {
