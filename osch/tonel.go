@@ -50,47 +50,57 @@ func (w *tonelWriter) writeClass(class *YamlClass) {
 	}
 	w.writeln("\t#superclass : #", super, ",")
 	w.writeln("\t#instVars : [")
-	w.eachPropOf(class, func(prop, _ string) {
-		w.writeln("\t\t'", prop, "',")
-	})
+	for i, prop := range class.Props {
+		propName := w.propNameOf(prop)
+		if propName == "" {
+			continue
+		}
+		if i < (len(class.Props) - 1) {
+			w.writeln("\t\t'", propName, "',")
+		} else {
+			w.writeln("\t\t'", propName, "'")
+		}
+	}
+
 	w.writeln("\t],")
 	w.writeln("\t#category : #'openLCA-Model'")
 	w.writeln("}")
 
 	// accessors
-	w.eachPropOf(class, func(prop, typeHint string) {
+	for _, prop := range class.Props {
+		propName := w.propNameOf(prop)
+		if propName == "" {
+			continue
+		}
+
 		w.writeln()
 
 		// getter
 		w.writeln("{ #category : #accessing }")
-		w.writeln(className, " >> ", prop, " [")
+		w.writeln(className, " >> ", propName, " [")
 		w.writeln()
-		w.writeln("\t^ ", prop)
+		w.writeln("\t^ ", propName)
 		w.writeln("]")
 		w.writeln()
 
 		// setter
+		typeHint := w.typeHintOf(prop)
 		w.writeln("{ #category : #accessing }")
-		w.writeln(className, " >> ", prop, ": ", typeHint, " [")
+		w.writeln(className, " >> ", propName, ": ", typeHint, " [")
 		w.writeln()
-		w.writeln("\t", prop, " := ", typeHint)
+		w.writeln("\t", propName, " := ", typeHint)
 		w.writeln("]")
-	})
-
+	}
 }
 
-func (w *tonelWriter) eachPropOf(
-	class *YamlClass, fn func(name string, typeHint string)) {
-
-	for _, prop := range class.Props {
-		if prop.Name == "@type" {
-			continue
-		}
-		propName := prop.Name
-		if propName == "@id" {
-			propName = "id"
-		}
-		fn(propName, w.typeHintOf(prop))
+func (w *tonelWriter) propNameOf(prop *YamlProp) string {
+	switch prop.Name {
+	case "@type":
+		return ""
+	case "@id":
+		return "id"
+	default:
+		return prop.Name
 	}
 }
 
@@ -112,6 +122,7 @@ func (w *tonelWriter) typeHintOf(prop *YamlProp) string {
 		}
 		return prefix + prop.Type
 	}
+
 	switch prop.Type {
 	case "string":
 		return "aString"
@@ -129,7 +140,6 @@ func (w *tonelWriter) typeHintOf(prop *YamlProp) string {
 		fmt.Println("warning: could provide a better type hint for:" + prop.Type)
 		return "anObject"
 	}
-
 }
 
 func (w *tonelWriter) writeln(xs ...string) {
