@@ -12,6 +12,30 @@ from .schema import *
 
 
 @dataclass
+class CostValue:
+
+    amount: Optional[float] = None
+    currency: Optional[Ref] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.amount:
+            d['amount'] = self.amount
+        if self.currency:
+            d['currency'] = self.currency.to_dict()
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'CostValue':
+        cost_value = CostValue()
+        if v := d.get('amount'):
+            cost_value.amount = v
+        if v := d.get('currency'):
+            cost_value.currency = Ref.from_dict(v)
+        return cost_value
+
+
+@dataclass
 class EnviFlow:
 
     flow: Optional[Ref] = None
@@ -200,3 +224,5 @@ class CalculationSetup:
         return calculation_setup
 
 
+
+RefEntity = Union[RootEntity, Unit, NwSet]

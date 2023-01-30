@@ -1,0 +1,13 @@
+
+class:
+  name: CostValue
+  doc: A value of a cost result.
+
+  properties:
+    - name: currency
+      index: 1
+      type: Ref[Currency]
+
+    - name: amount
+      index: 2
+      type: double

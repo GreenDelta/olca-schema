@@ -1,0 +1,29 @@
+
+class:
+  name: LinkingConfig
+  doc: A configuration for auto-completion of product systems.
+
+  properties:
+    - name: providerLinking
+      index: 1
+      type: ProviderLinking
+      doc: >
+           Defines how default providers of linkable product inputs and waste
+           outputs are handled.
+
+    - name: preferUnitProcesses
+      index: 2
+      type: boolean
+      doc: >
+           When there are multiple possible providers for linking product inputs
+           or waste inputs, prefer unit processes when this property is set to
+           `true`, and system processes otherwise.
+
+    - name: cutoff
+      index: 3
+      type: double
+      optional: true
+      doc: >
+           Applies a cutoff in the linking process. The cutoff is applied like
+           the scaling factor in a sequential calculation. This only makes sense
+           in a large mono-unit technosphere (e.g. input-output databases).

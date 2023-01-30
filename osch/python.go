@@ -70,6 +70,8 @@ func (w *pyWriter) writePackage(pack string) {
 		})
 		w.writeln("]")
 	}
+	w.writeln()
+	w.writeln("RefEntity = Union[RootEntity, Unit, NwSet]")
 }
 
 func (w *pyWriter) writeHeader(pack string) {

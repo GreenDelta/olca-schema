@@ -125,6 +125,20 @@ class ProcessType(Enum):
         return default
 
 
+class ProviderLinking(Enum):
+
+    IGNORE_DEFAULTS = 'IGNORE_DEFAULTS'
+    PREFER_DEFAULTS = 'PREFER_DEFAULTS'
+    ONLY_DEFAULTS = 'ONLY_DEFAULTS'
+
+    def get(v: Union[str, 'ProviderLinking'],
+            default: Optional['ProviderLinking'] = None) -> 'ProviderLinking':
+        for i in ProviderLinking:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
+
 class RiskLevel(Enum):
 
     NO_OPPORTUNITY = 'NO_OPPORTUNITY'
@@ -249,6 +263,35 @@ class ExchangeRef:
         if v := d.get('internalId'):
             exchange_ref.internal_id = v
         return exchange_ref
+
+
+@dataclass
+class LinkingConfig:
+
+    cutoff: Optional[float] = None
+    prefer_unit_processes: Optional[bool] = None
+    provider_linking: Optional[ProviderLinking] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.cutoff:
+            d['cutoff'] = self.cutoff
+        if self.prefer_unit_processes:
+            d['preferUnitProcesses'] = self.prefer_unit_processes
+        if self.provider_linking:
+            d['providerLinking'] = self.provider_linking.value
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'LinkingConfig':
+        linking_config = LinkingConfig()
+        if v := d.get('cutoff'):
+            linking_config.cutoff = v
+        if v := d.get('preferUnitProcesses'):
+            linking_config.prefer_unit_processes = v
+        if v := d.get('providerLinking'):
+            linking_config.provider_linking = ProviderLinking.get(v)
+        return linking_config
 
 
 @dataclass
@@ -3104,3 +3147,5 @@ RootEntity = Union[
     Source,
     UnitGroup,
 ]
+
+RefEntity = Union[RootEntity, Unit, NwSet]
