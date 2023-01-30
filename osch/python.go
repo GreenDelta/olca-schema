@@ -104,8 +104,8 @@ func (w *pyWriter) writeHeader(pack string) {
 }
 
 func (w *pyWriter) writeEnum(enum *YamlEnum) {
-	n := enum.Name
-	w.writeln("class " + n + "(Enum):")
+	name := enum.Name
+	w.writeln("class " + name + "(Enum):")
 	w.writeln()
 
 	// write the items
@@ -114,10 +114,12 @@ func (w *pyWriter) writeEnum(enum *YamlEnum) {
 	}
 	w.writeln()
 
-	// writer the get-method
-	w.wrind1ln("def get(v: Union[str, '" + n + "'],")
-	w.wrind3ln("default: Optional['" + n + "'] = None) -> '" + n + "':")
-	w.wrind2ln("for i in " + n + ":")
+	// write the get-method
+	w.wrind1ln("@staticmethod")
+	w.wrind1ln("def get(v: Union[str, '" + name + "'],")
+	w.wrind3ln("default: Optional['" + name +
+		"'] = None) -> Optional['" + name + "']:")
+	w.wrind2ln("for i in " + name + ":")
 	w.wrind3ln("if i == v or i.value == v or i.name == v:")
 	w.wrind4ln("return i")
 	w.wrind2ln("return default")
@@ -197,7 +199,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	}
 
 	// to_ref
-	if w.model.IsRootEntity(class) || class.Name == "Unit" {
+	if w.model.IsRefEntity(class) {
 		w.wrind1ln("def to_ref(self) -> 'Ref':")
 		w.wrind2ln("ref = Ref(id=self.id, name=self.name)")
 		if w.model.IsRootEntity(class) {
@@ -241,6 +243,9 @@ func (w *pyWriter) writeFromDict(class *YamlClass) {
 	}
 
 	for _, prop := range w.model.AllPropsOf(class) {
+		if prop.Name == "@type" {
+			continue
+		}
 		w.wrind2ln("if v := d.get('" + prop.Name + "'):")
 		propType := prop.PropType()
 		modelProp := instance + "." + prop.PyName()

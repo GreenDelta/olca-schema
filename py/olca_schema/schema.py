@@ -21,8 +21,9 @@ class AllocationType(Enum):
     USE_DEFAULT_ALLOCATION = 'USE_DEFAULT_ALLOCATION'
     NO_ALLOCATION = 'NO_ALLOCATION'
 
+    @staticmethod
     def get(v: Union[str, 'AllocationType'],
-            default: Optional['AllocationType'] = None) -> 'AllocationType':
+            default: Optional['AllocationType'] = None) -> Optional['AllocationType']:
         for i in AllocationType:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -34,8 +35,9 @@ class Direction(Enum):
     INPUT = 'INPUT'
     OUTPUT = 'OUTPUT'
 
+    @staticmethod
     def get(v: Union[str, 'Direction'],
-            default: Optional['Direction'] = None) -> 'Direction':
+            default: Optional['Direction'] = None) -> Optional['Direction']:
         for i in Direction:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -47,8 +49,9 @@ class FlowPropertyType(Enum):
     ECONOMIC_QUANTITY = 'ECONOMIC_QUANTITY'
     PHYSICAL_QUANTITY = 'PHYSICAL_QUANTITY'
 
+    @staticmethod
     def get(v: Union[str, 'FlowPropertyType'],
-            default: Optional['FlowPropertyType'] = None) -> 'FlowPropertyType':
+            default: Optional['FlowPropertyType'] = None) -> Optional['FlowPropertyType']:
         for i in FlowPropertyType:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -61,8 +64,9 @@ class FlowType(Enum):
     PRODUCT_FLOW = 'PRODUCT_FLOW'
     WASTE_FLOW = 'WASTE_FLOW'
 
+    @staticmethod
     def get(v: Union[str, 'FlowType'],
-            default: Optional['FlowType'] = None) -> 'FlowType':
+            default: Optional['FlowType'] = None) -> Optional['FlowType']:
         for i in FlowType:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -90,8 +94,9 @@ class ModelType(Enum):
     SOURCE = 'SOURCE'
     UNIT_GROUP = 'UNIT_GROUP'
 
+    @staticmethod
     def get(v: Union[str, 'ModelType'],
-            default: Optional['ModelType'] = None) -> 'ModelType':
+            default: Optional['ModelType'] = None) -> Optional['ModelType']:
         for i in ModelType:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -104,8 +109,9 @@ class ParameterScope(Enum):
     IMPACT_SCOPE = 'IMPACT_SCOPE'
     GLOBAL_SCOPE = 'GLOBAL_SCOPE'
 
+    @staticmethod
     def get(v: Union[str, 'ParameterScope'],
-            default: Optional['ParameterScope'] = None) -> 'ParameterScope':
+            default: Optional['ParameterScope'] = None) -> Optional['ParameterScope']:
         for i in ParameterScope:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -117,8 +123,9 @@ class ProcessType(Enum):
     LCI_RESULT = 'LCI_RESULT'
     UNIT_PROCESS = 'UNIT_PROCESS'
 
+    @staticmethod
     def get(v: Union[str, 'ProcessType'],
-            default: Optional['ProcessType'] = None) -> 'ProcessType':
+            default: Optional['ProcessType'] = None) -> Optional['ProcessType']:
         for i in ProcessType:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -131,8 +138,9 @@ class ProviderLinking(Enum):
     PREFER_DEFAULTS = 'PREFER_DEFAULTS'
     ONLY_DEFAULTS = 'ONLY_DEFAULTS'
 
+    @staticmethod
     def get(v: Union[str, 'ProviderLinking'],
-            default: Optional['ProviderLinking'] = None) -> 'ProviderLinking':
+            default: Optional['ProviderLinking'] = None) -> Optional['ProviderLinking']:
         for i in ProviderLinking:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -154,8 +162,9 @@ class RiskLevel(Enum):
     NO_DATA = 'NO_DATA'
     NOT_APPLICABLE = 'NOT_APPLICABLE'
 
+    @staticmethod
     def get(v: Union[str, 'RiskLevel'],
-            default: Optional['RiskLevel'] = None) -> 'RiskLevel':
+            default: Optional['RiskLevel'] = None) -> Optional['RiskLevel']:
         for i in RiskLevel:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -169,8 +178,9 @@ class UncertaintyType(Enum):
     TRIANGLE_DISTRIBUTION = 'TRIANGLE_DISTRIBUTION'
     UNIFORM_DISTRIBUTION = 'UNIFORM_DISTRIBUTION'
 
+    @staticmethod
     def get(v: Union[str, 'UncertaintyType'],
-            default: Optional['UncertaintyType'] = None) -> 'UncertaintyType':
+            default: Optional['UncertaintyType'] = None) -> Optional['UncertaintyType']:
         for i in UncertaintyType:
             if i == v or i.value == v or i.name == v:
                 return i
@@ -200,8 +210,6 @@ class DQScore:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQScore':
         d_q_score = DQScore()
-        if v := d.get('@type'):
-            d_q_score.schema_type = v
         if v := d.get('description'):
             d_q_score.description = v
         if v := d.get('label'):
@@ -233,8 +241,6 @@ class DQIndicator:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQIndicator':
         d_q_indicator = DQIndicator()
-        if v := d.get('@type'):
-            d_q_indicator.schema_type = v
         if v := d.get('name'):
             d_q_indicator.name = v
         if v := d.get('position'):
@@ -258,8 +264,6 @@ class ExchangeRef:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ExchangeRef':
         exchange_ref = ExchangeRef()
-        if v := d.get('@type'):
-            exchange_ref.schema_type = v
         if v := d.get('internalId'):
             exchange_ref.internal_id = v
         return exchange_ref
@@ -328,12 +332,15 @@ class Ref:
             d['refUnit'] = self.ref_unit
         return d
 
+    def to_ref(self) -> 'Ref':
+        ref = Ref(id=self.id, name=self.name)
+        ref.model_type = 'Ref'
+        return ref
+
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Ref':
         ref = Ref()
         ref.model_type = d.get('@type', '')
-        if v := d.get('@type'):
-            ref.schema_type = v
         if v := d.get('@id'):
             ref.id = v
         if v := d.get('category'):
@@ -427,8 +434,6 @@ class Actor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Actor':
         actor = Actor()
-        if v := d.get('@type'):
-            actor.schema_type = v
         if v := d.get('@id'):
             actor.id = v
         if v := d.get('address'):
@@ -492,8 +497,6 @@ class AllocationFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'AllocationFactor':
         allocation_factor = AllocationFactor()
-        if v := d.get('@type'):
-            allocation_factor.schema_type = v
         if v := d.get('allocationType'):
             allocation_factor.allocation_type = AllocationType.get(v)
         if v := d.get('exchange'):
@@ -566,8 +569,6 @@ class Currency:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Currency':
         currency = Currency()
-        if v := d.get('@type'):
-            currency.schema_type = v
         if v := d.get('@id'):
             currency.id = v
         if v := d.get('category'):
@@ -654,8 +655,6 @@ class DQSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQSystem':
         d_q_system = DQSystem()
-        if v := d.get('@type'):
-            d_q_system.schema_type = v
         if v := d.get('@id'):
             d_q_system.id = v
         if v := d.get('category'):
@@ -703,8 +702,6 @@ class EpdModule:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EpdModule':
         epd_module = EpdModule()
-        if v := d.get('@type'):
-            epd_module.schema_type = v
         if v := d.get('multiplier'):
             epd_module.multiplier = v
         if v := d.get('name'):
@@ -737,8 +734,6 @@ class EpdProduct:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EpdProduct':
         epd_product = EpdProduct()
-        if v := d.get('@type'):
-            epd_product.schema_type = v
         if v := d.get('amount'):
             epd_product.amount = v
         if v := d.get('flow'):
@@ -821,8 +816,6 @@ class Epd:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Epd':
         epd = Epd()
-        if v := d.get('@type'):
-            epd.schema_type = v
         if v := d.get('@id'):
             epd.id = v
         if v := d.get('category'):
@@ -881,8 +874,6 @@ class FlowMapRef:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMapRef':
         flow_map_ref = FlowMapRef()
-        if v := d.get('@type'):
-            flow_map_ref.schema_type = v
         if v := d.get('flow'):
             flow_map_ref.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
@@ -914,8 +905,6 @@ class FlowMapEntry:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMapEntry':
         flow_map_entry = FlowMapEntry()
-        if v := d.get('@type'):
-            flow_map_entry.schema_type = v
         if v := d.get('conversionFactor'):
             flow_map_entry.conversion_factor = v
         if v := d.get('from'):
@@ -984,8 +973,6 @@ class FlowMap:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMap':
         flow_map = FlowMap()
-        if v := d.get('@type'):
-            flow_map.schema_type = v
         if v := d.get('@id'):
             flow_map.id = v
         if v := d.get('category'):
@@ -1069,8 +1056,6 @@ class FlowProperty:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowProperty':
         flow_property = FlowProperty()
-        if v := d.get('@type'):
-            flow_property.schema_type = v
         if v := d.get('@id'):
             flow_property.id = v
         if v := d.get('category'):
@@ -1116,8 +1101,6 @@ class FlowPropertyFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowPropertyFactor':
         flow_property_factor = FlowPropertyFactor()
-        if v := d.get('@type'):
-            flow_property_factor.schema_type = v
         if v := d.get('conversionFactor'):
             flow_property_factor.conversion_factor = v
         if v := d.get('flowProperty'):
@@ -1198,8 +1181,6 @@ class Flow:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Flow':
         flow = Flow()
-        if v := d.get('@type'):
-            flow.schema_type = v
         if v := d.get('@id'):
             flow.id = v
         if v := d.get('cas'):
@@ -1270,8 +1251,6 @@ class FlowResult:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowResult':
         flow_result = FlowResult()
-        if v := d.get('@type'):
-            flow_result.schema_type = v
         if v := d.get('amount'):
             flow_result.amount = v
         if v := d.get('description'):
@@ -1311,8 +1290,6 @@ class ImpactResult:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactResult':
         impact_result = ImpactResult()
-        if v := d.get('@type'):
-            impact_result.schema_type = v
         if v := d.get('amount'):
             impact_result.amount = v
         if v := d.get('description'):
@@ -1384,8 +1361,6 @@ class Location:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Location':
         location = Location()
-        if v := d.get('@type'):
-            location.schema_type = v
         if v := d.get('@id'):
             location.id = v
         if v := d.get('category'):
@@ -1435,8 +1410,6 @@ class NwFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'NwFactor':
         nw_factor = NwFactor()
-        if v := d.get('@type'):
-            nw_factor.schema_type = v
         if v := d.get('impactCategory'):
             nw_factor.impact_category = Ref.from_dict(v)
         if v := d.get('normalisationFactor'):
@@ -1469,11 +1442,14 @@ class NwSet:
             d['weightedScoreUnit'] = self.weighted_score_unit
         return d
 
+    def to_ref(self) -> 'Ref':
+        ref = Ref(id=self.id, name=self.name)
+        ref.model_type = 'NwSet'
+        return ref
+
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'NwSet':
         nw_set = NwSet()
-        if v := d.get('@type'):
-            nw_set.schema_type = v
         if v := d.get('@id'):
             nw_set.id = v
         if v := d.get('description'):
@@ -1549,8 +1525,6 @@ class ImpactMethod:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactMethod':
         impact_method = ImpactMethod()
-        if v := d.get('@type'):
-            impact_method.schema_type = v
         if v := d.get('@id'):
             impact_method.id = v
         if v := d.get('category'):
@@ -1663,8 +1637,6 @@ class ProcessDocumentation:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProcessDocumentation':
         process_documentation = ProcessDocumentation()
-        if v := d.get('@type'):
-            process_documentation.schema_type = v
         if v := d.get('completenessDescription'):
             process_documentation.completeness_description = v
         if v := d.get('creationDate'):
@@ -1739,8 +1711,6 @@ class ProcessLink:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProcessLink':
         process_link = ProcessLink()
-        if v := d.get('@type'):
-            process_link.schema_type = v
         if v := d.get('exchange'):
             process_link.exchange = ExchangeRef.from_dict(v)
         if v := d.get('flow'):
@@ -1814,8 +1784,6 @@ class Result:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Result':
         result = Result()
-        if v := d.get('@type'):
-            result.schema_type = v
         if v := d.get('@id'):
             result.id = v
         if v := d.get('category'):
@@ -1877,8 +1845,6 @@ class SocialAspect:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialAspect':
         social_aspect = SocialAspect()
-        if v := d.get('@type'):
-            social_aspect.schema_type = v
         if v := d.get('activityValue'):
             social_aspect.activity_value = v
         if v := d.get('comment'):
@@ -1961,8 +1927,6 @@ class SocialIndicator:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialIndicator':
         social_indicator = SocialIndicator()
-        if v := d.get('@type'):
-            social_indicator.schema_type = v
         if v := d.get('@id'):
             social_indicator.id = v
         if v := d.get('activityQuantity'):
@@ -2056,8 +2020,6 @@ class Source:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Source':
         source = Source()
-        if v := d.get('@type'):
-            source.schema_type = v
         if v := d.get('@id'):
             source.id = v
         if v := d.get('category'):
@@ -2122,8 +2084,6 @@ class Uncertainty:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Uncertainty':
         uncertainty = Uncertainty()
-        if v := d.get('@type'):
-            uncertainty.schema_type = v
         if v := d.get('distributionType'):
             uncertainty.distribution_type = UncertaintyType.get(v)
         if v := d.get('geomMean'):
@@ -2208,8 +2168,6 @@ class Exchange:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Exchange':
         exchange = Exchange()
-        if v := d.get('@type'):
-            exchange.schema_type = v
         if v := d.get('amount'):
             exchange.amount = v
         if v := d.get('amountFormula'):
@@ -2281,8 +2239,6 @@ class ImpactFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactFactor':
         impact_factor = ImpactFactor()
-        if v := d.get('@type'):
-            impact_factor.schema_type = v
         if v := d.get('flow'):
             impact_factor.flow = Ref.from_dict(v)
         if v := d.get('flowProperty'):
@@ -2365,8 +2321,6 @@ class Parameter:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Parameter':
         parameter = Parameter()
-        if v := d.get('@type'):
-            parameter.schema_type = v
         if v := d.get('@id'):
             parameter.id = v
         if v := d.get('category'):
@@ -2466,8 +2420,6 @@ class ImpactCategory:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactCategory':
         impact_category = ImpactCategory()
-        if v := d.get('@type'):
-            impact_category.schema_type = v
         if v := d.get('@id'):
             impact_category.id = v
         if v := d.get('category'):
@@ -2530,8 +2482,6 @@ class ParameterRedef:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ParameterRedef':
         parameter_redef = ParameterRedef()
-        if v := d.get('@type'):
-            parameter_redef.schema_type = v
         if v := d.get('context'):
             parameter_redef.context = Ref.from_dict(v)
         if v := d.get('description'):
@@ -2570,8 +2520,6 @@ class ParameterRedefSet:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ParameterRedefSet':
         parameter_redef_set = ParameterRedefSet()
-        if v := d.get('@type'):
-            parameter_redef_set.schema_type = v
         if v := d.get('description'):
             parameter_redef_set.description = v
         if v := d.get('isBaseline'):
@@ -2675,8 +2623,6 @@ class Process:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Process':
         process = Process()
-        if v := d.get('@type'):
-            process.schema_type = v
         if v := d.get('@id'):
             process.id = v
         if v := d.get('allocationFactors'):
@@ -2800,8 +2746,6 @@ class ProductSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProductSystem':
         product_system = ProductSystem()
-        if v := d.get('@type'):
-            product_system.schema_type = v
         if v := d.get('@id'):
             product_system.id = v
         if v := d.get('category'):
@@ -2874,8 +2818,6 @@ class ProjectVariant:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProjectVariant':
         project_variant = ProjectVariant()
-        if v := d.get('@type'):
-            project_variant.schema_type = v
         if v := d.get('allocationMethod'):
             project_variant.allocation_method = AllocationType.get(v)
         if v := d.get('amount'):
@@ -2960,8 +2902,6 @@ class Project:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Project':
         project = Project()
-        if v := d.get('@type'):
-            project.schema_type = v
         if v := d.get('@id'):
             project.id = v
         if v := d.get('category'):
@@ -3027,8 +2967,6 @@ class Unit:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Unit':
         unit = Unit()
-        if v := d.get('@type'):
-            unit.schema_type = v
         if v := d.get('@id'):
             unit.id = v
         if v := d.get('conversionFactor'):
@@ -3100,8 +3038,6 @@ class UnitGroup:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'UnitGroup':
         unit_group = UnitGroup()
-        if v := d.get('@type'):
-            unit_group.schema_type = v
         if v := d.get('@id'):
             unit_group.id = v
         if v := d.get('category'):

@@ -246,13 +246,21 @@ func (model *YamlModel) AllPropsOf(class *YamlClass) []*YamlProp {
 // IsRootEntity returns true if the given class is a root entity. This is the case
 // when `RootEntity` is a parent class of the given class.
 func (model *YamlModel) IsRootEntity(class *YamlClass) bool {
+	return model.IsSubClass(class, "RootEntity")
+}
+
+func (model *YamlModel) IsRefEntity(class *YamlClass) bool {
+	return model.IsSubClass(class, "RefEntity")
+}
+
+func (model *YamlModel) IsSubClass(class *YamlClass, superClass string) bool {
 	c := class
 	for {
 		parent := model.ParentOf(c)
 		if parent == nil {
 			return false
 		}
-		if parent.Name == "RootEntity" {
+		if parent.Name == superClass {
 			return true
 		}
 		c = parent
