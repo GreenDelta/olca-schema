@@ -23,7 +23,8 @@ def new_unit(name: str, conversion_factor=1.0) -> Unit:
         id=str(uuid.uuid4()),
         name=name,
         conversion_factor=1.0,
-        is_ref_unit=conversion_factor == 1.0)
+        is_ref_unit=conversion_factor == 1.0,
+    )
 
 
 def new_unit_group(name: str, ref_unit: Union[str, Unit]) -> UnitGroup:
@@ -42,14 +43,14 @@ def new_unit_group(name: str, ref_unit: Union[str, Unit]) -> UnitGroup:
     group = new_unit_group('Mass units', 'kg')
     ```
     """
-    unit: Unit = new_unit(ref_unit) \
-        if isinstance(ref_unit, str) else ref_unit
+    unit: Unit = new_unit(ref_unit) if isinstance(ref_unit, str) else ref_unit
     group = UnitGroup(name=name, units=[unit])
     return group
 
 
-def new_flow_property(name: str,
-                      unit_group: Union[Ref, UnitGroup]) -> FlowProperty:
+def new_flow_property(
+    name: str, unit_group: Union[Ref, UnitGroup]
+) -> FlowProperty:
     """Creates a new flow property (quantity).
 
     Parameters
@@ -66,11 +67,12 @@ def new_flow_property(name: str,
     mass = new_flow_property('Mass', group)
     ```
     """
-    return FlowProperty(name=name, unit_group=_as_ref(unit_group))
+    return FlowProperty(name=name, unit_group=as_ref(unit_group))
 
 
-def new_flow(name: str, flow_type: FlowType,
-             flow_property: Union[Ref, FlowProperty]) -> Flow:
+def new_flow(
+    name: str, flow_type: FlowType, flow_property: Union[Ref, FlowProperty]
+) -> Flow:
     """Creates a new flow.
 
     Parameters
@@ -91,9 +93,10 @@ def new_flow(name: str, flow_type: FlowType,
     ```
     """
     factor = FlowPropertyFactor(
-        flow_property=_as_ref(flow_property),
+        flow_property=as_ref(flow_property),
         conversion_factor=1.0,
-        is_ref_flow_property=True)
+        is_ref_flow_property=True,
+    )
     return Flow(name=name, flow_type=flow_type, flow_properties=[factor])
 
 
@@ -139,8 +142,9 @@ def new_waste(name: str, flow_property: Union[Ref, FlowProperty]) -> Flow:
     return new_flow(name, FlowType.WASTE_FLOW, flow_property)
 
 
-def new_elementary_flow(name: str,
-                        flow_property: Union[Ref, FlowProperty]) -> Flow:
+def new_elementary_flow(
+    name: str, flow_property: Union[Ref, FlowProperty]
+) -> Flow:
     """Creates a new elementary flow.
 
     Parameters
@@ -178,9 +182,12 @@ def new_process(name: str) -> Process:
     return Process(name=name, process_type=ProcessType.UNIT_PROCESS)
 
 
-def new_exchange(process: Process, flow: Union[Ref, Flow],
-                 amount: Union[str, float] = 1.0,
-                 unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
+def new_exchange(
+    process: Process,
+    flow: Union[Ref, Flow],
+    amount: Union[str, float] = 1.0,
+    unit: Optional[Union[Ref, Unit]] = None,
+) -> Exchange:
     """Creates a new exchange.
 
     Parameters
@@ -213,15 +220,13 @@ def new_exchange(process: Process, flow: Union[Ref, Flow],
     else:
         internal_id = process.last_internal_id + 1
     process.last_internal_id = internal_id
-    exchange = Exchange(
-        internal_id=internal_id,
-        flow=_as_ref(flow))
+    exchange = Exchange(internal_id=internal_id, flow=as_ref(flow))
     if isinstance(amount, str):
         exchange.amount_formula = amount
     else:
         exchange.amount = amount
     if unit:
-        exchange.unit = _as_ref(unit)
+        exchange.unit = as_ref(unit)
     if process.exchanges is None:
         process.exchanges = [exchange]
     else:
@@ -229,9 +234,12 @@ def new_exchange(process: Process, flow: Union[Ref, Flow],
     return exchange
 
 
-def new_input(process: Process, flow: Union[Ref, Flow],
-              amount: Union[str, float] = 1.0,
-              unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
+def new_input(
+    process: Process,
+    flow: Union[Ref, Flow],
+    amount: Union[str, float] = 1.0,
+    unit: Optional[Union[Ref, Unit]] = None,
+) -> Exchange:
     """Creates a new input.
 
     Example
@@ -249,9 +257,12 @@ def new_input(process: Process, flow: Union[Ref, Flow],
     return exchange
 
 
-def new_output(process: Process, flow: Union[Ref, Flow],
-               amount: Union[str, float] = 1.0,
-               unit: Optional[Union[Ref, Unit]] = None) -> Exchange:
+def new_output(
+    process: Process,
+    flow: Union[Ref, Flow],
+    amount: Union[str, float] = 1.0,
+    unit: Optional[Union[Ref, Unit]] = None,
+) -> Exchange:
     """Creates a new output.
 
     Example
@@ -289,8 +300,9 @@ def new_location(name: str, code: Optional[str] = None) -> Location:
     return Location(name=name, code=code or name)
 
 
-def new_parameter(name: str, value: Union[str, float],
-                  scope=ParameterScope.GLOBAL_SCOPE) -> Parameter:
+def new_parameter(
+    name: str, value: Union[str, float], scope=ParameterScope.GLOBAL_SCOPE
+) -> Parameter:
     """Creates a new parameter.
 
     Parameters
@@ -325,35 +337,35 @@ def new_parameter(name: str, value: Union[str, float],
     param = Parameter(name=name, parameter_scope=scope)
     if isinstance(value, str):
         param.formula = value
-        param.input_parameter = False
+        param.is_input_parameter = False
     else:
         param.value = value
-        param.input_parameter = True
+        param.is_input_parameter = True
     return param
 
 
 def new_physical_allocation_factor(
-        process: Process, product: Union[Ref, Flow],
-        amount: Union[str, float]) -> AllocationFactor:
+    process: Process, product: Union[Ref, Flow], amount: Union[str, float]
+) -> AllocationFactor:
     f = _new_allocation_factor(process, product, amount)
     f.allocation_type = AllocationType.PHYSICAL_ALLOCATION
     return f
 
 
 def new_economic_allocation_factor(
-        process: Process,
-        product: Union[Ref, Flow],
-        amount: Union[str, float]) -> AllocationFactor:
+    process: Process, product: Union[Ref, Flow], amount: Union[str, float]
+) -> AllocationFactor:
     f = _new_allocation_factor(process, product, amount)
     f.allocation_type = AllocationType.ECONOMIC_ALLOCATION
     return f
 
 
 def new_causal_allocation_factor(
-        process: Process,
-        product: Union[Ref, Flow],
-        amount: Union[str, float],
-        exchange: Union[Exchange, ExchangeRef]) -> AllocationFactor:
+    process: Process,
+    product: Union[Ref, Flow],
+    amount: Union[str, float],
+    exchange: Union[Exchange, ExchangeRef],
+) -> AllocationFactor:
     f = _new_allocation_factor(process, product, amount)
     f.allocation_type = AllocationType.CAUSAL_ALLOCATION
     f.exchange = ExchangeRef(internal_id=exchange.internal_id)
@@ -361,11 +373,10 @@ def new_causal_allocation_factor(
 
 
 def _new_allocation_factor(
-        process: Process,
-        product: Union[Ref, Flow],
-        amount: Union[str, float]) -> AllocationFactor:
+    process: Process, product: Union[Ref, Flow], amount: Union[str, float]
+) -> AllocationFactor:
     f = AllocationFactor()
-    f.product = _as_ref(product)
+    f.product = as_ref(product)
     if isinstance(amount, str):
         f.formula = amount
     else:
@@ -377,5 +388,37 @@ def _new_allocation_factor(
     return f
 
 
-def _as_ref(e: Union[RootEntity, Ref]) -> Ref:
+def new_impact_category(name: str) -> ImpactCategory:
+    return ImpactCategory(name=name)
+
+
+def new_impact_factor(
+    indicator: ImpactCategory,
+    flow: Union[Ref, Flow],
+    value: Union[str, float] = 1.0,
+    unit: Optional[Union[Ref, Unit]] = None,
+) -> ImpactFactor:
+    factor = ImpactFactor(flow=as_ref(flow))
+    if isinstance(value, str):
+        factor.formula = value
+    else:
+        factor.value = value
+    if unit:
+        factor.unit = as_ref(unit)
+    if indicator.impact_factors is None:
+        indicator.impact_factors = [factor]
+    else:
+        indicator.impact_factors.append(factor)
+    return factor
+
+
+def new_impact_method(
+    name: str, *indicators: Union[Ref, ImpactCategory]
+) -> ImpactMethod:
+    method = ImpactMethod(name=name)
+    method.impact_categories = [as_ref(c) for c in indicators]
+    return method
+
+
+def as_ref(e: Union[RefEntity, Ref]) -> Ref:
     return e if isinstance(e, Ref) else e.to_ref()
