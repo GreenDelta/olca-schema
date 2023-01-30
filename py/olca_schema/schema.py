@@ -210,13 +210,7 @@ class DQScore:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQScore':
         d_q_score = DQScore()
-<<<<<<< HEAD
-        if v := d.get('description'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            d_q_score.schema_type = v
         if (v := d.get('description')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             d_q_score.description = v
         if (v := d.get('label')) or v is not None:
             d_q_score.label = v
@@ -247,13 +241,7 @@ class DQIndicator:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQIndicator':
         d_q_indicator = DQIndicator()
-<<<<<<< HEAD
-        if v := d.get('name'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            d_q_indicator.schema_type = v
         if (v := d.get('name')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             d_q_indicator.name = v
         if (v := d.get('position')) or v is not None:
             d_q_indicator.position = v
@@ -276,13 +264,7 @@ class ExchangeRef:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ExchangeRef':
         exchange_ref = ExchangeRef()
-<<<<<<< HEAD
-        if v := d.get('internalId'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            exchange_ref.schema_type = v
         if (v := d.get('internalId')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             exchange_ref.internal_id = v
         return exchange_ref
 
@@ -296,22 +278,22 @@ class LinkingConfig:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.cutoff:
+        if self.cutoff is not None:
             d['cutoff'] = self.cutoff
-        if self.prefer_unit_processes:
+        if self.prefer_unit_processes is not None:
             d['preferUnitProcesses'] = self.prefer_unit_processes
-        if self.provider_linking:
+        if self.provider_linking is not None:
             d['providerLinking'] = self.provider_linking.value
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'LinkingConfig':
         linking_config = LinkingConfig()
-        if v := d.get('cutoff'):
+        if (v := d.get('cutoff')) or v is not None:
             linking_config.cutoff = v
-        if v := d.get('preferUnitProcesses'):
+        if (v := d.get('preferUnitProcesses')) or v is not None:
             linking_config.prefer_unit_processes = v
-        if v := d.get('providerLinking'):
+        if (v := d.get('providerLinking')) or v is not None:
             linking_config.provider_linking = ProviderLinking.get(v)
         return linking_config
 
@@ -359,13 +341,7 @@ class Ref:
     def from_dict(d: Dict[str, Any]) -> 'Ref':
         ref = Ref()
         ref.model_type = d.get('@type', '')
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            ref.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             ref.id = v
         if (v := d.get('category')) or v is not None:
             ref.category = v
@@ -458,13 +434,7 @@ class Actor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Actor':
         actor = Actor()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            actor.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             actor.id = v
         if (v := d.get('address')) or v is not None:
             actor.address = v
@@ -527,13 +497,7 @@ class AllocationFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'AllocationFactor':
         allocation_factor = AllocationFactor()
-<<<<<<< HEAD
-        if v := d.get('allocationType'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            allocation_factor.schema_type = v
         if (v := d.get('allocationType')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             allocation_factor.allocation_type = AllocationType.get(v)
         if (v := d.get('exchange')) or v is not None:
             allocation_factor.exchange = ExchangeRef.from_dict(v)
@@ -605,13 +569,7 @@ class Currency:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Currency':
         currency = Currency()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            currency.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             currency.id = v
         if (v := d.get('category')) or v is not None:
             currency.category = v
@@ -697,13 +655,7 @@ class DQSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQSystem':
         d_q_system = DQSystem()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            d_q_system.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             d_q_system.id = v
         if (v := d.get('category')) or v is not None:
             d_q_system.category = v
@@ -750,13 +702,7 @@ class EpdModule:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EpdModule':
         epd_module = EpdModule()
-<<<<<<< HEAD
-        if v := d.get('multiplier'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            epd_module.schema_type = v
         if (v := d.get('multiplier')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             epd_module.multiplier = v
         if (v := d.get('name')) or v is not None:
             epd_module.name = v
@@ -788,13 +734,7 @@ class EpdProduct:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'EpdProduct':
         epd_product = EpdProduct()
-<<<<<<< HEAD
-        if v := d.get('amount'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            epd_product.schema_type = v
         if (v := d.get('amount')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             epd_product.amount = v
         if (v := d.get('flow')) or v is not None:
             epd_product.flow = Ref.from_dict(v)
@@ -876,13 +816,7 @@ class Epd:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Epd':
         epd = Epd()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            epd.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             epd.id = v
         if (v := d.get('category')) or v is not None:
             epd.category = v
@@ -940,13 +874,7 @@ class FlowMapRef:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMapRef':
         flow_map_ref = FlowMapRef()
-<<<<<<< HEAD
-        if v := d.get('flow'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow_map_ref.schema_type = v
         if (v := d.get('flow')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow_map_ref.flow = Ref.from_dict(v)
         if (v := d.get('flowProperty')) or v is not None:
             flow_map_ref.flow_property = Ref.from_dict(v)
@@ -977,13 +905,7 @@ class FlowMapEntry:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMapEntry':
         flow_map_entry = FlowMapEntry()
-<<<<<<< HEAD
-        if v := d.get('conversionFactor'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow_map_entry.schema_type = v
         if (v := d.get('conversionFactor')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow_map_entry.conversion_factor = v
         if (v := d.get('from')) or v is not None:
             flow_map_entry.from_ = FlowMapRef.from_dict(v)
@@ -1051,13 +973,7 @@ class FlowMap:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMap':
         flow_map = FlowMap()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow_map.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow_map.id = v
         if (v := d.get('category')) or v is not None:
             flow_map.category = v
@@ -1140,13 +1056,7 @@ class FlowProperty:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowProperty':
         flow_property = FlowProperty()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow_property.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow_property.id = v
         if (v := d.get('category')) or v is not None:
             flow_property.category = v
@@ -1191,13 +1101,7 @@ class FlowPropertyFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowPropertyFactor':
         flow_property_factor = FlowPropertyFactor()
-<<<<<<< HEAD
-        if v := d.get('conversionFactor'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow_property_factor.schema_type = v
         if (v := d.get('conversionFactor')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow_property_factor.conversion_factor = v
         if (v := d.get('flowProperty')) or v is not None:
             flow_property_factor.flow_property = Ref.from_dict(v)
@@ -1277,13 +1181,7 @@ class Flow:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Flow':
         flow = Flow()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow.id = v
         if (v := d.get('cas')) or v is not None:
             flow.cas = v
@@ -1353,13 +1251,7 @@ class FlowResult:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowResult':
         flow_result = FlowResult()
-<<<<<<< HEAD
-        if v := d.get('amount'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            flow_result.schema_type = v
         if (v := d.get('amount')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             flow_result.amount = v
         if (v := d.get('description')) or v is not None:
             flow_result.description = v
@@ -1398,13 +1290,7 @@ class ImpactResult:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactResult':
         impact_result = ImpactResult()
-<<<<<<< HEAD
-        if v := d.get('amount'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            impact_result.schema_type = v
         if (v := d.get('amount')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             impact_result.amount = v
         if (v := d.get('description')) or v is not None:
             impact_result.description = v
@@ -1475,13 +1361,7 @@ class Location:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Location':
         location = Location()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            location.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             location.id = v
         if (v := d.get('category')) or v is not None:
             location.category = v
@@ -1530,13 +1410,7 @@ class NwFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'NwFactor':
         nw_factor = NwFactor()
-<<<<<<< HEAD
-        if v := d.get('impactCategory'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            nw_factor.schema_type = v
         if (v := d.get('impactCategory')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             nw_factor.impact_category = Ref.from_dict(v)
         if (v := d.get('normalisationFactor')) or v is not None:
             nw_factor.normalisation_factor = v
@@ -1576,13 +1450,7 @@ class NwSet:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'NwSet':
         nw_set = NwSet()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            nw_set.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             nw_set.id = v
         if (v := d.get('description')) or v is not None:
             nw_set.description = v
@@ -1657,13 +1525,7 @@ class ImpactMethod:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactMethod':
         impact_method = ImpactMethod()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            impact_method.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             impact_method.id = v
         if (v := d.get('category')) or v is not None:
             impact_method.category = v
@@ -1775,13 +1637,7 @@ class ProcessDocumentation:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProcessDocumentation':
         process_documentation = ProcessDocumentation()
-<<<<<<< HEAD
-        if v := d.get('completenessDescription'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            process_documentation.schema_type = v
         if (v := d.get('completenessDescription')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             process_documentation.completeness_description = v
         if (v := d.get('creationDate')) or v is not None:
             process_documentation.creation_date = v
@@ -1855,13 +1711,7 @@ class ProcessLink:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProcessLink':
         process_link = ProcessLink()
-<<<<<<< HEAD
-        if v := d.get('exchange'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            process_link.schema_type = v
         if (v := d.get('exchange')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             process_link.exchange = ExchangeRef.from_dict(v)
         if (v := d.get('flow')) or v is not None:
             process_link.flow = Ref.from_dict(v)
@@ -1934,13 +1784,7 @@ class Result:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Result':
         result = Result()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            result.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             result.id = v
         if (v := d.get('category')) or v is not None:
             result.category = v
@@ -2001,13 +1845,7 @@ class SocialAspect:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialAspect':
         social_aspect = SocialAspect()
-<<<<<<< HEAD
-        if v := d.get('activityValue'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            social_aspect.schema_type = v
         if (v := d.get('activityValue')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             social_aspect.activity_value = v
         if (v := d.get('comment')) or v is not None:
             social_aspect.comment = v
@@ -2089,13 +1927,7 @@ class SocialIndicator:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialIndicator':
         social_indicator = SocialIndicator()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            social_indicator.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             social_indicator.id = v
         if (v := d.get('activityQuantity')) or v is not None:
             social_indicator.activity_quantity = Ref.from_dict(v)
@@ -2188,13 +2020,7 @@ class Source:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Source':
         source = Source()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            source.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             source.id = v
         if (v := d.get('category')) or v is not None:
             source.category = v
@@ -2258,13 +2084,7 @@ class Uncertainty:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Uncertainty':
         uncertainty = Uncertainty()
-<<<<<<< HEAD
-        if v := d.get('distributionType'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            uncertainty.schema_type = v
         if (v := d.get('distributionType')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             uncertainty.distribution_type = UncertaintyType.get(v)
         if (v := d.get('geomMean')) or v is not None:
             uncertainty.geom_mean = v
@@ -2348,13 +2168,7 @@ class Exchange:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Exchange':
         exchange = Exchange()
-<<<<<<< HEAD
-        if v := d.get('amount'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            exchange.schema_type = v
         if (v := d.get('amount')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             exchange.amount = v
         if (v := d.get('amountFormula')) or v is not None:
             exchange.amount_formula = v
@@ -2425,13 +2239,7 @@ class ImpactFactor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactFactor':
         impact_factor = ImpactFactor()
-<<<<<<< HEAD
-        if v := d.get('flow'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            impact_factor.schema_type = v
         if (v := d.get('flow')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             impact_factor.flow = Ref.from_dict(v)
         if (v := d.get('flowProperty')) or v is not None:
             impact_factor.flow_property = Ref.from_dict(v)
@@ -2513,13 +2321,7 @@ class Parameter:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Parameter':
         parameter = Parameter()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            parameter.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             parameter.id = v
         if (v := d.get('category')) or v is not None:
             parameter.category = v
@@ -2618,13 +2420,7 @@ class ImpactCategory:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactCategory':
         impact_category = ImpactCategory()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            impact_category.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             impact_category.id = v
         if (v := d.get('category')) or v is not None:
             impact_category.category = v
@@ -2686,13 +2482,7 @@ class ParameterRedef:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ParameterRedef':
         parameter_redef = ParameterRedef()
-<<<<<<< HEAD
-        if v := d.get('context'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            parameter_redef.schema_type = v
         if (v := d.get('context')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             parameter_redef.context = Ref.from_dict(v)
         if (v := d.get('description')) or v is not None:
             parameter_redef.description = v
@@ -2730,13 +2520,7 @@ class ParameterRedefSet:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ParameterRedefSet':
         parameter_redef_set = ParameterRedefSet()
-<<<<<<< HEAD
-        if v := d.get('description'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            parameter_redef_set.schema_type = v
         if (v := d.get('description')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             parameter_redef_set.description = v
         if (v := d.get('isBaseline')) or v is not None:
             parameter_redef_set.is_baseline = v
@@ -2839,13 +2623,7 @@ class Process:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Process':
         process = Process()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            process.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             process.id = v
         if (v := d.get('allocationFactors')) or v is not None:
             process.allocation_factors = [AllocationFactor.from_dict(e) for e in v]
@@ -2968,13 +2746,7 @@ class ProductSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProductSystem':
         product_system = ProductSystem()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            product_system.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             product_system.id = v
         if (v := d.get('category')) or v is not None:
             product_system.category = v
@@ -3046,13 +2818,7 @@ class ProjectVariant:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProjectVariant':
         project_variant = ProjectVariant()
-<<<<<<< HEAD
-        if v := d.get('allocationMethod'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            project_variant.schema_type = v
         if (v := d.get('allocationMethod')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             project_variant.allocation_method = AllocationType.get(v)
         if (v := d.get('amount')) or v is not None:
             project_variant.amount = v
@@ -3136,13 +2902,7 @@ class Project:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Project':
         project = Project()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            project.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             project.id = v
         if (v := d.get('category')) or v is not None:
             project.category = v
@@ -3207,13 +2967,7 @@ class Unit:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Unit':
         unit = Unit()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            unit.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             unit.id = v
         if (v := d.get('conversionFactor')) or v is not None:
             unit.conversion_factor = v
@@ -3284,13 +3038,7 @@ class UnitGroup:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'UnitGroup':
         unit_group = UnitGroup()
-<<<<<<< HEAD
-        if v := d.get('@id'):
-=======
-        if (v := d.get('@type')) or v is not None:
-            unit_group.schema_type = v
         if (v := d.get('@id')) or v is not None:
->>>>>>> 5b62450c5214ffd2b3e695e763c51b156b3c82ae
             unit_group.id = v
         if (v := d.get('category')) or v is not None:
             unit_group.category = v

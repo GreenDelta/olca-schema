@@ -2,7 +2,7 @@ import os
 import zipfile
 import olca_schema as schema
 
-from typing import cast, Optional, Type, TypeVar
+from typing import cast, Iterator, List, Optional, Type, TypeVar, Union
 
 import olca_schema as schema
 

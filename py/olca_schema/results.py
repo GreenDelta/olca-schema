@@ -19,18 +19,18 @@ class CostValue:
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        if self.amount:
+        if self.amount is not None:
             d['amount'] = self.amount
-        if self.currency:
+        if self.currency is not None:
             d['currency'] = self.currency.to_dict()
         return d
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'CostValue':
         cost_value = CostValue()
-        if v := d.get('amount'):
+        if (v := d.get('amount')) or v is not None:
             cost_value.amount = v
-        if v := d.get('currency'):
+        if (v := d.get('currency')) or v is not None:
             cost_value.currency = Ref.from_dict(v)
         return cost_value
 
