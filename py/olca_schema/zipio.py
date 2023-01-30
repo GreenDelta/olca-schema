@@ -1,15 +1,19 @@
+import os
 import zipfile
 import olca_schema as schema
 
 from typing import cast, Optional, Type, TypeVar
 
+import olca_schema as schema
+
+
 _E = TypeVar("_E", bound=schema.RootEntity)
 
 
 class ZipWriter:
-    def __init__(self, file_name: str):
+    def __init__(self, path: Union[str, os.PathLike]):
         self.__zip = zipfile.ZipFile(
-            file_name, mode="a", compression=zipfile.ZIP_DEFLATED
+            path, mode="a", compression=zipfile.ZIP_DEFLATED
         )
         if "olca-schema.json" not in self.__zip.namelist():
             self.__zip.writestr("olca-schema.json", '{"version": 2}')
@@ -32,8 +36,8 @@ class ZipWriter:
 
 
 class ZipReader:
-    def __init__(self, file_name: str):
-        self.__zip = zipfile.ZipFile(file_name, mode="r")
+    def __init__(self, path: Union[str, os.PathLike]):
+        self.__zip = zipfile.ZipFile(path, mode="r")
 
     def __enter__(self):
         return self
@@ -105,6 +109,29 @@ class ZipReader:
     def read_unit_group(self, uid: str) -> Optional[schema.UnitGroup]:
         return self.read(schema.UnitGroup, uid)
 
+    def read_each(self, type_: Type[_E]) -> Iterator[_E]:
+        for uid in self.ids_of(type_):
+            e = self.read(type_, uid)
+            if e is not None:
+                yield e
+
+    def ids_of(self, type_: Type[_E]) -> List[str]:
+        folder = _folder_of_class(type_)
+        ids = []
+        for info in self.__zip.filelist:
+            if info.is_dir():
+                continue
+            name = info.filename
+            if not name.endswith(".json"):
+                continue
+            parts = name.split("/")
+            if len(parts) < 2:
+                continue
+            if parts[-2] != folder:
+                continue
+            ids.append(parts[-1][0:-5])
+        return ids
+
 
 def _folder_of_entity(entity: schema.RootEntity) -> str:
     if entity is None:
@@ -112,7 +139,7 @@ def _folder_of_entity(entity: schema.RootEntity) -> str:
     return _folder_of_class(type(entity))
 
 
-def _folder_of_class(t: type) -> str:
+def _folder_of_class(t: Type[_E]) -> str:
     if t == schema.Actor:
         return "actors"
     if t == schema.Currency:

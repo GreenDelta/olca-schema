@@ -175,7 +175,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 		selfProp := "self." + prop.PyName()
 		dictProp := "d['" + prop.Name + "']"
 		propType := prop.PropType()
-		w.wrind2ln("if " + selfProp + ":")
+		w.wrind2ln("if " + selfProp + " is not None:")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
@@ -246,7 +246,7 @@ func (w *pyWriter) writeFromDict(class *YamlClass) {
 		if prop.Name == "@type" {
 			continue
 		}
-		w.wrind2ln("if v := d.get('" + prop.Name + "'):")
+		w.wrind2ln("if (v := d.get('" + prop.Name + "')) or v is not None:")
 		propType := prop.PropType()
 		modelProp := instance + "." + prop.PyName()
 
