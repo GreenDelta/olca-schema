@@ -32,6 +32,9 @@
     "processType": {
       "@type": "@vocab"
     },
+    "providerLinking": {
+      "@type": "@vocab"
+    },
     "riskLevel": {
       "@type": "@vocab"
     }
