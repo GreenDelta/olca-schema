@@ -19,18 +19,18 @@ Here is a small example that creates a package that can be imported into
 openLCA 2:
 
 ```python
-import olca_schema as lca
+import olca_schema as o
 import olca_schema.zipio as zipio
 
 # create a unit group and flow property
-units = lca.new_unit_group('Units of mass', 'kg')
+units = o.new_unit_group('Units of mass', 'kg')
 kg = units.units[0]
-mass = lca.new_flow_property('Mass', units)
+mass = o.new_flow_property('Mass', units)
 
 # create a product flow and a process with the product as output
-steel = lca.new_product('Steel', mass)
-process = lca.new_process('Steel production')
-output = lca.new_output(process, steel, 1, kg)
+steel = o.new_product('Steel', mass)
+process = o.new_process('Steel production')
+output = o.new_output(process, steel, 1, kg)
 output.is_quantitative_reference = True
 
 # prints the Json string of the process
