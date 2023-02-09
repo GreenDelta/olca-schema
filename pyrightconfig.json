@@ -1,0 +1,10 @@
+{
+  "reportMissingTypeStubs": "none",
+  "strictParameterNoneValue": false,
+  "reportUnusedImport": "warning",
+  "reportOptionalMemberAccess": "none",
+  "reportOptionalCall": "information",
+  "reportOptionalSubscript": "none",
+  "reportOptionalIterable": "none",
+  "reportGeneralTypeIssues": "information"
+}

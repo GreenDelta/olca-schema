@@ -13,6 +13,38 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Union
 
 
+class RefType(Enum):
+    Actor = 'Actor'
+    Currency = 'Currency'
+    DQSystem = 'DQSystem'
+    Epd = 'Epd'
+    Flow = 'Flow'
+    FlowMap = 'FlowMap'
+    FlowProperty = 'FlowProperty'
+    ImpactCategory = 'ImpactCategory'
+    ImpactMethod = 'ImpactMethod'
+    Location = 'Location'
+    NwSet = 'NwSet'
+    Parameter = 'Parameter'
+    Process = 'Process'
+    ProductSystem = 'ProductSystem'
+    Project = 'Project'
+    Result = 'Result'
+    RootEntity = 'RootEntity'
+    SocialIndicator = 'SocialIndicator'
+    Source = 'Source'
+    Unit = 'Unit'
+    UnitGroup = 'UnitGroup'
+
+    @staticmethod
+    def get(v: Union[str, 'RefType'],
+            default: Optional['RefType'] = None) -> Optional['RefType']:
+        for i in RefType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
+
 class AllocationType(Enum):
 
     PHYSICAL_ALLOCATION = 'PHYSICAL_ALLOCATION'
@@ -309,11 +341,12 @@ class Ref:
     name: Optional[str] = None
     process_type: Optional[ProcessType] = None
     ref_unit: Optional[str] = None
-    model_type: str = ''
+    ref_type: Optional[RefType] = None
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {}
-        d['@type'] = self.model_type
+        if self.ref_type is not None:
+            d['@type'] = self.ref_type.value
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -334,13 +367,13 @@ class Ref:
 
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
-        ref.model_type = 'Ref'
+        ref.ref_type = self.ref_type
         return ref
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Ref':
         ref = Ref()
-        ref.model_type = d.get('@type', '')
+        ref.ref_type = RefType.get(d.get('@type', ''))
         if (v := d.get('@id')) or v is not None:
             ref.id = v
         if (v := d.get('category')) or v is not None:
@@ -428,7 +461,7 @@ class Actor:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Actor'
+        ref.ref_type = RefType.get('Actor')
         return ref
 
     @staticmethod
@@ -587,7 +620,7 @@ class Currency:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Currency'
+        ref.ref_type = RefType.get('Currency')
         return ref
 
     @staticmethod
@@ -673,7 +706,7 @@ class DQSystem:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'DQSystem'
+        ref.ref_type = RefType.get('DQSystem')
         return ref
 
     @staticmethod
@@ -887,7 +920,7 @@ class Epd:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Epd'
+        ref.ref_type = RefType.get('Epd')
         return ref
 
     @staticmethod
@@ -1044,7 +1077,7 @@ class FlowMap:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'FlowMap'
+        ref.ref_type = RefType.get('FlowMap')
         return ref
 
     @staticmethod
@@ -1127,7 +1160,7 @@ class FlowProperty:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'FlowProperty'
+        ref.ref_type = RefType.get('FlowProperty')
         return ref
 
     @staticmethod
@@ -1252,7 +1285,7 @@ class Flow:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Flow'
+        ref.ref_type = RefType.get('Flow')
         return ref
 
     @staticmethod
@@ -1456,7 +1489,7 @@ class Location:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Location'
+        ref.ref_type = RefType.get('Location')
         return ref
 
     @staticmethod
@@ -1545,7 +1578,7 @@ class NwSet:
 
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
-        ref.model_type = 'NwSet'
+        ref.ref_type = RefType.get('NwSet')
         return ref
 
     @staticmethod
@@ -1620,7 +1653,7 @@ class ImpactMethod:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'ImpactMethod'
+        ref.ref_type = RefType.get('ImpactMethod')
         return ref
 
     @staticmethod
@@ -1879,7 +1912,7 @@ class Result:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Result'
+        ref.ref_type = RefType.get('Result')
         return ref
 
     @staticmethod
@@ -2061,7 +2094,7 @@ class SocialIndicator:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'SocialIndicator'
+        ref.ref_type = RefType.get('SocialIndicator')
         return ref
 
     @staticmethod
@@ -2154,7 +2187,7 @@ class Source:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Source'
+        ref.ref_type = RefType.get('Source')
         return ref
 
     @staticmethod
@@ -2503,7 +2536,7 @@ class Parameter:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Parameter'
+        ref.ref_type = RefType.get('Parameter')
         return ref
 
     @staticmethod
@@ -2602,7 +2635,7 @@ class ImpactCategory:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'ImpactCategory'
+        ref.ref_type = RefType.get('ImpactCategory')
         return ref
 
     @staticmethod
@@ -2869,7 +2902,7 @@ class Process:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Process'
+        ref.ref_type = RefType.get('Process')
         return ref
 
     @staticmethod
@@ -2992,7 +3025,7 @@ class ProductSystem:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'ProductSystem'
+        ref.ref_type = RefType.get('ProductSystem')
         return ref
 
     @staticmethod
@@ -3148,7 +3181,7 @@ class Project:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'Project'
+        ref.ref_type = RefType.get('Project')
         return ref
 
     @staticmethod
@@ -3213,7 +3246,7 @@ class Unit:
 
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
-        ref.model_type = 'Unit'
+        ref.ref_type = RefType.get('Unit')
         return ref
 
     @staticmethod
@@ -3284,7 +3317,7 @@ class UnitGroup:
     def to_ref(self) -> 'Ref':
         ref = Ref(id=self.id, name=self.name)
         ref.category = self.category
-        ref.model_type = 'UnitGroup'
+        ref.ref_type = RefType.get('UnitGroup')
         return ref
 
     @staticmethod
@@ -3335,5 +3368,6 @@ RootEntity = Union[
     Source,
     UnitGroup,
 ]
+
 
 RefEntity = Union[RootEntity, Unit, NwSet]
