@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Type
 
 
-import olca_schema as lca
+import olca_schema as o
 import olca_schema.zipio as zio
 
 
@@ -46,33 +46,33 @@ class ZipTest(unittest.TestCase):
         os.unlink(path)
 
 
-def _name_of(root_type: Type[lca.RootEntity]) -> str:
+def _name_of(root_type: Type[o.RootEntity]) -> str:
     return f"an instance of {root_type.__name__}"
 
 
-Spec = tuple[Type[lca.RootEntity], str]
+Spec = tuple[Type[o.RootEntity], str]
 
 
 def _setup() -> tuple[list[Spec], Path]:
     uid = lambda: str(uuid.uuid4())
     specs = [
-        (lca.Actor, uid()),
-        (lca.Currency, uid()),
-        (lca.DQSystem, uid()),
-        (lca.Epd, uid()),
-        (lca.Flow, uid()),
-        (lca.FlowProperty, uid()),
-        (lca.ImpactCategory, uid()),
-        (lca.ImpactMethod, uid()),
-        (lca.Location, uid()),
-        (lca.Parameter, uid()),
-        (lca.Process, uid()),
-        (lca.ProductSystem, uid()),
-        (lca.Project, uid()),
-        (lca.Result, uid()),
-        (lca.SocialIndicator, uid()),
-        (lca.Source, uid()),
-        (lca.UnitGroup, uid()),
+        (o.Actor, uid()),
+        (o.Currency, uid()),
+        (o.DQSystem, uid()),
+        (o.Epd, uid()),
+        (o.Flow, uid()),
+        (o.FlowProperty, uid()),
+        (o.ImpactCategory, uid()),
+        (o.ImpactMethod, uid()),
+        (o.Location, uid()),
+        (o.Parameter, uid()),
+        (o.Process, uid()),
+        (o.ProductSystem, uid()),
+        (o.Project, uid()),
+        (o.Result, uid()),
+        (o.SocialIndicator, uid()),
+        (o.Source, uid()),
+        (o.UnitGroup, uid()),
     ]
 
     path = Path(tempfile.mktemp(".zip", "olca"))

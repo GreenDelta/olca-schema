@@ -21,60 +21,47 @@ func writePythonModule(args *args) {
 	modDir := filepath.Join(args.home, "py", "olca_schema")
 	mkdir(modDir)
 
-	// write the packages
-	for _, pack := range model.Packages() {
-
-		var buffer bytes.Buffer
-		writer := pyWriter{
-			buff:  &buffer,
-			model: model,
-		}
-		writer.writePackage(pack)
-
-		var fileName string
-		if model.IsRootPackage(pack) {
-			fileName = "schema.py"
-		} else {
-			fileName = pack + ".py"
-		}
-		modFile := filepath.Join(modDir, fileName)
-		writeFile(modFile, buffer.String())
+	// write the schema
+	var buffer bytes.Buffer
+	writer := pyWriter{
+		buff:  &buffer,
+		model: model,
 	}
+	writer.writeSchema()
+	fileName := "schema.py"
+	modFile := filepath.Join(modDir, fileName)
+	writeFile(modFile, buffer.String())
 }
 
-func (w *pyWriter) writePackage(pack string) {
+func (w *pyWriter) writeSchema() {
 
-	w.writeHeader(pack)
+	w.writeHeader()
 
 	// enums and classes
 	w.model.EachEnum(func(enum *YamlEnum) {
-		if w.model.PackageOfEnum(enum) == pack {
-			w.writeEnum(enum)
-		}
+		w.writeEnum(enum)
 	})
-
 	for _, class := range w.model.TopoSortClasses() {
-		if w.model.PackageOfClass(class) != pack || w.model.IsAbstract(class) {
+		if w.model.IsAbstract(class) {
 			continue
 		}
 		w.writeClass(class)
 	}
 
 	// write RootEntity type
-	if w.model.IsRootPackage(pack) {
-		w.writeln("RootEntity = Union[")
-		w.model.EachClass(func(class *YamlClass) {
-			if w.model.IsRootEntity(class) {
-				w.wrind1ln(class.Name + ",")
-			}
-		})
-		w.writeln("]")
-	}
+	w.writeln("RootEntity = Union[")
+	w.model.EachClass(func(class *YamlClass) {
+		if w.model.IsRootEntity(class) {
+			w.wrind1ln(class.Name + ",")
+		}
+	})
+	w.writeln("]")
+
 	w.writeln()
 	w.writeln("RefEntity = Union[RootEntity, Unit, NwSet]")
 }
 
-func (w *pyWriter) writeHeader(pack string) {
+func (w *pyWriter) writeHeader() {
 	w.writeln("# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
 	w.writeln(`
 # This module contains a Python API for reading and writing data sets in
@@ -83,22 +70,13 @@ func (w *pyWriter) writeHeader(pack string) {
 `)
 
 	// imports
-	if w.model.IsRootPackage(pack) {
-		w.writeln("import datetime")
-		w.writeln("import json")
-		w.writeln("import uuid")
-		w.writeln()
-	}
-
+	w.writeln("import datetime")
+	w.writeln("import json")
+	w.writeln("import uuid")
+	w.writeln()
 	w.writeln("from enum import Enum")
 	w.writeln("from dataclasses import dataclass")
 	w.writeln("from typing import Any, Dict, List, Optional, Union")
-
-	if !w.model.IsRootPackage(pack) {
-		w.writeln()
-		w.writeln("from .schema import *")
-	}
-
 	w.writeln()
 	w.writeln()
 }

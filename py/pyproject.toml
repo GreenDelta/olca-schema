@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "olca_schema"
-version = "0.0.10"
+version = "0.0.11"
 description = "A package for reading and writing data sets in the openLCA schema format."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 keywords=["openLCA", "life cycle assessment", "LCA"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",

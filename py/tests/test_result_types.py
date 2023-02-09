@@ -1,11 +1,11 @@
 import unittest
-import olca_schema.results as res
+import olca_schema as o
 
 
 class ResultTypesTest(unittest.TestCase):
 
     def test_envi_flow(self):
-        envi_flow = res.EnviFlow.from_dict({
+        envi_flow = o.EnviFlow.from_dict({
             'flow': {
                 '@id': 'flow-id',
                 'name': 'flow-name',
@@ -17,7 +17,7 @@ class ResultTypesTest(unittest.TestCase):
             },
             'isInput': True,
         })
-        value = res.EnviFlowValue.from_dict({
+        value = o.EnviFlowValue.from_dict({
             'enviFlow': envi_flow.to_dict(),
             'amount': 42,
         })

@@ -1,6 +1,6 @@
 import uuid
 
-import olca_schema as lca
+import olca_schema as o
 import unittest
 
 
@@ -8,23 +8,23 @@ class RootTypeTest(unittest.TestCase):
 
     def test_conv(self):
         types = [
-            lca.Actor,
-            lca.Currency,
-            lca.DQSystem,
-            lca.Epd,
-            lca.Flow,
-            lca.FlowProperty,
-            lca.ImpactCategory,
-            lca.ImpactMethod,
-            lca.Location,
-            lca.Parameter,
-            lca.Process,
-            lca.ProductSystem,
-            lca.Project,
-            lca.Result,
-            lca.SocialIndicator,
-            lca.Source,
-            lca.UnitGroup,
+            o.Actor,
+            o.Currency,
+            o.DQSystem,
+            o.Epd,
+            o.Flow,
+            o.FlowProperty,
+            o.ImpactCategory,
+            o.ImpactMethod,
+            o.Location,
+            o.Parameter,
+            o.Process,
+            o.ProductSystem,
+            o.Project,
+            o.Result,
+            o.SocialIndicator,
+            o.Source,
+            o.UnitGroup,
         ]
 
         for t in types:
