@@ -24,6 +24,8 @@ func main() {
 		writePythonModule(args)
 	case "st", "tonel":
 		writeTonelFiles(args)
+	case "ts", "typescript":
+		writeTypeScriptModule(args)
 	case "context":
 		writeContextJson(args)
 	case "check":
