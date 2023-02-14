@@ -60,7 +60,21 @@ func (w *tsWriter) writeClasses() {
 		if w.model.IsAbstract(class) {
 			return
 		}
+
+		// write a companion interfase
+		w.writeln("interface I", class.Name, " {")
+		w.writeProps(class)
+		w.writeln("}")
+		w.writeln()
+
+		// write the class
 		w.writeln("export class ", class.Name, " {")
+		w.writeProps(class)
+		w.writeln()
+
+		// write the `of` factory method
+		w.writeln("  static of(i: I", class.Name, "): ", class.Name, " {")
+		w.writeln("    const e = new ", class.Name, "();")
 		for _, prop := range w.model.AllPropsOf(class) {
 			if prop.Name == "@type" {
 				continue
@@ -69,15 +83,34 @@ func (w *tsWriter) writeClasses() {
 			if prop.Name == "@id" {
 				propName = "uid"
 			}
-			propType := YamlPropType(prop.Type)
-			w.writeln("  ", propName, "?: ", w.typeOf(propType), ";")
+			w.writeln("    e.", propName, " = i.", propName, ";")
 		}
 		if class.Name == "Ref" {
-			w.writeln("  refType?: RefType;")
+			w.writeln("    e.refType = i.refType;")
 		}
+		w.writeln("    return e;")
+		w.writeln("  }")
+
 		w.writeln("}")
 		w.writeln()
 	})
+}
+
+func (w *tsWriter) writeProps(class *YamlClass) {
+	for _, prop := range w.model.AllPropsOf(class) {
+		if prop.Name == "@type" {
+			continue
+		}
+		propName := prop.Name
+		if prop.Name == "@id" {
+			propName = "uid"
+		}
+		propType := YamlPropType(prop.Type)
+		w.writeln("  ", propName, "?: ", w.typeOf(propType), ";")
+	}
+	if class.Name == "Ref" {
+		w.writeln("  refType?: RefType;")
+	}
 }
 
 func (w *tsWriter) typeOf(t YamlPropType) string {
