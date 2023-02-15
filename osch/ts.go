@@ -22,6 +22,7 @@ func writeTypeScriptModule(args *args) {
 		buff:  &buffer,
 		model: model,
 	}
+	writer.writeUtils()
 	writer.writeRefType()
 	writer.writeEnums()
 	writer.writeClasses()
@@ -30,6 +31,28 @@ func writeTypeScriptModule(args *args) {
 	mkdir(outDir)
 	file := filepath.Join(outDir, "schema.ts")
 	os.WriteFile(file, buffer.Bytes(), os.ModePerm)
+}
+
+func (w *tsWriter) writeUtils() {
+	w.writeln(`
+// #region: utils
+type Dict = {[field: string]: any};
+
+interface Dictable {
+  toDict: () => Dict,
+}
+
+function ifPresent<T>(val: T | undefined, consumer: (val: T) => void) {
+  if (val !== null && val !== undefined) {
+    consumer(val);
+  }
+}
+
+function dictAll(list: Array<Dictable>): Array<Dict> {
+  return list.map(e => e.toDict());
+}
+// #endregion
+`)
 }
 
 func (w *tsWriter) writeRefType() {
@@ -74,8 +97,16 @@ func (w *tsWriter) writeClasses() {
 		w.writeOfFactory(class)
 		if w.model.IsRefEntity(class) && class.Name != "Ref" {
 			w.writeln()
-			w.writeAsRef(class)
+			w.writeToRef(class)
 		}
+		w.writeln()
+		w.writeToDict(class)
+
+		w.writeln()
+		w.writeln("  toJson(): string {")
+		w.writeln("    return JSON.stringify(this.toDict(), null, \"  \");")
+		w.writeln("  }")
+
 		w.writeln("}")
 		w.writeln()
 	})
@@ -118,8 +149,8 @@ func (w *tsWriter) writeOfFactory(class *YamlClass) {
 	w.writeln("  }")
 }
 
-func (w *tsWriter) writeAsRef(class *YamlClass) {
-	w.writeln("  asRef(): Ref {")
+func (w *tsWriter) writeToRef(class *YamlClass) {
+	w.writeln("  toRef(): Ref {")
 	w.writeln("    return Ref.of({")
 	w.writeln("      refType: RefType.", class.Name, ",")
 	w.writeln("      id: this.id,")
@@ -128,6 +159,29 @@ func (w *tsWriter) writeAsRef(class *YamlClass) {
 		w.writeln("      category: this.category,")
 	}
 	w.writeln("    });")
+	w.writeln("  }")
+}
+
+func (w *tsWriter) writeToDict(class *YamlClass) {
+	w.writeln("  toDict(): Dict {")
+	w.writeln("    const d: Dict = {};")
+	for _, prop := range w.model.AllPropsOf(class) {
+		if prop.Name == "@type" {
+			continue
+		}
+		propName := prop.Name
+		if prop.Name == "@id" {
+			propName = "id"
+		}
+		t := prop.PropType()
+		conv := "v"
+		if t.IsList() && !t.UnpackList().IsPrimitive() {
+			conv = "dictAll(v)"
+		}
+		w.writeln("    ifPresent(this.", propName,
+			", v => d.", propName, " = ", conv, ");")
+	}
+	w.writeln("    return d;")
 	w.writeln("  }")
 }
 
