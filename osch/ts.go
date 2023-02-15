@@ -71,26 +71,11 @@ func (w *tsWriter) writeClasses() {
 		w.writeln("export class ", class.Name, " {")
 		w.writeProps(class)
 		w.writeln()
-
-		// write the `of` factory method
-		w.writeln("  static of(i: I", class.Name, "): ", class.Name, " {")
-		w.writeln("    const e = new ", class.Name, "();")
-		for _, prop := range w.model.AllPropsOf(class) {
-			if prop.Name == "@type" {
-				continue
-			}
-			propName := prop.Name
-			if prop.Name == "@id" {
-				propName = "uid"
-			}
-			w.writeln("    e.", propName, " = i.", propName, ";")
+		w.writeOfFactory(class)
+		if w.model.IsRefEntity(class) && class.Name != "Ref" {
+			w.writeln()
+			w.writeAsRef(class)
 		}
-		if class.Name == "Ref" {
-			w.writeln("    e.refType = i.refType;")
-		}
-		w.writeln("    return e;")
-		w.writeln("  }")
-
 		w.writeln("}")
 		w.writeln()
 	})
@@ -103,7 +88,7 @@ func (w *tsWriter) writeProps(class *YamlClass) {
 		}
 		propName := prop.Name
 		if prop.Name == "@id" {
-			propName = "uid"
+			propName = "id"
 		}
 		propType := YamlPropType(prop.Type)
 		w.writeln("  ", propName, "?: ", w.typeOf(propType), ";")
@@ -111,6 +96,39 @@ func (w *tsWriter) writeProps(class *YamlClass) {
 	if class.Name == "Ref" {
 		w.writeln("  refType?: RefType;")
 	}
+}
+
+func (w *tsWriter) writeOfFactory(class *YamlClass) {
+	w.writeln("  static of(i: I", class.Name, "): ", class.Name, " {")
+	w.writeln("    const e = new ", class.Name, "();")
+	for _, prop := range w.model.AllPropsOf(class) {
+		if prop.Name == "@type" {
+			continue
+		}
+		propName := prop.Name
+		if prop.Name == "@id" {
+			propName = "id"
+		}
+		w.writeln("    e.", propName, " = i.", propName, ";")
+	}
+	if class.Name == "Ref" {
+		w.writeln("    e.refType = i.refType;")
+	}
+	w.writeln("    return e;")
+	w.writeln("  }")
+}
+
+func (w *tsWriter) writeAsRef(class *YamlClass) {
+	w.writeln("  asRef(): Ref {")
+	w.writeln("    return Ref.of({")
+	w.writeln("      refType: RefType.", class.Name, ",")
+	w.writeln("      id: this.id,")
+	w.writeln("      name: this.name,")
+	if w.model.IsRootEntity(class) {
+		w.writeln("      category: this.category,")
+	}
+	w.writeln("    });")
+	w.writeln("  }")
 }
 
 func (w *tsWriter) typeOf(t YamlPropType) string {
