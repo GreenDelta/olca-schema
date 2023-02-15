@@ -165,21 +165,30 @@ func (w *tsWriter) writeToRef(class *YamlClass) {
 func (w *tsWriter) writeToDict(class *YamlClass) {
 	w.writeln("  toDict(): Dict {")
 	w.writeln("    const d: Dict = {};")
+	if w.model.IsRefEntity(class) && class.Name != "Ref" {
+		w.writeln("    d[\"@type\"] = \"", class.Name, "\";")
+	}
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
-		propName := prop.Name
 		if prop.Name == "@id" {
-			propName = "id"
+			w.writeln("    ifPresent(this.id, v => d[\"@id\"] = v);")
+			continue
 		}
+
 		t := prop.PropType()
 		conv := "v"
 		if t.IsList() && !t.UnpackList().IsPrimitive() {
 			conv = "dictAll(v)"
+		} else if !t.IsList() &&
+			!t.IsPrimitive() &&
+			!t.IsEnumOf(w.model) &&
+			prop.Type != "GeoJSON" {
+			conv = "v.toDict()"
 		}
-		w.writeln("    ifPresent(this.", propName,
-			", v => d.", propName, " = ", conv, ");")
+		w.writeln("    ifPresent(this.", prop.Name,
+			", v => d.", prop.Name, " = ", conv, ");")
 	}
 	w.writeln("    return d;")
 	w.writeln("  }")
@@ -201,7 +210,7 @@ func (w *tsWriter) typeOf(t YamlPropType) string {
 	case "bool", "boolean":
 		return "boolean"
 	case "GeoJSON":
-		return "any"
+		return "Record<string, unknown>"
 	default:
 		if startsWithLower(string(t)) {
 			log.Println("WARNING: unknown primitive type:", t)
