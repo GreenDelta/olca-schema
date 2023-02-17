@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -42,8 +43,12 @@ func writeTypeScriptModule(args *args) {
 
 func (w *tsWriter) writeUtils() {
 	w.writeln(`
+// this file was generated automatically; do not change it but help to make
+// the code generator better; see:
+// https://github.com/GreenDelta/olca-schema/tree/master/osch
+
 // #region: utils
-type Dict = {[field: string]: unknown};
+type Dict = Record<string, unknown>;
 
 interface Dictable {
   toDict: () => Dict,
@@ -55,8 +60,8 @@ function ifPresent<T>(val: T | undefined, consumer: (val: T) => void) {
   }
 }
 
-function dictAll(list: Array<Dictable>): Array<Dict> {
-  return list.map(e => e.toDict());
+function dictAll(list: Array<Dictable> | null): Array<Dict> {
+  return list ? list.map(e => e.toDict()) : [];
 }
 // #endregion
 `)
@@ -108,11 +113,21 @@ func (w *tsWriter) writeClasses() {
 		}
 		w.writeln()
 		w.writeToDict(class)
-
 		w.writeln()
-		w.writeln("  toJson(): string {")
-		w.writeln("    return JSON.stringify(this.toDict(), null, \"  \");")
-		w.writeln("  }")
+		w.writeFromDict(class)
+
+		// toJson & fromJson
+		w.writeln(fmt.Sprintf(`
+  static fromJson(json: string | Dict): %[1]s | null {
+    return typeof json === "string"
+      ? %[1]s.fromDict(JSON.parse(json) as Dict)
+      : %[1]s.fromDict(json);
+  }
+
+  toJson(): string {
+    return JSON.stringify(this.toDict(), null, "  ");
+  }
+`, class.Name))
 
 		w.writeln("}")
 		w.writeln()
@@ -129,10 +144,10 @@ func (w *tsWriter) writeProps(class *YamlClass) {
 			propName = "id"
 		}
 		propType := YamlPropType(prop.Type)
-		w.writeln("  ", propName, "?: ", w.typeOf(propType), ";")
+		w.writeln("  ", propName, "?: ", w.typeOf(propType), " | null;")
 	}
 	if class.Name == "Ref" {
-		w.writeln("  refType?: RefType;")
+		w.writeln("  refType?: RefType | null;")
 	}
 }
 
@@ -192,12 +207,51 @@ func (w *tsWriter) writeToDict(class *YamlClass) {
 			!t.IsPrimitive() &&
 			!t.IsEnumOf(w.model) &&
 			prop.Type != "GeoJSON" {
-			conv = "v.toDict()"
+			conv = "v?.toDict()"
 		}
 		w.writeln("    ifPresent(this.", prop.Name,
 			", v => d.", prop.Name, " = ", conv, ");")
 	}
 	w.writeln("    return d;")
+	w.writeln("  }")
+}
+
+func (w *tsWriter) writeFromDict(class *YamlClass) {
+	w.writeln("  static fromDict(d: Dict): ", class.Name, " | null {")
+	w.writeln("    if (!d) return null;")
+	w.writeln("    const e = new ", class.Name, "();")
+	for _, prop := range w.model.AllPropsOf(class) {
+		if prop.Name == "@type" {
+			continue
+		}
+		if prop.Name == "@id" {
+			w.writeln("    e.id = d[\"@id\"] as string;")
+			continue
+		}
+		t := prop.PropType()
+		if !t.IsList() {
+			if t.IsPrimitive() || t == "GeoJSON" || t.IsEnumOf(w.model) {
+				w.writeln("    e.", prop.Name, " = d.",
+					prop.Name, " as ", w.typeOf(t), ";")
+			} else {
+				w.writeln("    e.", prop.Name, " = ",
+					w.typeOf(t), ".fromDict(d.", prop.Name, " as Dict);")
+			}
+		} else {
+			inner := t.UnpackList()
+			if inner.IsPrimitive() {
+				w.writeln("    e.", prop.Name, " = d.",
+					prop.Name, " as ", w.typeOf(inner), "[];")
+			} else {
+				text := "    e." + prop.Name + " = d." + prop.Name + "\n"
+				text += "      ? (d." + prop.Name + " as Dict[]).map(" +
+					w.typeOf(inner) + ".fromDict) as " + w.typeOf(inner) + "[]\n" +
+					"      : null;"
+				w.writeln(text)
+			}
+		}
+	}
+	w.writeln("    return e;")
 	w.writeln("  }")
 }
 
