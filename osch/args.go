@@ -3,22 +3,37 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type args struct {
 	command string
 	home    string
+	output  string
 }
 
 func parseArgs() *args {
-	args := &args{}
+	args := &args{
+		home: findHome(),
+	}
 	osArgs := os.Args
 	if len(osArgs) < 2 {
 		return args
 	}
 
 	args.command = osArgs[1]
-	args.home = findHome()
+	flag := ""
+	for _, arg := range osArgs {
+		if strings.HasPrefix(arg, "-") {
+			flag = arg
+			continue
+		}
+		switch flag {
+		case "-o", "-output":
+			args.output = arg
+		}
+		flag = ""
+	}
 	return args
 }
 
