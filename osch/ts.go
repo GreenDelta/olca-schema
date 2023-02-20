@@ -25,6 +25,7 @@ func writeTypeScriptModule(args *args) {
 	}
 	writer.writeUtils()
 	writer.writeRefType()
+	writer.writeSumTypes()
 	writer.writeEnums()
 	writer.writeClasses()
 
@@ -71,12 +72,42 @@ func (w *tsWriter) writeRefType() {
 	w.writeln("export enum RefType {")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRefEntity(class) &&
-			class.Name != "Ref" {
+			class.Name != "Ref" &&
+			!w.model.IsAbstract(class) {
 			w.writeln("  ", class.Name+" = \""+class.Name+"\",")
 		}
 	})
 	w.writeln("}")
 	w.writeln()
+}
+
+func (w *tsWriter) writeSumTypes() {
+	text := "export type RootEntity = "
+	first := true
+	w.model.EachClass(func(class *YamlClass) {
+		if !w.model.IsAbstract(class) && w.model.IsRootEntity(class) {
+			text += "\n  "
+			if !first {
+				text += "| "
+			}
+			text += class.Name
+			first = false
+		}
+	})
+	text += ";\n"
+	w.writeln(text)
+
+	text = "export type RefEntity = RootEntity"
+	w.model.EachClass(func(class *YamlClass) {
+		if !w.model.IsAbstract(class) &&
+			w.model.IsRefEntity(class) &&
+			!w.model.IsRootEntity(class) &&
+			class.Name != "Ref" {
+			text += "\n  | " + class.Name
+		}
+	})
+	text += ";\n"
+	w.writeln(text)
 }
 
 func (w *tsWriter) writeEnums() {
