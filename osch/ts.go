@@ -43,8 +43,7 @@ func writeTypeScriptModule(args *args) {
 }
 
 func (w *tsWriter) writeUtils() {
-	w.writeln(`
-// this file was generated automatically; do not change it but help to make
+	w.writeln(`// this file was generated automatically; do not change it but help to make
 // the code generator better; see:
 // https://github.com/GreenDelta/olca-schema/tree/master/osch
 
@@ -52,7 +51,7 @@ func (w *tsWriter) writeUtils() {
 type Dict = Record<string, unknown>;
 
 interface Dictable {
-  toDict: () => Dict,
+  toDict: () => Dict;
 }
 
 function ifPresent<T>(val: T | undefined, consumer: (val: T) => void) {
@@ -62,7 +61,7 @@ function ifPresent<T>(val: T | undefined, consumer: (val: T) => void) {
 }
 
 function dictAll(list: Array<Dictable> | null): Array<Dict> {
-  return list ? list.map(e => e.toDict()) : [];
+  return list ? list.map((e) => e.toDict()) : [];
 }
 // #endregion
 `)
@@ -83,21 +82,15 @@ func (w *tsWriter) writeRefType() {
 
 func (w *tsWriter) writeSumTypes() {
 	text := "export type RootEntity = "
-	first := true
 	w.model.EachClass(func(class *YamlClass) {
 		if !w.model.IsAbstract(class) && w.model.IsRootEntity(class) {
-			text += "\n  "
-			if !first {
-				text += "| "
-			}
-			text += class.Name
-			first = false
+			text += "\n  | " + class.Name
 		}
 	})
 	text += ";\n"
 	w.writeln(text)
 
-	text = "export type RefEntity = RootEntity"
+	text = "export type RefEntity =\n  | RootEntity"
 	w.model.EachClass(func(class *YamlClass) {
 		if !w.model.IsAbstract(class) &&
 			w.model.IsRefEntity(class) &&
@@ -157,8 +150,7 @@ func (w *tsWriter) writeClasses() {
 
   toJson(): string {
     return JSON.stringify(this.toDict(), null, "  ");
-  }
-`, class.Name))
+  }`, class.Name))
 
 		w.writeln("}")
 		w.writeln()
@@ -221,12 +213,15 @@ func (w *tsWriter) writeToDict(class *YamlClass) {
 	if w.model.IsRefEntity(class) && class.Name != "Ref" {
 		w.writeln("    d[\"@type\"] = \"", class.Name, "\";")
 	}
+	if class.Name == "Ref" {
+		w.writeln("    ifPresent(this.refType, (v) => d[\"@type\"] = v);")
+	}
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
 		if prop.Name == "@id" {
-			w.writeln("    ifPresent(this.id, v => d[\"@id\"] = v);")
+			w.writeln("    ifPresent(this.id, (v) => d[\"@id\"] = v);")
 			continue
 		}
 
@@ -241,7 +236,7 @@ func (w *tsWriter) writeToDict(class *YamlClass) {
 			conv = "v?.toDict()"
 		}
 		w.writeln("    ifPresent(this.", prop.Name,
-			", v => d.", prop.Name, " = ", conv, ");")
+			", (v) => d.", prop.Name, " = ", conv, ");")
 	}
 	w.writeln("    return d;")
 	w.writeln("  }")
