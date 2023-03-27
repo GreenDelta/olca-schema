@@ -35,6 +35,7 @@
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -72,10 +73,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -236,6 +239,22 @@ referenced from other entities, e.g. in an <code>Exchange</code> of a process.</
 <p>It should be quite easy to implement these concepts in common programming
 languages an serialization formats. In fact, such implementations can be
 directly generated from the schema definition.</p>
+<h1 id="json-ld--rdf"><a class="header" href="#json-ld--rdf">JSON-LD / RDF</a></h1>
+<p>In most cases, the openLCA schema is just used as a structured data format.
+However, the JSON serialization uses the two standard JSON-LD annotations
+<code>@type</code> and <code>@id</code> for the type and identifier of a data set or <a href="./Ref">data set
+reference</a>. We also provide a <a href="./context.jsonld">JSON-LD context</a> and a
+<a href="./schema.ttl">RDF ontology</a> for the schema. The vocabulary base of the schema
+is <code>http://greendelta.github.io/olca-schema#</code> but the data set identifiers are
+relative to the specific context. Instances of the openLCA schema classes or
+properties are not part of its ontology. For example, in the following document,
+the type is expanded to <code>http://greendelta.github.io/olca-schema#Flow</code> but the
+ID is relative to the respective context:</p>
+<pre><code class="language-json">{
+  &quot;@type&quot;: &quot;Flow&quot;,
+  &quot;@id&quot;: &quot;123&quot;
+}
+</code></pre>
 <h2 id="zip-packages"><a class="header" href="#zip-packages">Zip packages</a></h2>
 <p>For the data exchange with openLCA, openLCA schema data sets are typically
 packed as JSON serialized files in zip files. Data sets of the different root
@@ -4648,5 +4667,6 @@ class TechFlowValue:
         });
         </script>
 
+    </div>
     </body>
 </html>
