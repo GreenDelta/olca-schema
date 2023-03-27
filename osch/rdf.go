@@ -4,11 +4,58 @@ import (
 	"bytes"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type rdfWriter struct {
 	buff  *bytes.Buffer
 	model *YamlModel
+}
+
+type rdfProp struct {
+	domain []*YamlClass
+	yaml   *YamlProp
+}
+
+func (p *rdfProp) domainDef() string {
+	if len(p.domain) == 1 {
+		class := p.domain[0]
+		return ":" + class.Name
+	}
+	text := "[ a owl:Class; owl:unionOf ("
+	for i, class := range p.domain {
+		if i > 0 {
+			text += " "
+		}
+		text += ":" + class.Name
+	}
+	return text + ")]"
+}
+
+func (p *rdfProp) rangeDef() string {
+	t := p.yaml.Type
+	if strings.HasPrefix(t, "List[") {
+		return "rdf:List"
+	}
+	if strings.HasPrefix(t, "Ref[") {
+		return ":Ref"
+	}
+	switch t {
+	case "string":
+		return "xsd:string"
+	case "int", "integer":
+		return "xsd:integer"
+	case "double", "float":
+		return "xsd:double"
+	case "bool", "boolean":
+		return "xsd:boolean"
+	case "date":
+		return "xsd:date"
+	case "dateTime":
+		return "xsd:dateTime"
+	default:
+		return ":" + t
+	}
 }
 
 func writeRdf(args *args) {
@@ -49,11 +96,12 @@ func writeRdf(args *args) {
 		w.ln("  .\n")
 	})
 
+	w.writeProps()
 	os.WriteFile(filepath.Join(outDir, "schema.ttl"), w.buff.Bytes(), os.ModePerm)
 }
 
 func (w *rdfWriter) header() {
-	w.ln("@prefix : <http://greendelta.github.io/olca-schema/schema.ttl#> .")
+	w.ln("@prefix : <http://greendelta.github.io/olca-schema#> .")
 	w.ln("@prefix owl: <http://www.w3.org/2002/07/owl#> .")
 	w.ln("@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .")
 	w.ln("@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .")
@@ -63,6 +111,38 @@ func (w *rdfWriter) header() {
   rdfs:comment "The super-class of all enumeration types."
   .`)
 	w.ln()
+}
+
+func (w *rdfWriter) writeProps() {
+	for id, prop := range w.collectProps() {
+		w.ln(":", id, " a rdf:Property;")
+		if len(prop.domain) == 1 {
+			w.ln("  rdfs:comment \"", strip(prop.yaml.Doc), "\";")
+		}
+		w.ln("  rdfs:domain ", prop.domainDef(), ";")
+		w.ln("  rdfs:range ", prop.rangeDef())
+		w.ln("  .\n")
+	}
+}
+
+func (w *rdfWriter) collectProps() map[string]*rdfProp {
+	dict := make(map[string]*rdfProp)
+	w.model.EachClass(func(class *YamlClass) {
+		for i, prop := range class.Props {
+			if strings.HasPrefix(prop.Name, "@") {
+				continue
+			}
+			p := dict[prop.Name]
+			if p == nil {
+				p = &rdfProp{
+					yaml: class.Props[i],
+				}
+				dict[prop.Name] = p
+			}
+			p.domain = append(p.domain, class)
+		}
+	})
+	return dict
 }
 
 func (w *rdfWriter) ln(xs ...string) {
