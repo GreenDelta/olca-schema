@@ -99,7 +99,7 @@ languages an serialization formats. In fact, such implementations can be
 directly generated from the schema definition.
 
 
-# JSON-LD / RDF
+## JSON-LD / RDF
 
 In most cases, the openLCA schema is just used as a structured data format.
 However, the JSON serialization uses the two standard JSON-LD annotations
