@@ -630,7 +630,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :allocationFactors a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Process;
-  rdfs:range rdf:List
+  rdfs:range :AllocationFactor
   .
 
 :allocationMethod a rdf:Property;
@@ -862,7 +862,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :exchanges a rdf:Property;
   rdfs:comment "The inputs and outputs of the process.";
   rdfs:domain :Process;
-  rdfs:range rdf:List
+  rdfs:range :Exchange
   .
 
 :externalFile a rdf:Property;
@@ -874,7 +874,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :factors a rdf:Property;
   rdfs:comment "The list of normalization and weighting factors of this set.";
   rdfs:domain :NwSet;
-  rdfs:range rdf:List
+  rdfs:range :NwFactor
   .
 
 :flow a rdf:Property;
@@ -885,7 +885,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :flowProperties a rdf:Property;
   rdfs:comment "The flow properties (quantities) in which amounts of the flow can be expressed together with conversion factors between these flow flow properties.";
   rdfs:domain :Flow;
-  rdfs:range rdf:List
+  rdfs:range :FlowPropertyFactor
   .
 
 :flowProperty a rdf:Property;
@@ -902,7 +902,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :flowResults a rdf:Property;
   rdfs:comment "An array of `FlowResult` objects.";
   rdfs:domain :Result;
-  rdfs:range rdf:List
+  rdfs:range :FlowResult
   .
 
 :flowType a rdf:Property;
@@ -942,7 +942,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :geometry a rdf:Property;
   rdfs:comment "A GeoJSON object.";
   rdfs:domain :Location;
-  rdfs:range :GeoJSON
+  rdfs:range http://purl.org/geojson/vocab#Feature
   .
 
 :hasUncertainties a rdf:Property;
@@ -954,7 +954,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :impactCategories a rdf:Property;
   rdfs:comment "The impact categories of the method.";
   rdfs:domain :ImpactMethod;
-  rdfs:range rdf:List
+  rdfs:range :Ref
   .
 
 :impactCategory a rdf:Property;
@@ -965,7 +965,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :impactFactors a rdf:Property;
   rdfs:comment "The characterisation factors of the LCIA category.";
   rdfs:domain :ImpactCategory;
-  rdfs:range rdf:List
+  rdfs:range :ImpactFactor
   .
 
 :impactMethod a rdf:Property;
@@ -976,7 +976,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :impactResults a rdf:Property;
   rdfs:comment "An array of `ImpactResult` objects.1";
   rdfs:domain :Result;
-  rdfs:range rdf:List
+  rdfs:range :ImpactResult
   .
 
 :indicator a rdf:Property;
@@ -988,7 +988,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :indicators a rdf:Property;
   rdfs:comment "";
   rdfs:domain :DQSystem;
-  rdfs:range rdf:List
+  rdfs:range :DQIndicator
   .
 
 :intendedApplication a rdf:Property;
@@ -1153,7 +1153,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :mappings a rdf:Property;
   rdfs:comment "A list of flow mappings from flows in a source flow list to flows in a target flow list.";
   rdfs:domain :FlowMap;
-  rdfs:range rdf:List
+  rdfs:range :FlowMapEntry
   .
 
 :maximum a rdf:Property;
@@ -1189,7 +1189,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :modules a rdf:Property;
   rdfs:comment "The results of this EPD structured in modules.";
   rdfs:domain :Epd;
-  rdfs:range rdf:List
+  rdfs:range :EpdModule
   .
 
 :multiplier a rdf:Property;
@@ -1217,13 +1217,13 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :nwSets a rdf:Property;
   rdfs:comment "The normalization and weighting sets of the method.";
   rdfs:domain :ImpactMethod;
-  rdfs:range rdf:List
+  rdfs:range :NwSet
   .
 
 :parameterRedefs a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProjectVariant;
-  rdfs:range rdf:List
+  rdfs:range :ParameterRedef
   .
 
 :parameterScope a rdf:Property;
@@ -1235,12 +1235,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :parameterSets a rdf:Property;
   rdfs:comment "A list of possible sets of parameter redefinitions for this product system.";
   rdfs:domain :ProductSystem;
-  rdfs:range rdf:List
+  rdfs:range :ParameterRedefSet
   .
 
 :parameters a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:ImpactCategory :ParameterRedefSet :Process :CalculationSetup)];
-  rdfs:range rdf:List
+  rdfs:range :Parameter
   .
 
 :pcr a rdf:Property;
@@ -1275,7 +1275,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :processLinks a rdf:Property;
   rdfs:comment "The process links of the product system.";
   rdfs:domain :ProductSystem;
-  rdfs:range rdf:List
+  rdfs:range :ProcessLink
   .
 
 :processType a rdf:Property;
@@ -1286,7 +1286,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :processes a rdf:Property;
   rdfs:comment "The descriptors of all processes and sub-systems that are contained in the product system.";
   rdfs:domain :ProductSystem;
-  rdfs:range rdf:List
+  rdfs:range :Ref
   .
 
 :product a rdf:Property;
@@ -1402,7 +1402,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :scores a rdf:Property;
   rdfs:comment "";
   rdfs:domain :DQIndicator;
-  rdfs:range rdf:List
+  rdfs:range :DQScore
   .
 
 :sd a rdf:Property;
@@ -1414,7 +1414,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :socialAspects a rdf:Property;
   rdfs:comment "A set of social aspects related to this process.";
   rdfs:domain :Process;
-  rdfs:range rdf:List
+  rdfs:range :SocialAspect
   .
 
 :socialDqSystem a rdf:Property;
@@ -1437,7 +1437,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :sources a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
-  rdfs:range rdf:List
+  rdfs:range :Ref
   .
 
 :synonyms a rdf:Property;
@@ -1448,7 +1448,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :tags a rdf:Property;
   rdfs:comment "A list of optional tags. A tag is just a string which should not contain commas (and other special characters).";
   rdfs:domain :RootEntity;
-  rdfs:range rdf:List
+  rdfs:range xsd:string
   .
 
 :target a rdf:Property;
@@ -1547,7 +1547,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :units a rdf:Property;
   rdfs:comment "The units of the unit group.";
   rdfs:domain :UnitGroup;
-  rdfs:range rdf:List
+  rdfs:range :Unit
   .
 
 :url a rdf:Property;
@@ -1582,7 +1582,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :variants a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Project;
-  rdfs:range rdf:List
+  rdfs:range :ProjectVariant
   .
 
 :verifier a rdf:Property;

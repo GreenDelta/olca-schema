@@ -104,13 +104,14 @@ directly generated from the schema definition.
 In most cases, the openLCA schema is just used as a structured data format.
 However, the JSON serialization uses the two standard JSON-LD annotations
 `@type` and `@id` for the type and identifier of a data set or [data set
-reference](./Ref). We also provide a [JSON-LD context](./context.jsonld) and a
-[RDF ontology](./schema.ttl) for the schema. The vocabulary base of the schema
-is `http://greendelta.github.io/olca-schema#` but the data set identifiers are
-relative to the specific context. Instances of the openLCA schema classes or
-properties are not part of its ontology. For example, in the following document,
-the type is expanded to `http://greendelta.github.io/olca-schema#Flow` but the
-ID is relative to the respective context:
+reference](./classes/Ref.html). We also provide a [JSON-LD
+context](./context.jsonld) and a [RDF ontology](./schema.ttl) for the schema.
+The vocabulary base of the schema is `http://greendelta.github.io/olca-schema#`
+but the data set identifiers are relative to the specific context. Instances of
+the openLCA schema classes or properties are not part of its ontology. For
+example, in the following document, the type is expanded to
+`http://greendelta.github.io/olca-schema#Flow` but the ID is relative to the
+respective context:
 
 ```json
 {

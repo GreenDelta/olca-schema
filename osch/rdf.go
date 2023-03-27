@@ -34,29 +34,34 @@ func (p *rdfProp) domainDef() string {
 }
 
 func (p *rdfProp) rangeDef() string {
-	t := p.yaml.Type
-	if strings.HasPrefix(t, "List[") {
-		return "rdf:List"
+	var _range func(t string) string
+	_range = func(t string) string {
+		if strings.HasPrefix(t, "Ref[") {
+			return ":Ref"
+		}
+		if strings.HasPrefix(t, "List[") {
+			return _range(t[5 : len(t)-1])
+		}
+		switch t {
+		case "string":
+			return "xsd:string"
+		case "int", "integer":
+			return "xsd:integer"
+		case "double", "float":
+			return "xsd:double"
+		case "bool", "boolean":
+			return "xsd:boolean"
+		case "date":
+			return "xsd:date"
+		case "dateTime":
+			return "xsd:dateTime"
+		case "GeoJSON":
+			return "http://purl.org/geojson/vocab#Feature"
+		default:
+			return ":" + t
+		}
 	}
-	if strings.HasPrefix(t, "Ref[") {
-		return ":Ref"
-	}
-	switch t {
-	case "string":
-		return "xsd:string"
-	case "int", "integer":
-		return "xsd:integer"
-	case "double", "float":
-		return "xsd:double"
-	case "bool", "boolean":
-		return "xsd:boolean"
-	case "date":
-		return "xsd:date"
-	case "dateTime":
-		return "xsd:dateTime"
-	default:
-		return ":" + t
-	}
+	return _range(p.yaml.Type)
 }
 
 func (p *rdfProp) name() string {
