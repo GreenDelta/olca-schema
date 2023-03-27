@@ -28,6 +28,8 @@ func main() {
 		writeTypeScriptModule(args)
 	case "context":
 		writeContextJson(args)
+	case "rdf", "ttl":
+		writeRdf(args)
 	case "check":
 		checkSchema(args)
 	default:

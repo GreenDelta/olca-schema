@@ -115,6 +115,10 @@ func startsWithLower(s string) bool {
 	return false
 }
 
+func strip(s string) string {
+	return strings.TrimSpace(s)
+}
+
 type Buffer struct {
 	buff *bytes.Buffer
 }
