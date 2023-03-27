@@ -26,9 +26,8 @@ func main() {
 		writeTonelFiles(args)
 	case "ts", "typescript":
 		writeTypeScriptModule(args)
-	case "context":
-		writeContextJson(args)
 	case "rdf", "ttl":
+		writeContextJson(args)
 		writeRdf(args)
 	case "check":
 		checkSchema(args)

@@ -62,7 +62,7 @@ func writeRdf(args *args) {
 
 	model, err := ReadYamlModel(args)
 	check(err, "could not read YAML model")
-	outDir := filepath.Join(args.home, "build")
+	outDir := filepath.Join(args.home, "docs")
 	mkdir(outDir)
 
 	var buffer bytes.Buffer
