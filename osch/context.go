@@ -33,7 +33,7 @@ func writeContextJson(args *args) {
 	// build the context dictionary
 	context := map[string]any{
 		"@vocab": "http://greendelta.github.io/olca-schema#",
-		"@base":  "http://greendelta.github.io/olca-schema#",
+		// "@base":  "http://greendelta.github.io/olca-schema#",
 	}
 	vocab := map[string]string{"@type": "@vocab"}
 	for field := range enumFields {

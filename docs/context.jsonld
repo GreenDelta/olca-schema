@@ -1,6 +1,5 @@
 {
   "@context": {
-    "@base": "http://greendelta.github.io/olca-schema#",
     "@vocab": "http://greendelta.github.io/olca-schema#",
     "allocation": {
       "@type": "@vocab"

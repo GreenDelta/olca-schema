@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -56,6 +57,10 @@ func (p *rdfProp) rangeDef() string {
 	default:
 		return ":" + t
 	}
+}
+
+func (p *rdfProp) name() string {
+	return p.yaml.Name
 }
 
 func writeRdf(args *args) {
@@ -114,8 +119,8 @@ func (w *rdfWriter) header() {
 }
 
 func (w *rdfWriter) writeProps() {
-	for id, prop := range w.collectProps() {
-		w.ln(":", id, " a rdf:Property;")
+	for _, prop := range w.collectProps() {
+		w.ln(":", prop.name(), " a rdf:Property;")
 		if len(prop.domain) == 1 {
 			w.ln("  rdfs:comment \"", strip(prop.yaml.Doc), "\";")
 		}
@@ -125,7 +130,7 @@ func (w *rdfWriter) writeProps() {
 	}
 }
 
-func (w *rdfWriter) collectProps() map[string]*rdfProp {
+func (w *rdfWriter) collectProps() []*rdfProp {
 	dict := make(map[string]*rdfProp)
 	w.model.EachClass(func(class *YamlClass) {
 		for i, prop := range class.Props {
@@ -142,7 +147,14 @@ func (w *rdfWriter) collectProps() map[string]*rdfProp {
 			p.domain = append(p.domain, class)
 		}
 	})
-	return dict
+	props := make([]*rdfProp, 0, len(dict))
+	for _, p := range dict {
+		props = append(props, p)
+	}
+	sort.Slice(props, func(i, j int) bool {
+		return strings.Compare(props[i].name(), props[j].name()) < 0
+	})
+	return props
 }
 
 func (w *rdfWriter) ln(xs ...string) {

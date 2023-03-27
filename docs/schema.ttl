@@ -591,56 +591,85 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "A value related to a technosphere flow."
   .
 
-:enviFlow a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :EnviFlowValue;
-  rdfs:range :EnviFlow
+:activityQuantity a rdf:Property;
+  rdfs:comment "The quantity of the activity variable.";
+  rdfs:domain :SocialIndicator;
+  rdfs:range :Ref
   .
 
-:telefax a rdf:Property;
+:activityUnit a rdf:Property;
+  rdfs:comment "The unit of the activity variable.";
+  rdfs:domain :SocialIndicator;
+  rdfs:range :Ref
+  .
+
+:activityValue a rdf:Property;
+  rdfs:comment "The value of the activity variable of the related indicator.";
+  rdfs:domain :SocialAspect;
+  rdfs:range xsd:double
+  .
+
+:activityVariable a rdf:Property;
+  rdfs:comment "The name of the activity variable of the indicator.";
+  rdfs:domain :SocialIndicator;
+  rdfs:range xsd:string
+  .
+
+:address a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Actor;
   rdfs:range xsd:string
   .
 
-:flowPropertyType a rdf:Property;
-  rdfs:comment "The type of the flow property";
-  rdfs:domain :FlowProperty;
-  rdfs:range :FlowPropertyType
+:allocation a rdf:Property;
+  rdfs:comment "The allocation method that should be applied.";
+  rdfs:domain :CalculationSetup;
+  rdfs:range :AllocationType
   .
 
-:dqSystem a rdf:Property;
-  rdfs:comment "A reference to a data quality system (`DQSystem`) with which the overall quality of the process can be assessed.";
+:allocationFactors a rdf:Property;
+  rdfs:comment "";
   rdfs:domain :Process;
-  rdfs:range :Ref
-  .
-
-:reviewDetails a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:validUntil a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:date
-  .
-
-:impactCategory a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:NwFactor :ImpactValue)];
-  rdfs:range :Ref
-  .
-
-:processLinks a rdf:Property;
-  rdfs:comment "The process links of the product system.";
-  rdfs:domain :ProductSystem;
   rdfs:range rdf:List
   .
 
-:comment a rdf:Property;
+:allocationMethod a rdf:Property;
   rdfs:comment "";
-  rdfs:domain :SocialAspect;
+  rdfs:domain :ProjectVariant;
+  rdfs:range :AllocationType
+  .
+
+:allocationType a rdf:Property;
+  rdfs:comment "The type of allocation.";
+  rdfs:domain :AllocationFactor;
+  rdfs:range :AllocationType
+  .
+
+:amount a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowResult :ImpactResult :ProjectVariant :CalculationSetup :CostValue :EnviFlowValue :ImpactValue :TechFlowValue)];
+  rdfs:range xsd:double
+  .
+
+:amountFormula a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Exchange;
+  rdfs:range xsd:string
+  .
+
+:baseUncertainty a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Exchange;
+  rdfs:range xsd:double
+  .
+
+:cas a rdf:Property;
+  rdfs:comment "A CAS number of the flow.";
+  rdfs:domain :Flow;
+  rdfs:range xsd:string
+  .
+
+:category a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Ref :RootEntity)];
   rdfs:range xsd:string
   .
 
@@ -650,125 +679,15 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
-:urn a rdf:Property;
-  rdfs:comment "An universal resource name (URN) that identifies where the EPD comes from, e.g. `openEPD:ec3yznau`.";
-  rdfs:domain :Epd;
+:code a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Currency :ImpactCategory :ImpactMethod :Location)];
   rdfs:range xsd:string
   .
 
-:costFormula a rdf:Property;
-  rdfs:comment "A formula for calculating the costs of this exchange.";
-  rdfs:domain :Exchange;
-  rdfs:range xsd:string
-  .
-
-:dqEntry a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :Process)];
-  rdfs:range xsd:string
-  .
-
-:preferUnitProcesses a rdf:Property;
-  rdfs:comment "When there are multiple possible providers for linking product inputs or waste inputs, prefer unit processes when this property is set to `true`, and system processes otherwise.";
-  rdfs:domain :LinkingConfig;
-  rdfs:range xsd:boolean
-  .
-
-:country a rdf:Property;
+:comment a rdf:Property;
   rdfs:comment "";
-  rdfs:domain :Actor;
+  rdfs:domain :SocialAspect;
   rdfs:range xsd:string
-  .
-
-:position a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :DQScore)];
-  rdfs:range xsd:integer
-  .
-
-:flowProperties a rdf:Property;
-  rdfs:comment "The flow properties (quantities) in which amounts of the flow can be expressed together with conversion factors between these flow flow properties.";
-  rdfs:domain :Flow;
-  rdfs:range rdf:List
-  .
-
-:targetAmount a rdf:Property;
-  rdfs:comment "The flow amount of the functional unit of the product system.";
-  rdfs:domain :ProductSystem;
-  rdfs:range xsd:double
-  .
-
-:version a rdf:Property;
-  rdfs:comment "A version number in MAJOR.MINOR.PATCH format where the MINOR and PATCH fields are optional and the fields may have leading zeros (so 01.00.00 is the same as 1.0.0 or 1).";
-  rdfs:domain :RootEntity;
-  rdfs:range xsd:string
-  .
-
-:units a rdf:Property;
-  rdfs:comment "The units of the unit group.";
-  rdfs:domain :UnitGroup;
-  rdfs:range rdf:List
-  .
-
-:isReady a rdf:Property;
-  rdfs:comment "`true` if the result is ready.";
-  rdfs:domain :ResultState;
-  rdfs:range xsd:boolean
-  .
-
-:refUnit a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:ImpactCategory :Ref)];
-  rdfs:range xsd:string
-  .
-
-:weightedScoreUnit a rdf:Property;
-  rdfs:comment "This is the optional unit of the (normalized and) weighted score when this normalization and weighting set was applied on a LCIA result.";
-  rdfs:domain :NwSet;
-  rdfs:range xsd:string
-  .
-
-:reviewer a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range :Ref
-  .
-
-:sources a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range rdf:List
-  .
-
-:geomMean a rdf:Property;
-  rdfs:comment "The geometric mean value (used for log-normal distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
-:name a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
-  rdfs:range xsd:string
-  .
-
-:isInput a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :FlowResult :EnviFlow)];
-  rdfs:range xsd:boolean
-  .
-
-:withRegionalization a rdf:Property;
-  rdfs:comment "Defines if regionalization should be applied.";
-  rdfs:domain :CalculationSetup;
-  rdfs:range xsd:boolean
-  .
-
-:techFlow a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :TechFlowValue;
-  rdfs:range :TechFlow
-  .
-
-:direction a rdf:Property;
-  rdfs:comment "The impact direction of this impact category.";
-  rdfs:domain :ImpactCategory;
-  rdfs:range :Direction
   .
 
 :completenessDescription a rdf:Property;
@@ -777,38 +696,10 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
-:lastChange a rdf:Property;
-  rdfs:comment "The timestamp when the entity was changed the last time.";
-  rdfs:domain :RootEntity;
-  rdfs:range xsd:dateTime
-  .
-
-:allocationType a rdf:Property;
-  rdfs:comment "The type of allocation.";
-  rdfs:domain :AllocationFactor;
-  rdfs:range :AllocationType
-  .
-
-:description a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :FlowResult :ImpactResult :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
-  rdfs:range xsd:string
-  .
-
-:programOperator a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Epd;
+:context a rdf:Property;
+  rdfs:comment "The context of the paramater (a process or LCIA method). If no context is provided it is assumed that this is a redefinition of a global parameter.";
+  rdfs:domain :ParameterRedef;
   rdfs:range :Ref
-  .
-
-:isInfrastructureFlow a rdf:Property;
-  rdfs:comment "Indicates whether this flow describes an infrastructure product. This field is part of the openLCA schema because of backward compatibility with EcoSpold 1. It does not really have a meaning in openLCA and should not be used anymore.";
-  rdfs:domain :Flow;
-  rdfs:range xsd:boolean
-  .
-
-:synonyms a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Flow :Unit)];
-  rdfs:range xsd:string
   .
 
 :conversionFactor a rdf:Property;
@@ -816,250 +707,39 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:double
   .
 
-:unit a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowResult :ImpactFactor :ProjectVariant :CalculationSetup)];
-  rdfs:range :Ref
-  .
-
-:cas a rdf:Property;
-  rdfs:comment "A CAS number of the flow.";
-  rdfs:domain :Flow;
-  rdfs:range xsd:string
-  .
-
-:refProcess a rdf:Property;
-  rdfs:comment "The descriptor of the process that provides the flow of the functional unit of the product system.";
-  rdfs:domain :ProductSystem;
-  rdfs:range :Ref
-  .
-
-:processDocumentation a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Process;
-  rdfs:range :ProcessDocumentation
-  .
-
-:maximum a rdf:Property;
-  rdfs:comment "The maximum value (used for uniform and triangle distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
-:allocation a rdf:Property;
-  rdfs:comment "The allocation method that should be applied.";
-  rdfs:domain :CalculationSetup;
-  rdfs:range :AllocationType
-  .
-
-:hasUncertainties a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :DQSystem;
-  rdfs:range xsd:boolean
-  .
-
-:amount a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowResult :ImpactResult :ProjectVariant :CalculationSetup :CostValue :EnviFlowValue :ImpactValue :TechFlowValue)];
-  rdfs:range xsd:double
-  .
-
-:mappings a rdf:Property;
-  rdfs:comment "A list of flow mappings from flows in a source flow list to flows in a target flow list.";
-  rdfs:domain :FlowMap;
-  rdfs:range rdf:List
-  .
-
-:normalisationFactor a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :NwFactor;
-  rdfs:range xsd:double
-  .
-
-:lastInternalId a rdf:Property;
-  rdfs:comment "This field holds the last internal ID that was used in an exchange (which may have been deleted, so it can be larger than the largest internal ID of the exchanges of the process.) The internal ID of an exchange is used to identify exchanges within a process (for updates, data exchanges (see process links), etc.). When you add an exchange to a process, you should increment this field in the process and set the resulting value as the internal ID of that exchange. The sequence of internal IDs should start with `1`.";
-  rdfs:domain :Process;
-  rdfs:range xsd:integer
-  .
-
-:scores a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :DQIndicator;
-  rdfs:range rdf:List
-  .
-
-:source a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQSystem :FlowMap :ImpactCategory :ImpactMethod :SocialAspect)];
-  rdfs:range :Ref
-  .
-
-:amountFormula a rdf:Property;
-  rdfs:comment "";
+:costFormula a rdf:Property;
+  rdfs:comment "A formula for calculating the costs of this exchange.";
   rdfs:domain :Exchange;
   rdfs:range xsd:string
   .
 
-:isRefFlowProperty a rdf:Property;
-  rdfs:comment "Indicates whether the flow property of the factor is the reference flow property of the flow. The reference flow property must have a conversion factor of 1.0 and there should be only one reference flow property.";
-  rdfs:domain :FlowPropertyFactor;
-  rdfs:range xsd:boolean
+:costValue a rdf:Property;
+  rdfs:comment "The costs of this exchange.";
+  rdfs:domain :Exchange;
+  rdfs:range xsd:double
   .
 
-:parameterScope a rdf:Property;
-  rdfs:comment "The scope where the parameter is valid.";
-  rdfs:domain :Parameter;
-  rdfs:range :ParameterScope
+:country a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Actor;
+  rdfs:range xsd:string
   .
 
-:isCopyrightProtected a rdf:Property;
+:creationDate a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:boolean
+  rdfs:range xsd:dateTime
   .
 
-:validFrom a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:date
-  .
-
-:targetUnit a rdf:Property;
-  rdfs:comment "The unit in which the flow amount of the functional unit is given.";
-  rdfs:domain :ProductSystem;
+:currency a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :CostValue)];
   rdfs:range :Ref
   .
 
-:unitGroup a rdf:Property;
-  rdfs:comment "The units of measure that can be used to express quantities of the flow property.";
-  rdfs:domain :FlowProperty;
-  rdfs:range :Ref
-  .
-
-:providerLinking a rdf:Property;
-  rdfs:comment "Defines how default providers of linkable product inputs and waste outputs are handled.";
+:cutoff a rdf:Property;
+  rdfs:comment "Applies a cutoff in the linking process. The cutoff is applied like the scaling factor in a sequential calculation. This only makes sense in a large mono-unit technosphere (e.g. input-output databases).";
   rdfs:domain :LinkingConfig;
-  rdfs:range :ProviderLinking
-  .
-
-:longitude a rdf:Property;
-  rdfs:comment "The average longitude of the location.";
-  rdfs:domain :Location;
   rdfs:range xsd:double
-  .
-
-:isInputParameter a rdf:Property;
-  rdfs:comment "Indicates whether the parameter is an input parameter (true) or a dependent/calculated parameter (false). A parameter can have a formula if it is not an input parameter.";
-  rdfs:domain :Parameter;
-  rdfs:range xsd:boolean
-  .
-
-:context a rdf:Property;
-  rdfs:comment "The context of the paramater (a process or LCIA method). If no context is provided it is assumed that this is a redefinition of a global parameter.";
-  rdfs:domain :ParameterRedef;
-  rdfs:range :Ref
-  .
-
-:category a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Ref :RootEntity)];
-  rdfs:range xsd:string
-  .
-
-:minimum a rdf:Property;
-  rdfs:comment "The minimum value (used for uniform and triangle distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
-:zipCode a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Actor;
-  rdfs:range xsd:string
-  .
-
-:value a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :ImpactFactor :Parameter :ParameterRedef)];
-  rdfs:range xsd:double
-  .
-
-:defaultAllocationMethod a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Process;
-  rdfs:range :AllocationType
-  .
-
-:rawAmount a rdf:Property;
-  rdfs:comment "The raw amount of the indicator's unit of measurement (not required to be numeric currently)";
-  rdfs:domain :SocialAspect;
-  rdfs:range xsd:string
-  .
-
-:geomSd a rdf:Property;
-  rdfs:comment "The geometric standard deviation (used for log-normal distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
-:defaultFlowProperty a rdf:Property;
-  rdfs:comment "Some LCA data formats do not have the concept of flow properties or quantities. This field provides a default link to a flow property for units that are contained in this group.";
-  rdfs:domain :UnitGroup;
-  rdfs:range :Ref
-  .
-
-:time a rdf:Property;
-  rdfs:comment "The time when the state was obtained as Unix time stamp (see `https://www.unixtimestamp.com/`).";
-  rdfs:domain :ResultState;
-  rdfs:range xsd:integer
-  .
-
-:telephone a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Actor;
-  rdfs:range xsd:string
-  .
-
-:flowType a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Flow :Ref)];
-  rdfs:range :FlowType
-  .
-
-:from a rdf:Property;
-  rdfs:comment "Describes the source flow of the mapping.";
-  rdfs:domain :FlowMapEntry;
-  rdfs:range :FlowMapRef
-  .
-
-:geometry a rdf:Property;
-  rdfs:comment "A GeoJSON object.";
-  rdfs:domain :Location;
-  rdfs:range :GeoJSON
-  .
-
-:tags a rdf:Property;
-  rdfs:comment "A list of optional tags. A tag is just a string which should not contain commas (and other special characters).";
-  rdfs:domain :RootEntity;
-  rdfs:range rdf:List
-  .
-
-:isInfrastructureProcess a rdf:Property;
-  rdfs:comment "Indicates whether this process describes an infrastructure process. This field is part of the openLCA schema because of backward compatibility with EcoSpold 1. It does not really have a meaning in openLCA and should not be used anymore.";
-  rdfs:domain :Process;
-  rdfs:range xsd:boolean
-  .
-
-:samplingDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:processes a rdf:Property;
-  rdfs:comment "The descriptors of all processes and sub-systems that are contained in the product system.";
-  rdfs:domain :ProductSystem;
-  rdfs:range rdf:List
-  .
-
-:activityVariable a rdf:Property;
-  rdfs:comment "The name of the activity variable of the indicator.";
-  rdfs:domain :SocialIndicator;
-  rdfs:range xsd:string
   .
 
 :dataCollectionDescription a rdf:Property;
@@ -1068,19 +748,13 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
-:isWithRegionalization a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Project;
-  rdfs:range xsd:boolean
-  .
-
-:mode a rdf:Property;
-  rdfs:comment "The most likely value (used for triangle distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
 :dataDocumentor a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range :Ref
+  .
+
+:dataGenerator a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
   rdfs:range :Ref
@@ -1092,290 +766,10 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
-:inventoryMethodDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:flowProperty a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowPropertyFactor :FlowResult :ImpactFactor :CalculationSetup)];
-  rdfs:range :Ref
-  .
-
-:projectDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:restrictionsDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:externalFile a rdf:Property;
-  rdfs:comment "A direct link (relative or absolute URL) to the source file.";
-  rdfs:domain :Source;
-  rdfs:range xsd:string
-  .
-
-:isProtected a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ParameterRedef;
-  rdfs:range xsd:boolean
-  .
-
-:geographyDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:technologyDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:variants a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Project;
-  rdfs:range rdf:List
-  .
-
-:mean a rdf:Property;
-  rdfs:comment "The arithmetic mean (used for normal distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
-:isScheduled a rdf:Property;
-  rdfs:comment "`true` if the result is scheduled for calculation but not ready yet.";
-  rdfs:domain :ResultState;
-  rdfs:range xsd:boolean
-  .
-
-:label a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :DQScore;
-  rdfs:range xsd:string
-  .
-
-:publication a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range :Ref
-  .
-
-:refExchange a rdf:Property;
-  rdfs:comment "The exchange of the reference processes (typically the product output) that provides the flow of the functional unit of the product system.";
-  rdfs:domain :ProductSystem;
-  rdfs:range :ExchangeRef
-  .
-
-:riskLevel a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :SocialAspect;
-  rdfs:range :RiskLevel
-  .
-
-:distributionType a rdf:Property;
-  rdfs:comment "The uncertainty distribution type";
-  rdfs:domain :Uncertainty;
-  rdfs:range :UncertaintyType
-  .
-
-:modules a rdf:Property;
-  rdfs:comment "The results of this EPD structured in modules.";
-  rdfs:domain :Epd;
-  rdfs:range rdf:List
-  .
-
-:impactFactors a rdf:Property;
-  rdfs:comment "The characterisation factors of the LCIA category.";
-  rdfs:domain :ImpactCategory;
-  rdfs:range rdf:List
-  .
-
-:modelingConstantsDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:product a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :Epd)];
-  rdfs:range :Ref
-  .
-
-:uncertainty a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :ImpactFactor :Parameter :ParameterRedef)];
-  rdfs:range xsd:double
-  .
-
-:parameters a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:ImpactCategory :ParameterRedefSet :Process :CalculationSetup)];
-  rdfs:range rdf:List
-  .
-
-:creationDate a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:dateTime
-  .
-
-:intendedApplication a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:website a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Actor;
-  rdfs:range xsd:string
-  .
-
-:defaultProvider a rdf:Property;
-  rdfs:comment "A default provider is a `Process` that is linked as the provider of a product input or the waste treatment provider of a waste output. It is just an optional default setting which can be also ignored when building product systems in openLCA. The user is always free to link processes in product systems ignoring these defaults (but the flows and flow directions have to match of course).";
-  rdfs:domain :Exchange;
-  rdfs:range :Ref
-  .
-
-:target a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:FlowMap :CalculationSetup)];
-  rdfs:range :Ref
-  .
-
-:allocationFactors a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Process;
-  rdfs:range rdf:List
-  .
-
-:error a rdf:Property;
-  rdfs:comment "Contains an error message when the calculation of the result failed.";
-  rdfs:domain :ResultState;
-  rdfs:range xsd:string
-  .
-
-:isRefUnit a rdf:Property;
-  rdfs:comment "Indicates whether the unit is the reference unit of the unit group to which this unit belongs. If it is the reference unit the conversion factor must be 1.0. There should be always only one reference unit in a unit group. The reference unit is used to convert amounts given in one unit to amounts given in another unit of the respective unit group.";
-  rdfs:domain :Unit;
-  rdfs:range xsd:boolean
-  .
-
-:indicators a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :DQSystem;
-  rdfs:range rdf:List
-  .
-
-:baseUncertainty a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Exchange;
-  rdfs:range xsd:double
-  .
-
-:currency a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :CostValue)];
-  rdfs:range :Ref
-  .
-
-:isWithCosts a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Project;
-  rdfs:range xsd:boolean
-  .
-
-:activityValue a rdf:Property;
-  rdfs:comment "The value of the activity variable of the related indicator.";
-  rdfs:domain :SocialAspect;
-  rdfs:range xsd:double
-  .
-
-:activityQuantity a rdf:Property;
-  rdfs:comment "The quantity of the activity variable.";
-  rdfs:domain :SocialIndicator;
-  rdfs:range :Ref
-  .
-
-:exchangeDqSystem a rdf:Property;
-  rdfs:comment "A reference to a data quality system (`DQSystem`) with which the quality of individual inputs and outputs (`Exchange`) of the process can be assessed.";
-  rdfs:domain :Process;
-  rdfs:range :Ref
-  .
-
-:socialDqSystem a rdf:Property;
-  rdfs:comment "A reference to a data quality system (`DQSystem`) with which the quality of individual social aspects of the process can be assessed.";
-  rdfs:domain :Process;
-  rdfs:range :Ref
-  .
-
-:timeDescription a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
-  rdfs:range xsd:string
-  .
-
-:parameterRedefs a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProjectVariant;
-  rdfs:range rdf:List
-  .
-
-:flowResults a rdf:Property;
-  rdfs:comment "An array of `FlowResult` objects.";
-  rdfs:domain :Result;
-  rdfs:range rdf:List
-  .
-
-:evaluationScheme a rdf:Property;
-  rdfs:comment "Documentation of the evaluation scheme of the indicator.";
-  rdfs:domain :SocialIndicator;
-  rdfs:range xsd:string
-  .
-
-:refCurrency a rdf:Property;
-  rdfs:comment "The reference currency to which the conversion factor is related.";
-  rdfs:domain :Currency;
-  rdfs:range :Ref
-  .
-
-:provider a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:FlowMapRef :ProcessLink :TechFlow)];
-  rdfs:range :Ref
-  .
-
-:impactCategories a rdf:Property;
-  rdfs:comment "The impact categories of the method.";
-  rdfs:domain :ImpactMethod;
-  rdfs:range rdf:List
-  .
-
-:weightingFactor a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :NwFactor;
-  rdfs:range xsd:double
-  .
-
 :dataSetOwner a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
   rdfs:range :Ref
-  .
-
-:impactMethod a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Project :Result :CalculationSetup)];
-  rdfs:range :Ref
-  .
-
-:year a rdf:Property;
-  rdfs:comment "The publication year of the source.";
-  rdfs:domain :Source;
-  rdfs:range xsd:integer
   .
 
 :dataTreatmentDescription a rdf:Property;
@@ -1384,32 +778,97 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
-:parameterSets a rdf:Property;
-  rdfs:comment "A list of possible sets of parameter redefinitions for this product system.";
-  rdfs:domain :ProductSystem;
-  rdfs:range rdf:List
+:defaultAllocationMethod a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Process;
+  rdfs:range :AllocationType
   .
 
-:quality a rdf:Property;
-  rdfs:comment "A data quality entry, e.g. `(3,1,2,4,1)`.";
-  rdfs:domain :SocialAspect;
+:defaultFlowProperty a rdf:Property;
+  rdfs:comment "Some LCA data formats do not have the concept of flow properties or quantities. This field provides a default link to a flow property for units that are contained in this group.";
+  rdfs:domain :UnitGroup;
+  rdfs:range :Ref
+  .
+
+:defaultProvider a rdf:Property;
+  rdfs:comment "A default provider is a `Process` that is linked as the provider of a product input or the waste treatment provider of a waste output. It is just an optional default setting which can be also ignored when building product systems in openLCA. The user is always free to link processes in product systems ignoring these defaults (but the flows and flow directions have to match of course).";
+  rdfs:domain :Exchange;
+  rdfs:range :Ref
+  .
+
+:description a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :FlowResult :ImpactResult :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
   rdfs:range xsd:string
   .
 
-:address a rdf:Property;
+:direction a rdf:Property;
+  rdfs:comment "The impact direction of this impact category.";
+  rdfs:domain :ImpactCategory;
+  rdfs:range :Direction
+  .
+
+:distributionType a rdf:Property;
+  rdfs:comment "The uncertainty distribution type";
+  rdfs:domain :Uncertainty;
+  rdfs:range :UncertaintyType
+  .
+
+:dqEntry a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :Process)];
+  rdfs:range xsd:string
+  .
+
+:dqSystem a rdf:Property;
+  rdfs:comment "A reference to a data quality system (`DQSystem`) with which the overall quality of the process can be assessed.";
+  rdfs:domain :Process;
+  rdfs:range :Ref
+  .
+
+:email a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Actor;
   rdfs:range xsd:string
   .
 
-:code a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Currency :ImpactCategory :ImpactMethod :Location)];
+:enviFlow a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :EnviFlowValue;
+  rdfs:range :EnviFlow
+  .
+
+:error a rdf:Property;
+  rdfs:comment "Contains an error message when the calculation of the result failed.";
+  rdfs:domain :ResultState;
   rdfs:range xsd:string
   .
 
-:location a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :Flow :FlowResult :ImpactFactor :Process :Ref :EnviFlow)];
+:evaluationScheme a rdf:Property;
+  rdfs:comment "Documentation of the evaluation scheme of the indicator.";
+  rdfs:domain :SocialIndicator;
+  rdfs:range xsd:string
+  .
+
+:exchange a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :ProcessLink)];
+  rdfs:range :ExchangeRef
+  .
+
+:exchangeDqSystem a rdf:Property;
+  rdfs:comment "A reference to a data quality system (`DQSystem`) with which the quality of individual inputs and outputs (`Exchange`) of the process can be assessed.";
+  rdfs:domain :Process;
   rdfs:range :Ref
+  .
+
+:exchanges a rdf:Property;
+  rdfs:comment "The inputs and outputs of the process.";
+  rdfs:domain :Process;
+  rdfs:range rdf:List
+  .
+
+:externalFile a rdf:Property;
+  rdfs:comment "A direct link (relative or absolute URL) to the source file.";
+  rdfs:domain :Source;
+  rdfs:range xsd:string
   .
 
 :factors a rdf:Property;
@@ -1418,68 +877,99 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range rdf:List
   .
 
-:isBaseline a rdf:Property;
-  rdfs:comment "Indicates if this set of parameter redefinitions is the baseline for a product system.";
-  rdfs:domain :ParameterRedefSet;
-  rdfs:range xsd:boolean
+:flow a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowResult :ImpactFactor :ProcessLink :EnviFlow :TechFlow)];
+  rdfs:range :Ref
   .
 
-:withCosts a rdf:Property;
-  rdfs:comment "Defines if cost results should be also calculated.";
-  rdfs:domain :CalculationSetup;
-  rdfs:range xsd:boolean
+:flowProperties a rdf:Property;
+  rdfs:comment "The flow properties (quantities) in which amounts of the flow can be expressed together with conversion factors between these flow flow properties.";
+  rdfs:domain :Flow;
+  rdfs:range rdf:List
   .
 
-:isQuantitativeReference a rdf:Property;
-  rdfs:comment "Indicates whether the exchange is the quantitative reference of the process.";
-  rdfs:domain :Exchange;
-  rdfs:range xsd:boolean
+:flowProperty a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowPropertyFactor :FlowResult :ImpactFactor :CalculationSetup)];
+  rdfs:range :Ref
   .
 
-:to a rdf:Property;
-  rdfs:comment "Describes the target of the mapping.";
+:flowPropertyType a rdf:Property;
+  rdfs:comment "The type of the flow property";
+  rdfs:domain :FlowProperty;
+  rdfs:range :FlowPropertyType
+  .
+
+:flowResults a rdf:Property;
+  rdfs:comment "An array of `FlowResult` objects.";
+  rdfs:domain :Result;
+  rdfs:range rdf:List
+  .
+
+:flowType a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Flow :Ref)];
+  rdfs:range :FlowType
+  .
+
+:formula a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :Flow :ImpactFactor :Parameter)];
+  rdfs:range xsd:string
+  .
+
+:from a rdf:Property;
+  rdfs:comment "Describes the source flow of the mapping.";
   rdfs:domain :FlowMapEntry;
   rdfs:range :FlowMapRef
   .
 
-:indicator a rdf:Property;
-  rdfs:comment "The impact assessment category.";
-  rdfs:domain :ImpactResult;
-  rdfs:range :Ref
-  .
-
-:manufacturer a rdf:Property;
+:geographyDescription a rdf:Property;
   rdfs:comment "";
-  rdfs:domain :Epd;
-  rdfs:range :Ref
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
   .
 
-:multiplier a rdf:Property;
-  rdfs:comment "Scales the linked result to the required amount for this module.";
-  rdfs:domain :EpdModule;
+:geomMean a rdf:Property;
+  rdfs:comment "The geometric mean value (used for log-normal distributions).";
+  rdfs:domain :Uncertainty;
   rdfs:range xsd:double
   .
 
-:result a rdf:Property;
-  rdfs:comment "A reference to the module's result. Note that results are stand-alone entities and that the same result could be referenced from different modules. Also, results can be directly linked in product systems.";
-  rdfs:domain :EpdModule;
-  rdfs:range :Ref
-  .
-
-:costValue a rdf:Property;
-  rdfs:comment "The costs of this exchange.";
-  rdfs:domain :Exchange;
+:geomSd a rdf:Property;
+  rdfs:comment "The geometric standard deviation (used for log-normal distributions).";
+  rdfs:domain :Uncertainty;
   rdfs:range xsd:double
   .
 
-:internalId a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :ExchangeRef)];
-  rdfs:range xsd:integer
+:geometry a rdf:Property;
+  rdfs:comment "A GeoJSON object.";
+  rdfs:domain :Location;
+  rdfs:range :GeoJSON
   .
 
-:process a rdf:Property;
-  rdfs:comment "The descriptor of the process that is linked to the provider.";
-  rdfs:domain :ProcessLink;
+:hasUncertainties a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :DQSystem;
+  rdfs:range xsd:boolean
+  .
+
+:impactCategories a rdf:Property;
+  rdfs:comment "The impact categories of the method.";
+  rdfs:domain :ImpactMethod;
+  rdfs:range rdf:List
+  .
+
+:impactCategory a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:NwFactor :ImpactValue)];
+  rdfs:range :Ref
+  .
+
+:impactFactors a rdf:Property;
+  rdfs:comment "The characterisation factors of the LCIA category.";
+  rdfs:domain :ImpactCategory;
+  rdfs:range rdf:List
+  .
+
+:impactMethod a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Project :Result :CalculationSetup)];
   rdfs:range :Ref
   .
 
@@ -1489,62 +979,51 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range rdf:List
   .
 
-:unitOfMeasurement a rdf:Property;
-  rdfs:comment "The unit in which the indicator is measured.";
-  rdfs:domain :SocialIndicator;
-  rdfs:range xsd:string
-  .
-
-:formula a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :Flow :ImpactFactor :Parameter)];
-  rdfs:range xsd:string
-  .
-
-:verifier a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Epd;
+:indicator a rdf:Property;
+  rdfs:comment "The impact assessment category.";
+  rdfs:domain :ImpactResult;
   rdfs:range :Ref
   .
 
-:latitude a rdf:Property;
-  rdfs:comment "The average latitude of the location.";
-  rdfs:domain :Location;
-  rdfs:range xsd:double
-  .
-
-:targetFlowProperty a rdf:Property;
-  rdfs:comment "The flow property in which the flow amount of the functional unit is given.";
-  rdfs:domain :ProductSystem;
-  rdfs:range :Ref
-  .
-
-:socialIndicator a rdf:Property;
+:indicators a rdf:Property;
   rdfs:comment "";
-  rdfs:domain :SocialAspect;
-  rdfs:range :Ref
-  .
-
-:sd a rdf:Property;
-  rdfs:comment "The arithmetic standard deviation  (used for normal distributions).";
-  rdfs:domain :Uncertainty;
-  rdfs:range xsd:double
-  .
-
-:email a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :Actor;
-  rdfs:range xsd:string
-  .
-
-:processType a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Process :Ref)];
-  rdfs:range :ProcessType
-  .
-
-:socialAspects a rdf:Property;
-  rdfs:comment "A set of social aspects related to this process.";
-  rdfs:domain :Process;
+  rdfs:domain :DQSystem;
   rdfs:range rdf:List
+  .
+
+:intendedApplication a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:internalId a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :ExchangeRef)];
+  rdfs:range xsd:integer
+  .
+
+:inventoryMethodDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:isAvoidedProduct a rdf:Property;
+  rdfs:comment "Indicates whether this exchange is an avoided product.";
+  rdfs:domain :Exchange;
+  rdfs:range xsd:boolean
+  .
+
+:isBaseline a rdf:Property;
+  rdfs:comment "Indicates if this set of parameter redefinitions is the baseline for a product system.";
+  rdfs:domain :ParameterRedefSet;
+  rdfs:range xsd:boolean
+  .
+
+:isCopyrightProtected a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:boolean
   .
 
 :isDisabled a rdf:Property;
@@ -1553,42 +1032,44 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:boolean
   .
 
-:url a rdf:Property;
-  rdfs:comment "A URL that points to the source.";
-  rdfs:domain :Source;
-  rdfs:range xsd:string
+:isInfrastructureFlow a rdf:Property;
+  rdfs:comment "Indicates whether this flow describes an infrastructure product. This field is part of the openLCA schema because of backward compatibility with EcoSpold 1. It does not really have a meaning in openLCA and should not be used anymore.";
+  rdfs:domain :Flow;
+  rdfs:range xsd:boolean
   .
 
-:pcr a rdf:Property;
+:isInfrastructureProcess a rdf:Property;
+  rdfs:comment "Indicates whether this process describes an infrastructure process. This field is part of the openLCA schema because of backward compatibility with EcoSpold 1. It does not really have a meaning in openLCA and should not be used anymore.";
+  rdfs:domain :Process;
+  rdfs:range xsd:boolean
+  .
+
+:isInput a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :FlowResult :EnviFlow)];
+  rdfs:range xsd:boolean
+  .
+
+:isInputParameter a rdf:Property;
+  rdfs:comment "Indicates whether the parameter is an input parameter (true) or a dependent/calculated parameter (false). A parameter can have a formula if it is not an input parameter.";
+  rdfs:domain :Parameter;
+  rdfs:range xsd:boolean
+  .
+
+:isProtected a rdf:Property;
   rdfs:comment "";
-  rdfs:domain :Epd;
-  rdfs:range :Ref
+  rdfs:domain :ParameterRedef;
+  rdfs:range xsd:boolean
   .
 
-:cutoff a rdf:Property;
-  rdfs:comment "Applies a cutoff in the linking process. The cutoff is applied like the scaling factor in a sequential calculation. This only makes sense in a large mono-unit technosphere (e.g. input-output databases).";
-  rdfs:domain :LinkingConfig;
-  rdfs:range xsd:double
-  .
-
-:nwSet a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Project :CalculationSetup)];
-  rdfs:range :NwSet
-  .
-
-:productSystem a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:ProjectVariant :Result)];
-  rdfs:range :Ref
-  .
-
-:flow a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowResult :ImpactFactor :ProcessLink :EnviFlow :TechFlow)];
-  rdfs:range :Ref
-  .
-
-:isAvoidedProduct a rdf:Property;
-  rdfs:comment "Indicates whether this exchange is an avoided product.";
+:isQuantitativeReference a rdf:Property;
+  rdfs:comment "Indicates whether the exchange is the quantitative reference of the process.";
   rdfs:domain :Exchange;
+  rdfs:range xsd:boolean
+  .
+
+:isReady a rdf:Property;
+  rdfs:comment "`true` if the result is ready.";
+  rdfs:domain :ResultState;
   rdfs:range xsd:boolean
   .
 
@@ -1598,44 +1079,563 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:boolean
   .
 
+:isRefFlowProperty a rdf:Property;
+  rdfs:comment "Indicates whether the flow property of the factor is the reference flow property of the flow. The reference flow property must have a conversion factor of 1.0 and there should be only one reference flow property.";
+  rdfs:domain :FlowPropertyFactor;
+  rdfs:range xsd:boolean
+  .
+
+:isRefUnit a rdf:Property;
+  rdfs:comment "Indicates whether the unit is the reference unit of the unit group to which this unit belongs. If it is the reference unit the conversion factor must be 1.0. There should be always only one reference unit in a unit group. The reference unit is used to convert amounts given in one unit to amounts given in another unit of the respective unit group.";
+  rdfs:domain :Unit;
+  rdfs:range xsd:boolean
+  .
+
+:isScheduled a rdf:Property;
+  rdfs:comment "`true` if the result is scheduled for calculation but not ready yet.";
+  rdfs:domain :ResultState;
+  rdfs:range xsd:boolean
+  .
+
+:isWithCosts a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Project;
+  rdfs:range xsd:boolean
+  .
+
+:isWithRegionalization a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Project;
+  rdfs:range xsd:boolean
+  .
+
+:label a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :DQScore;
+  rdfs:range xsd:string
+  .
+
+:lastChange a rdf:Property;
+  rdfs:comment "The timestamp when the entity was changed the last time.";
+  rdfs:domain :RootEntity;
+  rdfs:range xsd:dateTime
+  .
+
+:lastInternalId a rdf:Property;
+  rdfs:comment "This field holds the last internal ID that was used in an exchange (which may have been deleted, so it can be larger than the largest internal ID of the exchanges of the process.) The internal ID of an exchange is used to identify exchanges within a process (for updates, data exchanges (see process links), etc.). When you add an exchange to a process, you should increment this field in the process and set the resulting value as the internal ID of that exchange. The sequence of internal IDs should start with `1`.";
+  rdfs:domain :Process;
+  rdfs:range xsd:integer
+  .
+
+:latitude a rdf:Property;
+  rdfs:comment "The average latitude of the location.";
+  rdfs:domain :Location;
+  rdfs:range xsd:double
+  .
+
+:location a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :Flow :FlowResult :ImpactFactor :Process :Ref :EnviFlow)];
+  rdfs:range :Ref
+  .
+
+:longitude a rdf:Property;
+  rdfs:comment "The average longitude of the location.";
+  rdfs:domain :Location;
+  rdfs:range xsd:double
+  .
+
+:manufacturer a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range :Ref
+  .
+
+:mappings a rdf:Property;
+  rdfs:comment "A list of flow mappings from flows in a source flow list to flows in a target flow list.";
+  rdfs:domain :FlowMap;
+  rdfs:range rdf:List
+  .
+
+:maximum a rdf:Property;
+  rdfs:comment "The maximum value (used for uniform and triangle distributions).";
+  rdfs:domain :Uncertainty;
+  rdfs:range xsd:double
+  .
+
+:mean a rdf:Property;
+  rdfs:comment "The arithmetic mean (used for normal distributions).";
+  rdfs:domain :Uncertainty;
+  rdfs:range xsd:double
+  .
+
+:minimum a rdf:Property;
+  rdfs:comment "The minimum value (used for uniform and triangle distributions).";
+  rdfs:domain :Uncertainty;
+  rdfs:range xsd:double
+  .
+
+:mode a rdf:Property;
+  rdfs:comment "The most likely value (used for triangle distributions).";
+  rdfs:domain :Uncertainty;
+  rdfs:range xsd:double
+  .
+
+:modelingConstantsDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:modules a rdf:Property;
+  rdfs:comment "The results of this EPD structured in modules.";
+  rdfs:domain :Epd;
+  rdfs:range rdf:List
+  .
+
+:multiplier a rdf:Property;
+  rdfs:comment "Scales the linked result to the required amount for this module.";
+  rdfs:domain :EpdModule;
+  rdfs:range xsd:double
+  .
+
+:name a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
+  rdfs:range xsd:string
+  .
+
+:normalisationFactor a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :NwFactor;
+  rdfs:range xsd:double
+  .
+
+:nwSet a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Project :CalculationSetup)];
+  rdfs:range :NwSet
+  .
+
 :nwSets a rdf:Property;
   rdfs:comment "The normalization and weighting sets of the method.";
   rdfs:domain :ImpactMethod;
   rdfs:range rdf:List
   .
 
-:allocationMethod a rdf:Property;
+:parameterRedefs a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProjectVariant;
-  rdfs:range :AllocationType
-  .
-
-:exchange a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :ProcessLink)];
-  rdfs:range :ExchangeRef
-  .
-
-:exchanges a rdf:Property;
-  rdfs:comment "The inputs and outputs of the process.";
-  rdfs:domain :Process;
   rdfs:range rdf:List
   .
 
-:dataGenerator a rdf:Property;
+:parameterScope a rdf:Property;
+  rdfs:comment "The scope where the parameter is valid.";
+  rdfs:domain :Parameter;
+  rdfs:range :ParameterScope
+  .
+
+:parameterSets a rdf:Property;
+  rdfs:comment "A list of possible sets of parameter redefinitions for this product system.";
+  rdfs:domain :ProductSystem;
+  rdfs:range rdf:List
+  .
+
+:parameters a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:ImpactCategory :ParameterRedefSet :Process :CalculationSetup)];
+  rdfs:range rdf:List
+  .
+
+:pcr a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range :Ref
+  .
+
+:position a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :DQScore)];
+  rdfs:range xsd:integer
+  .
+
+:preferUnitProcesses a rdf:Property;
+  rdfs:comment "When there are multiple possible providers for linking product inputs or waste inputs, prefer unit processes when this property is set to `true`, and system processes otherwise.";
+  rdfs:domain :LinkingConfig;
+  rdfs:range xsd:boolean
+  .
+
+:process a rdf:Property;
+  rdfs:comment "The descriptor of the process that is linked to the provider.";
+  rdfs:domain :ProcessLink;
+  rdfs:range :Ref
+  .
+
+:processDocumentation a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Process;
+  rdfs:range :ProcessDocumentation
+  .
+
+:processLinks a rdf:Property;
+  rdfs:comment "The process links of the product system.";
+  rdfs:domain :ProductSystem;
+  rdfs:range rdf:List
+  .
+
+:processType a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Process :Ref)];
+  rdfs:range :ProcessType
+  .
+
+:processes a rdf:Property;
+  rdfs:comment "The descriptors of all processes and sub-systems that are contained in the product system.";
+  rdfs:domain :ProductSystem;
+  rdfs:range rdf:List
+  .
+
+:product a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :Epd)];
+  rdfs:range :Ref
+  .
+
+:productSystem a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:ProjectVariant :Result)];
+  rdfs:range :Ref
+  .
+
+:programOperator a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range :Ref
+  .
+
+:projectDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:provider a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:FlowMapRef :ProcessLink :TechFlow)];
+  rdfs:range :Ref
+  .
+
+:providerLinking a rdf:Property;
+  rdfs:comment "Defines how default providers of linkable product inputs and waste outputs are handled.";
+  rdfs:domain :LinkingConfig;
+  rdfs:range :ProviderLinking
+  .
+
+:publication a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
   rdfs:range :Ref
   .
 
-:activityUnit a rdf:Property;
-  rdfs:comment "The unit of the activity variable.";
-  rdfs:domain :SocialIndicator;
+:quality a rdf:Property;
+  rdfs:comment "A data quality entry, e.g. `(3,1,2,4,1)`.";
+  rdfs:domain :SocialAspect;
+  rdfs:range xsd:string
+  .
+
+:rawAmount a rdf:Property;
+  rdfs:comment "The raw amount of the indicator's unit of measurement (not required to be numeric currently)";
+  rdfs:domain :SocialAspect;
+  rdfs:range xsd:string
+  .
+
+:refCurrency a rdf:Property;
+  rdfs:comment "The reference currency to which the conversion factor is related.";
+  rdfs:domain :Currency;
   rdfs:range :Ref
+  .
+
+:refExchange a rdf:Property;
+  rdfs:comment "The exchange of the reference processes (typically the product output) that provides the flow of the functional unit of the product system.";
+  rdfs:domain :ProductSystem;
+  rdfs:range :ExchangeRef
+  .
+
+:refProcess a rdf:Property;
+  rdfs:comment "The descriptor of the process that provides the flow of the functional unit of the product system.";
+  rdfs:domain :ProductSystem;
+  rdfs:range :Ref
+  .
+
+:refUnit a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:ImpactCategory :Ref)];
+  rdfs:range xsd:string
+  .
+
+:restrictionsDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:result a rdf:Property;
+  rdfs:comment "A reference to the module's result. Note that results are stand-alone entities and that the same result could be referenced from different modules. Also, results can be directly linked in product systems.";
+  rdfs:domain :EpdModule;
+  rdfs:range :Ref
+  .
+
+:reviewDetails a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:reviewer a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range :Ref
+  .
+
+:riskLevel a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :SocialAspect;
+  rdfs:range :RiskLevel
+  .
+
+:samplingDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:scores a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :DQIndicator;
+  rdfs:range rdf:List
+  .
+
+:sd a rdf:Property;
+  rdfs:comment "The arithmetic standard deviation  (used for normal distributions).";
+  rdfs:domain :Uncertainty;
+  rdfs:range xsd:double
+  .
+
+:socialAspects a rdf:Property;
+  rdfs:comment "A set of social aspects related to this process.";
+  rdfs:domain :Process;
+  rdfs:range rdf:List
+  .
+
+:socialDqSystem a rdf:Property;
+  rdfs:comment "A reference to a data quality system (`DQSystem`) with which the quality of individual social aspects of the process can be assessed.";
+  rdfs:domain :Process;
+  rdfs:range :Ref
+  .
+
+:socialIndicator a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :SocialAspect;
+  rdfs:range :Ref
+  .
+
+:source a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:DQSystem :FlowMap :ImpactCategory :ImpactMethod :SocialAspect)];
+  rdfs:range :Ref
+  .
+
+:sources a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range rdf:List
+  .
+
+:synonyms a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Flow :Unit)];
+  rdfs:range xsd:string
+  .
+
+:tags a rdf:Property;
+  rdfs:comment "A list of optional tags. A tag is just a string which should not contain commas (and other special characters).";
+  rdfs:domain :RootEntity;
+  rdfs:range rdf:List
+  .
+
+:target a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:FlowMap :CalculationSetup)];
+  rdfs:range :Ref
+  .
+
+:targetAmount a rdf:Property;
+  rdfs:comment "The flow amount of the functional unit of the product system.";
+  rdfs:domain :ProductSystem;
+  rdfs:range xsd:double
+  .
+
+:targetFlowProperty a rdf:Property;
+  rdfs:comment "The flow property in which the flow amount of the functional unit is given.";
+  rdfs:domain :ProductSystem;
+  rdfs:range :Ref
+  .
+
+:targetUnit a rdf:Property;
+  rdfs:comment "The unit in which the flow amount of the functional unit is given.";
+  rdfs:domain :ProductSystem;
+  rdfs:range :Ref
+  .
+
+:techFlow a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :TechFlowValue;
+  rdfs:range :TechFlow
+  .
+
+:technologyDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:telefax a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Actor;
+  rdfs:range xsd:string
+  .
+
+:telephone a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Actor;
+  rdfs:range xsd:string
   .
 
 :textReference a rdf:Property;
   rdfs:comment "The full text reference of the source.";
   rdfs:domain :Source;
+  rdfs:range xsd:string
+  .
+
+:time a rdf:Property;
+  rdfs:comment "The time when the state was obtained as Unix time stamp (see `https://www.unixtimestamp.com/`).";
+  rdfs:domain :ResultState;
+  rdfs:range xsd:integer
+  .
+
+:timeDescription a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:string
+  .
+
+:to a rdf:Property;
+  rdfs:comment "Describes the target of the mapping.";
+  rdfs:domain :FlowMapEntry;
+  rdfs:range :FlowMapRef
+  .
+
+:uncertainty a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :ImpactFactor :Parameter :ParameterRedef)];
+  rdfs:range xsd:double
+  .
+
+:unit a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowResult :ImpactFactor :ProjectVariant :CalculationSetup)];
+  rdfs:range :Ref
+  .
+
+:unitGroup a rdf:Property;
+  rdfs:comment "The units of measure that can be used to express quantities of the flow property.";
+  rdfs:domain :FlowProperty;
+  rdfs:range :Ref
+  .
+
+:unitOfMeasurement a rdf:Property;
+  rdfs:comment "The unit in which the indicator is measured.";
+  rdfs:domain :SocialIndicator;
+  rdfs:range xsd:string
+  .
+
+:units a rdf:Property;
+  rdfs:comment "The units of the unit group.";
+  rdfs:domain :UnitGroup;
+  rdfs:range rdf:List
+  .
+
+:url a rdf:Property;
+  rdfs:comment "A URL that points to the source.";
+  rdfs:domain :Source;
+  rdfs:range xsd:string
+  .
+
+:urn a rdf:Property;
+  rdfs:comment "An universal resource name (URN) that identifies where the EPD comes from, e.g. `openEPD:ec3yznau`.";
+  rdfs:domain :Epd;
+  rdfs:range xsd:string
+  .
+
+:validFrom a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:date
+  .
+
+:validUntil a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range xsd:date
+  .
+
+:value a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :ImpactFactor :Parameter :ParameterRedef)];
+  rdfs:range xsd:double
+  .
+
+:variants a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Project;
+  rdfs:range rdf:List
+  .
+
+:verifier a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range :Ref
+  .
+
+:version a rdf:Property;
+  rdfs:comment "A version number in MAJOR.MINOR.PATCH format where the MINOR and PATCH fields are optional and the fields may have leading zeros (so 01.00.00 is the same as 1.0.0 or 1).";
+  rdfs:domain :RootEntity;
+  rdfs:range xsd:string
+  .
+
+:website a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Actor;
+  rdfs:range xsd:string
+  .
+
+:weightedScoreUnit a rdf:Property;
+  rdfs:comment "This is the optional unit of the (normalized and) weighted score when this normalization and weighting set was applied on a LCIA result.";
+  rdfs:domain :NwSet;
+  rdfs:range xsd:string
+  .
+
+:weightingFactor a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :NwFactor;
+  rdfs:range xsd:double
+  .
+
+:withCosts a rdf:Property;
+  rdfs:comment "Defines if cost results should be also calculated.";
+  rdfs:domain :CalculationSetup;
+  rdfs:range xsd:boolean
+  .
+
+:withRegionalization a rdf:Property;
+  rdfs:comment "Defines if regionalization should be applied.";
+  rdfs:domain :CalculationSetup;
+  rdfs:range xsd:boolean
+  .
+
+:year a rdf:Property;
+  rdfs:comment "The publication year of the source.";
+  rdfs:domain :Source;
+  rdfs:range xsd:integer
+  .
+
+:zipCode a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Actor;
   rdfs:range xsd:string
   .
 
