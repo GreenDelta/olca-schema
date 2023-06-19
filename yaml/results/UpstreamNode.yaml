@@ -1,0 +1,35 @@
+
+class:
+  name: UpstreamNode
+  doc: A node in an upstream tree.
+
+  properties:
+    - name: techFlow
+      index: 1
+      type: TechFlow
+      doc: >
+           The process (and product or waste flow) to which this upstream result
+            is related.
+
+    - name: result
+      index: 2
+      type: double
+      doc: >
+           The total result at the point of the supply chain represented by this
+           node. This includes upstream and direct contributions.
+
+    - name: directContribution
+      index: 3
+      type: double
+      doc: >
+           The direct contribution of the process at this point of the supply
+           chain.
+
+    - name: requiredAmount
+      index: 4
+      type: double
+      doc: >
+           The required amount of the process product that is needed at this
+           point of the supply chain to fulfill the demand of the calculated
+           system. This value is given in the reference unit of the respective
+           product flow.

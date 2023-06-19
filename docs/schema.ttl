@@ -591,6 +591,10 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "A value related to a technosphere flow."
   .
 
+:UpstreamNode a rdfs:Class;
+  rdfs:comment "A node in an upstream tree."
+  .
+
 :activityQuantity a rdf:Property;
   rdfs:comment "The quantity of the activity variable.";
   rdfs:domain :SocialIndicator;
@@ -799,6 +803,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :description a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :FlowResult :ImpactResult :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
   rdfs:range xsd:string
+  .
+
+:directContribution a rdf:Property;
+  rdfs:comment "The direct contribution of the process at this point of the supply chain.";
+  rdfs:domain :UpstreamNode;
+  rdfs:range xsd:double
   .
 
 :direction a rdf:Property;
@@ -1363,6 +1373,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
+:requiredAmount a rdf:Property;
+  rdfs:comment "The required amount of the process product that is needed at this point of the supply chain to fulfill the demand of the calculated system. This value is given in the reference unit of the respective product flow.";
+  rdfs:domain :UpstreamNode;
+  rdfs:range xsd:double
+  .
+
 :restrictionsDescription a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
@@ -1370,8 +1386,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :result a rdf:Property;
-  rdfs:comment "A reference to the module's result. Note that results are stand-alone entities and that the same result could be referenced from different modules. Also, results can be directly linked in product systems.";
-  rdfs:domain :EpdModule;
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdModule :UpstreamNode)];
   rdfs:range :Ref
   .
 
@@ -1475,8 +1490,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :techFlow a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :TechFlowValue;
+  rdfs:domain [ a owl:Class; owl:unionOf (:TechFlowValue :UpstreamNode)];
   rdfs:range :TechFlow
   .
 
