@@ -1019,7 +1019,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :isAvoidedProduct a rdf:Property;
-  rdfs:comment "Indicates whether this exchange is an avoided product.";
+  rdfs:comment "Indicates whether this exchange is an avoided product (or waste flow). Note that there is a difference in the data model and the openLCA user interface: in the user interface avoided products (waste flows) are shown as outputs (inputs) but in the data model avoided products (waste flows) have `isInput` set to `true` (`false`). The reason for this is, that it is (maybe) more understandable in the user interface that the production (treatment) of some other product (waste) is avoided this way. However, openLCA links product inputs and waste outputs to providers. Avoided flows are linked in the same way but with a negative sign so that the respective upstream (downstream) chain is subtracted effectively from the result. This is why in the data model we have the `isInput` property set according to this linking logic.";
   rdfs:domain :Exchange;
   rdfs:range xsd:boolean
   .

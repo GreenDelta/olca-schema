@@ -2183,7 +2183,7 @@ class AllocationFactor:
 <li><em>Proto-Index:</em> 13</li>
 </ul>
 <h3 id="isavoidedproduct"><a class="header" href="#isavoidedproduct"><code>isAvoidedProduct</code></a></h3>
-<p>Indicates whether this exchange is an avoided product.</p>
+<p>Indicates whether this exchange is an avoided product (or waste flow). Note that there is a difference in the data model and the openLCA user interface: in the user interface avoided products (waste flows) are shown as outputs (inputs) but in the data model avoided products (waste flows) have <code>isInput</code> set to <code>true</code> (<code>false</code>). The reason for this is, that it is (maybe) more understandable in the user interface that the production (treatment) of some other product (waste) is avoided this way. However, openLCA links product inputs and waste outputs to providers. Avoided flows are linked in the same way but with a negative sign so that the respective upstream (downstream) chain is subtracted effectively from the result. This is why in the data model we have the <code>isInput</code> property set according to this linking logic.</p>
 <ul>
 <li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
 <li><em>Proto-Index:</em> 14</li>
