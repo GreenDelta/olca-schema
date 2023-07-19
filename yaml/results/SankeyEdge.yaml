@@ -1,0 +1,27 @@
+
+class:
+  name: SankeyEdge
+  doc: An edge (link) between two nodes in a [SankeyGraph]
+
+  properties:
+    - name: nodeIndex
+      index: 1
+      type: int
+      doc: >
+           The index of node, where the product (waste)
+           flow of the provider node is an input (output).
+
+    - name: providerIndex
+      index: 2
+      type: int
+      doc: >
+           The index of the node, that produces (treats)
+           the linked product (waste), thus has it as an
+           output (input)
+
+    - name: upstreamShare
+      index: 3
+      type: double
+      doc: >
+           The share of the total result of the provider
+           node that is related to this link.

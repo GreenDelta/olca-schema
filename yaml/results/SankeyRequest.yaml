@@ -1,0 +1,49 @@
+
+class:
+  name: SankeyRequest
+  doc: >
+       A configuration request for calculating a [SankeyGraph]
+       for a result.
+
+  properties:
+    - name: impactCategory
+      index: 1
+      type: Ref[ImpactCategory]
+      optional: true
+      doc: >
+           The reference to the impact category if a graph based
+           on the results of that impact category should be returned.
+
+    - name: enviFlow
+      index: 2
+      type: EnviFlow
+      optional: true
+      doc: >
+           The reference to the intervention flow if a graph based
+           on the results of that flow should be returned.
+
+    - name: forCosts
+      index: 3
+      type: boolean
+      optional: true
+      doc: >
+           If set to true, the returned graph will be based on the
+           life cycle costing results of the system.
+
+    - name: minShare
+      index: 4
+      type: double
+      optional: true
+      doc: >
+           A cut-off rule based on the minimum result share of a node,
+           that is the total result of that node (including direct and
+           upstream contributions) divided by the total result of the
+           system.
+
+    - name: maxNodes
+      index: 5
+      type: int
+      optional: true
+      doc: >
+           The maximum number of nodes that should be contained in the
+           returned graph.

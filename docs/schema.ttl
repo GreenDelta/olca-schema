@@ -583,6 +583,22 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment ""
   .
 
+:SankeyEdge a rdfs:Class;
+  rdfs:comment "An edge (link) between two nodes in a [SankeyGraph]"
+  .
+
+:SankeyGraph a rdfs:Class;
+  rdfs:comment "A data structure that contains elements for a Sankey diagram."
+  .
+
+:SankeyNode a rdfs:Class;
+  rdfs:comment "A node in a [SankeyGraph]"
+  .
+
+:SankeyRequest a rdfs:Class;
+  rdfs:comment "A configuration request for calculating a [SankeyGraph] for a result."
+  .
+
 :TechFlow a rdfs:Class;
   rdfs:comment "A technosphere flow. These are flows that can be linked to product inputs are waste outputs. A technosphere flow has a provider, which can be a `Process`, `ProductSystem`, or `Result`."
   .
@@ -811,6 +827,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:double
   .
 
+:directResult a rdf:Property;
+  rdfs:comment "The direct contribution of the production (treatment) of the product (waste) flow described by this node to the total result of the system.";
+  rdfs:domain :SankeyNode;
+  rdfs:range xsd:double
+  .
+
 :direction a rdf:Property;
   rdfs:comment "The impact direction of this impact category.";
   rdfs:domain :ImpactCategory;
@@ -834,6 +856,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :Ref
   .
 
+:edges a rdf:Property;
+  rdfs:comment "The edges of the graph.";
+  rdfs:domain :SankeyGraph;
+  rdfs:range :SankeyEdge
+  .
+
 :email a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Actor;
@@ -841,8 +869,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :enviFlow a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :EnviFlowValue;
+  rdfs:domain [ a owl:Class; owl:unionOf (:EnviFlowValue :SankeyRequest)];
   rdfs:range :EnviFlow
   .
 
@@ -920,6 +947,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :FlowType
   .
 
+:forCosts a rdf:Property;
+  rdfs:comment "If set to true, the returned graph will be based on the life cycle costing results of the system.";
+  rdfs:domain :SankeyRequest;
+  rdfs:range xsd:boolean
+  .
+
 :formula a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :Flow :ImpactFactor :Parameter)];
   rdfs:range xsd:string
@@ -968,7 +1001,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :impactCategory a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:NwFactor :ImpactValue)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:NwFactor :ImpactValue :SankeyRequest)];
   rdfs:range :Ref
   .
 
@@ -987,6 +1020,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "An array of `ImpactResult` objects.1";
   rdfs:domain :Result;
   rdfs:range :ImpactResult
+  .
+
+:index a rdf:Property;
+  rdfs:comment "The (matrix) index of the node. This is used as the identifier of this node in the graph. For each linked technosphere flow in the system there can be only one node in the graph.";
+  rdfs:domain :SankeyNode;
+  rdfs:range xsd:integer
   .
 
 :indicator a rdf:Property;
@@ -1166,6 +1205,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :FlowMapEntry
   .
 
+:maxNodes a rdf:Property;
+  rdfs:comment "The maximum number of nodes that should be contained in the returned graph.";
+  rdfs:domain :SankeyRequest;
+  rdfs:range xsd:integer
+  .
+
 :maximum a rdf:Property;
   rdfs:comment "The maximum value (used for uniform and triangle distributions).";
   rdfs:domain :Uncertainty;
@@ -1175,6 +1220,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :mean a rdf:Property;
   rdfs:comment "The arithmetic mean (used for normal distributions).";
   rdfs:domain :Uncertainty;
+  rdfs:range xsd:double
+  .
+
+:minShare a rdf:Property;
+  rdfs:comment "A cut-off rule based on the minimum result share of a node, that is the total result of that node (including direct and upstream contributions) divided by the total result of the system.";
+  rdfs:domain :SankeyRequest;
   rdfs:range xsd:double
   .
 
@@ -1211,6 +1262,18 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :name a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
   rdfs:range xsd:string
+  .
+
+:nodeIndex a rdf:Property;
+  rdfs:comment "The index of node, where the product (waste) flow of the provider node is an input (output).";
+  rdfs:domain :SankeyEdge;
+  rdfs:range xsd:integer
+  .
+
+:nodes a rdf:Property;
+  rdfs:comment "The nodes of the graph.";
+  rdfs:domain :SankeyGraph;
+  rdfs:range :SankeyNode
   .
 
 :normalisationFactor a rdf:Property;
@@ -1326,6 +1389,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :Ref
   .
 
+:providerIndex a rdf:Property;
+  rdfs:comment "The index of the node, that produces (treats) the linked product (waste), thus has it as an output (input)";
+  rdfs:domain :SankeyEdge;
+  rdfs:range xsd:integer
+  .
+
 :providerLinking a rdf:Property;
   rdfs:comment "Defines how default providers of linkable product inputs and waste outputs are handled.";
   rdfs:domain :LinkingConfig;
@@ -1406,6 +1475,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "";
   rdfs:domain :SocialAspect;
   rdfs:range :RiskLevel
+  .
+
+:rootIndex a rdf:Property;
+  rdfs:comment "The index of the node that represents the quantitative reference of the graph. In order to create and layout a Sankey diagram, an LCA system is typically traversed in breadth-first order. When back-links of cycles in this traversal order are ignored, the (sub-) graph created by this traversal is a directed acyclic graph (DAG) with this root.";
+  rdfs:domain :SankeyGraph;
+  rdfs:range xsd:integer
   .
 
 :samplingDescription a rdf:Property;
@@ -1490,7 +1565,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :techFlow a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:TechFlowValue :UpstreamNode)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:SankeyNode :TechFlowValue :UpstreamNode)];
   rdfs:range :TechFlow
   .
 
@@ -1536,6 +1611,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :FlowMapRef
   .
 
+:totalResult a rdf:Property;
+  rdfs:comment "The total result (upstream and direct) related to the production (treatment) of the product (waste) flow described by this node. Note that this product (waste) flow could be an input (output) of several processes in the system and all these instances are aggregated to a single node here. This is different than in the upstream contribution tree where these instances can be unrolled into multiple nodes (see [UpstreamNode]).";
+  rdfs:domain :SankeyNode;
+  rdfs:range xsd:double
+  .
+
 :uncertainty a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :ImpactFactor :Parameter :ParameterRedef)];
   rdfs:range xsd:double
@@ -1562,6 +1643,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "The units of the unit group.";
   rdfs:domain :UnitGroup;
   rdfs:range :Unit
+  .
+
+:upstreamShare a rdf:Property;
+  rdfs:comment "The share of the total result of the provider node that is related to this link.";
+  rdfs:domain :SankeyEdge;
+  rdfs:range xsd:double
   .
 
 :url a rdf:Property;

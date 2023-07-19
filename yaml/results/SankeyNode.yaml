@@ -1,0 +1,43 @@
+
+class:
+  name: SankeyNode
+  doc: A node in a [SankeyGraph]
+
+  properties:
+    - name: index
+      index: 1
+      type: int
+      doc: >
+           The (matrix) index of the node. This is used as the
+           identifier of this node in the graph. For each
+           linked technosphere flow in the system there can be
+           only one node in the graph.
+
+    - name: techFlow
+      index: 2
+      type: TechFlow
+      doc: >
+           The process-product or process-waste flow described
+           by this node.
+
+    - name: directResult
+      index: 3
+      type: double
+      doc: >
+           The direct contribution of the production (treatment)
+           of the product (waste) flow described by this node
+           to the total result of the system.
+
+    - name: totalResult
+      index: 4
+      type: double
+      doc: >
+           The total result (upstream and direct) related to
+           the production (treatment) of the product (waste)
+           flow described by this node. Note that this product
+           (waste) flow could be an input (output) of several
+           processes in the system and all these instances
+           are aggregated to a single node here. This is
+           different than in the upstream contribution tree
+           where these instances can be unrolled into multiple
+           nodes (see [UpstreamNode]).

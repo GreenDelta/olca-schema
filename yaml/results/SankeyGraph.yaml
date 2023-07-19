@@ -1,0 +1,28 @@
+
+class:
+  name: SankeyGraph
+  doc: >
+       A data structure that contains elements for a Sankey diagram.
+
+  properties:
+    - name: rootIndex
+      index: 1
+      type: int
+      doc: >
+           The index of the node that represents the quantitative
+           reference of the graph. In order to create and layout
+           a Sankey diagram, an LCA system is typically traversed in
+           breadth-first order. When back-links of cycles in this
+           traversal order are ignored, the (sub-) graph created
+           by this traversal is a directed acyclic graph (DAG)
+           with this root.
+
+    - name: nodes
+      index: 2
+      type: List[SankeyNode]
+      doc: The nodes of the graph.
+
+    - name: edges
+      index: 3
+      type: List[SankeyEdge]
+      doc: The edges of the graph.
