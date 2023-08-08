@@ -1987,6 +1987,74 @@ class ResultState:
 
 
 @dataclass
+class SankeyEdge:
+
+    node_index: Optional[int] = None
+    provider_index: Optional[int] = None
+    upstream_share: Optional[float] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.node_index is not None:
+            d['nodeIndex'] = self.node_index
+        if self.provider_index is not None:
+            d['providerIndex'] = self.provider_index
+        if self.upstream_share is not None:
+            d['upstreamShare'] = self.upstream_share
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'SankeyEdge':
+        sankey_edge = SankeyEdge()
+        if (v := d.get('nodeIndex')) or v is not None:
+            sankey_edge.node_index = v
+        if (v := d.get('providerIndex')) or v is not None:
+            sankey_edge.provider_index = v
+        if (v := d.get('upstreamShare')) or v is not None:
+            sankey_edge.upstream_share = v
+        return sankey_edge
+
+
+@dataclass
+class SankeyRequest:
+
+    envi_flow: Optional[EnviFlow] = None
+    for_costs: Optional[bool] = None
+    impact_category: Optional[Ref] = None
+    max_nodes: Optional[int] = None
+    min_share: Optional[float] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.envi_flow is not None:
+            d['enviFlow'] = self.envi_flow.to_dict()
+        if self.for_costs is not None:
+            d['forCosts'] = self.for_costs
+        if self.impact_category is not None:
+            d['impactCategory'] = self.impact_category.to_dict()
+        if self.max_nodes is not None:
+            d['maxNodes'] = self.max_nodes
+        if self.min_share is not None:
+            d['minShare'] = self.min_share
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'SankeyRequest':
+        sankey_request = SankeyRequest()
+        if (v := d.get('enviFlow')) or v is not None:
+            sankey_request.envi_flow = EnviFlow.from_dict(v)
+        if (v := d.get('forCosts')) or v is not None:
+            sankey_request.for_costs = v
+        if (v := d.get('impactCategory')) or v is not None:
+            sankey_request.impact_category = Ref.from_dict(v)
+        if (v := d.get('maxNodes')) or v is not None:
+            sankey_request.max_nodes = v
+        if (v := d.get('minShare')) or v is not None:
+            sankey_request.min_share = v
+        return sankey_request
+
+
+@dataclass
 class SocialAspect:
 
     activity_value: Optional[float] = None
@@ -2244,6 +2312,69 @@ class TechFlow:
         if (v := d.get('provider')) or v is not None:
             tech_flow.provider = Ref.from_dict(v)
         return tech_flow
+
+
+@dataclass
+class SankeyNode:
+
+    direct_result: Optional[float] = None
+    index: Optional[int] = None
+    tech_flow: Optional[TechFlow] = None
+    total_result: Optional[float] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.direct_result is not None:
+            d['directResult'] = self.direct_result
+        if self.index is not None:
+            d['index'] = self.index
+        if self.tech_flow is not None:
+            d['techFlow'] = self.tech_flow.to_dict()
+        if self.total_result is not None:
+            d['totalResult'] = self.total_result
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'SankeyNode':
+        sankey_node = SankeyNode()
+        if (v := d.get('directResult')) or v is not None:
+            sankey_node.direct_result = v
+        if (v := d.get('index')) or v is not None:
+            sankey_node.index = v
+        if (v := d.get('techFlow')) or v is not None:
+            sankey_node.tech_flow = TechFlow.from_dict(v)
+        if (v := d.get('totalResult')) or v is not None:
+            sankey_node.total_result = v
+        return sankey_node
+
+
+@dataclass
+class SankeyGraph:
+
+    edges: Optional[List[SankeyEdge]] = None
+    nodes: Optional[List[SankeyNode]] = None
+    root_index: Optional[int] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.edges is not None:
+            d['edges'] = [e.to_dict() for e in self.edges]
+        if self.nodes is not None:
+            d['nodes'] = [e.to_dict() for e in self.nodes]
+        if self.root_index is not None:
+            d['rootIndex'] = self.root_index
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'SankeyGraph':
+        sankey_graph = SankeyGraph()
+        if (v := d.get('edges')) or v is not None:
+            sankey_graph.edges = [SankeyEdge.from_dict(e) for e in v]
+        if (v := d.get('nodes')) or v is not None:
+            sankey_graph.nodes = [SankeyNode.from_dict(e) for e in v]
+        if (v := d.get('rootIndex')) or v is not None:
+            sankey_graph.root_index = v
+        return sankey_graph
 
 
 @dataclass
@@ -3346,6 +3477,40 @@ class UnitGroup:
     @staticmethod
     def from_json(data: Union[str, bytes]) -> 'UnitGroup':
         return UnitGroup.from_dict(json.loads(data))
+
+
+@dataclass
+class UpstreamNode:
+
+    direct_contribution: Optional[float] = None
+    required_amount: Optional[float] = None
+    result: Optional[float] = None
+    tech_flow: Optional[TechFlow] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.direct_contribution is not None:
+            d['directContribution'] = self.direct_contribution
+        if self.required_amount is not None:
+            d['requiredAmount'] = self.required_amount
+        if self.result is not None:
+            d['result'] = self.result
+        if self.tech_flow is not None:
+            d['techFlow'] = self.tech_flow.to_dict()
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'UpstreamNode':
+        upstream_node = UpstreamNode()
+        if (v := d.get('directContribution')) or v is not None:
+            upstream_node.direct_contribution = v
+        if (v := d.get('requiredAmount')) or v is not None:
+            upstream_node.required_amount = v
+        if (v := d.get('result')) or v is not None:
+            upstream_node.result = v
+        if (v := d.get('techFlow')) or v is not None:
+            upstream_node.tech_flow = TechFlow.from_dict(v)
+        return upstream_node
 
 
 RootEntity = Union[
