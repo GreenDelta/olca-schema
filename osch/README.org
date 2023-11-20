@@ -1,0 +1,81 @@
+* The =osch= tool
+
+The =osch= tool takes the schema definition and converts it to a defined target. It is a command line tool written in Go:
+
+#+begin_src shell :results output
+# cd olca-schema/osch
+
+# build the tool, you need to have Go installed
+go build
+
+# prints the help of the tool
+./osch help
+
+# validates the schema definition
+# prints warnings and errors, we are not perfect yet...
+# ./osch check
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+
+osch
+
+usage:
+
+$ osch [command]
+
+commands:
+
+  help    - prints this help
+  check   - checks the schema
+	doc     - generates the schema documentation
+  proto   - generates the Protocol Buffers schema
+	py      - generates the Python classes
+	context - writes the docs/context.jsonld file
+  
+#+end_example
+
+** Generating the schema documentation
+
+The following command generates the [[https://github.com/rust-lang/mdBook][mdBook]] sources from the schema definition in the =build/docs= folder:
+
+#+begin_src shell :results none
+./osch doc
+#+end_src
+
+
+With the =mdbook= command, the documentation can be then generated in the =docs= folder (relative to the book sources) via the following command:
+
+#+begin_src shell :results none
+mdbook build -d ../../docs ../build/docs
+#+end_src
+
+This folder is then served as our online documentation via Github pages: [[https://greendelta.github.io/olca-schema/]]
+
+We also host the [[https://greendelta.github.io/olca-schema/context.jsonld][JSON-LD context]] and the [[https://greendelta.github.io/olca-schema/schema.ttl][schema in Turtle format]] via Github pages. These resources are generated with the =rdf= command which should be executed after the =mdbook= was generated (because it will clean the =docs= folder): 
+
+#+begin_src shell :results none
+./osch rdf
+#+end_src
+
+** Protocol Buffers
+
+The =proto= command will generate a =olca.proto= file in the =build= folder:
+
+#+begin_src shell :results none
+./osch proto
+#+end_src
+
+The =build= contains then the Protocol Buffers schema. This schema is used in the
+[[https://github.com/GreenDelta/olca-proto][olca-proto project]] and is used for data exchange with openLCA via Protocol Buffers and gRPC.
+
+** Python
+
+The class defintions of the Python package can be generated via the =py= command:
+
+#+begin_src shell :results none
+./osch py
+#+end_src
+

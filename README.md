@@ -28,7 +28,7 @@ tool:
 * a [Python package](https://pypi.org/project/olca-schema/) for reading and
   writing openLCA schema data sets in Json, also from and to zip packages
 * a [Protocol Buffers schema](https://github.com/GreenDelta/olca-proto/blob/master/proto/olca.proto)
-
+* a [TypeScript package](https://github.com/GreenDelta/olca-ipc.ts)
 
 ## License
 The openLCA schema is in the worldwide public domain, released under the
