@@ -85,7 +85,7 @@ func (w *mdWriter) file(path, content string) {
 
 func (w *mdWriter) summary() string {
 
-	outerTypeOf := w.directCompositions()
+	compositions := w.directCompositions()
 
 	buff := NewBuffer()
 	buff.Writeln("# Summary\n")
@@ -93,17 +93,19 @@ func (w *mdWriter) summary() string {
 	buff.Writeln("[Changes](./CHANGES.md)")
 
 	addClassLinks := func(class *YamlClass) {
-		if class == nil || outerTypeOf[class.Name] != "" {
+		if class == nil || compositions[class.Name] != "" {
 			return
 		}
 		buff.Writeln(" - [" + class.Name + "](./classes/" + class.Name + ".md)")
-		// write direct components
+
+		// write inner components
 		w.model.EachClass(func(inner *YamlClass) {
-			if outerTypeOf[inner.Name] == class.Name {
+			if w.isDirectComponent(compositions, inner.Name, class.Name) {
 				buff.Writeln(
 					"   - [" + inner.Name + "](./classes/" + inner.Name + ".md)")
 			}
 		})
+
 	}
 
 	// root entities and their direct components (the can only exist in
@@ -355,6 +357,26 @@ func (w *mdWriter) directCompositions() map[string]string {
 	}
 
 	return m
+}
+
+// Returns true when the given class `inner` is a component
+// of the given class `outer` that is only used in the
+// context or some sub-context of `outer`.
+func (w *mdWriter) isDirectComponent(
+	rel map[string]string, inner string, outer string,
+) bool {
+	i := inner
+	for {
+		o, ok := rel[i]
+		if !ok || o == "" {
+			break
+		}
+		if o == outer {
+			return true
+		}
+		i = o
+	}
+	return false
 }
 
 func (w *mdWriter) getJsonExample(class *YamlClass) string {

@@ -33,7 +33,9 @@ commands:
 	doc     - generates the schema documentation
   proto   - generates the Protocol Buffers schema
 	py      - generates the Python classes
-	context - writes the docs/context.jsonld file
+	rdf     - generates the JSON-LD context and Turtle schema
+  tonel   - generates the schema in Tonel format (for usage in Pharo/Smalltalk)
+  ts      - generates the TypeScript module
   
 #+end_example
 
