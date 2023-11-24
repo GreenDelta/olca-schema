@@ -246,6 +246,12 @@ func (w *tsWriter) writeFromDict(class *YamlClass) {
 	w.writeln("  static fromDict(d: Dict): ", class.Name, " | null {")
 	w.writeln("    if (!d) return null;")
 	w.writeln("    const e = new ", class.Name, "();")
+
+	// set type attribute for instances of Ref
+	if class.Name == "Ref" {
+		w.writeln("    ifPresent(d[\"@type\"], (v) => e.refType = v as RefType);")
+	}
+	
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue

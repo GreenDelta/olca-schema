@@ -81,3 +81,15 @@ The class defintions of the Python package can be generated via the =py= command
 ./osch py
 #+end_src
 
+** TypeScript
+
+The =ts= command will generate type declarations and many utility methods for working with the schema in TypeScript. The [[https://github.com/GreenDelta/olca-ipc.ts][olca-ipc.ts]] API is built around that generated schema. The script below will update this schema assuming the =olca-ipc.ts= project is located next to the =olca-schema= project and a current version of [[https://deno.com/][Deno]] is installed: 
+
+#+begin_src shell :results none
+./osch ts -o "../../olca-ipc.ts/src/schema.ts"
+
+# run the Deno formatter
+cd ../../olca-ipc.ts
+deno fmt
+#+end_src
+
