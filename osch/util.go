@@ -118,25 +118,3 @@ func startsWithLower(s string) bool {
 func strip(s string) string {
 	return strings.TrimSpace(s)
 }
-
-type Buffer struct {
-	buff *bytes.Buffer
-}
-
-func NewBuffer() *Buffer {
-	return &Buffer{buff: &bytes.Buffer{}}
-}
-
-func (b *Buffer) String() string {
-	return b.buff.String()
-}
-
-func (b *Buffer) Writeln(args ...string) {
-	for i, arg := range args {
-		if i > 0 {
-			b.buff.WriteRune(' ')
-		}
-		b.buff.WriteString(arg)
-	}
-	b.buff.WriteRune('\n')
-}

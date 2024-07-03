@@ -87,22 +87,21 @@ func (w *mdWriter) summary() string {
 
 	compositions := w.directCompositions()
 
-	buff := NewBuffer()
-	buff.Writeln("# Summary\n")
-	buff.Writeln("[Introduction](./intro.md)")
-	buff.Writeln("[Changes](./CHANGES.md)")
+	buff := newWriter()
+	wln(buff, "# Summary\n")
+	wln(buff, "[Introduction](./intro.md)")
+	wln(buff, "[Changes](./CHANGES.md)")
 
 	addClassLinks := func(class *YamlClass) {
 		if class == nil || compositions[class.Name] != "" {
 			return
 		}
-		buff.Writeln(" - [" + class.Name + "](./classes/" + class.Name + ".md)")
+		wln(buff, " - [", class.Name, "](./classes/", class.Name, ".md)")
 
 		// write inner components
 		w.model.EachClass(func(inner *YamlClass) {
 			if w.isDirectComponent(compositions, inner.Name, class.Name) {
-				buff.Writeln(
-					"   - [" + inner.Name + "](./classes/" + inner.Name + ".md)")
+				wln(buff, "   - [", inner.Name, "](./classes/", inner.Name, ".md)")
 			}
 		})
 
@@ -110,7 +109,7 @@ func (w *mdWriter) summary() string {
 
 	// root entities and their direct components (the can only exist in
 	// the root package)
-	buff.Writeln("# Root entities\n")
+	wln(buff, "# Root entities\n")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRootEntity(class) {
 			addClassLinks(class)
@@ -118,7 +117,7 @@ func (w *mdWriter) summary() string {
 	})
 
 	// other shared components in the root package
-	buff.Writeln("# Other components\n")
+	wln(buff, "# Other components\n")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRootEntity(class) ||
 			!w.model.IsRootPackage(w.model.PackageOfClass(class)) {
@@ -128,12 +127,12 @@ func (w *mdWriter) summary() string {
 	})
 
 	// write the enumerations of the root package
-	buff.Writeln("\n# Enumerations\n")
+	wln(buff, "\n# Enumerations\n")
 	for _, t := range w.model.Types {
 		if t.IsClass() || !w.model.IsRootPackage(t.Package) {
 			continue
 		}
-		buff.Writeln(" - [" + t.Name() + "](./enums/" + t.Name() + ".md)")
+		wln(buff, " - [", t.Name(), "](./enums/", t.Name(), ".md)")
 	}
 
 	// write types in other packages
@@ -141,8 +140,8 @@ func (w *mdWriter) summary() string {
 		if w.model.IsRootPackage(pack) {
 			continue
 		}
-		buff.Writeln("\n# Package: ", pack)
-		buff.Writeln("\n## Classes")
+		wln(buff, "\n# Package: "+pack)
+		wln(buff, "\n## Classes")
 		for _, t := range w.model.Types {
 			if !t.IsClass() || t.Package != pack {
 				continue
@@ -157,13 +156,13 @@ func (w *mdWriter) summary() string {
 			}
 			if !hasEnums {
 				hasEnums = true
-				buff.Writeln("\n## Enumerations")
+				wln(buff, "\n## Enumerations")
 			}
-			buff.Writeln(" - [" + t.Name() + "](./enums/" + t.Name() + ".md)")
+			wln(buff, " - [", t.Name(), "](./enums/", t.Name(), ".md)")
 		}
 	}
 
-	return buff.String()
+	return buff.buffer().String()
 }
 
 func (w *mdWriter) docClassOf(class *YamlClass) string {

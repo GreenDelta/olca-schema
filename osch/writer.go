@@ -7,6 +7,24 @@ type buffer interface {
 	indent() string
 }
 
+type writer struct {
+	buff *bytes.Buffer
+}
+
+func newWriter() *writer {
+	return &writer{buff: &bytes.Buffer{}}
+}
+
+func (w *writer) buffer() *bytes.Buffer {
+	return w.buff
+}
+
+func (w *writer) indent() string {
+	return "  "
+}
+
+// wln concatenates the string arguments and writes them as a line into the
+// given buffer.
 func wln(buff buffer, xs ...string) {
 	text := buff.buffer()
 	for _, x := range xs {
@@ -15,6 +33,8 @@ func wln(buff buffer, xs ...string) {
 	text.WriteRune('\n')
 }
 
+// wln concatenates the string arguments and writes them as an i-indented line
+// into the given buffer where i is the number of indentations.
 func wlni(buff buffer, i int, xs ...string) {
 	text := buff.buffer()
 	indent := buff.indent()
