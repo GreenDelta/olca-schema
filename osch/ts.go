@@ -8,9 +8,17 @@ import (
 	"path/filepath"
 )
 
-type tsWriter struct {
+type tsw struct {
 	buff  *bytes.Buffer
 	model *YamlModel
+}
+
+func (w *tsw) buffer() *bytes.Buffer {
+	return w.buff
+}
+
+func (w *tsw) indent() string {
+	return "  "
 }
 
 func writeTypeScriptModule(args *args) {
@@ -19,15 +27,15 @@ func writeTypeScriptModule(args *args) {
 	check(err, "could not read YAML model")
 
 	var buffer bytes.Buffer
-	writer := tsWriter{
+	w := tsw{
 		buff:  &buffer,
 		model: model,
 	}
-	writer.writeUtils()
-	writer.writeRefType()
-	writer.writeSumTypes()
-	writer.writeEnums()
-	writer.writeClasses()
+	w.writeUtils()
+	w.writeRefType()
+	w.writeSumTypes()
+	w.writeEnums()
+	w.writeClasses()
 
 	var outFile string
 	if args.output != "" {
@@ -42,8 +50,8 @@ func writeTypeScriptModule(args *args) {
 	os.WriteFile(outFile, buffer.Bytes(), os.ModePerm)
 }
 
-func (w *tsWriter) writeUtils() {
-	w.writeln(`// this file was generated automatically; do not change it but help to make
+func (w *tsw) writeUtils() {
+	wln(w, `// this file was generated automatically; do not change it but help to make
 // the code generator better; see:
 // https://github.com/GreenDelta/olca-schema/tree/master/osch
 
@@ -67,20 +75,20 @@ function dictAll(list: Array<Dictable> | null): Array<Dict> {
 `)
 }
 
-func (w *tsWriter) writeRefType() {
-	w.writeln("export enum RefType {")
+func (w *tsw) writeRefType() {
+	wln(w, "export enum RefType {")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRefEntity(class) &&
 			class.Name != "Ref" &&
 			!w.model.IsAbstract(class) {
-			w.writeln("  ", class.Name+" = \""+class.Name+"\",")
+			wlni(w, 1, class.Name+" = \""+class.Name+"\",")
 		}
 	})
-	w.writeln("}")
-	w.writeln()
+	wln(w, "}")
+	wln(w)
 }
 
-func (w *tsWriter) writeSumTypes() {
+func (w *tsw) writeSumTypes() {
 	text := "export type RootEntity = "
 	w.model.EachClass(func(class *YamlClass) {
 		if !w.model.IsAbstract(class) && w.model.IsRootEntity(class) {
@@ -88,7 +96,7 @@ func (w *tsWriter) writeSumTypes() {
 		}
 	})
 	text += ";\n"
-	w.writeln(text)
+	wln(w, text)
 
 	text = "export type RefEntity =\n  | RootEntity"
 	w.model.EachClass(func(class *YamlClass) {
@@ -100,48 +108,48 @@ func (w *tsWriter) writeSumTypes() {
 		}
 	})
 	text += ";\n"
-	w.writeln(text)
+	wln(w, text)
 }
 
-func (w *tsWriter) writeEnums() {
+func (w *tsw) writeEnums() {
 	w.model.EachEnum(func(e *YamlEnum) {
-		w.writeln("export enum ", e.Name, " {")
+		wln(w, "export enum ", e.Name, " {")
 		for _, item := range e.Items {
-			w.writeln("  ", item.Name, " = \""+item.Name+"\",")
+			wlni(w, 1, item.Name, " = \""+item.Name+"\",")
 		}
-		w.writeln("}")
-		w.writeln()
+		wln(w, "}")
+		wln(w)
 	})
 }
 
-func (w *tsWriter) writeClasses() {
+func (w *tsw) writeClasses() {
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsAbstract(class) {
 			return
 		}
 
 		// write a companion interfase
-		w.writeln("interface I", class.Name, " {")
+		wln(w, "interface I", class.Name, " {")
 		w.writeProps(class)
-		w.writeln("}")
-		w.writeln()
+		wln(w, "}")
+		wln(w)
 
 		// write the class
-		w.writeln("export class ", class.Name, " {")
+		wln(w, "export class ", class.Name, " {")
 		w.writeProps(class)
-		w.writeln()
+		wln(w)
 		w.writeOfFactory(class)
 		if w.model.IsRefEntity(class) && class.Name != "Ref" {
-			w.writeln()
+			wln(w)
 			w.writeToRef(class)
 		}
-		w.writeln()
+		wln(w)
 		w.writeToDict(class)
-		w.writeln()
+		wln(w)
 		w.writeFromDict(class)
 
 		// toJson & fromJson
-		w.writeln(fmt.Sprintf(`
+		wln(w, fmt.Sprintf(`
   static fromJson(json: string | Dict): %[1]s | null {
     return typeof json === "string"
       ? %[1]s.fromDict(JSON.parse(json) as Dict)
@@ -152,12 +160,12 @@ func (w *tsWriter) writeClasses() {
     return JSON.stringify(this.toDict(), null, "  ");
   }`, class.Name))
 
-		w.writeln("}")
-		w.writeln()
+		wln(w, "}")
+		wln(w)
 	})
 }
 
-func (w *tsWriter) writeProps(class *YamlClass) {
+func (w *tsw) writeProps(class *YamlClass) {
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
@@ -167,16 +175,16 @@ func (w *tsWriter) writeProps(class *YamlClass) {
 			propName = "id"
 		}
 		propType := YamlPropType(prop.Type)
-		w.writeln("  ", propName, "?: ", w.typeOf(propType), " | null;")
+		wlni(w, 1, propName, "?: ", w.typeOf(propType), " | null;")
 	}
 	if class.Name == "Ref" {
-		w.writeln("  refType?: RefType | null;")
+		wlni(w, 1, "refType?: RefType | null;")
 	}
 }
 
-func (w *tsWriter) writeOfFactory(class *YamlClass) {
-	w.writeln("  static of(i: I", class.Name, "): ", class.Name, " {")
-	w.writeln("    const e = new ", class.Name, "();")
+func (w *tsw) writeOfFactory(class *YamlClass) {
+	wlni(w, 1, "static of(i: I", class.Name, "): ", class.Name, " {")
+	wlni(w, 2, "const e = new ", class.Name, "();")
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
@@ -185,43 +193,43 @@ func (w *tsWriter) writeOfFactory(class *YamlClass) {
 		if prop.Name == "@id" {
 			propName = "id"
 		}
-		w.writeln("    e.", propName, " = i.", propName, ";")
+		wlni(w, 2, "e.", propName, " = i.", propName, ";")
 	}
 	if class.Name == "Ref" {
-		w.writeln("    e.refType = i.refType;")
+		wlni(w, 2, "e.refType = i.refType;")
 	}
-	w.writeln("    return e;")
-	w.writeln("  }")
+	wlni(w, 2, "return e;")
+	wlni(w, 1, "}")
 }
 
-func (w *tsWriter) writeToRef(class *YamlClass) {
-	w.writeln("  toRef(): Ref {")
-	w.writeln("    return Ref.of({")
-	w.writeln("      refType: RefType.", class.Name, ",")
-	w.writeln("      id: this.id,")
-	w.writeln("      name: this.name,")
+func (w *tsw) writeToRef(class *YamlClass) {
+	wlni(w, 1, "toRef(): Ref {")
+	wlni(w, 2, "return Ref.of({")
+	wlni(w, 3, "refType: RefType.", class.Name, ",")
+	wlni(w, 3, "id: this.id,")
+	wlni(w, 3, "name: this.name,")
 	if w.model.IsRootEntity(class) {
-		w.writeln("      category: this.category,")
+		wlni(w, 3, "category: this.category,")
 	}
-	w.writeln("    });")
-	w.writeln("  }")
+	wlni(w, 2, "});")
+	wlni(w, 1, "}")
 }
 
-func (w *tsWriter) writeToDict(class *YamlClass) {
-	w.writeln("  toDict(): Dict {")
-	w.writeln("    const d: Dict = {};")
+func (w *tsw) writeToDict(class *YamlClass) {
+	wlni(w, 1, "toDict(): Dict {")
+	wlni(w, 2, "const d: Dict = {};")
 	if w.model.IsRefEntity(class) && class.Name != "Ref" {
-		w.writeln("    d[\"@type\"] = \"", class.Name, "\";")
+		wlni(w, 2, "d[\"@type\"] = \"", class.Name, "\";")
 	}
 	if class.Name == "Ref" {
-		w.writeln("    ifPresent(this.refType, (v) => d[\"@type\"] = v);")
+		wlni(w, 2, "ifPresent(this.refType, (v) => d[\"@type\"] = v);")
 	}
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
 		if prop.Name == "@id" {
-			w.writeln("    ifPresent(this.id, (v) => d[\"@id\"] = v);")
+			wlni(w, 2, "ifPresent(this.id, (v) => d[\"@id\"] = v);")
 			continue
 		}
 
@@ -235,59 +243,59 @@ func (w *tsWriter) writeToDict(class *YamlClass) {
 			prop.Type != "GeoJSON" {
 			conv = "v?.toDict()"
 		}
-		w.writeln("    ifPresent(this.", prop.Name,
+		wlni(w, 2, "ifPresent(this.", prop.Name,
 			", (v) => d.", prop.Name, " = ", conv, ");")
 	}
-	w.writeln("    return d;")
-	w.writeln("  }")
+	wlni(w, 2, "return d;")
+	wlni(w, 1, "}")
 }
 
-func (w *tsWriter) writeFromDict(class *YamlClass) {
-	w.writeln("  static fromDict(d: Dict): ", class.Name, " | null {")
-	w.writeln("    if (!d) return null;")
-	w.writeln("    const e = new ", class.Name, "();")
+func (w *tsw) writeFromDict(class *YamlClass) {
+	wlni(w, 1, "static fromDict(d: Dict): ", class.Name, " | null {")
+	wlni(w, 2, "if (!d) return null;")
+	wlni(w, 2, "const e = new ", class.Name, "();")
 
 	// set type attribute for instances of Ref
 	if class.Name == "Ref" {
-		w.writeln("    ifPresent(d[\"@type\"], (v) => e.refType = v as RefType);")
+		wlni(w, 2, "ifPresent(d[\"@type\"], (v) => e.refType = v as RefType);")
 	}
-	
+
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
 		if prop.Name == "@id" {
-			w.writeln("    e.id = d[\"@id\"] as string;")
+			wlni(w, 2, "e.id = d[\"@id\"] as string;")
 			continue
 		}
 		t := prop.PropType()
 		if !t.IsList() {
 			if t.IsPrimitive() || t == "GeoJSON" || t.IsEnumOf(w.model) {
-				w.writeln("    e.", prop.Name, " = d.",
+				wlni(w, 2, "e.", prop.Name, " = d.",
 					prop.Name, " as ", w.typeOf(t), ";")
 			} else {
-				w.writeln("    e.", prop.Name, " = ",
+				wlni(w, 2, "e.", prop.Name, " = ",
 					w.typeOf(t), ".fromDict(d.", prop.Name, " as Dict);")
 			}
 		} else {
 			inner := t.UnpackList()
 			if inner.IsPrimitive() {
-				w.writeln("    e.", prop.Name, " = d.",
+				wlni(w, 2, "e.", prop.Name, " = d.",
 					prop.Name, " as ", w.typeOf(inner), "[];")
 			} else {
 				text := "    e." + prop.Name + " = d." + prop.Name + "\n"
 				text += "      ? (d." + prop.Name + " as Dict[]).map(" +
 					w.typeOf(inner) + ".fromDict) as " + w.typeOf(inner) + "[]\n" +
 					"      : null;"
-				w.writeln(text)
+				wln(w, text)
 			}
 		}
 	}
-	w.writeln("    return e;")
-	w.writeln("  }")
+	wlni(w, 2, "return e;")
+	wlni(w, 1, "}")
 }
 
-func (w *tsWriter) typeOf(t YamlPropType) string {
+func (w *tsw) typeOf(t YamlPropType) string {
 	if t.IsList() {
 		param := t.UnpackList()
 		return "Array<" + w.typeOf(param) + ">"
@@ -312,11 +320,4 @@ func (w *tsWriter) typeOf(t YamlPropType) string {
 			return string(t)
 		}
 	}
-}
-
-func (w *tsWriter) writeln(xs ...string) {
-	for _, x := range xs {
-		w.buff.WriteString(x)
-	}
-	w.buff.WriteRune('\n')
 }
