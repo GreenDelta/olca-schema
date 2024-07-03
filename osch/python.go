@@ -46,16 +46,16 @@ func (w *pyw) writeSchema() {
 	w.writeHeader()
 
 	// RefType
-	wln(w, "class RefType(Enum):")
+	ln(w, "class RefType(Enum):")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRefEntity(class) &&
 			class.Name != "Ref" {
-			wlni(w, 1, class.Name, " = '", class.Name, "'")
+			lni(w, 1, class.Name, " = '", class.Name, "'")
 		}
 	})
-	wln(w)
+	ln(w)
 	w.writeEnumGetter("RefType")
-	wln(w)
+	ln(w)
 
 	// enums
 	w.model.EachEnum(func(enum *YamlEnum) {
@@ -71,65 +71,65 @@ func (w *pyw) writeSchema() {
 	}
 
 	// RootEntity and RefEntity
-	wln(w, "RootEntity = Union[")
+	ln(w, "RootEntity = Union[")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRootEntity(class) {
-			wlni(w, 1, class.Name, ",")
+			lni(w, 1, class.Name, ",")
 		}
 	})
-	wln(w, "]")
-	wln(w)
-	wln(w)
-	wln(w, "RefEntity = Union[RootEntity, Unit, NwSet]")
+	ln(w, "]")
+	ln(w)
+	ln(w)
+	ln(w, "RefEntity = Union[RootEntity, Unit, NwSet]")
 }
 
 func (w *pyw) writeHeader() {
-	wln(w, "# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
-	wln(w, `
+	ln(w, "# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
+	ln(w, `
 # This module contains a Python API for reading and writing data sets in
 # the JSON based openLCA data exchange format. For more information see
 # http://greendelta.github.io/olca-schema
 `)
 
 	// imports
-	wln(w, "import datetime")
-	wln(w, "import json")
-	wln(w, "import uuid")
-	wln(w)
-	wln(w, "from enum import Enum")
-	wln(w, "from dataclasses import dataclass")
-	wln(w, "from typing import Any, Dict, List, Optional, Union")
-	wln(w)
-	wln(w)
+	ln(w, "import datetime")
+	ln(w, "import json")
+	ln(w, "import uuid")
+	ln(w)
+	ln(w, "from enum import Enum")
+	ln(w, "from dataclasses import dataclass")
+	ln(w, "from typing import Any, Dict, List, Optional, Union")
+	ln(w)
+	ln(w)
 }
 
 func (w *pyw) writeEnum(enum *YamlEnum) {
 	name := enum.Name
-	wln(w, "class ", name, "(Enum):")
-	wln(w)
+	ln(w, "class ", name, "(Enum):")
+	ln(w)
 	for _, item := range enum.Items {
-		wlni(w, 1, item.Name, " = '", item.Name, "'")
+		lni(w, 1, item.Name, " = '", item.Name, "'")
 	}
-	wln(w)
+	ln(w)
 	w.writeEnumGetter(name)
-	wln(w)
+	ln(w)
 }
 
 func (w *pyw) writeEnumGetter(name string) {
-	wlni(w, 1, "@staticmethod")
-	wlni(w, 1, "def get(v: Union[str, '", name, "'],")
-	wlni(w, 3, "default: Optional['", name, "'] = None) -> Optional['", name, "']:")
-	wlni(w, 2, "for i in ", name, ":")
-	wlni(w, 3, "if i == v or i.value == v or i.name == v:")
-	wlni(w, 4, "return i")
-	wlni(w, 2, "return default")
-	wln(w)
+	lni(w, 1, "@staticmethod")
+	lni(w, 1, "def get(v: Union[str, '", name, "'],")
+	lni(w, 3, "default: Optional['", name, "'] = None) -> Optional['", name, "']:")
+	lni(w, 2, "for i in ", name, ":")
+	lni(w, 3, "if i == v or i.value == v or i.name == v:")
+	lni(w, 4, "return i")
+	lni(w, 2, "return default")
+	ln(w)
 }
 
 func (w *pyw) writeClass(class *YamlClass) {
-	wln(w, "@dataclass")
-	wln(w, "class ", class.Name, ":")
-	wln(w)
+	ln(w, "@dataclass")
+	ln(w, "class ", class.Name, ":")
+	ln(w)
 
 	// properties
 	for _, prop := range w.model.AllPropsOf(class) {
@@ -137,35 +137,35 @@ func (w *pyw) writeClass(class *YamlClass) {
 			continue
 		}
 		propType := YamlPropType(prop.Type)
-		wlni(w, 1, prop.PyName(), ": Optional[", propType.ToPython(), "] = None")
+		lni(w, 1, prop.PyName(), ": Optional[", propType.ToPython(), "] = None")
 	}
 	if class.Name == "Ref" {
-		wlni(w, 1, "ref_type: Optional[RefType] = None")
+		lni(w, 1, "ref_type: Optional[RefType] = None")
 	}
-	wln(w)
+	ln(w)
 
 	// __post_init__
 	if w.model.IsRootEntity(class) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
 			"datetime.datetime.utcnow().isoformat() + 'Z'"}
-		wlni(w, 1, "def __post_init__(self):")
+		lni(w, 1, "def __post_init__(self):")
 		for i, field := range fields {
-			wlni(w, 2, "if self.", field, " is None:")
-			wlni(w, 3, "self.", field, " = ", inits[i])
+			lni(w, 2, "if self.", field, " is None:")
+			lni(w, 3, "self.", field, " = ", inits[i])
 		}
-		wln(w)
+		ln(w)
 	}
 
 	// to_dict
-	wlni(w, 1, "def to_dict(self) -> Dict[str, Any]:")
-	wlni(w, 2, "d: Dict[str, Any] = {}")
+	lni(w, 1, "def to_dict(self) -> Dict[str, Any]:")
+	lni(w, 2, "d: Dict[str, Any] = {}")
 	if w.model.IsRootEntity(class) {
-		wlni(w, 2, "d['@type'] = '", class.Name, "'")
+		lni(w, 2, "d['@type'] = '", class.Name, "'")
 	}
 	if class.Name == "Ref" {
-		wlni(w, 2, "if self.ref_type is not None:")
-		wlni(w, 3, "d['@type'] = self.ref_type.value")
+		lni(w, 2, "if self.ref_type is not None:")
+		lni(w, 3, "d['@type'] = self.ref_type.value")
 	}
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
@@ -174,57 +174,57 @@ func (w *pyw) writeClass(class *YamlClass) {
 		selfProp := "self." + prop.PyName()
 		dictProp := "d['" + prop.Name + "']"
 		propType := prop.PropType()
-		wlni(w, 2, "if ", selfProp, " is not None:")
+		lni(w, 2, "if ", selfProp, " is not None:")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
-			wlni(w, 3, dictProp, " = ", selfProp)
+			lni(w, 3, dictProp, " = ", selfProp)
 		} else if propType.IsEnumOf(w.model) {
-			wlni(w, 3, dictProp, " = ", selfProp, ".value")
+			lni(w, 3, dictProp, " = ", selfProp, ".value")
 		} else if propType.IsList() {
-			wlni(w, 3, dictProp, " = [e.to_dict() for e in ", selfProp, "]")
+			lni(w, 3, dictProp, " = [e.to_dict() for e in ", selfProp, "]")
 		} else {
-			wlni(w, 3, dictProp, " = ", selfProp, ".to_dict()")
+			lni(w, 3, dictProp, " = ", selfProp, ".to_dict()")
 		}
 	}
-	wlni(w, 2, "return d")
-	wln(w)
+	lni(w, 2, "return d")
+	ln(w)
 
 	// to_json
 	if w.model.IsRootEntity(class) {
-		wlni(w, 1, "def to_json(self) -> str:")
-		wlni(w, 2, "return json.dumps(self.to_dict(), indent=2)")
-		wln(w)
+		lni(w, 1, "def to_json(self) -> str:")
+		lni(w, 2, "return json.dumps(self.to_dict(), indent=2)")
+		ln(w)
 	}
 
 	// to_ref
 	if w.model.IsRefEntity(class) {
-		wlni(w, 1, "def to_ref(self) -> 'Ref':")
-		wlni(w, 2, "ref = Ref(id=self.id, name=self.name)")
+		lni(w, 1, "def to_ref(self) -> 'Ref':")
+		lni(w, 2, "ref = Ref(id=self.id, name=self.name)")
 		if w.model.IsRootEntity(class) {
-			wlni(w, 2, "ref.category = self.category")
+			lni(w, 2, "ref.category = self.category")
 		}
 		if class.Name != "Ref" {
-			wlni(w, 2, "ref.ref_type = RefType.get('" + class.Name + "')")
+			lni(w, 2, "ref.ref_type = RefType.get('"+class.Name+"')")
 		} else {
-			wlni(w, 2, "ref.ref_type = self.ref_type")
+			lni(w, 2, "ref.ref_type = self.ref_type")
 		}
-		wlni(w, 2, "return ref")
-		wln(w)
+		lni(w, 2, "return ref")
+		ln(w)
 	}
 
 	w.writeFromDict(class)
 
 	// from_json
 	if w.model.IsRootEntity(class) {
-		wlni(w, 1, "@staticmethod")
-		wlni(w, 1, "def from_json(data: Union[str, bytes]) -> '",
+		lni(w, 1, "@staticmethod")
+		lni(w, 1, "def from_json(data: Union[str, bytes]) -> '",
 			class.Name, "':")
-		wlni(w, 2, "return " + class.Name + ".from_dict(json.loads(data))")
-		wln(w)
+		lni(w, 2, "return "+class.Name+".from_dict(json.loads(data))")
+		ln(w)
 	}
 
-	wln(w)
+	ln(w)
 }
 
 func (w *pyw) writeFromDict(class *YamlClass) {
@@ -237,19 +237,19 @@ func (w *pyw) writeFromDict(class *YamlClass) {
 		}
 	}
 
-	wlni(w, 1, "@staticmethod")
-	wlni(w, 1, "def from_dict(d: Dict[str, Any]) -> '", class.Name, "':")
+	lni(w, 1, "@staticmethod")
+	lni(w, 1, "def from_dict(d: Dict[str, Any]) -> '", class.Name, "':")
 	instance := strings.ToLower(toSnakeCase(class.Name))
-	wlni(w, 2, instance, " = ", class.Name, "()")
+	lni(w, 2, instance, " = ", class.Name, "()")
 	if class.Name == "Ref" {
-		wlni(w, 2, instance, ".ref_type = RefType.get(d.get('@type', ''))")
+		lni(w, 2, instance, ".ref_type = RefType.get(d.get('@type', ''))")
 	}
 
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
-		wlni(w, 2, "if (v := d.get('", prop.Name, "')) or v is not None:")
+		lni(w, 2, "if (v := d.get('", prop.Name, "')) or v is not None:")
 		propType := prop.PropType()
 		modelProp := instance + "." + prop.PyName()
 
@@ -259,25 +259,25 @@ func (w *pyw) writeFromDict(class *YamlClass) {
 
 			// direct assignments for primitives, list of primitives, or GeoJson
 			// objects
-			wlni(w, 3, modelProp, " = v")
+			lni(w, 3, modelProp, " = v")
 
 		} else if propType.IsEnumOf(w.model) {
 
 			// enum getters
-			wlni(w, 3, modelProp, " = ", prop.Type, ".get(v)")
+			lni(w, 3, modelProp, " = ", prop.Type, ".get(v)")
 
 		} else if propType.IsList() {
 
 			// list conversion for non-primitive types
 			u := propType.UnpackList()
-			wlni(w, 3, modelProp, " = [", classOf(u), ".from_dict(e) for e in v]")
+			lni(w, 3, modelProp, " = [", classOf(u), ".from_dict(e) for e in v]")
 
 		} else {
 
 			// from-dict calls for entity types
-			wlni(w, 3, modelProp, " = ", classOf(propType), ".from_dict(v)")
+			lni(w, 3, modelProp, " = ", classOf(propType), ".from_dict(v)")
 		}
 	}
-	wlni(w, 2, "return " + instance)
-	wln(w)
+	lni(w, 2, "return "+instance)
+	ln(w)
 }

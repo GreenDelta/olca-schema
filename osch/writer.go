@@ -23,9 +23,9 @@ func (w *writer) indent() string {
 	return "  "
 }
 
-// wln concatenates the string arguments and writes them as a line into the
+// ln concatenates the string arguments and writes them as a line into the
 // given buffer.
-func wln(buff buffer, xs ...string) {
+func ln(buff buffer, xs ...string) {
 	text := buff.buffer()
 	for _, x := range xs {
 		text.WriteString(x)
@@ -33,13 +33,13 @@ func wln(buff buffer, xs ...string) {
 	text.WriteRune('\n')
 }
 
-// wln concatenates the string arguments and writes them as an i-indented line
+// lni concatenates the string arguments and writes them as an i-indented line
 // into the given buffer where i is the number of indentations.
-func wlni(buff buffer, i int, xs ...string) {
+func lni(buff buffer, i int, xs ...string) {
 	text := buff.buffer()
 	indent := buff.indent()
 	for j := 0; j < i; j++ {
 		text.WriteString(indent)
 	}
-	wln(buff, xs...)
+	ln(buff, xs...)
 }

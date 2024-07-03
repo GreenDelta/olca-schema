@@ -13,6 +13,14 @@ type rdfWriter struct {
 	model *YamlModel
 }
 
+func (w *rdfWriter) buffer() *bytes.Buffer {
+	return w.buff
+}
+
+func (w *rdfWriter) indent() string {
+	return "  "
+}
+
 type rdfProp struct {
 	domain []*YamlClass
 	yaml   *YamlProp
@@ -76,7 +84,7 @@ func writeRdf(args *args) {
 	mkdir(outDir)
 
 	var buffer bytes.Buffer
-	w := rdfWriter{
+	w := &rdfWriter{
 		buff:  &buffer,
 		model: model,
 	}
@@ -84,26 +92,26 @@ func writeRdf(args *args) {
 	w.header()
 
 	model.EachEnum(func(enum *YamlEnum) {
-		w.ln(":", enum.Name, " a rdfs:Class;")
-		w.ln("  rdfs:subClassOf :Enumeration;")
-		w.ln("  rdfs:comment \"", strip(enum.Doc), "\"")
-		w.ln("  .\n")
+		ln(w, ":", enum.Name, " a rdfs:Class;")
+		lni(w, 1, "rdfs:subClassOf :Enumeration;")
+		lni(w, 1, "rdfs:comment \"", strip(enum.Doc), "\"")
+		lni(w, 1, ".\n")
 
 		for _, item := range enum.Items {
-			w.ln(":", item.Name, " a rdfs:Class;")
-			w.ln("  rdfs:subClassOf :", enum.Name, ";")
-			w.ln("  rdfs:comment \"", strip(item.Doc), "\"")
-			w.ln("  .\n")
+			ln(w, ":", item.Name, " a rdfs:Class;")
+			lni(w, 1, "rdfs:subClassOf :", enum.Name, ";")
+			lni(w, 1, "rdfs:comment \"", strip(item.Doc), "\"")
+			lni(w, 1, ".\n")
 		}
 	})
 
 	model.EachClass(func(class *YamlClass) {
-		w.ln(":", class.Name, " a rdfs:Class;")
+		ln(w, ":", class.Name, " a rdfs:Class;")
 		if class.SuperClass != "" {
-			w.ln("  rdfs:subClassOf :", class.SuperClass, ";")
+			lni(w, 1, "rdfs:subClassOf :", class.SuperClass, ";")
 		}
-		w.ln("  rdfs:comment \"", strip(class.Doc), "\"")
-		w.ln("  .\n")
+		lni(w, 1, "rdfs:comment \"", strip(class.Doc), "\"")
+		lni(w, 1, ".\n")
 	})
 
 	w.writeProps()
@@ -111,27 +119,27 @@ func writeRdf(args *args) {
 }
 
 func (w *rdfWriter) header() {
-	w.ln("@prefix : <http://greendelta.github.io/olca-schema#> .")
-	w.ln("@prefix owl: <http://www.w3.org/2002/07/owl#> .")
-	w.ln("@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .")
-	w.ln("@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .")
-	w.ln("@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .")
-	w.ln()
-	w.ln(`:Enumeration a rdfs:Class;
+	ln(w, "@prefix : <http://greendelta.github.io/olca-schema#> .")
+	ln(w, "@prefix owl: <http://www.w3.org/2002/07/owl#> .")
+	ln(w, "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .")
+	ln(w, "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .")
+	ln(w, "@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .")
+	ln(w)
+	ln(w, `:Enumeration a rdfs:Class;
   rdfs:comment "The super-class of all enumeration types."
   .`)
-	w.ln()
+	ln(w)
 }
 
 func (w *rdfWriter) writeProps() {
 	for _, prop := range w.collectProps() {
-		w.ln(":", prop.name(), " a rdf:Property;")
+		ln(w, ":", prop.name(), " a rdf:Property;")
 		if len(prop.domain) == 1 {
-			w.ln("  rdfs:comment \"", strip(prop.yaml.Doc), "\";")
+			lni(w, 1, "rdfs:comment \"", strip(prop.yaml.Doc), "\";")
 		}
-		w.ln("  rdfs:domain ", prop.domainDef(), ";")
-		w.ln("  rdfs:range ", prop.rangeDef())
-		w.ln("  .\n")
+		lni(w, 1, "rdfs:domain ", prop.domainDef(), ";")
+		lni(w, 1, "rdfs:range ", prop.rangeDef())
+		lni(w, 1, ".\n")
 	}
 }
 
@@ -160,11 +168,4 @@ func (w *rdfWriter) collectProps() []*rdfProp {
 		return strings.Compare(props[i].name(), props[j].name()) < 0
 	})
 	return props
-}
-
-func (w *rdfWriter) ln(xs ...string) {
-	for _, x := range xs {
-		w.buff.WriteString(x)
-	}
-	w.buff.WriteRune('\n')
 }
