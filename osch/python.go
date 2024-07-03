@@ -46,16 +46,16 @@ func (w *pyw) writeSchema() {
 	w.writeHeader()
 
 	// RefType
-	w.writeln("class RefType(Enum):")
+	wln(w, "class RefType(Enum):")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRefEntity(class) &&
 			class.Name != "Ref" {
-			w.wrind1ln(class.Name + " = '" + class.Name + "'")
+			wlni(w, 1, class.Name, " = '", class.Name, "'")
 		}
 	})
-	w.writeln()
+	wln(w)
 	w.writeEnumGetter("RefType")
-	w.writeln()
+	wln(w)
 
 	// enums
 	w.model.EachEnum(func(enum *YamlEnum) {
@@ -71,65 +71,65 @@ func (w *pyw) writeSchema() {
 	}
 
 	// RootEntity and RefEntity
-	w.writeln("RootEntity = Union[")
+	wln(w, "RootEntity = Union[")
 	w.model.EachClass(func(class *YamlClass) {
 		if w.model.IsRootEntity(class) {
-			w.wrind1ln(class.Name + ",")
+			wlni(w, 1, class.Name, ",")
 		}
 	})
-	w.writeln("]")
-	w.writeln()
-	w.writeln()
-	w.writeln("RefEntity = Union[RootEntity, Unit, NwSet]")
+	wln(w, "]")
+	wln(w)
+	wln(w)
+	wln(w, "RefEntity = Union[RootEntity, Unit, NwSet]")
 }
 
 func (w *pyw) writeHeader() {
-	w.writeln("# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
-	w.writeln(`
+	wln(w, "# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
+	wln(w, `
 # This module contains a Python API for reading and writing data sets in
 # the JSON based openLCA data exchange format. For more information see
 # http://greendelta.github.io/olca-schema
 `)
 
 	// imports
-	w.writeln("import datetime")
-	w.writeln("import json")
-	w.writeln("import uuid")
-	w.writeln()
-	w.writeln("from enum import Enum")
-	w.writeln("from dataclasses import dataclass")
-	w.writeln("from typing import Any, Dict, List, Optional, Union")
-	w.writeln()
-	w.writeln()
+	wln(w, "import datetime")
+	wln(w, "import json")
+	wln(w, "import uuid")
+	wln(w)
+	wln(w, "from enum import Enum")
+	wln(w, "from dataclasses import dataclass")
+	wln(w, "from typing import Any, Dict, List, Optional, Union")
+	wln(w)
+	wln(w)
 }
 
 func (w *pyw) writeEnum(enum *YamlEnum) {
 	name := enum.Name
-	w.writeln("class " + name + "(Enum):")
-	w.writeln()
+	wln(w, "class ", name, "(Enum):")
+	wln(w)
 	for _, item := range enum.Items {
-		w.wrind1ln(item.Name + " = '" + item.Name + "'")
+		wlni(w, 1, item.Name, " = '", item.Name, "'")
 	}
-	w.writeln()
+	wln(w)
 	w.writeEnumGetter(name)
-	w.writeln()
+	wln(w)
 }
 
 func (w *pyw) writeEnumGetter(name string) {
-	w.wrind1ln("@staticmethod")
-	w.wrind1ln("def get(v: Union[str, '" + name + "'],")
+	wlni(w, 1, "@staticmethod")
+	wlni(w, 1, "def get(v: Union[str, '", name, "'],")
 	wlni(w, 3, "default: Optional['", name, "'] = None) -> Optional['", name, "']:")
-	w.wrind2ln("for i in " + name + ":")
+	wlni(w, 2, "for i in ", name, ":")
 	wlni(w, 3, "if i == v or i.value == v or i.name == v:")
 	wlni(w, 4, "return i")
-	w.wrind2ln("return default")
-	w.writeln()
+	wlni(w, 2, "return default")
+	wln(w)
 }
 
 func (w *pyw) writeClass(class *YamlClass) {
-	w.writeln("@dataclass")
-	w.writeln("class " + class.Name + ":")
-	w.writeln()
+	wln(w, "@dataclass")
+	wln(w, "class ", class.Name, ":")
+	wln(w)
 
 	// properties
 	for _, prop := range w.model.AllPropsOf(class) {
@@ -137,35 +137,34 @@ func (w *pyw) writeClass(class *YamlClass) {
 			continue
 		}
 		propType := YamlPropType(prop.Type)
-		w.wrind1ln(prop.PyName() +
-			": Optional[" + propType.ToPython() + "] = None")
+		wlni(w, 1, prop.PyName(), ": Optional[", propType.ToPython(), "] = None")
 	}
 	if class.Name == "Ref" {
-		w.wrind1ln("ref_type: Optional[RefType] = None")
+		wlni(w, 1, "ref_type: Optional[RefType] = None")
 	}
-	w.writeln()
+	wln(w)
 
 	// __post_init__
 	if w.model.IsRootEntity(class) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
 			"datetime.datetime.utcnow().isoformat() + 'Z'"}
-		w.wrind1ln("def __post_init__(self):")
+		wlni(w, 1, "def __post_init__(self):")
 		for i, field := range fields {
-			w.wrind2ln("if self." + field + " is None:")
+			wlni(w, 2, "if self.", field, " is None:")
 			wlni(w, 3, "self.", field, " = ", inits[i])
 		}
-		w.writeln()
+		wln(w)
 	}
 
 	// to_dict
-	w.wrind1ln("def to_dict(self) -> Dict[str, Any]:")
-	w.wrind2ln("d: Dict[str, Any] = {}")
+	wlni(w, 1, "def to_dict(self) -> Dict[str, Any]:")
+	wlni(w, 2, "d: Dict[str, Any] = {}")
 	if w.model.IsRootEntity(class) {
-		w.wrind2ln("d['@type'] = '" + class.Name + "'")
+		wlni(w, 2, "d['@type'] = '", class.Name, "'")
 	}
 	if class.Name == "Ref" {
-		w.wrind2ln("if self.ref_type is not None:")
+		wlni(w, 2, "if self.ref_type is not None:")
 		wlni(w, 3, "d['@type'] = self.ref_type.value")
 	}
 	for _, prop := range w.model.AllPropsOf(class) {
@@ -175,7 +174,7 @@ func (w *pyw) writeClass(class *YamlClass) {
 		selfProp := "self." + prop.PyName()
 		dictProp := "d['" + prop.Name + "']"
 		propType := prop.PropType()
-		w.wrind2ln("if " + selfProp + " is not None:")
+		wlni(w, 2, "if ", selfProp, " is not None:")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
@@ -188,44 +187,44 @@ func (w *pyw) writeClass(class *YamlClass) {
 			wlni(w, 3, dictProp, " = ", selfProp, ".to_dict()")
 		}
 	}
-	w.wrind2ln("return d")
-	w.writeln()
+	wlni(w, 2, "return d")
+	wln(w)
 
 	// to_json
 	if w.model.IsRootEntity(class) {
-		w.wrind1ln("def to_json(self) -> str:")
-		w.wrind2ln("return json.dumps(self.to_dict(), indent=2)")
-		w.writeln()
+		wlni(w, 1, "def to_json(self) -> str:")
+		wlni(w, 2, "return json.dumps(self.to_dict(), indent=2)")
+		wln(w)
 	}
 
 	// to_ref
 	if w.model.IsRefEntity(class) {
-		w.wrind1ln("def to_ref(self) -> 'Ref':")
-		w.wrind2ln("ref = Ref(id=self.id, name=self.name)")
+		wlni(w, 1, "def to_ref(self) -> 'Ref':")
+		wlni(w, 2, "ref = Ref(id=self.id, name=self.name)")
 		if w.model.IsRootEntity(class) {
-			w.wrind2ln("ref.category = self.category")
+			wlni(w, 2, "ref.category = self.category")
 		}
 		if class.Name != "Ref" {
-			w.wrind2ln("ref.ref_type = RefType.get('" + class.Name + "')")
+			wlni(w, 2, "ref.ref_type = RefType.get('" + class.Name + "')")
 		} else {
-			w.wrind2ln("ref.ref_type = self.ref_type")
+			wlni(w, 2, "ref.ref_type = self.ref_type")
 		}
-		w.wrind2ln("return ref")
-		w.writeln()
+		wlni(w, 2, "return ref")
+		wln(w)
 	}
 
 	w.writeFromDict(class)
 
 	// from_json
 	if w.model.IsRootEntity(class) {
-		w.wrind1ln("@staticmethod")
-		w.wrind1ln("def from_json(data: Union[str, bytes]) -> '" +
-			class.Name + "':")
-		w.wrind2ln("return " + class.Name + ".from_dict(json.loads(data))")
-		w.writeln()
+		wlni(w, 1, "@staticmethod")
+		wlni(w, 1, "def from_json(data: Union[str, bytes]) -> '",
+			class.Name, "':")
+		wlni(w, 2, "return " + class.Name + ".from_dict(json.loads(data))")
+		wln(w)
 	}
 
-	w.writeln()
+	wln(w)
 }
 
 func (w *pyw) writeFromDict(class *YamlClass) {
@@ -238,19 +237,19 @@ func (w *pyw) writeFromDict(class *YamlClass) {
 		}
 	}
 
-	w.wrind1ln("@staticmethod")
-	w.wrind1ln("def from_dict(d: Dict[str, Any]) -> '" + class.Name + "':")
+	wlni(w, 1, "@staticmethod")
+	wlni(w, 1, "def from_dict(d: Dict[str, Any]) -> '", class.Name, "':")
 	instance := strings.ToLower(toSnakeCase(class.Name))
-	w.wrind2ln(instance + " = " + class.Name + "()")
+	wlni(w, 2, instance, " = ", class.Name, "()")
 	if class.Name == "Ref" {
-		w.wrind2ln(instance + ".ref_type = RefType.get(d.get('@type', ''))")
+		wlni(w, 2, instance, ".ref_type = RefType.get(d.get('@type', ''))")
 	}
 
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
 			continue
 		}
-		w.wrind2ln("if (v := d.get('" + prop.Name + "')) or v is not None:")
+		wlni(w, 2, "if (v := d.get('", prop.Name, "')) or v is not None:")
 		propType := prop.PropType()
 		modelProp := instance + "." + prop.PyName()
 
@@ -279,21 +278,6 @@ func (w *pyw) writeFromDict(class *YamlClass) {
 			wlni(w, 3, modelProp, " = ", classOf(propType), ".from_dict(v)")
 		}
 	}
-	w.wrind2ln("return " + instance)
-	w.writeln()
-}
-
-func (w *pyw) wrind1ln(s string) {
-	w.writeln("    ", s)
-}
-
-func (w *pyw) wrind2ln(s string) {
-	w.writeln("        ", s)
-}
-
-func (w *pyw) writeln(xs ...string) {
-	for _, x := range xs {
-		w.buff.WriteString(x)
-	}
-	w.buff.WriteRune('\n')
+	wlni(w, 2, "return " + instance)
+	wln(w)
 }
