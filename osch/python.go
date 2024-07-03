@@ -6,9 +6,17 @@ import (
 	"strings"
 )
 
-type pyWriter struct {
+type pyw struct {
 	buff  *bytes.Buffer
 	model *YamlModel
+}
+
+func (w *pyw) buffer() *bytes.Buffer {
+	return w.buff
+}
+
+func (w *pyw) indent() string {
+	return "    "
 }
 
 func writePythonModule(args *args) {
@@ -23,7 +31,7 @@ func writePythonModule(args *args) {
 
 	// write the schema
 	var buffer bytes.Buffer
-	writer := pyWriter{
+	writer := pyw{
 		buff:  &buffer,
 		model: model,
 	}
@@ -33,7 +41,7 @@ func writePythonModule(args *args) {
 	writeFile(modFile, buffer.String())
 }
 
-func (w *pyWriter) writeSchema() {
+func (w *pyw) writeSchema() {
 
 	w.writeHeader()
 
@@ -75,7 +83,7 @@ func (w *pyWriter) writeSchema() {
 	w.writeln("RefEntity = Union[RootEntity, Unit, NwSet]")
 }
 
-func (w *pyWriter) writeHeader() {
+func (w *pyw) writeHeader() {
 	w.writeln("# DO NOT CHANGE THIS CODE AS THIS IS GENERATED AUTOMATICALLY")
 	w.writeln(`
 # This module contains a Python API for reading and writing data sets in
@@ -95,7 +103,7 @@ func (w *pyWriter) writeHeader() {
 	w.writeln()
 }
 
-func (w *pyWriter) writeEnum(enum *YamlEnum) {
+func (w *pyw) writeEnum(enum *YamlEnum) {
 	name := enum.Name
 	w.writeln("class " + name + "(Enum):")
 	w.writeln()
@@ -107,19 +115,18 @@ func (w *pyWriter) writeEnum(enum *YamlEnum) {
 	w.writeln()
 }
 
-func (w *pyWriter) writeEnumGetter(name string) {
+func (w *pyw) writeEnumGetter(name string) {
 	w.wrind1ln("@staticmethod")
 	w.wrind1ln("def get(v: Union[str, '" + name + "'],")
-	w.wrind3ln("default: Optional['" + name +
-		"'] = None) -> Optional['" + name + "']:")
+	wlni(w, 3, "default: Optional['", name, "'] = None) -> Optional['", name, "']:")
 	w.wrind2ln("for i in " + name + ":")
-	w.wrind3ln("if i == v or i.value == v or i.name == v:")
-	w.wrind4ln("return i")
+	wlni(w, 3, "if i == v or i.value == v or i.name == v:")
+	wlni(w, 4, "return i")
 	w.wrind2ln("return default")
 	w.writeln()
 }
 
-func (w *pyWriter) writeClass(class *YamlClass) {
+func (w *pyw) writeClass(class *YamlClass) {
 	w.writeln("@dataclass")
 	w.writeln("class " + class.Name + ":")
 	w.writeln()
@@ -146,7 +153,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 		w.wrind1ln("def __post_init__(self):")
 		for i, field := range fields {
 			w.wrind2ln("if self." + field + " is None:")
-			w.wrind3ln("self." + field + " = " + inits[i])
+			wlni(w, 3, "self.", field, " = ", inits[i])
 		}
 		w.writeln()
 	}
@@ -159,7 +166,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	}
 	if class.Name == "Ref" {
 		w.wrind2ln("if self.ref_type is not None:")
-		w.wrind3ln("d['@type'] = self.ref_type.value")
+		wlni(w, 3, "d['@type'] = self.ref_type.value")
 	}
 	for _, prop := range w.model.AllPropsOf(class) {
 		if prop.Name == "@type" {
@@ -172,13 +179,13 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
 			propType == "GeoJSON" {
-			w.wrind3ln(dictProp + " = " + selfProp)
+			wlni(w, 3, dictProp, " = ", selfProp)
 		} else if propType.IsEnumOf(w.model) {
-			w.wrind3ln(dictProp + " = " + selfProp + ".value")
+			wlni(w, 3, dictProp, " = ", selfProp, ".value")
 		} else if propType.IsList() {
-			w.wrind3ln(dictProp + " = [e.to_dict() for e in " + selfProp + "]")
+			wlni(w, 3, dictProp, " = [e.to_dict() for e in ", selfProp, "]")
 		} else {
-			w.wrind3ln(dictProp + " = " + selfProp + ".to_dict()")
+			wlni(w, 3, dictProp, " = ", selfProp, ".to_dict()")
 		}
 	}
 	w.wrind2ln("return d")
@@ -221,7 +228,7 @@ func (w *pyWriter) writeClass(class *YamlClass) {
 	w.writeln()
 }
 
-func (w *pyWriter) writeFromDict(class *YamlClass) {
+func (w *pyw) writeFromDict(class *YamlClass) {
 
 	classOf := func(propType YamlPropType) string {
 		if propType.IsRef() {
@@ -253,46 +260,38 @@ func (w *pyWriter) writeFromDict(class *YamlClass) {
 
 			// direct assignments for primitives, list of primitives, or GeoJson
 			// objects
-			w.wrind3ln(modelProp + " = v")
+			wlni(w, 3, modelProp, " = v")
 
 		} else if propType.IsEnumOf(w.model) {
 
 			// enum getters
-			w.wrind3ln(modelProp + " = " + prop.Type + ".get(v)")
+			wlni(w, 3, modelProp, " = ", prop.Type, ".get(v)")
 
 		} else if propType.IsList() {
 
 			// list conversion for non-primitive types
 			u := propType.UnpackList()
-			w.wrind3ln(modelProp + " = [" + classOf(u) + ".from_dict(e) for e in v]")
+			wlni(w, 3, modelProp, " = [", classOf(u), ".from_dict(e) for e in v]")
 
 		} else {
 
 			// from-dict calls for entity types
-			w.wrind3ln(modelProp + " = " + classOf(propType) + ".from_dict(v)")
+			wlni(w, 3, modelProp, " = ", classOf(propType), ".from_dict(v)")
 		}
 	}
 	w.wrind2ln("return " + instance)
 	w.writeln()
 }
 
-func (w *pyWriter) wrind1ln(s string) {
+func (w *pyw) wrind1ln(s string) {
 	w.writeln("    ", s)
 }
 
-func (w *pyWriter) wrind2ln(s string) {
+func (w *pyw) wrind2ln(s string) {
 	w.writeln("        ", s)
 }
 
-func (w *pyWriter) wrind3ln(s string) {
-	w.writeln("            ", s)
-}
-
-func (w *pyWriter) wrind4ln(s string) {
-	w.writeln("                ", s)
-}
-
-func (w *pyWriter) writeln(xs ...string) {
+func (w *pyw) writeln(xs ...string) {
 	for _, x := range xs {
 		w.buff.WriteString(x)
 	}

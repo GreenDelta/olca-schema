@@ -125,3 +125,7 @@ class:
       index: 25
       type: date
       doc:
+
+    - name: useAdvice
+      index: 26
+      type: string

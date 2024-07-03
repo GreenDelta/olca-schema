@@ -1713,6 +1713,7 @@ class ProcessDocumentation:
     sources: Optional[List[Ref]] = None
     technology_description: Optional[str] = None
     time_description: Optional[str] = None
+    use_advice: Optional[str] = None
     valid_from: Optional[str] = None
     valid_until: Optional[str] = None
 
@@ -1762,6 +1763,8 @@ class ProcessDocumentation:
             d['technologyDescription'] = self.technology_description
         if self.time_description is not None:
             d['timeDescription'] = self.time_description
+        if self.use_advice is not None:
+            d['useAdvice'] = self.use_advice
         if self.valid_from is not None:
             d['validFrom'] = self.valid_from
         if self.valid_until is not None:
@@ -1815,6 +1818,8 @@ class ProcessDocumentation:
             process_documentation.technology_description = v
         if (v := d.get('timeDescription')) or v is not None:
             process_documentation.time_description = v
+        if (v := d.get('useAdvice')) or v is not None:
+            process_documentation.use_advice = v
         if (v := d.get('validFrom')) or v is not None:
             process_documentation.valid_from = v
         if (v := d.get('validUntil')) or v is not None:
