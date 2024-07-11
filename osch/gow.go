@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"strings"
 )
 
 type gow struct {
@@ -30,6 +31,7 @@ func writeGo(args *args) error {
 	w := gow{&buffer, model}
 	w.header()
 	w.enums()
+	w.structs()
 
 	out, err := args.outputFileOrDefault("/build/golcas/schema.go")
 	if err != nil {
@@ -51,7 +53,6 @@ func (w *gow) header() {
 }
 
 func (w *gow) enums() {
-
 	w.model.EachEnum(func(e *YamlEnum) {
 		ln(w, "type ", e.Name, " string")
 		ln(w, "const(")
@@ -61,5 +62,72 @@ func (w *gow) enums() {
 		ln(w, ")")
 		ln(w)
 	})
+}
 
+func (w *gow) structs() {
+	w.model.EachClass(func(c *YamlClass) {
+		if w.model.IsAbstract(c) {
+			return
+		}
+
+		ln(w, "type ", c.Name, " struct {")
+		for _, prop := range w.model.AllPropsOf(c) {
+			if prop.Name == "@type" {
+				continue
+			}
+			ptype := prop.PropType()
+			fieldType := w.typeOf(ptype)
+			if ptype.IsClassOf(w.model) || fieldType == "Ref" ||
+				(prop.IsOptional && ptype.IsPrimitive() && fieldType != "string") {
+				fieldType = "*" + fieldType
+			}
+			lni(w, 1, w.fieldOf(prop), " ", fieldType, " ", w.jsonTagOf(prop))
+		}
+
+		ln(w, "}")
+		ln(w)
+	})
+}
+
+func (w *gow) fieldOf(prop *YamlProp) string {
+	if prop.Name == "@id" {
+		return "ID"
+	}
+	name := prop.Name
+	return strings.ToUpper(name[0:1]) + name[1:]
+}
+
+func (w *gow) typeOf(t YamlPropType) string {
+	if t.IsList() {
+		return "[]" + w.typeOf(t.UnpackList())
+	}
+	if t.IsRef() {
+		return "Ref"
+	}
+	if t.IsClassOf(w.model) || t.IsEnumOf(w.model) {
+		return string(t)
+	}
+	switch t {
+	case "string", "date", "dateTime":
+		return "string"
+	case "double", "float":
+		return "float64"
+	case "int", "integer":
+		return "int"
+	case "bool", "boolean":
+		return "bool"
+	case "GeoJSON":
+		return "map[string]any"
+	default:
+		return "?"
+	}
+}
+
+func (w *gow) jsonTagOf(prop *YamlProp) string {
+	tag := "`json:" + "\"" + prop.Name
+	t := prop.PropType()
+	if t.IsList() || prop.Type == "string" || t.IsEnumOf(w.model) {
+		tag += ",omitempty"
+	}
+	return tag + "\"`"
 }
