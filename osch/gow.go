@@ -69,8 +69,12 @@ func (w *gow) structs() {
 		if w.model.IsAbstract(c) {
 			return
 		}
-
 		ln(w, "type ", c.Name, " struct {")
+
+		if c.Name == "Ref" {
+			lni(w, 1, "Type string `json:\"@type,omitempty\"`")
+		}
+
 		for _, prop := range w.model.AllPropsOf(c) {
 			if prop.Name == "@type" {
 				continue
@@ -126,7 +130,12 @@ func (w *gow) typeOf(t YamlPropType) string {
 func (w *gow) jsonTagOf(prop *YamlProp) string {
 	tag := "`json:" + "\"" + prop.Name
 	t := prop.PropType()
-	if t.IsList() || prop.Type == "string" || t.IsEnumOf(w.model) {
+	if t.IsList() ||
+		w.typeOf(t) == "string" ||
+		t.IsEnumOf(w.model) ||
+		t.IsClassOf(w.model) ||
+		t.IsRef() ||
+		prop.IsOptional {
 		tag += ",omitempty"
 	}
 	return tag + "\"`"
