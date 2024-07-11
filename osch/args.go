@@ -54,3 +54,16 @@ func findHome() string {
 		dir = parent
 	}
 }
+
+func (a *args) outputFileOrDefault(name string) (string, error) {
+	var path string
+	if a.output != "" {
+		path = a.output
+	} else {
+		path = filepath.Join(a.home, name)
+	}
+	if err := os.MkdirAll(filepath.Dir(path), os.ModePerm); err != nil {
+		return "", err
+	}
+	return path, nil
+}

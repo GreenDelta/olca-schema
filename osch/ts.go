@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 )
 
 type tsw struct {
@@ -37,17 +36,9 @@ func writeTypeScriptModule(args *args) {
 	w.writeEnums()
 	w.writeClasses()
 
-	var outFile string
-	if args.output != "" {
-		mkdir(filepath.Dir(outFile))
-		outFile = args.output
-	} else {
-		outDir := filepath.Join(args.home, "build")
-		mkdir(outDir)
-		outFile = filepath.Join(outDir, "schema.ts")
-	}
-
-	os.WriteFile(outFile, buffer.Bytes(), os.ModePerm)
+	out, err := args.outputFileOrDefault("/build/schema.ts")
+	check(err, "failed to create file "+out)
+	os.WriteFile(out, buffer.Bytes(), os.ModePerm)
 }
 
 func (w *tsw) writeUtils() {

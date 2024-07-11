@@ -29,6 +29,8 @@ func main() {
 	case "rdf", "ttl":
 		writeContextJson(args)
 		writeRdf(args)
+	case "go":
+		check(writeGo(args), "failed to write Go module")
 	case "check":
 		checkSchema(args)
 	default:
