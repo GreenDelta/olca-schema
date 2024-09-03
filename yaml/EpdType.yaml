@@ -1,0 +1,19 @@
+
+enum:
+  name: EpdType
+
+  items:
+    - name: GENERIC_DATASET
+      index: 1
+
+    - name: REPRESENTATIVE_DATASET
+      index: 2
+
+    - name: AVERAGE_DATASET
+      index: 3
+
+    - name: SPECIFIC_DATASET
+      index: 4
+
+    - name: TEMPLATE_DATASET
+      index: 5

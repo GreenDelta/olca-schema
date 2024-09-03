@@ -39,3 +39,43 @@ class:
     - name: verifier
       index: 16
       type: Ref[Actor]
+
+    - name: epdType
+      index: 17
+      type: EpdType
+
+    - name: validFrom
+      index: 18
+      type: date
+
+    - name: validUntil
+      index: 19
+      type: date
+
+    - name: location
+      index: 20
+      type: Ref[Location]
+
+    - name: originalEpd
+      index: 21
+      type: Ref[Source]
+
+    - name: manufacturing
+      index: 22
+      type: string
+
+    - name: productUsage
+      index: 23
+      type: string
+
+    - name: useAdvice
+      index: 24
+      type: string
+
+    - name: registrationId
+      index: 25
+      type: string
+
+    - name: dataGenerator
+      index: 26
+      type: Ref[Actor]

@@ -148,7 +148,7 @@ func (w *pyw) writeClass(class *YamlClass) {
 	if w.model.IsRootEntity(class) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
-			"datetime.datetime.utcnow().isoformat() + 'Z'"}
+			"datetime.datetime.now(datetime.UTC).isoformat() + 'Z'"}
 		lni(w, 1, "def __post_init__(self):")
 		for i, field := range fields {
 			lni(w, 2, "if self.", field, " is None:")
@@ -159,10 +159,12 @@ func (w *pyw) writeClass(class *YamlClass) {
 
 	// to_dict
 	lni(w, 1, "def to_dict(self) -> Dict[str, Any]:")
-	lni(w, 2, "d: Dict[str, Any] = {}")
 	if w.model.IsRootEntity(class) {
-		lni(w, 2, "d['@type'] = '", class.Name, "'")
+		lni(w, 2, "d: Dict[str, Any] = {'@type': '", class.Name, "'}")
+	} else {
+		lni(w, 2, "d: Dict[str, Any] = {}")
 	}
+
 	if class.Name == "Ref" {
 		lni(w, 2, "if self.ref_type is not None:")
 		lni(w, 3, "d['@type'] = self.ref_type.value")

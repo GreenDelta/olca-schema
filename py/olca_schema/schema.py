@@ -76,6 +76,23 @@ class Direction(Enum):
         return default
 
 
+class EpdType(Enum):
+
+    GENERIC_DATASET = 'GENERIC_DATASET'
+    REPRESENTATIVE_DATASET = 'REPRESENTATIVE_DATASET'
+    AVERAGE_DATASET = 'AVERAGE_DATASET'
+    SPECIFIC_DATASET = 'SPECIFIC_DATASET'
+    TEMPLATE_DATASET = 'TEMPLATE_DATASET'
+
+    @staticmethod
+    def get(v: Union[str, 'EpdType'],
+            default: Optional['EpdType'] = None) -> Optional['EpdType']:
+        for i in EpdType:
+            if i == v or i.value == v or i.name == v:
+                return i
+        return default
+
+
 class FlowPropertyType(Enum):
 
     ECONOMIC_QUANTITY = 'ECONOMIC_QUANTITY'
@@ -442,11 +459,10 @@ class Actor:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Actor'
+        d: Dict[str, Any] = {'@type': 'Actor'}
         if self.id is not None:
             d['@id'] = self.id
         if self.address is not None:
@@ -640,11 +656,10 @@ class Currency:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Currency'
+        d: Dict[str, Any] = {'@type': 'Currency'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -726,11 +741,10 @@ class DQSystem:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'DQSystem'
+        d: Dict[str, Any] = {'@type': 'DQSystem'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -913,16 +927,26 @@ class Epd:
 
     id: Optional[str] = None
     category: Optional[str] = None
+    data_generator: Optional[Ref] = None
     description: Optional[str] = None
+    epd_type: Optional[EpdType] = None
     last_change: Optional[str] = None
+    location: Optional[Ref] = None
     manufacturer: Optional[Ref] = None
+    manufacturing: Optional[str] = None
     modules: Optional[List[EpdModule]] = None
     name: Optional[str] = None
+    original_epd: Optional[Ref] = None
     pcr: Optional[Ref] = None
     product: Optional[EpdProduct] = None
+    product_usage: Optional[str] = None
     program_operator: Optional[Ref] = None
+    registration_id: Optional[str] = None
     tags: Optional[List[str]] = None
     urn: Optional[str] = None
+    use_advice: Optional[str] = None
+    valid_from: Optional[str] = None
+    valid_until: Optional[str] = None
     verifier: Optional[Ref] = None
     version: Optional[str] = None
 
@@ -932,35 +956,54 @@ class Epd:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Epd'
+        d: Dict[str, Any] = {'@type': 'Epd'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
             d['category'] = self.category
+        if self.data_generator is not None:
+            d['dataGenerator'] = self.data_generator.to_dict()
         if self.description is not None:
             d['description'] = self.description
+        if self.epd_type is not None:
+            d['epdType'] = self.epd_type.value
         if self.last_change is not None:
             d['lastChange'] = self.last_change
+        if self.location is not None:
+            d['location'] = self.location.to_dict()
         if self.manufacturer is not None:
             d['manufacturer'] = self.manufacturer.to_dict()
+        if self.manufacturing is not None:
+            d['manufacturing'] = self.manufacturing
         if self.modules is not None:
             d['modules'] = [e.to_dict() for e in self.modules]
         if self.name is not None:
             d['name'] = self.name
+        if self.original_epd is not None:
+            d['originalEpd'] = self.original_epd.to_dict()
         if self.pcr is not None:
             d['pcr'] = self.pcr.to_dict()
         if self.product is not None:
             d['product'] = self.product.to_dict()
+        if self.product_usage is not None:
+            d['productUsage'] = self.product_usage
         if self.program_operator is not None:
             d['programOperator'] = self.program_operator.to_dict()
+        if self.registration_id is not None:
+            d['registrationId'] = self.registration_id
         if self.tags is not None:
             d['tags'] = self.tags
         if self.urn is not None:
             d['urn'] = self.urn
+        if self.use_advice is not None:
+            d['useAdvice'] = self.use_advice
+        if self.valid_from is not None:
+            d['validFrom'] = self.valid_from
+        if self.valid_until is not None:
+            d['validUntil'] = self.valid_until
         if self.verifier is not None:
             d['verifier'] = self.verifier.to_dict()
         if self.version is not None:
@@ -983,26 +1026,46 @@ class Epd:
             epd.id = v
         if (v := d.get('category')) or v is not None:
             epd.category = v
+        if (v := d.get('dataGenerator')) or v is not None:
+            epd.data_generator = Ref.from_dict(v)
         if (v := d.get('description')) or v is not None:
             epd.description = v
+        if (v := d.get('epdType')) or v is not None:
+            epd.epd_type = EpdType.get(v)
         if (v := d.get('lastChange')) or v is not None:
             epd.last_change = v
+        if (v := d.get('location')) or v is not None:
+            epd.location = Ref.from_dict(v)
         if (v := d.get('manufacturer')) or v is not None:
             epd.manufacturer = Ref.from_dict(v)
+        if (v := d.get('manufacturing')) or v is not None:
+            epd.manufacturing = v
         if (v := d.get('modules')) or v is not None:
             epd.modules = [EpdModule.from_dict(e) for e in v]
         if (v := d.get('name')) or v is not None:
             epd.name = v
+        if (v := d.get('originalEpd')) or v is not None:
+            epd.original_epd = Ref.from_dict(v)
         if (v := d.get('pcr')) or v is not None:
             epd.pcr = Ref.from_dict(v)
         if (v := d.get('product')) or v is not None:
             epd.product = EpdProduct.from_dict(v)
+        if (v := d.get('productUsage')) or v is not None:
+            epd.product_usage = v
         if (v := d.get('programOperator')) or v is not None:
             epd.program_operator = Ref.from_dict(v)
+        if (v := d.get('registrationId')) or v is not None:
+            epd.registration_id = v
         if (v := d.get('tags')) or v is not None:
             epd.tags = v
         if (v := d.get('urn')) or v is not None:
             epd.urn = v
+        if (v := d.get('useAdvice')) or v is not None:
+            epd.use_advice = v
+        if (v := d.get('validFrom')) or v is not None:
+            epd.valid_from = v
+        if (v := d.get('validUntil')) or v is not None:
+            epd.valid_until = v
         if (v := d.get('verifier')) or v is not None:
             epd.verifier = Ref.from_dict(v)
         if (v := d.get('version')) or v is not None:
@@ -1097,11 +1160,10 @@ class FlowMap:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'FlowMap'
+        d: Dict[str, Any] = {'@type': 'FlowMap'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -1182,11 +1244,10 @@ class FlowProperty:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'FlowProperty'
+        d: Dict[str, Any] = {'@type': 'FlowProperty'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -1297,11 +1358,10 @@ class Flow:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Flow'
+        d: Dict[str, Any] = {'@type': 'Flow'}
         if self.id is not None:
             d['@id'] = self.id
         if self.cas is not None:
@@ -1507,11 +1567,10 @@ class Location:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Location'
+        d: Dict[str, Any] = {'@type': 'Location'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -1671,11 +1730,10 @@ class ImpactMethod:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'ImpactMethod'
+        d: Dict[str, Any] = {'@type': 'ImpactMethod'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -1796,11 +1854,10 @@ class Result:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Result'
+        d: Dict[str, Any] = {'@type': 'Result'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -2256,11 +2313,10 @@ class SocialIndicator:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'SocialIndicator'
+        d: Dict[str, Any] = {'@type': 'SocialIndicator'}
         if self.id is not None:
             d['@id'] = self.id
         if self.activity_quantity is not None:
@@ -2351,11 +2407,10 @@ class Source:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Source'
+        d: Dict[str, Any] = {'@type': 'Source'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -2761,11 +2816,10 @@ class Parameter:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Parameter'
+        d: Dict[str, Any] = {'@type': 'Parameter'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -2858,11 +2912,10 @@ class ImpactCategory:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'ImpactCategory'
+        d: Dict[str, Any] = {'@type': 'ImpactCategory'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -3109,11 +3162,10 @@ class Process:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Process'
+        d: Dict[str, Any] = {'@type': 'Process'}
         if self.id is not None:
             d['@id'] = self.id
         if self.allocation_factors is not None:
@@ -3244,11 +3296,10 @@ class ProductSystem:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'ProductSystem'
+        d: Dict[str, Any] = {'@type': 'ProductSystem'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -3406,11 +3457,10 @@ class Project:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'Project'
+        d: Dict[str, Any] = {'@type': 'Project'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
@@ -3548,11 +3598,10 @@ class UnitGroup:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.utcnow().isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
 
     def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        d['@type'] = 'UnitGroup'
+        d: Dict[str, Any] = {'@type': 'UnitGroup'}
         if self.id is not None:
             d['@id'] = self.id
         if self.category is not None:
