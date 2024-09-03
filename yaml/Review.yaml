@@ -1,0 +1,29 @@
+
+class:
+  name: Review
+  superClass: Entity
+
+  properties:
+    - name: reviewType
+      index: 2
+      type: string
+
+    - name: scopes
+      index: 3
+      type: List[ReviewScope]
+
+    - name: details
+      index: 4
+      type: string
+
+    - name: report
+      index: 5
+      type: Ref[Source]
+
+    - name: assessment
+      index: 6
+      type: List[AspectValue]
+
+    - name: reviewers
+      index: 7
+      type: List[Ref[Actor]]

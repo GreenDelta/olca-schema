@@ -220,6 +220,30 @@ class UncertaintyType(Enum):
 
 
 @dataclass
+class AspectValue:
+
+    aspect: Optional[str] = None
+    value: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.aspect is not None:
+            d['aspect'] = self.aspect
+        if self.value is not None:
+            d['value'] = self.value
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'AspectValue':
+        aspect_value = AspectValue()
+        if (v := d.get('aspect')) or v is not None:
+            aspect_value.aspect = v
+        if (v := d.get('value')) or v is not None:
+            aspect_value.value = v
+        return aspect_value
+
+
+@dataclass
 class DQScore:
 
     description: Optional[str] = None
@@ -541,6 +565,35 @@ class AllocationFactor:
         if (v := d.get('value')) or v is not None:
             allocation_factor.value = v
         return allocation_factor
+
+
+@dataclass
+class ComplianceDeclaration:
+
+    aspects: Optional[List[AspectValue]] = None
+    comment: Optional[str] = None
+    system: Optional[Ref] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.aspects is not None:
+            d['aspects'] = [e.to_dict() for e in self.aspects]
+        if self.comment is not None:
+            d['comment'] = self.comment
+        if self.system is not None:
+            d['system'] = self.system.to_dict()
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'ComplianceDeclaration':
+        compliance_declaration = ComplianceDeclaration()
+        if (v := d.get('aspects')) or v is not None:
+            compliance_declaration.aspects = [AspectValue.from_dict(e) for e in v]
+        if (v := d.get('comment')) or v is not None:
+            compliance_declaration.comment = v
+        if (v := d.get('system')) or v is not None:
+            compliance_declaration.system = Ref.from_dict(v)
+        return compliance_declaration
 
 
 @dataclass
@@ -1689,145 +1742,6 @@ class ImpactMethod:
 
 
 @dataclass
-class ProcessDocumentation:
-
-    completeness_description: Optional[str] = None
-    creation_date: Optional[str] = None
-    data_collection_description: Optional[str] = None
-    data_documentor: Optional[Ref] = None
-    data_generator: Optional[Ref] = None
-    data_selection_description: Optional[str] = None
-    data_set_owner: Optional[Ref] = None
-    data_treatment_description: Optional[str] = None
-    geography_description: Optional[str] = None
-    intended_application: Optional[str] = None
-    inventory_method_description: Optional[str] = None
-    is_copyright_protected: Optional[bool] = None
-    modeling_constants_description: Optional[str] = None
-    project_description: Optional[str] = None
-    publication: Optional[Ref] = None
-    restrictions_description: Optional[str] = None
-    review_details: Optional[str] = None
-    reviewer: Optional[Ref] = None
-    sampling_description: Optional[str] = None
-    sources: Optional[List[Ref]] = None
-    technology_description: Optional[str] = None
-    time_description: Optional[str] = None
-    use_advice: Optional[str] = None
-    valid_from: Optional[str] = None
-    valid_until: Optional[str] = None
-
-    def to_dict(self) -> Dict[str, Any]:
-        d: Dict[str, Any] = {}
-        if self.completeness_description is not None:
-            d['completenessDescription'] = self.completeness_description
-        if self.creation_date is not None:
-            d['creationDate'] = self.creation_date
-        if self.data_collection_description is not None:
-            d['dataCollectionDescription'] = self.data_collection_description
-        if self.data_documentor is not None:
-            d['dataDocumentor'] = self.data_documentor.to_dict()
-        if self.data_generator is not None:
-            d['dataGenerator'] = self.data_generator.to_dict()
-        if self.data_selection_description is not None:
-            d['dataSelectionDescription'] = self.data_selection_description
-        if self.data_set_owner is not None:
-            d['dataSetOwner'] = self.data_set_owner.to_dict()
-        if self.data_treatment_description is not None:
-            d['dataTreatmentDescription'] = self.data_treatment_description
-        if self.geography_description is not None:
-            d['geographyDescription'] = self.geography_description
-        if self.intended_application is not None:
-            d['intendedApplication'] = self.intended_application
-        if self.inventory_method_description is not None:
-            d['inventoryMethodDescription'] = self.inventory_method_description
-        if self.is_copyright_protected is not None:
-            d['isCopyrightProtected'] = self.is_copyright_protected
-        if self.modeling_constants_description is not None:
-            d['modelingConstantsDescription'] = self.modeling_constants_description
-        if self.project_description is not None:
-            d['projectDescription'] = self.project_description
-        if self.publication is not None:
-            d['publication'] = self.publication.to_dict()
-        if self.restrictions_description is not None:
-            d['restrictionsDescription'] = self.restrictions_description
-        if self.review_details is not None:
-            d['reviewDetails'] = self.review_details
-        if self.reviewer is not None:
-            d['reviewer'] = self.reviewer.to_dict()
-        if self.sampling_description is not None:
-            d['samplingDescription'] = self.sampling_description
-        if self.sources is not None:
-            d['sources'] = [e.to_dict() for e in self.sources]
-        if self.technology_description is not None:
-            d['technologyDescription'] = self.technology_description
-        if self.time_description is not None:
-            d['timeDescription'] = self.time_description
-        if self.use_advice is not None:
-            d['useAdvice'] = self.use_advice
-        if self.valid_from is not None:
-            d['validFrom'] = self.valid_from
-        if self.valid_until is not None:
-            d['validUntil'] = self.valid_until
-        return d
-
-    @staticmethod
-    def from_dict(d: Dict[str, Any]) -> 'ProcessDocumentation':
-        process_documentation = ProcessDocumentation()
-        if (v := d.get('completenessDescription')) or v is not None:
-            process_documentation.completeness_description = v
-        if (v := d.get('creationDate')) or v is not None:
-            process_documentation.creation_date = v
-        if (v := d.get('dataCollectionDescription')) or v is not None:
-            process_documentation.data_collection_description = v
-        if (v := d.get('dataDocumentor')) or v is not None:
-            process_documentation.data_documentor = Ref.from_dict(v)
-        if (v := d.get('dataGenerator')) or v is not None:
-            process_documentation.data_generator = Ref.from_dict(v)
-        if (v := d.get('dataSelectionDescription')) or v is not None:
-            process_documentation.data_selection_description = v
-        if (v := d.get('dataSetOwner')) or v is not None:
-            process_documentation.data_set_owner = Ref.from_dict(v)
-        if (v := d.get('dataTreatmentDescription')) or v is not None:
-            process_documentation.data_treatment_description = v
-        if (v := d.get('geographyDescription')) or v is not None:
-            process_documentation.geography_description = v
-        if (v := d.get('intendedApplication')) or v is not None:
-            process_documentation.intended_application = v
-        if (v := d.get('inventoryMethodDescription')) or v is not None:
-            process_documentation.inventory_method_description = v
-        if (v := d.get('isCopyrightProtected')) or v is not None:
-            process_documentation.is_copyright_protected = v
-        if (v := d.get('modelingConstantsDescription')) or v is not None:
-            process_documentation.modeling_constants_description = v
-        if (v := d.get('projectDescription')) or v is not None:
-            process_documentation.project_description = v
-        if (v := d.get('publication')) or v is not None:
-            process_documentation.publication = Ref.from_dict(v)
-        if (v := d.get('restrictionsDescription')) or v is not None:
-            process_documentation.restrictions_description = v
-        if (v := d.get('reviewDetails')) or v is not None:
-            process_documentation.review_details = v
-        if (v := d.get('reviewer')) or v is not None:
-            process_documentation.reviewer = Ref.from_dict(v)
-        if (v := d.get('samplingDescription')) or v is not None:
-            process_documentation.sampling_description = v
-        if (v := d.get('sources')) or v is not None:
-            process_documentation.sources = [Ref.from_dict(e) for e in v]
-        if (v := d.get('technologyDescription')) or v is not None:
-            process_documentation.technology_description = v
-        if (v := d.get('timeDescription')) or v is not None:
-            process_documentation.time_description = v
-        if (v := d.get('useAdvice')) or v is not None:
-            process_documentation.use_advice = v
-        if (v := d.get('validFrom')) or v is not None:
-            process_documentation.valid_from = v
-        if (v := d.get('validUntil')) or v is not None:
-            process_documentation.valid_until = v
-        return process_documentation
-
-
-@dataclass
 class ProcessLink:
 
     exchange: Optional[ExchangeRef] = None
@@ -1989,6 +1903,218 @@ class ResultState:
         if (v := d.get('time')) or v is not None:
             result_state.time = v
         return result_state
+
+
+@dataclass
+class ReviewScope:
+
+    methods: Optional[List[str]] = None
+    name: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.methods is not None:
+            d['methods'] = self.methods
+        if self.name is not None:
+            d['name'] = self.name
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'ReviewScope':
+        review_scope = ReviewScope()
+        if (v := d.get('methods')) or v is not None:
+            review_scope.methods = v
+        if (v := d.get('name')) or v is not None:
+            review_scope.name = v
+        return review_scope
+
+
+@dataclass
+class Review:
+
+    assessment: Optional[List[AspectValue]] = None
+    details: Optional[str] = None
+    report: Optional[Ref] = None
+    review_type: Optional[str] = None
+    reviewers: Optional[List[Ref]] = None
+    scopes: Optional[List[ReviewScope]] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.assessment is not None:
+            d['assessment'] = [e.to_dict() for e in self.assessment]
+        if self.details is not None:
+            d['details'] = self.details
+        if self.report is not None:
+            d['report'] = self.report.to_dict()
+        if self.review_type is not None:
+            d['reviewType'] = self.review_type
+        if self.reviewers is not None:
+            d['reviewers'] = [e.to_dict() for e in self.reviewers]
+        if self.scopes is not None:
+            d['scopes'] = [e.to_dict() for e in self.scopes]
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'Review':
+        review = Review()
+        if (v := d.get('assessment')) or v is not None:
+            review.assessment = [AspectValue.from_dict(e) for e in v]
+        if (v := d.get('details')) or v is not None:
+            review.details = v
+        if (v := d.get('report')) or v is not None:
+            review.report = Ref.from_dict(v)
+        if (v := d.get('reviewType')) or v is not None:
+            review.review_type = v
+        if (v := d.get('reviewers')) or v is not None:
+            review.reviewers = [Ref.from_dict(e) for e in v]
+        if (v := d.get('scopes')) or v is not None:
+            review.scopes = [ReviewScope.from_dict(e) for e in v]
+        return review
+
+
+@dataclass
+class ProcessDocumentation:
+
+    completeness_description: Optional[str] = None
+    compliance_declarations: Optional[List[ComplianceDeclaration]] = None
+    creation_date: Optional[str] = None
+    data_collection_description: Optional[str] = None
+    data_documentor: Optional[Ref] = None
+    data_generator: Optional[Ref] = None
+    data_selection_description: Optional[str] = None
+    data_set_owner: Optional[Ref] = None
+    data_treatment_description: Optional[str] = None
+    flow_completeness: Optional[List[AspectValue]] = None
+    geography_description: Optional[str] = None
+    intended_application: Optional[str] = None
+    inventory_method_description: Optional[str] = None
+    is_copyright_protected: Optional[bool] = None
+    modeling_constants_description: Optional[str] = None
+    project_description: Optional[str] = None
+    publication: Optional[Ref] = None
+    restrictions_description: Optional[str] = None
+    reviews: Optional[List[Review]] = None
+    sampling_description: Optional[str] = None
+    sources: Optional[List[Ref]] = None
+    technology_description: Optional[str] = None
+    time_description: Optional[str] = None
+    use_advice: Optional[str] = None
+    valid_from: Optional[str] = None
+    valid_until: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.completeness_description is not None:
+            d['completenessDescription'] = self.completeness_description
+        if self.compliance_declarations is not None:
+            d['complianceDeclarations'] = [e.to_dict() for e in self.compliance_declarations]
+        if self.creation_date is not None:
+            d['creationDate'] = self.creation_date
+        if self.data_collection_description is not None:
+            d['dataCollectionDescription'] = self.data_collection_description
+        if self.data_documentor is not None:
+            d['dataDocumentor'] = self.data_documentor.to_dict()
+        if self.data_generator is not None:
+            d['dataGenerator'] = self.data_generator.to_dict()
+        if self.data_selection_description is not None:
+            d['dataSelectionDescription'] = self.data_selection_description
+        if self.data_set_owner is not None:
+            d['dataSetOwner'] = self.data_set_owner.to_dict()
+        if self.data_treatment_description is not None:
+            d['dataTreatmentDescription'] = self.data_treatment_description
+        if self.flow_completeness is not None:
+            d['flowCompleteness'] = [e.to_dict() for e in self.flow_completeness]
+        if self.geography_description is not None:
+            d['geographyDescription'] = self.geography_description
+        if self.intended_application is not None:
+            d['intendedApplication'] = self.intended_application
+        if self.inventory_method_description is not None:
+            d['inventoryMethodDescription'] = self.inventory_method_description
+        if self.is_copyright_protected is not None:
+            d['isCopyrightProtected'] = self.is_copyright_protected
+        if self.modeling_constants_description is not None:
+            d['modelingConstantsDescription'] = self.modeling_constants_description
+        if self.project_description is not None:
+            d['projectDescription'] = self.project_description
+        if self.publication is not None:
+            d['publication'] = self.publication.to_dict()
+        if self.restrictions_description is not None:
+            d['restrictionsDescription'] = self.restrictions_description
+        if self.reviews is not None:
+            d['reviews'] = [e.to_dict() for e in self.reviews]
+        if self.sampling_description is not None:
+            d['samplingDescription'] = self.sampling_description
+        if self.sources is not None:
+            d['sources'] = [e.to_dict() for e in self.sources]
+        if self.technology_description is not None:
+            d['technologyDescription'] = self.technology_description
+        if self.time_description is not None:
+            d['timeDescription'] = self.time_description
+        if self.use_advice is not None:
+            d['useAdvice'] = self.use_advice
+        if self.valid_from is not None:
+            d['validFrom'] = self.valid_from
+        if self.valid_until is not None:
+            d['validUntil'] = self.valid_until
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'ProcessDocumentation':
+        process_documentation = ProcessDocumentation()
+        if (v := d.get('completenessDescription')) or v is not None:
+            process_documentation.completeness_description = v
+        if (v := d.get('complianceDeclarations')) or v is not None:
+            process_documentation.compliance_declarations = [ComplianceDeclaration.from_dict(e) for e in v]
+        if (v := d.get('creationDate')) or v is not None:
+            process_documentation.creation_date = v
+        if (v := d.get('dataCollectionDescription')) or v is not None:
+            process_documentation.data_collection_description = v
+        if (v := d.get('dataDocumentor')) or v is not None:
+            process_documentation.data_documentor = Ref.from_dict(v)
+        if (v := d.get('dataGenerator')) or v is not None:
+            process_documentation.data_generator = Ref.from_dict(v)
+        if (v := d.get('dataSelectionDescription')) or v is not None:
+            process_documentation.data_selection_description = v
+        if (v := d.get('dataSetOwner')) or v is not None:
+            process_documentation.data_set_owner = Ref.from_dict(v)
+        if (v := d.get('dataTreatmentDescription')) or v is not None:
+            process_documentation.data_treatment_description = v
+        if (v := d.get('flowCompleteness')) or v is not None:
+            process_documentation.flow_completeness = [AspectValue.from_dict(e) for e in v]
+        if (v := d.get('geographyDescription')) or v is not None:
+            process_documentation.geography_description = v
+        if (v := d.get('intendedApplication')) or v is not None:
+            process_documentation.intended_application = v
+        if (v := d.get('inventoryMethodDescription')) or v is not None:
+            process_documentation.inventory_method_description = v
+        if (v := d.get('isCopyrightProtected')) or v is not None:
+            process_documentation.is_copyright_protected = v
+        if (v := d.get('modelingConstantsDescription')) or v is not None:
+            process_documentation.modeling_constants_description = v
+        if (v := d.get('projectDescription')) or v is not None:
+            process_documentation.project_description = v
+        if (v := d.get('publication')) or v is not None:
+            process_documentation.publication = Ref.from_dict(v)
+        if (v := d.get('restrictionsDescription')) or v is not None:
+            process_documentation.restrictions_description = v
+        if (v := d.get('reviews')) or v is not None:
+            process_documentation.reviews = [Review.from_dict(e) for e in v]
+        if (v := d.get('samplingDescription')) or v is not None:
+            process_documentation.sampling_description = v
+        if (v := d.get('sources')) or v is not None:
+            process_documentation.sources = [Ref.from_dict(e) for e in v]
+        if (v := d.get('technologyDescription')) or v is not None:
+            process_documentation.technology_description = v
+        if (v := d.get('timeDescription')) or v is not None:
+            process_documentation.time_description = v
+        if (v := d.get('useAdvice')) or v is not None:
+            process_documentation.use_advice = v
+        if (v := d.get('validFrom')) or v is not None:
+            process_documentation.valid_from = v
+        if (v := d.get('validUntil')) or v is not None:
+            process_documentation.valid_until = v
+        return process_documentation
 
 
 @dataclass

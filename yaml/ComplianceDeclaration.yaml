@@ -1,0 +1,17 @@
+
+class:
+  name: ComplianceDeclaration
+  superClass: Entity
+
+  properties:
+    - name: system
+      index: 2
+      type: Ref[Source]
+
+    - name: comment
+      index: 3
+      type: string
+
+    - name: aspects
+      index: 4
+      type: List[AspectValue]

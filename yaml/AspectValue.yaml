@@ -1,0 +1,16 @@
+
+class:
+  name: AspectValue
+  superClass: Entity
+  doc: >
+       This is basically just a key-value pair, used to describe
+       documentation aspects.
+
+  properties:
+    - name: aspect
+      index: 2
+      type: string
+
+    - name: value
+      index: 3
+      type: string

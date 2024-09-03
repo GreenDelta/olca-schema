@@ -86,16 +86,6 @@ class:
       type: string
       doc:
 
-    - name: reviewDetails
-      index: 18
-      type: string
-      doc:
-
-    - name: reviewer
-      index: 19
-      type: Ref[Actor]
-      doc:
-
     - name: samplingDescription
       index: 20
       type: string
@@ -129,3 +119,15 @@ class:
     - name: useAdvice
       index: 26
       type: string
+
+    - name: flowCompleteness
+      index: 27
+      type: List[AspectValue]
+
+    - name: complianceDeclarations
+      index: 28
+      type: List[ComplianceDeclaration]
+
+    - name: reviews
+      index: 29
+      type: List[Review]
