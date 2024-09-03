@@ -4,10 +4,8 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>ExchangeRef - openLCA schema</title>
-
-
         <!-- Custom HTML head -->
-        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -18,31 +16,27 @@
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
         <link rel="stylesheet" href="../css/print.css" media="print">
-
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="../fonts/fonts.css">
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-
         <!-- MathJax -->
-        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
-    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script>
+        <script type="text/javascript">
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script>
+        <script type="text/javascript">
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -58,7 +52,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script>
+        <script type="text/javascript">
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -70,14 +64,12 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
+        <script type="text/javascript">
             var html = document.querySelector('html');
-            var sidebar = null;
+            var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -85,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../CHANGES.html">Changes</a></li><li class="chapter-item expanded affix "><li class="part-title">Root entities</li><li class="chapter-item expanded "><a href="../classes/Actor.html"><strong aria-hidden="true">1.</strong> Actor</a></li><li class="chapter-item expanded "><a href="../classes/Currency.html"><strong aria-hidden="true">2.</strong> Currency</a></li><li class="chapter-item expanded "><a href="../classes/DQSystem.html"><strong aria-hidden="true">3.</strong> DQSystem</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/DQIndicator.html"><strong aria-hidden="true">3.1.</strong> DQIndicator</a></li><li class="chapter-item expanded "><a href="../classes/DQScore.html"><strong aria-hidden="true">3.2.</strong> DQScore</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Epd.html"><strong aria-hidden="true">4.</strong> Epd</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/EpdModule.html"><strong aria-hidden="true">4.1.</strong> EpdModule</a></li><li class="chapter-item expanded "><a href="../classes/EpdProduct.html"><strong aria-hidden="true">4.2.</strong> EpdProduct</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Flow.html"><strong aria-hidden="true">5.</strong> Flow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/FlowPropertyFactor.html"><strong aria-hidden="true">5.1.</strong> FlowPropertyFactor</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/FlowMap.html"><strong aria-hidden="true">6.</strong> FlowMap</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/FlowMapEntry.html"><strong aria-hidden="true">6.1.</strong> FlowMapEntry</a></li><li class="chapter-item expanded "><a href="../classes/FlowMapRef.html"><strong aria-hidden="true">6.2.</strong> FlowMapRef</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/FlowProperty.html"><strong aria-hidden="true">7.</strong> FlowProperty</a></li><li class="chapter-item expanded "><a href="../classes/ImpactCategory.html"><strong aria-hidden="true">8.</strong> ImpactCategory</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/ImpactFactor.html"><strong aria-hidden="true">8.1.</strong> ImpactFactor</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/ImpactMethod.html"><strong aria-hidden="true">9.</strong> ImpactMethod</a></li><li class="chapter-item expanded "><a href="../classes/Location.html"><strong aria-hidden="true">10.</strong> Location</a></li><li class="chapter-item expanded "><a href="../classes/Parameter.html"><strong aria-hidden="true">11.</strong> Parameter</a></li><li class="chapter-item expanded "><a href="../classes/Process.html"><strong aria-hidden="true">12.</strong> Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/AllocationFactor.html"><strong aria-hidden="true">12.1.</strong> AllocationFactor</a></li><li class="chapter-item expanded "><a href="../classes/Exchange.html"><strong aria-hidden="true">12.2.</strong> Exchange</a></li><li class="chapter-item expanded "><a href="../classes/ProcessDocumentation.html"><strong aria-hidden="true">12.3.</strong> ProcessDocumentation</a></li><li class="chapter-item expanded "><a href="../classes/SocialAspect.html"><strong aria-hidden="true">12.4.</strong> SocialAspect</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/ProductSystem.html"><strong aria-hidden="true">13.</strong> ProductSystem</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/ParameterRedefSet.html"><strong aria-hidden="true">13.1.</strong> ParameterRedefSet</a></li><li class="chapter-item expanded "><a href="../classes/ProcessLink.html"><strong aria-hidden="true">13.2.</strong> ProcessLink</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Project.html"><strong aria-hidden="true">14.</strong> Project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/ProjectVariant.html"><strong aria-hidden="true">14.1.</strong> ProjectVariant</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Result.html"><strong aria-hidden="true">15.</strong> Result</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/FlowResult.html"><strong aria-hidden="true">15.1.</strong> FlowResult</a></li><li class="chapter-item expanded "><a href="../classes/ImpactResult.html"><strong aria-hidden="true">15.2.</strong> ImpactResult</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/SocialIndicator.html"><strong aria-hidden="true">16.</strong> SocialIndicator</a></li><li class="chapter-item expanded "><a href="../classes/Source.html"><strong aria-hidden="true">17.</strong> Source</a></li><li class="chapter-item expanded "><a href="../classes/UnitGroup.html"><strong aria-hidden="true">18.</strong> UnitGroup</a></li><li class="chapter-item expanded affix "><li class="part-title">Other components</li><li class="chapter-item expanded "><a href="../classes/Entity.html"><strong aria-hidden="true">19.</strong> Entity</a></li><li class="chapter-item expanded "><a href="../classes/ExchangeRef.html" class="active"><strong aria-hidden="true">20.</strong> ExchangeRef</a></li><li class="chapter-item expanded "><a href="../classes/LinkingConfig.html"><strong aria-hidden="true">21.</strong> LinkingConfig</a></li><li class="chapter-item expanded "><a href="../classes/NwSet.html"><strong aria-hidden="true">22.</strong> NwSet</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/NwFactor.html"><strong aria-hidden="true">22.1.</strong> NwFactor</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/ParameterRedef.html"><strong aria-hidden="true">23.</strong> ParameterRedef</a></li><li class="chapter-item expanded "><a href="../classes/Ref.html"><strong aria-hidden="true">24.</strong> Ref</a></li><li class="chapter-item expanded "><a href="../classes/RefEntity.html"><strong aria-hidden="true">25.</strong> RefEntity</a></li><li class="chapter-item expanded "><a href="../classes/RootEntity.html"><strong aria-hidden="true">26.</strong> RootEntity</a></li><li class="chapter-item expanded "><a href="../classes/Uncertainty.html"><strong aria-hidden="true">27.</strong> Uncertainty</a></li><li class="chapter-item expanded "><a href="../classes/Unit.html"><strong aria-hidden="true">28.</strong> Unit</a></li><li class="chapter-item expanded affix "><li class="part-title">Enumerations</li><li class="chapter-item expanded "><a href="../enums/AllocationType.html"><strong aria-hidden="true">29.</strong> AllocationType</a></li><li class="chapter-item expanded "><a href="../enums/Direction.html"><strong aria-hidden="true">30.</strong> Direction</a></li><li class="chapter-item expanded "><a href="../enums/FlowPropertyType.html"><strong aria-hidden="true">31.</strong> FlowPropertyType</a></li><li class="chapter-item expanded "><a href="../enums/FlowType.html"><strong aria-hidden="true">32.</strong> FlowType</a></li><li class="chapter-item expanded "><a href="../enums/ModelType.html"><strong aria-hidden="true">33.</strong> ModelType</a></li><li class="chapter-item expanded "><a href="../enums/ParameterScope.html"><strong aria-hidden="true">34.</strong> ParameterScope</a></li><li class="chapter-item expanded "><a href="../enums/ProcessType.html"><strong aria-hidden="true">35.</strong> ProcessType</a></li><li class="chapter-item expanded "><a href="../enums/ProviderLinking.html"><strong aria-hidden="true">36.</strong> ProviderLinking</a></li><li class="chapter-item expanded "><a href="../enums/RiskLevel.html"><strong aria-hidden="true">37.</strong> RiskLevel</a></li><li class="chapter-item expanded "><a href="../enums/UncertaintyType.html"><strong aria-hidden="true">38.</strong> UncertaintyType</a></li><li class="chapter-item expanded affix "><li class="part-title">Package:  results</li><li class="chapter-item expanded "><a href="../classes/CalculationSetup.html"><strong aria-hidden="true">39.</strong> CalculationSetup</a></li><li class="chapter-item expanded "><a href="../classes/CostValue.html"><strong aria-hidden="true">40.</strong> CostValue</a></li><li class="chapter-item expanded "><a href="../classes/EnviFlow.html"><strong aria-hidden="true">41.</strong> EnviFlow</a></li><li class="chapter-item expanded "><a href="../classes/EnviFlowValue.html"><strong aria-hidden="true">42.</strong> EnviFlowValue</a></li><li class="chapter-item expanded "><a href="../classes/ImpactValue.html"><strong aria-hidden="true">43.</strong> ImpactValue</a></li><li class="chapter-item expanded "><a href="../classes/ResultState.html"><strong aria-hidden="true">44.</strong> ResultState</a></li><li class="chapter-item expanded "><a href="../classes/SankeyEdge.html"><strong aria-hidden="true">45.</strong> SankeyEdge</a></li><li class="chapter-item expanded "><a href="../classes/SankeyGraph.html"><strong aria-hidden="true">46.</strong> SankeyGraph</a></li><li class="chapter-item expanded "><a href="../classes/SankeyNode.html"><strong aria-hidden="true">47.</strong> SankeyNode</a></li><li class="chapter-item expanded "><a href="../classes/SankeyRequest.html"><strong aria-hidden="true">48.</strong> SankeyRequest</a></li><li class="chapter-item expanded "><a href="../classes/TechFlow.html"><strong aria-hidden="true">49.</strong> TechFlow</a></li><li class="chapter-item expanded "><a href="../classes/TechFlowValue.html"><strong aria-hidden="true">50.</strong> TechFlowValue</a></li><li class="chapter-item expanded "><a href="../classes/UpstreamNode.html"><strong aria-hidden="true">51.</strong> UpstreamNode</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="../CHANGES.html">Changes</a></li><li class="chapter-item expanded affix "><li class="part-title">Root entities</li><li class="chapter-item expanded "><a href="../classes/Actor.html"><strong aria-hidden="true">1.</strong> Actor</a></li><li class="chapter-item expanded "><a href="../classes/Currency.html"><strong aria-hidden="true">2.</strong> Currency</a></li><li class="chapter-item expanded "><a href="../classes/DQSystem.html"><strong aria-hidden="true">3.</strong> DQSystem</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/DQIndicator.html"><strong aria-hidden="true">3.1.</strong> DQIndicator</a></li><li class="chapter-item expanded "><a href="../classes/DQScore.html"><strong aria-hidden="true">3.2.</strong> DQScore</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Epd.html"><strong aria-hidden="true">4.</strong> Epd</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/EpdModule.html"><strong aria-hidden="true">4.1.</strong> EpdModule</a></li><li class="chapter-item expanded "><a href="../classes/EpdProduct.html"><strong aria-hidden="true">4.2.</strong> EpdProduct</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Flow.html"><strong aria-hidden="true">5.</strong> Flow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/FlowPropertyFactor.html"><strong aria-hidden="true">5.1.</strong> FlowPropertyFactor</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/FlowMap.html"><strong aria-hidden="true">6.</strong> FlowMap</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/FlowMapEntry.html"><strong aria-hidden="true">6.1.</strong> FlowMapEntry</a></li><li class="chapter-item expanded "><a href="../classes/FlowMapRef.html"><strong aria-hidden="true">6.2.</strong> FlowMapRef</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/FlowProperty.html"><strong aria-hidden="true">7.</strong> FlowProperty</a></li><li class="chapter-item expanded "><a href="../classes/ImpactCategory.html"><strong aria-hidden="true">8.</strong> ImpactCategory</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/ImpactFactor.html"><strong aria-hidden="true">8.1.</strong> ImpactFactor</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/ImpactMethod.html"><strong aria-hidden="true">9.</strong> ImpactMethod</a></li><li class="chapter-item expanded "><a href="../classes/Location.html"><strong aria-hidden="true">10.</strong> Location</a></li><li class="chapter-item expanded "><a href="../classes/Parameter.html"><strong aria-hidden="true">11.</strong> Parameter</a></li><li class="chapter-item expanded "><a href="../classes/Process.html"><strong aria-hidden="true">12.</strong> Process</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/AllocationFactor.html"><strong aria-hidden="true">12.1.</strong> AllocationFactor</a></li><li class="chapter-item expanded "><a href="../classes/ComplianceDeclaration.html"><strong aria-hidden="true">12.2.</strong> ComplianceDeclaration</a></li><li class="chapter-item expanded "><a href="../classes/Exchange.html"><strong aria-hidden="true">12.3.</strong> Exchange</a></li><li class="chapter-item expanded "><a href="../classes/ProcessDocumentation.html"><strong aria-hidden="true">12.4.</strong> ProcessDocumentation</a></li><li class="chapter-item expanded "><a href="../classes/Review.html"><strong aria-hidden="true">12.5.</strong> Review</a></li><li class="chapter-item expanded "><a href="../classes/ReviewScope.html"><strong aria-hidden="true">12.6.</strong> ReviewScope</a></li><li class="chapter-item expanded "><a href="../classes/SocialAspect.html"><strong aria-hidden="true">12.7.</strong> SocialAspect</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/ProductSystem.html"><strong aria-hidden="true">13.</strong> ProductSystem</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/ParameterRedefSet.html"><strong aria-hidden="true">13.1.</strong> ParameterRedefSet</a></li><li class="chapter-item expanded "><a href="../classes/ProcessLink.html"><strong aria-hidden="true">13.2.</strong> ProcessLink</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Project.html"><strong aria-hidden="true">14.</strong> Project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/ProjectVariant.html"><strong aria-hidden="true">14.1.</strong> ProjectVariant</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/Result.html"><strong aria-hidden="true">15.</strong> Result</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/FlowResult.html"><strong aria-hidden="true">15.1.</strong> FlowResult</a></li><li class="chapter-item expanded "><a href="../classes/ImpactResult.html"><strong aria-hidden="true">15.2.</strong> ImpactResult</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/SocialIndicator.html"><strong aria-hidden="true">16.</strong> SocialIndicator</a></li><li class="chapter-item expanded "><a href="../classes/Source.html"><strong aria-hidden="true">17.</strong> Source</a></li><li class="chapter-item expanded "><a href="../classes/UnitGroup.html"><strong aria-hidden="true">18.</strong> UnitGroup</a></li><li class="chapter-item expanded affix "><li class="part-title">Other components</li><li class="chapter-item expanded "><a href="../classes/AspectValue.html"><strong aria-hidden="true">19.</strong> AspectValue</a></li><li class="chapter-item expanded "><a href="../classes/Entity.html"><strong aria-hidden="true">20.</strong> Entity</a></li><li class="chapter-item expanded "><a href="../classes/ExchangeRef.html" class="active"><strong aria-hidden="true">21.</strong> ExchangeRef</a></li><li class="chapter-item expanded "><a href="../classes/LinkingConfig.html"><strong aria-hidden="true">22.</strong> LinkingConfig</a></li><li class="chapter-item expanded "><a href="../classes/NwSet.html"><strong aria-hidden="true">23.</strong> NwSet</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../classes/NwFactor.html"><strong aria-hidden="true">23.1.</strong> NwFactor</a></li></ol></li><li class="chapter-item expanded "><a href="../classes/ParameterRedef.html"><strong aria-hidden="true">24.</strong> ParameterRedef</a></li><li class="chapter-item expanded "><a href="../classes/Ref.html"><strong aria-hidden="true">25.</strong> Ref</a></li><li class="chapter-item expanded "><a href="../classes/RefEntity.html"><strong aria-hidden="true">26.</strong> RefEntity</a></li><li class="chapter-item expanded "><a href="../classes/RootEntity.html"><strong aria-hidden="true">27.</strong> RootEntity</a></li><li class="chapter-item expanded "><a href="../classes/Uncertainty.html"><strong aria-hidden="true">28.</strong> Uncertainty</a></li><li class="chapter-item expanded "><a href="../classes/Unit.html"><strong aria-hidden="true">29.</strong> Unit</a></li><li class="chapter-item expanded affix "><li class="part-title">Enumerations</li><li class="chapter-item expanded "><a href="../enums/AllocationType.html"><strong aria-hidden="true">30.</strong> AllocationType</a></li><li class="chapter-item expanded "><a href="../enums/Direction.html"><strong aria-hidden="true">31.</strong> Direction</a></li><li class="chapter-item expanded "><a href="../enums/EpdType.html"><strong aria-hidden="true">32.</strong> EpdType</a></li><li class="chapter-item expanded "><a href="../enums/FlowPropertyType.html"><strong aria-hidden="true">33.</strong> FlowPropertyType</a></li><li class="chapter-item expanded "><a href="../enums/FlowType.html"><strong aria-hidden="true">34.</strong> FlowType</a></li><li class="chapter-item expanded "><a href="../enums/ModelType.html"><strong aria-hidden="true">35.</strong> ModelType</a></li><li class="chapter-item expanded "><a href="../enums/ParameterScope.html"><strong aria-hidden="true">36.</strong> ParameterScope</a></li><li class="chapter-item expanded "><a href="../enums/ProcessType.html"><strong aria-hidden="true">37.</strong> ProcessType</a></li><li class="chapter-item expanded "><a href="../enums/ProviderLinking.html"><strong aria-hidden="true">38.</strong> ProviderLinking</a></li><li class="chapter-item expanded "><a href="../enums/RiskLevel.html"><strong aria-hidden="true">39.</strong> RiskLevel</a></li><li class="chapter-item expanded "><a href="../enums/UncertaintyType.html"><strong aria-hidden="true">40.</strong> UncertaintyType</a></li><li class="chapter-item expanded affix "><li class="part-title">Package: results</li><li class="chapter-item expanded "><a href="../classes/CalculationSetup.html"><strong aria-hidden="true">41.</strong> CalculationSetup</a></li><li class="chapter-item expanded "><a href="../classes/CostValue.html"><strong aria-hidden="true">42.</strong> CostValue</a></li><li class="chapter-item expanded "><a href="../classes/EnviFlow.html"><strong aria-hidden="true">43.</strong> EnviFlow</a></li><li class="chapter-item expanded "><a href="../classes/EnviFlowValue.html"><strong aria-hidden="true">44.</strong> EnviFlowValue</a></li><li class="chapter-item expanded "><a href="../classes/ImpactValue.html"><strong aria-hidden="true">45.</strong> ImpactValue</a></li><li class="chapter-item expanded "><a href="../classes/ResultState.html"><strong aria-hidden="true">46.</strong> ResultState</a></li><li class="chapter-item expanded "><a href="../classes/SankeyEdge.html"><strong aria-hidden="true">47.</strong> SankeyEdge</a></li><li class="chapter-item expanded "><a href="../classes/SankeyGraph.html"><strong aria-hidden="true">48.</strong> SankeyGraph</a></li><li class="chapter-item expanded "><a href="../classes/SankeyNode.html"><strong aria-hidden="true">49.</strong> SankeyNode</a></li><li class="chapter-item expanded "><a href="../classes/SankeyRequest.html"><strong aria-hidden="true">50.</strong> SankeyRequest</a></li><li class="chapter-item expanded "><a href="../classes/TechFlow.html"><strong aria-hidden="true">51.</strong> TechFlow</a></li><li class="chapter-item expanded "><a href="../classes/TechFlowValue.html"><strong aria-hidden="true">52.</strong> TechFlowValue</a></li><li class="chapter-item expanded "><a href="../classes/UpstreamNode.html"><strong aria-hidden="true">53.</strong> UpstreamNode</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -93,7 +85,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -103,7 +95,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -120,7 +112,6 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-
                     </div>
                 </div>
 
@@ -134,9 +125,8 @@
                         </ul>
                     </div>
                 </div>
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script>
+                <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -180,11 +170,9 @@ class ExchangeRef:
                             <a rel="prev" href="../classes/Entity.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-
                             <a rel="next" href="../classes/LinkingConfig.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
@@ -194,7 +182,6 @@ class ExchangeRef:
                     <a rel="prev" href="../classes/Entity.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-
                     <a rel="next" href="../classes/LinkingConfig.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
@@ -202,25 +189,16 @@ class ExchangeRef:
 
         </div>
 
-
-
-
-        <script>
+        <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-
-
-        <script src="../elasticlunr.min.js"></script>
-        <script src="../mark.min.js"></script>
-        <script src="../searcher.js"></script>
-
-        <script src="../clipboard.min.js"></script>
-        <script src="../highlight.js"></script>
-        <script src="../book.js"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-
-
-    </div>
     </body>
 </html>

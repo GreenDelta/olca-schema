@@ -53,6 +53,36 @@
   rdfs:comment ""
   .
 
+:EpdType a rdfs:Class;
+  rdfs:subClassOf :Enumeration;
+  rdfs:comment ""
+  .
+
+:GENERIC_DATASET a rdfs:Class;
+  rdfs:subClassOf :EpdType;
+  rdfs:comment ""
+  .
+
+:REPRESENTATIVE_DATASET a rdfs:Class;
+  rdfs:subClassOf :EpdType;
+  rdfs:comment ""
+  .
+
+:AVERAGE_DATASET a rdfs:Class;
+  rdfs:subClassOf :EpdType;
+  rdfs:comment ""
+  .
+
+:SPECIFIC_DATASET a rdfs:Class;
+  rdfs:subClassOf :EpdType;
+  rdfs:comment ""
+  .
+
+:TEMPLATE_DATASET a rdfs:Class;
+  rdfs:subClassOf :EpdType;
+  rdfs:comment ""
+  .
+
 :FlowPropertyType a rdfs:Class;
   rdfs:subClassOf :Enumeration;
   rdfs:comment "An enumeration of flow property types."
@@ -338,6 +368,16 @@
   rdfs:comment "A single allocation factor in a process."
   .
 
+:AspectValue a rdfs:Class;
+  rdfs:subClassOf :Entity;
+  rdfs:comment "This is basically just a key-value pair, used to describe documentation aspects."
+  .
+
+:ComplianceDeclaration a rdfs:Class;
+  rdfs:subClassOf :Entity;
+  rdfs:comment ""
+  .
+
 :Currency a rdfs:Class;
   rdfs:subClassOf :RootEntity;
   rdfs:comment ""
@@ -524,6 +564,16 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "A calculation result of a product system."
   .
 
+:Review a rdfs:Class;
+  rdfs:subClassOf :Entity;
+  rdfs:comment ""
+  .
+
+:ReviewScope a rdfs:Class;
+  rdfs:subClassOf :Entity;
+  rdfs:comment ""
+  .
+
 :RootEntity a rdfs:Class;
   rdfs:subClassOf :RefEntity;
   rdfs:comment "A `RootEntity` is a stand-alone data set (like a `Flow` or `Process`)."
@@ -676,6 +726,24 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
+:aspect a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :AspectValue;
+  rdfs:range xsd:string
+  .
+
+:aspects a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ComplianceDeclaration;
+  rdfs:range :AspectValue
+  .
+
+:assessment a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Review;
+  rdfs:range :AspectValue
+  .
+
 :baseUncertainty a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Exchange;
@@ -705,8 +773,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :comment a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :SocialAspect;
+  rdfs:domain [ a owl:Class; owl:unionOf (:ComplianceDeclaration :SocialAspect)];
   rdfs:range xsd:string
   .
 
@@ -714,6 +781,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
   rdfs:range xsd:string
+  .
+
+:complianceDeclarations a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range :ComplianceDeclaration
   .
 
 :context a rdf:Property;
@@ -775,8 +848,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :dataGenerator a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Epd :ProcessDocumentation)];
   rdfs:range :Ref
   .
 
@@ -818,6 +890,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 
 :description a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:DQScore :Exchange :FlowResult :ImpactResult :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
+  rdfs:range xsd:string
+  .
+
+:details a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Review;
   rdfs:range xsd:string
   .
 
@@ -873,6 +951,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :EnviFlow
   .
 
+:epdType a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range :EpdType
+  .
+
 :error a rdf:Property;
   rdfs:comment "Contains an error message when the calculation of the result failed.";
   rdfs:domain :ResultState;
@@ -917,6 +1001,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :flow a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowMapRef :FlowResult :ImpactFactor :ProcessLink :EnviFlow :TechFlow)];
   rdfs:range :Ref
+  .
+
+:flowCompleteness a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ProcessDocumentation;
+  rdfs:range :AspectValue
   .
 
 :flowProperties a rdf:Property;
@@ -1183,7 +1273,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :location a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:Exchange :Flow :FlowResult :ImpactFactor :Process :Ref :EnviFlow)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:Epd :Exchange :Flow :FlowResult :ImpactFactor :Process :Ref :EnviFlow)];
   rdfs:range :Ref
   .
 
@@ -1197,6 +1287,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "";
   rdfs:domain :Epd;
   rdfs:range :Ref
+  .
+
+:manufacturing a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range xsd:string
   .
 
 :mappings a rdf:Property;
@@ -1221,6 +1317,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "The arithmetic mean (used for normal distributions).";
   rdfs:domain :Uncertainty;
   rdfs:range xsd:double
+  .
+
+:methods a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ReviewScope;
+  rdfs:range xsd:string
   .
 
 :minShare a rdf:Property;
@@ -1260,7 +1362,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :name a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity :ReviewScope)];
   rdfs:range xsd:string
   .
 
@@ -1291,6 +1393,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "The normalization and weighting sets of the method.";
   rdfs:domain :ImpactMethod;
   rdfs:range :NwSet
+  .
+
+:originalEpd a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range :Ref
   .
 
 :parameterRedefs a rdf:Property;
@@ -1372,6 +1480,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :Ref
   .
 
+:productUsage a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range xsd:string
+  .
+
 :programOperator a rdf:Property;
   rdfs:comment "";
   rdfs:domain :Epd;
@@ -1442,6 +1556,18 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
+:registrationId a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Epd;
+  rdfs:range xsd:string
+  .
+
+:report a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Review;
+  rdfs:range :Ref
+  .
+
 :requiredAmount a rdf:Property;
   rdfs:comment "The required amount of the process product that is needed at this point of the supply chain to fulfill the demand of the calculated system. This value is given in the reference unit of the respective product flow.";
   rdfs:domain :UpstreamNode;
@@ -1459,16 +1585,22 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :Ref
   .
 
-:reviewDetails a rdf:Property;
+:reviewType a rdf:Property;
   rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
+  rdfs:domain :Review;
   rdfs:range xsd:string
   .
 
-:reviewer a rdf:Property;
+:reviewers a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Review;
+  rdfs:range :Ref
+  .
+
+:reviews a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
-  rdfs:range :Ref
+  rdfs:range :Review
   .
 
 :riskLevel a rdf:Property;
@@ -1487,6 +1619,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "";
   rdfs:domain :ProcessDocumentation;
   rdfs:range xsd:string
+  .
+
+:scopes a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :Review;
+  rdfs:range :ReviewScope
   .
 
 :scores a rdf:Property;
@@ -1533,6 +1671,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :synonyms a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:Flow :Unit)];
   rdfs:range xsd:string
+  .
+
+:system a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :ComplianceDeclaration;
+  rdfs:range :Ref
   .
 
 :tags a rdf:Property;
@@ -1663,20 +1807,23 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:string
   .
 
+:useAdvice a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Epd :ProcessDocumentation)];
+  rdfs:range xsd:string
+  .
+
 :validFrom a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Epd :ProcessDocumentation)];
   rdfs:range xsd:date
   .
 
 :validUntil a rdf:Property;
-  rdfs:comment "";
-  rdfs:domain :ProcessDocumentation;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Epd :ProcessDocumentation)];
   rdfs:range xsd:date
   .
 
 :value a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :ImpactFactor :Parameter :ParameterRedef)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:AllocationFactor :AspectValue :ImpactFactor :Parameter :ParameterRedef)];
   rdfs:range xsd:double
   .
 

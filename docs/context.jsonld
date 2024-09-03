@@ -19,6 +19,9 @@
     "distributionType": {
       "@type": "@vocab"
     },
+    "epdType": {
+      "@type": "@vocab"
+    },
     "flowPropertyType": {
       "@type": "@vocab"
     },
