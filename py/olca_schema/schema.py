@@ -459,7 +459,7 @@ class Actor:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Actor'}
@@ -507,6 +507,9 @@ class Actor:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Actor':
         actor = Actor()
+        actor.id = None
+        actor.last_change = None
+        actor.version = None
         if (v := d.get('@id')) or v is not None:
             actor.id = v
         if (v := d.get('address')) or v is not None:
@@ -656,7 +659,7 @@ class Currency:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Currency'}
@@ -694,6 +697,9 @@ class Currency:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Currency':
         currency = Currency()
+        currency.id = None
+        currency.last_change = None
+        currency.version = None
         if (v := d.get('@id')) or v is not None:
             currency.id = v
         if (v := d.get('category')) or v is not None:
@@ -741,7 +747,7 @@ class DQSystem:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'DQSystem'}
@@ -779,6 +785,9 @@ class DQSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'DQSystem':
         d_q_system = DQSystem()
+        d_q_system.id = None
+        d_q_system.last_change = None
+        d_q_system.version = None
         if (v := d.get('@id')) or v is not None:
             d_q_system.id = v
         if (v := d.get('category')) or v is not None:
@@ -956,7 +965,7 @@ class Epd:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Epd'}
@@ -1022,6 +1031,9 @@ class Epd:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Epd':
         epd = Epd()
+        epd.id = None
+        epd.last_change = None
+        epd.version = None
         if (v := d.get('@id')) or v is not None:
             epd.id = v
         if (v := d.get('category')) or v is not None:
@@ -1160,7 +1172,7 @@ class FlowMap:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'FlowMap'}
@@ -1198,6 +1210,9 @@ class FlowMap:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowMap':
         flow_map = FlowMap()
+        flow_map.id = None
+        flow_map.last_change = None
+        flow_map.version = None
         if (v := d.get('@id')) or v is not None:
             flow_map.id = v
         if (v := d.get('category')) or v is not None:
@@ -1244,7 +1259,7 @@ class FlowProperty:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'FlowProperty'}
@@ -1280,6 +1295,9 @@ class FlowProperty:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'FlowProperty':
         flow_property = FlowProperty()
+        flow_property.id = None
+        flow_property.last_change = None
+        flow_property.version = None
         if (v := d.get('@id')) or v is not None:
             flow_property.id = v
         if (v := d.get('category')) or v is not None:
@@ -1358,7 +1376,7 @@ class Flow:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Flow'}
@@ -1404,6 +1422,9 @@ class Flow:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Flow':
         flow = Flow()
+        flow.id = None
+        flow.last_change = None
+        flow.version = None
         if (v := d.get('@id')) or v is not None:
             flow.id = v
         if (v := d.get('cas')) or v is not None:
@@ -1567,7 +1588,7 @@ class Location:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Location'}
@@ -1607,6 +1628,9 @@ class Location:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Location':
         location = Location()
+        location.id = None
+        location.last_change = None
+        location.version = None
         if (v := d.get('@id')) or v is not None:
             location.id = v
         if (v := d.get('category')) or v is not None:
@@ -1730,7 +1754,7 @@ class ImpactMethod:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'ImpactMethod'}
@@ -1770,6 +1794,9 @@ class ImpactMethod:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactMethod':
         impact_method = ImpactMethod()
+        impact_method.id = None
+        impact_method.last_change = None
+        impact_method.version = None
         if (v := d.get('@id')) or v is not None:
             impact_method.id = v
         if (v := d.get('category')) or v is not None:
@@ -1854,7 +1881,7 @@ class Result:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Result'}
@@ -1894,6 +1921,9 @@ class Result:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Result':
         result = Result()
+        result.id = None
+        result.last_change = None
+        result.version = None
         if (v := d.get('@id')) or v is not None:
             result.id = v
         if (v := d.get('category')) or v is not None:
@@ -2313,7 +2343,7 @@ class SocialIndicator:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'SocialIndicator'}
@@ -2355,6 +2385,9 @@ class SocialIndicator:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'SocialIndicator':
         social_indicator = SocialIndicator()
+        social_indicator.id = None
+        social_indicator.last_change = None
+        social_indicator.version = None
         if (v := d.get('@id')) or v is not None:
             social_indicator.id = v
         if (v := d.get('activityQuantity')) or v is not None:
@@ -2407,7 +2440,7 @@ class Source:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Source'}
@@ -2447,6 +2480,9 @@ class Source:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Source':
         source = Source()
+        source.id = None
+        source.last_change = None
+        source.version = None
         if (v := d.get('@id')) or v is not None:
             source.id = v
         if (v := d.get('category')) or v is not None:
@@ -2816,7 +2852,7 @@ class Parameter:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Parameter'}
@@ -2858,6 +2894,9 @@ class Parameter:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Parameter':
         parameter = Parameter()
+        parameter.id = None
+        parameter.last_change = None
+        parameter.version = None
         if (v := d.get('@id')) or v is not None:
             parameter.id = v
         if (v := d.get('category')) or v is not None:
@@ -2912,7 +2951,7 @@ class ImpactCategory:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'ImpactCategory'}
@@ -2956,6 +2995,9 @@ class ImpactCategory:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ImpactCategory':
         impact_category = ImpactCategory()
+        impact_category.id = None
+        impact_category.last_change = None
+        impact_category.version = None
         if (v := d.get('@id')) or v is not None:
             impact_category.id = v
         if (v := d.get('category')) or v is not None:
@@ -3162,7 +3204,7 @@ class Process:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Process'}
@@ -3222,6 +3264,9 @@ class Process:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Process':
         process = Process()
+        process.id = None
+        process.last_change = None
+        process.version = None
         if (v := d.get('@id')) or v is not None:
             process.id = v
         if (v := d.get('allocationFactors')) or v is not None:
@@ -3296,7 +3341,7 @@ class ProductSystem:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'ProductSystem'}
@@ -3344,6 +3389,9 @@ class ProductSystem:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'ProductSystem':
         product_system = ProductSystem()
+        product_system.id = None
+        product_system.last_change = None
+        product_system.version = None
         if (v := d.get('@id')) or v is not None:
             product_system.id = v
         if (v := d.get('category')) or v is not None:
@@ -3457,7 +3505,7 @@ class Project:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'Project'}
@@ -3499,6 +3547,9 @@ class Project:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'Project':
         project = Project()
+        project.id = None
+        project.last_change = None
+        project.version = None
         if (v := d.get('@id')) or v is not None:
             project.id = v
         if (v := d.get('category')) or v is not None:
@@ -3598,7 +3649,7 @@ class UnitGroup:
         if self.version is None:
             self.version = '01.00.000'
         if self.last_change is None:
-            self.last_change = datetime.datetime.now(datetime.UTC).isoformat() + 'Z'
+            self.last_change = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     def to_dict(self) -> Dict[str, Any]:
         d: Dict[str, Any] = {'@type': 'UnitGroup'}
@@ -3634,6 +3685,9 @@ class UnitGroup:
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> 'UnitGroup':
         unit_group = UnitGroup()
+        unit_group.id = None
+        unit_group.last_change = None
+        unit_group.version = None
         if (v := d.get('@id')) or v is not None:
             unit_group.id = v
         if (v := d.get('category')) or v is not None:

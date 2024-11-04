@@ -148,7 +148,7 @@ func (w *pyw) writeClass(class *YamlClass) {
 	if w.model.IsRootEntity(class) {
 		fields := []string{"id", "version", "last_change"}
 		inits := []string{"str(uuid.uuid4())", "'01.00.000'",
-			"datetime.datetime.now(datetime.UTC).isoformat() + 'Z'"}
+			"datetime.datetime.now(datetime.timezone.utc).isoformat()"}
 		lni(w, 1, "def __post_init__(self):")
 		for i, field := range fields {
 			lni(w, 2, "if self.", field, " is None:")
@@ -220,8 +220,7 @@ func (w *pyw) writeClass(class *YamlClass) {
 	// from_json
 	if w.model.IsRootEntity(class) {
 		lni(w, 1, "@staticmethod")
-		lni(w, 1, "def from_json(data: Union[str, bytes]) -> '",
-			class.Name, "':")
+		lni(w, 1, "def from_json(data: Union[str, bytes]) -> '", class.Name, "':")
 		lni(w, 2, "return "+class.Name+".from_dict(json.loads(data))")
 		ln(w)
 	}
@@ -243,6 +242,14 @@ func (w *pyw) writeFromDict(class *YamlClass) {
 	lni(w, 1, "def from_dict(d: Dict[str, Any]) -> '", class.Name, "':")
 	instance := strings.ToLower(toSnakeCase(class.Name))
 	lni(w, 2, instance, " = ", class.Name, "()")
+
+	// clear the fields that are set in __post_init__
+	if w.model.IsRootEntity(class) {
+		for _, field := range []string{"id", "last_change", "version"} {
+			lni(w, 2, instance, ".", field, " = None")
+		}
+	}
+
 	if class.Name == "Ref" {
 		lni(w, 2, instance, ".ref_type = RefType.get(d.get('@type', ''))")
 	}
