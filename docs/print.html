@@ -2918,7 +2918,7 @@ class SocialAspect:
 <h3 id="analysisgroups"><a class="header" href="#analysisgroups"><code>analysisGroups</code></a></h3>
 <p>An optional list of analysis groups.</p>
 <ul>
-<li><em>Type:</em> <a href="classes/./Ref.html">Ref</a> of <a href="classes/./AnalysisGroup.html">AnalysisGroup</a></li>
+<li><em>Type:</em> <code>List</code> of <a href="classes/./AnalysisGroup.html">AnalysisGroup</a></li>
 <li><em>Proto-Index:</em> 18</li>
 </ul>
 <h2 id="python-class-stub-27"><a class="header" href="#python-class-stub-27">Python class stub</a></h2>
@@ -2930,7 +2930,7 @@ the names of the class and its properties.</p>
 @dataclass
 class ProductSystem:
   id: str
-  analysis_groups: Ref
+  analysis_groups: List[AnalysisGroup]
   category: str
   description: str
   last_change: str

@@ -738,7 +738,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 :analysisGroups a rdf:Property;
   rdfs:comment "An optional list of analysis groups.";
   rdfs:domain :ProductSystem;
-  rdfs:range :Ref
+  rdfs:range :AnalysisGroup
   .
 
 :aspect a rdf:Property;

@@ -3373,7 +3373,7 @@ class Process:
 class ProductSystem:
 
     id: Optional[str] = None
-    analysis_groups: Optional[Ref] = None
+    analysis_groups: Optional[List[AnalysisGroup]] = None
     category: Optional[str] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
@@ -3402,7 +3402,7 @@ class ProductSystem:
         if self.id is not None:
             d['@id'] = self.id
         if self.analysis_groups is not None:
-            d['analysisGroups'] = self.analysis_groups.to_dict()
+            d['analysisGroups'] = [e.to_dict() for e in self.analysis_groups]
         if self.category is not None:
             d['category'] = self.category
         if self.description is not None:
@@ -3451,7 +3451,7 @@ class ProductSystem:
         if (v := d.get('@id')) or v is not None:
             product_system.id = v
         if (v := d.get('analysisGroups')) or v is not None:
-            product_system.analysis_groups = Ref.from_dict(v)
+            product_system.analysis_groups = [AnalysisGroup.from_dict(e) for e in v]
         if (v := d.get('category')) or v is not None:
             product_system.category = v
         if (v := d.get('description')) or v is not None:
