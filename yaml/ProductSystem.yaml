@@ -56,3 +56,8 @@ class:
       index: 17
       type: Ref[Unit]
       doc: The unit in which the flow amount of the functional unit is given.
+
+    - name: analysisGroups
+      index: 18
+      type: Ref[AnalysisGroup]
+      doc: An optional list of analysis groups.

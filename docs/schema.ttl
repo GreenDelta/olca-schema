@@ -368,6 +368,11 @@
   rdfs:comment "A single allocation factor in a process."
   .
 
+:AnalysisGroup a rdfs:Class;
+  rdfs:subClassOf :Entity;
+  rdfs:comment "In a product system, processes (or sub-systems and results) can be grouped and for these groups, aggregated results can be then calculated. This can be used, for example, to organize the results of different life cycle stages (like EPD modules) in a product system."
+  .
+
 :AspectValue a rdfs:Class;
   rdfs:subClassOf :Entity;
   rdfs:comment "This is basically just a key-value pair, used to describe documentation aspects."
@@ -625,6 +630,10 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "A result related to an intervention flow."
   .
 
+:GroupValue a rdfs:Class;
+  rdfs:comment "A single value of an analysis group result."
+  .
+
 :ImpactValue a rdfs:Class;
   rdfs:comment "A value linked to an impact assessment category."
   .
@@ -716,7 +725,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :amount a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowResult :ImpactResult :ProjectVariant :CalculationSetup :CostValue :EnviFlowValue :ImpactValue :TechFlowValue)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowResult :ImpactResult :ProjectVariant :CalculationSetup :CostValue :EnviFlowValue :GroupValue :ImpactValue :TechFlowValue)];
   rdfs:range xsd:double
   .
 
@@ -724,6 +733,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "";
   rdfs:domain :Exchange;
   rdfs:range xsd:string
+  .
+
+:analysisGroups a rdf:Property;
+  rdfs:comment "An optional list of analysis groups.";
+  rdfs:domain :ProductSystem;
+  rdfs:range :Ref
   .
 
 :aspect a rdf:Property;
@@ -769,6 +784,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
 
 :code a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:Currency :ImpactCategory :ImpactMethod :Location)];
+  rdfs:range xsd:string
+  .
+
+:color a rdf:Property;
+  rdfs:comment "An optional color of the analysis group as RGB hex color code (`#RRGGBB`).";
+  rdfs:domain :AnalysisGroup;
   rdfs:range xsd:string
   .
 
@@ -1078,6 +1099,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range http://purl.org/geojson/vocab#Feature
   .
 
+:group a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :GroupValue;
+  rdfs:range xsd:string
+  .
+
 :hasUncertainties a rdf:Property;
   rdfs:comment "";
   rdfs:domain :DQSystem;
@@ -1362,7 +1389,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :name a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity :ReviewScope)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:AnalysisGroup :DQIndicator :EpdModule :ParameterRedef :ParameterRedefSet :ProjectVariant :RefEntity :ReviewScope)];
   rdfs:range xsd:string
   .
 
@@ -1465,8 +1492,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :processes a rdf:Property;
-  rdfs:comment "The descriptors of all processes and sub-systems that are contained in the product system.";
-  rdfs:domain :ProductSystem;
+  rdfs:domain [ a owl:Class; owl:unionOf (:AnalysisGroup :ProductSystem)];
   rdfs:range :Ref
   .
 

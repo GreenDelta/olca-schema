@@ -343,6 +343,30 @@ class ExchangeRef:
 
 
 @dataclass
+class GroupValue:
+
+    amount: Optional[float] = None
+    group: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.amount is not None:
+            d['amount'] = self.amount
+        if self.group is not None:
+            d['group'] = self.group
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'GroupValue':
+        group_value = GroupValue()
+        if (v := d.get('amount')) or v is not None:
+            group_value.amount = v
+        if (v := d.get('group')) or v is not None:
+            group_value.group = v
+        return group_value
+
+
+@dataclass
 class LinkingConfig:
 
     cutoff: Optional[float] = None
@@ -584,6 +608,35 @@ class AllocationFactor:
         if (v := d.get('value')) or v is not None:
             allocation_factor.value = v
         return allocation_factor
+
+
+@dataclass
+class AnalysisGroup:
+
+    color: Optional[str] = None
+    name: Optional[str] = None
+    processes: Optional[List[Ref]] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.color is not None:
+            d['color'] = self.color
+        if self.name is not None:
+            d['name'] = self.name
+        if self.processes is not None:
+            d['processes'] = [e.to_dict() for e in self.processes]
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'AnalysisGroup':
+        analysis_group = AnalysisGroup()
+        if (v := d.get('color')) or v is not None:
+            analysis_group.color = v
+        if (v := d.get('name')) or v is not None:
+            analysis_group.name = v
+        if (v := d.get('processes')) or v is not None:
+            analysis_group.processes = [Ref.from_dict(e) for e in v]
+        return analysis_group
 
 
 @dataclass
@@ -3320,6 +3373,7 @@ class Process:
 class ProductSystem:
 
     id: Optional[str] = None
+    analysis_groups: Optional[Ref] = None
     category: Optional[str] = None
     description: Optional[str] = None
     last_change: Optional[str] = None
@@ -3347,6 +3401,8 @@ class ProductSystem:
         d: Dict[str, Any] = {'@type': 'ProductSystem'}
         if self.id is not None:
             d['@id'] = self.id
+        if self.analysis_groups is not None:
+            d['analysisGroups'] = self.analysis_groups.to_dict()
         if self.category is not None:
             d['category'] = self.category
         if self.description is not None:
@@ -3394,6 +3450,8 @@ class ProductSystem:
         product_system.version = None
         if (v := d.get('@id')) or v is not None:
             product_system.id = v
+        if (v := d.get('analysisGroups')) or v is not None:
+            product_system.analysis_groups = Ref.from_dict(v)
         if (v := d.get('category')) or v is not None:
             product_system.category = v
         if (v := d.get('description')) or v is not None:

@@ -1,0 +1,14 @@
+
+class:
+  name: GroupValue
+  doc: A single value of an analysis group result.
+
+  properties:
+
+    - name: group
+      index: 1
+      type: string
+
+    - name: amount
+      index: 2
+      type: double

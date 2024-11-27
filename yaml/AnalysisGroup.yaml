@@ -1,0 +1,29 @@
+
+class:
+  name: AnalysisGroup
+  superClass: Entity
+  doc: >
+       In a product system, processes (or sub-systems and results) can be
+       grouped and for these groups, aggregated results can be then calculated.
+       This can be used, for example, to organize the results of different life
+       cycle stages (like EPD modules) in a product system.
+
+  properties:
+
+    - name: name
+      index: 2
+      type: string
+      doc: The name of the analysis group.
+
+    - name: color
+      index: 3
+      type: string
+      doc: >
+           An optional color of the analysis group as RGB hex color code
+           (`#RRGGBB`).
+
+    - name: processes
+      index: 4
+      type: List[Ref]
+      doc: >
+           The processes, sub-systems, or results that belong to the group.
