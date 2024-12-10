@@ -41,6 +41,6 @@ class:
            service APIs (like IPC, REST, gRPC, etc.) and of course only, if the
            respective dataset is part of a library. For datasets in data
            packages, the location of the package defines if the datasets are
-           part of which library. It has then practical reasons to not tag all
+           part of a library. It has then practical reasons to not tag all
            datasets with the library, e.g. renaming a library would require to
            change all datasets otherwise.
