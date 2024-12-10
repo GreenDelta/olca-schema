@@ -226,6 +226,12 @@
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library"><a class="header" href="#library"><code>library</code></a></h3>
+<p>An identifier of a data library. This field should be only used in service APIs (like IPC, REST, gRPC, etc.) and of course only, if the respective dataset is part of a library. For datasets in data packages, the location of the package defines if the datasets are part of which library. It has then practical reasons to not tag all datasets with the library, e.g. renaming a library would require to change all datasets otherwise.</p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h2 id="python-class-stub"><a class="header" href="#python-class-stub">Python class stub</a></h2>
 <p>The snippet below shows the names of the properties of the corresponding
 Python class of the <a href="https://pypi.org/project/olca-schema">olca-schema</a>
@@ -238,6 +244,7 @@ class RootEntity:
   category: str
   description: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   version: str

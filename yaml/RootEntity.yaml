@@ -32,3 +32,15 @@ class:
            A version number in MAJOR.MINOR.PATCH format where the MINOR and
            PATCH fields are optional and the fields may have leading zeros
            (so 01.00.00 is the same as 1.0.0 or 1).
+
+    - name: library
+      index: 9
+      type: string
+      doc: >
+           An identifier of a data library. This field should be only used in
+           service APIs (like IPC, REST, gRPC, etc.) and of course only, if the
+           respective dataset is part of a library. For datasets in data
+           packages, the location of the package defines if the datasets are
+           part of which library. It has then practical reasons to not tag all
+           datasets with the library, e.g. renaming a library would require to
+           change all datasets otherwise.

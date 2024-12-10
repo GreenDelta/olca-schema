@@ -1299,6 +1299,11 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range xsd:double
   .
 
+:library a rdf:Property;
+  rdfs:domain [ a owl:Class; owl:unionOf (:Ref :RootEntity)];
+  rdfs:range xsd:string
+  .
+
 :location a rdf:Property;
   rdfs:domain [ a owl:Class; owl:unionOf (:Epd :Exchange :Flow :FlowResult :ImpactFactor :Process :Ref :EnviFlow)];
   rdfs:range :Ref

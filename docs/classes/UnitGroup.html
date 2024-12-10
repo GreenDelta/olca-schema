@@ -226,6 +226,12 @@
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library"><a class="header" href="#library"><code>library</code></a></h3>
+<p>Inherited from <a href="./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="defaultflowproperty"><a class="header" href="#defaultflowproperty"><code>defaultFlowProperty</code></a></h3>
 <p>Some LCA data formats do not have the concept of flow properties or quantities. This field provides a default link to a flow property for units that are contained in this group.</p>
 <ul>
@@ -251,6 +257,7 @@ class UnitGroup:
   default_flow_property: Ref
   description: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   units: List[Unit]

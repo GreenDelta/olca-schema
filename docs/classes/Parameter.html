@@ -226,6 +226,12 @@
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library"><a class="header" href="#library"><code>library</code></a></h3>
+<p>Inherited from <a href="./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="formula"><a class="header" href="#formula"><code>formula</code></a></h3>
 <p>A mathematical expression to calculate the parameter value.</p>
 <ul>
@@ -270,6 +276,7 @@ class Parameter:
   formula: str
   is_input_parameter: bool
   last_change: str
+  library: str
   name: str
   parameter_scope: ParameterScope
   tags: List[str]

@@ -451,6 +451,12 @@ class <code>CategorizedEntity</code> to <code>RootEntity</code></li>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library"><a class="header" href="#library"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="address"><a class="header" href="#address"><code>address</code></a></h3>
 <ul>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
@@ -507,6 +513,7 @@ class Actor:
   description: str
   email: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   telefax: str
@@ -566,6 +573,12 @@ class Actor:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-1"><a class="header" href="#library-1"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="code"><a class="header" href="#code"><code>code</code></a></h3>
 <ul>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
@@ -596,6 +609,7 @@ class Currency:
   conversion_factor: float
   description: str
   last_change: str
+  library: str
   name: str
   ref_currency: Ref
   tags: List[str]
@@ -656,6 +670,12 @@ Finally, custom labels like <code>A, B, C, ...</code> or <code>Very good, Good, 
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-2"><a class="header" href="#library-2"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="hasuncertainties"><a class="header" href="#hasuncertainties"><code>hasUncertainties</code></a></h3>
 <ul>
 <li><em>Type:</em> <code>boolean</code> (<a href="http://www.w3.org/TR/xmlschema-2/#boolean">external doc</a>)</li>
@@ -685,6 +705,7 @@ class DQSystem:
   has_uncertainties: bool
   indicators: List[DQIndicator]
   last_change: str
+  library: str
   name: str
   source: Ref
   tags: List[str]
@@ -822,6 +843,12 @@ class DQScore:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-3"><a class="header" href="#library-3"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="manufacturer"><a class="header" href="#manufacturer"><code>manufacturer</code></a></h3>
 <ul>
 <li><em>Type:</em> <a href="classes/./Ref.html">Ref</a> of <a href="classes/./Actor.html">Actor</a></li>
@@ -924,6 +951,7 @@ class Epd:
   description: str
   epd_type: EpdType
   last_change: str
+  library: str
   location: Ref
   manufacturer: Ref
   manufacturing: str
@@ -1082,6 +1110,12 @@ class EpdProduct:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-4"><a class="header" href="#library-4"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="cas"><a class="header" href="#cas"><code>cas</code></a></h3>
 <p>A CAS number of the flow.</p>
 <ul>
@@ -1141,6 +1175,7 @@ class Flow:
   formula: str
   is_infrastructure_flow: bool
   last_change: str
+  library: str
   location: Ref
   name: str
   synonyms: str
@@ -1279,6 +1314,12 @@ class FlowPropertyFactor:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-5"><a class="header" href="#library-5"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="mappings"><a class="header" href="#mappings"><code>mappings</code></a></h3>
 <p>A list of flow mappings from flows in a source flow list to flows in a target flow list.</p>
 <ul>
@@ -1309,6 +1350,7 @@ class FlowMap:
   category: str
   description: str
   last_change: str
+  library: str
   mappings: List[FlowMapEntry]
   name: str
   source: Ref
@@ -1455,6 +1497,12 @@ class FlowMapRef:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-6"><a class="header" href="#library-6"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="flowpropertytype"><a class="header" href="#flowpropertytype"><code>flowPropertyType</code></a></h3>
 <p>The type of the flow property</p>
 <ul>
@@ -1480,6 +1528,7 @@ class FlowProperty:
   description: str
   flow_property_type: FlowPropertyType
   last_change: str
+  library: str
   name: str
   tags: List[str]
   unit_group: Ref
@@ -1551,6 +1600,12 @@ class FlowProperty:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-7"><a class="header" href="#library-7"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="code-1"><a class="header" href="#code-1"><code>code</code></a></h3>
 <ul>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
@@ -1600,6 +1655,7 @@ class ImpactCategory:
   direction: Direction
   impact_factors: List[ImpactFactor]
   last_change: str
+  library: str
   name: str
   parameters: List[Parameter]
   ref_unit: str
@@ -1780,6 +1836,12 @@ class ImpactFactor:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-8"><a class="header" href="#library-8"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="code-2"><a class="header" href="#code-2"><code>code</code></a></h3>
 <ul>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
@@ -1816,6 +1878,7 @@ class ImpactMethod:
   description: str
   impact_categories: List[Ref]
   last_change: str
+  library: str
   name: str
   nw_sets: List[NwSet]
   source: Ref
@@ -1874,6 +1937,12 @@ class ImpactMethod:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-9"><a class="header" href="#library-9"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="code-3"><a class="header" href="#code-3"><code>code</code></a></h3>
 <p>The code of the location (e.g. an ISO 2-letter country code).</p>
 <ul>
@@ -1913,6 +1982,7 @@ class Location:
   geometry: Dict[str, Any]
   last_change: str
   latitude: float
+  library: str
   longitude: float
   name: str
   tags: List[str]
@@ -1982,6 +2052,12 @@ class Location:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-10"><a class="header" href="#library-10"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="formula-2"><a class="header" href="#formula-2"><code>formula</code></a></h3>
 <p>A mathematical expression to calculate the parameter value.</p>
 <ul>
@@ -2026,6 +2102,7 @@ class Parameter:
   formula: str
   is_input_parameter: bool
   last_change: str
+  library: str
   name: str
   parameter_scope: ParameterScope
   tags: List[str]
@@ -2083,6 +2160,12 @@ class Parameter:
 <ul>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
+</ul>
+<h3 id="library-11"><a class="header" href="#library-11"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
 </ul>
 <h3 id="allocationfactors"><a class="header" href="#allocationfactors"><code>allocationFactors</code></a></h3>
 <ul>
@@ -2183,6 +2266,7 @@ class Process:
   is_infrastructure_process: bool
   last_change: str
   last_internal_id: int
+  library: str
   location: Ref
   name: str
   parameters: List[Parameter]
@@ -2867,6 +2951,12 @@ class SocialAspect:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-12"><a class="header" href="#library-12"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="parametersets"><a class="header" href="#parametersets"><code>parameterSets</code></a></h3>
 <p>A list of possible sets of parameter redefinitions for this product system.</p>
 <ul>
@@ -2934,6 +3024,7 @@ class ProductSystem:
   category: str
   description: str
   last_change: str
+  library: str
   name: str
   parameter_sets: List[ParameterRedefSet]
   process_links: List[ProcessLink]
@@ -3220,6 +3311,12 @@ class ProcessLink:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-13"><a class="header" href="#library-13"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="impactmethod-1"><a class="header" href="#impactmethod-1"><code>impactMethod</code></a></h3>
 <ul>
 <li><em>Type:</em> <a href="classes/./Ref.html">Ref</a> of <a href="classes/./ImpactMethod.html">ImpactMethod</a></li>
@@ -3260,6 +3357,7 @@ class Project:
   is_with_costs: bool
   is_with_regionalization: bool
   last_change: str
+  library: str
   name: str
   nw_set: NwSet
   tags: List[str]
@@ -3384,6 +3482,12 @@ class ProjectVariant:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-14"><a class="header" href="#library-14"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="flowresults"><a class="header" href="#flowresults"><code>flowResults</code></a></h3>
 <p>An array of <code>FlowResult</code> objects.</p>
 <ul>
@@ -3423,6 +3527,7 @@ class Result:
   impact_method: Ref
   impact_results: List[ImpactResult]
   last_change: str
+  library: str
   name: str
   product_system: Ref
   tags: List[str]
@@ -3591,6 +3696,12 @@ class ImpactResult:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-15"><a class="header" href="#library-15"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="activityquantity"><a class="header" href="#activityquantity"><code>activityQuantity</code></a></h3>
 <p>The quantity of the activity variable.</p>
 <ul>
@@ -3637,6 +3748,7 @@ class SocialIndicator:
   description: str
   evaluation_scheme: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   unit_of_measurement: str
@@ -3716,6 +3828,12 @@ class SocialIndicator:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-16"><a class="header" href="#library-16"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="externalfile"><a class="header" href="#externalfile"><code>externalFile</code></a></h3>
 <p>A direct link (relative or absolute URL) to the source file.</p>
 <ul>
@@ -3753,6 +3871,7 @@ class Source:
   description: str
   external_file: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   text_reference: str
@@ -3812,6 +3931,12 @@ class Source:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-17"><a class="header" href="#library-17"><code>library</code></a></h3>
+<p>Inherited from <a href="classes/./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="defaultflowproperty"><a class="header" href="#defaultflowproperty"><code>defaultFlowProperty</code></a></h3>
 <p>Some LCA data formats do not have the concept of flow properties or quantities. This field provides a default link to a flow property for units that are contained in this group.</p>
 <ul>
@@ -3837,6 +3962,7 @@ class UnitGroup:
   default_flow_property: Ref
   description: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   units: List[Unit]
@@ -4192,6 +4318,12 @@ class ParameterRedef:
 <li><em>Type:</em> <a href="classes/../enums/ProcessType.html">ProcessType</a></li>
 <li><em>Proto-Index:</em> 9</li>
 </ul>
+<h3 id="library-18"><a class="header" href="#library-18"><code>library</code></a></h3>
+<p>An identifier of a data library. This field should be only used in service APIs (like IPC, REST, gRPC, etc.) and of course only, if the referenced dataset is part of a library. For data references in data packages, the location of the referenced dataset defines if it is part of a library.</p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 10</li>
+</ul>
 <h2 id="python-class-stub-46"><a class="header" href="#python-class-stub-46">Python class stub</a></h2>
 <p>The snippet below shows the names of the properties of the corresponding
 Python class of the <a href="https://pypi.org/project/olca-schema">olca-schema</a>
@@ -4204,6 +4336,7 @@ class Ref:
   category: str
   description: str
   flow_type: FlowType
+  library: str
   location: str
   name: str
   process_type: ProcessType
@@ -4301,6 +4434,12 @@ class RefEntity:
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library-19"><a class="header" href="#library-19"><code>library</code></a></h3>
+<p>An identifier of a data library. This field should be only used in service APIs (like IPC, REST, gRPC, etc.) and of course only, if the respective dataset is part of a library. For datasets in data packages, the location of the package defines if the datasets are part of which library. It has then practical reasons to not tag all datasets with the library, e.g. renaming a library would require to change all datasets otherwise.</p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h2 id="python-class-stub-48"><a class="header" href="#python-class-stub-48">Python class stub</a></h2>
 <p>The snippet below shows the names of the properties of the corresponding
 Python class of the <a href="https://pypi.org/project/olca-schema">olca-schema</a>
@@ -4313,6 +4452,7 @@ class RootEntity:
   category: str
   description: str
   last_change: str
+  library: str
   name: str
   tags: List[str]
   version: str

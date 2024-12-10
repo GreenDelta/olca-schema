@@ -232,6 +232,12 @@
 <li><em>Type:</em> <a href="../enums/ProcessType.html">ProcessType</a></li>
 <li><em>Proto-Index:</em> 9</li>
 </ul>
+<h3 id="library"><a class="header" href="#library"><code>library</code></a></h3>
+<p>An identifier of a data library. This field should be only used in service APIs (like IPC, REST, gRPC, etc.) and of course only, if the referenced dataset is part of a library. For data references in data packages, the location of the referenced dataset defines if it is part of a library.</p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 10</li>
+</ul>
 <h2 id="python-class-stub"><a class="header" href="#python-class-stub">Python class stub</a></h2>
 <p>The snippet below shows the names of the properties of the corresponding
 Python class of the <a href="https://pypi.org/project/olca-schema">olca-schema</a>
@@ -244,6 +250,7 @@ class Ref:
   category: str
   description: str
   flow_type: FlowType
+  library: str
   location: str
   name: str
   process_type: ProcessType

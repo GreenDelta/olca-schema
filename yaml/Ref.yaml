@@ -46,3 +46,13 @@ class:
       doc: >
            In case of a reference to a process, this fiel can contain the type
            of process that is referenced.
+
+    - name: library
+      index: 10
+      type: string
+      doc: >
+           An identifier of a data library. This field should be only used in
+           service APIs (like IPC, REST, gRPC, etc.) and of course only, if the
+           referenced dataset is part of a library. For data references in data
+           packages, the location of the referenced dataset defines if it is
+           part of a library.

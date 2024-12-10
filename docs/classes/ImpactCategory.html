@@ -225,6 +225,12 @@
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
 <li><em>Proto-Index:</em> 8</li>
 </ul>
+<h3 id="library"><a class="header" href="#library"><code>library</code></a></h3>
+<p>Inherited from <a href="./RootEntity.html#library">RootEntity.library</a></p>
+<ul>
+<li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
+<li><em>Proto-Index:</em> 9</li>
+</ul>
 <h3 id="code"><a class="header" href="#code"><code>code</code></a></h3>
 <ul>
 <li><em>Type:</em> <code>string</code> (<a href="http://www.w3.org/TR/xmlschema-2/#string">external doc</a>)</li>
@@ -274,6 +280,7 @@ class ImpactCategory:
   direction: Direction
   impact_factors: List[ImpactFactor]
   last_change: str
+  library: str
   name: str
   parameters: List[Parameter]
   ref_unit: str
