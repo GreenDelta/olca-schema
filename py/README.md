@@ -41,3 +41,13 @@ with zipio.ZipWriter('path/to/example.zip') as w:
     for entity in [units, mass, steel, process]:
         w.write(entity)
 ```
+
+
+## Running the tests
+
+```
+cd py
+uv venv
+uv pip install -e . pytest
+uv run pytest
+```
