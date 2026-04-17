@@ -30,7 +30,6 @@ func (w *mdWriter) writeBook() {
 
 	w.file("book.toml", `[book]
 language = "en"
-multilingual = false
 src = "src"
 title = "openLCA schema"
 
