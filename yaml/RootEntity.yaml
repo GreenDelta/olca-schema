@@ -44,3 +44,11 @@ class:
            part of a library. It has then practical reasons to not tag all
            datasets with the library, e.g. renaming a library would require to
            change all datasets otherwise.
+
+    - name: otherProperties
+      index: 1000
+      type: JsonObject
+      optional: true
+      doc: >
+           Additional custom properties as arbitrary JSON object content.
+           These properties are intended for extensions.

@@ -114,7 +114,7 @@ func (t YamlPropType) ToPython() string {
 		return "int"
 	case "bool", "boolean":
 		return "bool"
-	case "GeoJSON":
+	case "GeoJSON", "JsonObject":
 		return "Dict[str, Any]"
 	default:
 		if startsWithLower(string(t)) {

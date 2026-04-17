@@ -120,7 +120,7 @@ func (w *gow) typeOf(t YamlPropType) string {
 		return "int"
 	case "bool", "boolean":
 		return "bool"
-	case "GeoJSON":
+	case "GeoJSON", "JsonObject":
 		return "map[string]any"
 	default:
 		return "?"

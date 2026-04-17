@@ -45,6 +45,20 @@ class TestJson(unittest.TestCase):
         flow_dict = flow.to_dict()
         self.assertEqual("Flow", flow_dict["@type"])
 
+    def test_other_properties_round_trip(self):
+        flow = o.Flow(name="custom flow")
+        flow.other_properties = {
+            "some": "property",
+            "another": ["property", 42],
+            "nested": {"flag": True},
+        }
+
+        flow_dict = flow.to_dict()
+        self.assertEqual(flow.other_properties, flow_dict["otherProperties"])
+
+        flow_copy = o.Flow.from_dict(flow_dict)
+        self.assertEqual(flow.other_properties, flow_copy.other_properties)
+
 
 if __name__ == "__main__":
     unittest.main()

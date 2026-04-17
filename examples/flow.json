@@ -3,6 +3,13 @@
   "@id": "4a40cb39-e306-3649-b6da-ca061e384e23",
   "name": "electricity, high voltage, at grid",
   "category": "electricity/supply mix",
+  "otherProperties": {
+    "source": "custom-extension",
+    "attributes": [
+      "example",
+      42
+    ]
+  },
   "flowType": "PRODUCT_FLOW",
   "location": {
     "@type": "Location",

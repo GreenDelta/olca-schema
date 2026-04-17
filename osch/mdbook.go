@@ -279,6 +279,10 @@ func (w *mdWriter) docTypeOf(yamlType string) string {
 		return "`GeoJSON` ([external doc](https://tools.ietf.org/html/rfc7946))"
 	}
 
+	if yamlType == "JsonObject" {
+		return "`JsonObject` (an arbitrary JSON object for custom extensions)"
+	}
+
 	if startsWithLower(yamlType) {
 		return "`" + yamlType +
 			"` ([external doc](http://www.w3.org/TR/xmlschema-2/#" + yamlType + "))"

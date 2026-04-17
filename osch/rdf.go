@@ -65,6 +65,8 @@ func (p *rdfProp) rangeDef() string {
 			return "xsd:dateTime"
 		case "GeoJSON":
 			return "http://purl.org/geojson/vocab#Feature"
+		case "JsonObject":
+			return "rdf:JSON"
 		default:
 			return ":" + t
 		}

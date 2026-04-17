@@ -179,7 +179,8 @@ func (w *pyw) writeClass(class *YamlClass) {
 		lni(w, 2, "if ", selfProp, " is not None:")
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
-			propType == "GeoJSON" {
+			propType == "GeoJSON" ||
+			propType == "JsonObject" {
 			lni(w, 3, dictProp, " = ", selfProp)
 		} else if propType.IsEnumOf(w.model) {
 			lni(w, 3, dictProp, " = ", selfProp, ".value")
@@ -264,7 +265,8 @@ func (w *pyw) writeFromDict(class *YamlClass) {
 
 		if propType.IsPrimitive() ||
 			(propType.IsList() && propType.UnpackList().IsPrimitive()) ||
-			propType == "GeoJSON" {
+			propType == "GeoJSON" ||
+			propType == "JsonObject" {
 
 			// direct assignments for primitives, list of primitives, or GeoJson
 			// objects

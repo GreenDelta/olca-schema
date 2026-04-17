@@ -476,6 +476,7 @@ class Actor:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     telefax: Optional[str] = None
     telephone: Optional[str] = None
@@ -513,6 +514,8 @@ class Actor:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.telefax is not None:
@@ -562,6 +565,8 @@ class Actor:
             actor.library = v
         if (v := d.get('name')) or v is not None:
             actor.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            actor.other_properties = v
         if (v := d.get('tags')) or v is not None:
             actor.tags = v
         if (v := d.get('telefax')) or v is not None:
@@ -713,6 +718,7 @@ class Currency:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     ref_currency: Optional[Ref] = None
     tags: Optional[List[str]] = None
     version: Optional[str] = None
@@ -743,6 +749,8 @@ class Currency:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.ref_currency is not None:
             d['refCurrency'] = self.ref_currency.to_dict()
         if self.tags is not None:
@@ -782,6 +790,8 @@ class Currency:
             currency.library = v
         if (v := d.get('name')) or v is not None:
             currency.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            currency.other_properties = v
         if (v := d.get('refCurrency')) or v is not None:
             currency.ref_currency = Ref.from_dict(v)
         if (v := d.get('tags')) or v is not None:
@@ -806,6 +816,7 @@ class DQSystem:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     source: Optional[Ref] = None
     tags: Optional[List[str]] = None
     version: Optional[str] = None
@@ -836,6 +847,8 @@ class DQSystem:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.source is not None:
             d['source'] = self.source.to_dict()
         if self.tags is not None:
@@ -875,6 +888,8 @@ class DQSystem:
             d_q_system.library = v
         if (v := d.get('name')) or v is not None:
             d_q_system.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            d_q_system.other_properties = v
         if (v := d.get('source')) or v is not None:
             d_q_system.source = Ref.from_dict(v)
         if (v := d.get('tags')) or v is not None:
@@ -1020,6 +1035,7 @@ class Epd:
     modules: Optional[List[EpdModule]] = None
     name: Optional[str] = None
     original_epd: Optional[Ref] = None
+    other_properties: Optional[Dict[str, Any]] = None
     pcr: Optional[Ref] = None
     product: Optional[EpdProduct] = None
     product_usage: Optional[str] = None
@@ -1069,6 +1085,8 @@ class Epd:
             d['name'] = self.name
         if self.original_epd is not None:
             d['originalEpd'] = self.original_epd.to_dict()
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.pcr is not None:
             d['pcr'] = self.pcr.to_dict()
         if self.product is not None:
@@ -1136,6 +1154,8 @@ class Epd:
             epd.name = v
         if (v := d.get('originalEpd')) or v is not None:
             epd.original_epd = Ref.from_dict(v)
+        if (v := d.get('otherProperties')) or v is not None:
+            epd.other_properties = v
         if (v := d.get('pcr')) or v is not None:
             epd.pcr = Ref.from_dict(v)
         if (v := d.get('product')) or v is not None:
@@ -1240,6 +1260,7 @@ class FlowMap:
     library: Optional[str] = None
     mappings: Optional[List[FlowMapEntry]] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     source: Optional[Ref] = None
     tags: Optional[List[str]] = None
     target: Optional[Ref] = None
@@ -1269,6 +1290,8 @@ class FlowMap:
             d['mappings'] = [e.to_dict() for e in self.mappings]
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.source is not None:
             d['source'] = self.source.to_dict()
         if self.tags is not None:
@@ -1308,6 +1331,8 @@ class FlowMap:
             flow_map.mappings = [FlowMapEntry.from_dict(e) for e in v]
         if (v := d.get('name')) or v is not None:
             flow_map.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            flow_map.other_properties = v
         if (v := d.get('source')) or v is not None:
             flow_map.source = Ref.from_dict(v)
         if (v := d.get('tags')) or v is not None:
@@ -1333,6 +1358,7 @@ class FlowProperty:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     unit_group: Optional[Ref] = None
     version: Optional[str] = None
@@ -1361,6 +1387,8 @@ class FlowProperty:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.unit_group is not None:
@@ -1398,6 +1426,8 @@ class FlowProperty:
             flow_property.library = v
         if (v := d.get('name')) or v is not None:
             flow_property.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            flow_property.other_properties = v
         if (v := d.get('tags')) or v is not None:
             flow_property.tags = v
         if (v := d.get('unitGroup')) or v is not None:
@@ -1455,6 +1485,7 @@ class Flow:
     library: Optional[str] = None
     location: Optional[Ref] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     synonyms: Optional[str] = None
     tags: Optional[List[str]] = None
     version: Optional[str] = None
@@ -1493,6 +1524,8 @@ class Flow:
             d['location'] = self.location.to_dict()
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.synonyms is not None:
             d['synonyms'] = self.synonyms
         if self.tags is not None:
@@ -1540,6 +1573,8 @@ class Flow:
             flow.location = Ref.from_dict(v)
         if (v := d.get('name')) or v is not None:
             flow.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            flow.other_properties = v
         if (v := d.get('synonyms')) or v is not None:
             flow.synonyms = v
         if (v := d.get('tags')) or v is not None:
@@ -1673,6 +1708,7 @@ class Location:
     library: Optional[str] = None
     longitude: Optional[float] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     version: Optional[str] = None
 
@@ -1706,6 +1742,8 @@ class Location:
             d['longitude'] = self.longitude
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.version is not None:
@@ -1747,6 +1785,8 @@ class Location:
             location.longitude = v
         if (v := d.get('name')) or v is not None:
             location.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            location.other_properties = v
         if (v := d.get('tags')) or v is not None:
             location.tags = v
         if (v := d.get('version')) or v is not None:
@@ -1843,6 +1883,7 @@ class ImpactMethod:
     library: Optional[str] = None
     name: Optional[str] = None
     nw_sets: Optional[List[NwSet]] = None
+    other_properties: Optional[Dict[str, Any]] = None
     source: Optional[Ref] = None
     tags: Optional[List[str]] = None
     version: Optional[str] = None
@@ -1875,6 +1916,8 @@ class ImpactMethod:
             d['name'] = self.name
         if self.nw_sets is not None:
             d['nwSets'] = [e.to_dict() for e in self.nw_sets]
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.source is not None:
             d['source'] = self.source.to_dict()
         if self.tags is not None:
@@ -1916,6 +1959,8 @@ class ImpactMethod:
             impact_method.name = v
         if (v := d.get('nwSets')) or v is not None:
             impact_method.nw_sets = [NwSet.from_dict(e) for e in v]
+        if (v := d.get('otherProperties')) or v is not None:
+            impact_method.other_properties = v
         if (v := d.get('source')) or v is not None:
             impact_method.source = Ref.from_dict(v)
         if (v := d.get('tags')) or v is not None:
@@ -1975,6 +2020,7 @@ class Result:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     product_system: Optional[Ref] = None
     tags: Optional[List[str]] = None
     version: Optional[str] = None
@@ -2007,6 +2053,8 @@ class Result:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.product_system is not None:
             d['productSystem'] = self.product_system.to_dict()
         if self.tags is not None:
@@ -2048,6 +2096,8 @@ class Result:
             result.library = v
         if (v := d.get('name')) or v is not None:
             result.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            result.other_properties = v
         if (v := d.get('productSystem')) or v is not None:
             result.product_system = Ref.from_dict(v)
         if (v := d.get('tags')) or v is not None:
@@ -2442,6 +2492,7 @@ class SocialIndicator:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     unit_of_measurement: Optional[str] = None
     version: Optional[str] = None
@@ -2476,6 +2527,8 @@ class SocialIndicator:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.unit_of_measurement is not None:
@@ -2519,6 +2572,8 @@ class SocialIndicator:
             social_indicator.library = v
         if (v := d.get('name')) or v is not None:
             social_indicator.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            social_indicator.other_properties = v
         if (v := d.get('tags')) or v is not None:
             social_indicator.tags = v
         if (v := d.get('unitOfMeasurement')) or v is not None:
@@ -2542,6 +2597,7 @@ class Source:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     text_reference: Optional[str] = None
     url: Optional[str] = None
@@ -2572,6 +2628,8 @@ class Source:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.text_reference is not None:
@@ -2613,6 +2671,8 @@ class Source:
             source.library = v
         if (v := d.get('name')) or v is not None:
             source.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            source.other_properties = v
         if (v := d.get('tags')) or v is not None:
             source.tags = v
         if (v := d.get('textReference')) or v is not None:
@@ -2959,6 +3019,7 @@ class Parameter:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     parameter_scope: Optional[ParameterScope] = None
     tags: Optional[List[str]] = None
     uncertainty: Optional[Uncertainty] = None
@@ -2991,6 +3052,8 @@ class Parameter:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.parameter_scope is not None:
             d['parameterScope'] = self.parameter_scope.value
         if self.tags is not None:
@@ -3034,6 +3097,8 @@ class Parameter:
             parameter.library = v
         if (v := d.get('name')) or v is not None:
             parameter.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            parameter.other_properties = v
         if (v := d.get('parameterScope')) or v is not None:
             parameter.parameter_scope = ParameterScope.get(v)
         if (v := d.get('tags')) or v is not None:
@@ -3063,6 +3128,7 @@ class ImpactCategory:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     parameters: Optional[List[Parameter]] = None
     ref_unit: Optional[str] = None
     source: Optional[Ref] = None
@@ -3097,6 +3163,8 @@ class ImpactCategory:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.parameters is not None:
             d['parameters'] = [e.to_dict() for e in self.parameters]
         if self.ref_unit is not None:
@@ -3142,6 +3210,8 @@ class ImpactCategory:
             impact_category.library = v
         if (v := d.get('name')) or v is not None:
             impact_category.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            impact_category.other_properties = v
         if (v := d.get('parameters')) or v is not None:
             impact_category.parameters = [Parameter.from_dict(e) for e in v]
         if (v := d.get('refUnit')) or v is not None:
@@ -3319,6 +3389,7 @@ class Process:
     library: Optional[str] = None
     location: Optional[Ref] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     parameters: Optional[List[Parameter]] = None
     process_documentation: Optional[ProcessDocumentation] = None
     process_type: Optional[ProcessType] = None
@@ -3367,6 +3438,8 @@ class Process:
             d['location'] = self.location.to_dict()
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.parameters is not None:
             d['parameters'] = [e.to_dict() for e in self.parameters]
         if self.process_documentation is not None:
@@ -3428,6 +3501,8 @@ class Process:
             process.location = Ref.from_dict(v)
         if (v := d.get('name')) or v is not None:
             process.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            process.other_properties = v
         if (v := d.get('parameters')) or v is not None:
             process.parameters = [Parameter.from_dict(e) for e in v]
         if (v := d.get('processDocumentation')) or v is not None:
@@ -3459,6 +3534,7 @@ class ProductSystem:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     parameter_sets: Optional[List[ParameterRedefSet]] = None
     process_links: Optional[List[ProcessLink]] = None
     processes: Optional[List[Ref]] = None
@@ -3494,6 +3570,8 @@ class ProductSystem:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.parameter_sets is not None:
             d['parameterSets'] = [e.to_dict() for e in self.parameter_sets]
         if self.process_links is not None:
@@ -3545,6 +3623,8 @@ class ProductSystem:
             product_system.library = v
         if (v := d.get('name')) or v is not None:
             product_system.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            product_system.other_properties = v
         if (v := d.get('parameterSets')) or v is not None:
             product_system.parameter_sets = [ParameterRedefSet.from_dict(e) for e in v]
         if (v := d.get('processLinks')) or v is not None:
@@ -3639,6 +3719,7 @@ class Project:
     library: Optional[str] = None
     name: Optional[str] = None
     nw_set: Optional[NwSet] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     variants: Optional[List[ProjectVariant]] = None
     version: Optional[str] = None
@@ -3673,6 +3754,8 @@ class Project:
             d['name'] = self.name
         if self.nw_set is not None:
             d['nwSet'] = self.nw_set.to_dict()
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.variants is not None:
@@ -3716,6 +3799,8 @@ class Project:
             project.name = v
         if (v := d.get('nwSet')) or v is not None:
             project.nw_set = NwSet.from_dict(v)
+        if (v := d.get('otherProperties')) or v is not None:
+            project.other_properties = v
         if (v := d.get('tags')) or v is not None:
             project.tags = v
         if (v := d.get('variants')) or v is not None:
@@ -3788,6 +3873,7 @@ class UnitGroup:
     last_change: Optional[str] = None
     library: Optional[str] = None
     name: Optional[str] = None
+    other_properties: Optional[Dict[str, Any]] = None
     tags: Optional[List[str]] = None
     units: Optional[List[Unit]] = None
     version: Optional[str] = None
@@ -3816,6 +3902,8 @@ class UnitGroup:
             d['library'] = self.library
         if self.name is not None:
             d['name'] = self.name
+        if self.other_properties is not None:
+            d['otherProperties'] = self.other_properties
         if self.tags is not None:
             d['tags'] = self.tags
         if self.units is not None:
@@ -3853,6 +3941,8 @@ class UnitGroup:
             unit_group.library = v
         if (v := d.get('name')) or v is not None:
             unit_group.name = v
+        if (v := d.get('otherProperties')) or v is not None:
+            unit_group.other_properties = v
         if (v := d.get('tags')) or v is not None:
             unit_group.tags = v
         if (v := d.get('units')) or v is not None:

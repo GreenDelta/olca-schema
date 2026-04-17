@@ -12,11 +12,11 @@ import (
 
 // BytesHint is a comment we add to fields with `bytes` as data type.
 const ProtoBytesHint = `  // When we map to the bytes type it means that we have no matching message
-  // type and just put the raw bytes into the field. This is specifically true
-  // for our geometry data of locations which cannot be translated to valid
-  // GeoJSON using Protocol Buffers (as they do not support arrays of arrays).
-  // To indicate that this is a different field than the field in the
-  // olca-schema definition, we append the _bytes suffix to the field name
+	// type and just put the raw bytes into the field. This is specifically true
+	// for data like GeoJSON geometries or arbitrary JSON extension objects that
+	// cannot be represented faithfully with the generated Protocol Buffers schema.
+	// To indicate that this is a different field than the field in the
+	// olca-schema definition, we append the _bytes suffix to the field name
 `
 
 const ProtoRootFooter = `// This enumeration type is added for compatibility with the @type attribute of
@@ -242,7 +242,7 @@ func toProtoType(schemaType string) string {
 		return "int32"
 	case "boolean":
 		return "bool"
-	case "GeoJSON":
+	case "GeoJSON", "JsonObject":
 		return "bytes"
 	case "ModelType":
 		return "ProtoCategoryType"

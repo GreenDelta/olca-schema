@@ -231,7 +231,8 @@ func (w *tsw) writeToDict(class *YamlClass) {
 		} else if !t.IsList() &&
 			!t.IsPrimitive() &&
 			!t.IsEnumOf(w.model) &&
-			prop.Type != "GeoJSON" {
+			prop.Type != "GeoJSON" &&
+			prop.Type != "JsonObject" {
 			conv = "v?.toDict()"
 		}
 		lni(w, 2, "ifPresent(this.", prop.Name,
@@ -261,7 +262,7 @@ func (w *tsw) writeFromDict(class *YamlClass) {
 		}
 		t := prop.PropType()
 		if !t.IsList() {
-			if t.IsPrimitive() || t == "GeoJSON" || t.IsEnumOf(w.model) {
+			if t.IsPrimitive() || t == "GeoJSON" || t == "JsonObject" || t.IsEnumOf(w.model) {
 				lni(w, 2, "e.", prop.Name, " = d.",
 					prop.Name, " as ", w.typeOf(t), ";")
 			} else {
@@ -301,7 +302,7 @@ func (w *tsw) typeOf(t YamlPropType) string {
 		return "number"
 	case "bool", "boolean":
 		return "boolean"
-	case "GeoJSON":
+	case "GeoJSON", "JsonObject":
 		return "Record<string, unknown>"
 	default:
 		if startsWithLower(string(t)) {

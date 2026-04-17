@@ -1433,6 +1433,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:range :Ref
   .
 
+:otherProperties a rdf:Property;
+  rdfs:comment "Additional custom properties as arbitrary JSON object content. These properties are intended for extensions.";
+  rdfs:domain :RootEntity;
+  rdfs:range rdf:JSON
+  .
+
 :parameterRedefs a rdf:Property;
   rdfs:comment "";
   rdfs:domain :ProjectVariant;

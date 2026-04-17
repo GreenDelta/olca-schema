@@ -136,6 +136,8 @@ func (w *tonelWriter) typeHintOf(prop *YamlProp) string {
 		return "aDateString"
 	case "dateTime":
 		return "aDateTimeString"
+	case "GeoJSON", "JsonObject":
+		return "aDictionary"
 	default:
 		fmt.Println("warning: could provide a better type hint for:" + prop.Type)
 		return "anObject"
