@@ -36,7 +36,7 @@ commands:
   rdf     - generates the JSON-LD context and Turtle schema
   tonel   - generates the schema in Tonel format (for usage in Pharo/Smalltalk)
   ts      - generates the TypeScript module
-  
+
 #+end_example
 
 ** Generating the schema documentation
@@ -51,12 +51,12 @@ The following command generates the [[https://github.com/rust-lang/mdBook][mdBoo
 With the =mdbook= command, the documentation can be then generated in the =docs= folder (relative to the book sources) via the following command:
 
 #+begin_src shell :results none
-mdbook build -d ../../docs ../build/docs
+mdbook build -d ../docs ../build/docs
 #+end_src
 
 This folder is then served as our online documentation via Github pages: [[https://greendelta.github.io/olca-schema/]]
 
-We also host the [[https://greendelta.github.io/olca-schema/context.jsonld][JSON-LD context]] and the [[https://greendelta.github.io/olca-schema/schema.ttl][schema in Turtle format]] via Github pages. These resources are generated with the =rdf= command which should be executed after the =mdbook= was generated (because it will clean the =docs= folder): 
+We also host the [[https://greendelta.github.io/olca-schema/context.jsonld][JSON-LD context]] and the [[https://greendelta.github.io/olca-schema/schema.ttl][schema in Turtle format]] via Github pages. These resources are generated with the =rdf= command which should be executed after the =mdbook= was generated (because it will clean the =docs= folder):
 
 #+begin_src shell :results none
 ./osch rdf
@@ -83,7 +83,7 @@ The class defintions of the Python package can be generated via the =py= command
 
 ** TypeScript
 
-The =ts= command will generate type declarations and many utility methods for working with the schema in TypeScript. The [[https://github.com/GreenDelta/olca-ipc.ts][olca-ipc.ts]] API is built around that generated schema. The script below will update this schema assuming the =olca-ipc.ts= project is located next to the =olca-schema= project and a current version of [[https://deno.com/][Deno]] is installed: 
+The =ts= command will generate type declarations and many utility methods for working with the schema in TypeScript. The [[https://github.com/GreenDelta/olca-ipc.ts][olca-ipc.ts]] API is built around that generated schema. The script below will update this schema assuming the =olca-ipc.ts= project is located next to the =olca-schema= project and a current version of [[https://deno.com/][Deno]] is installed:
 
 #+begin_src shell :results none
 ./osch ts -o "../../olca-ipc.ts/src/schema.ts"
@@ -92,4 +92,3 @@ The =ts= command will generate type declarations and many utility methods for wo
 cd ../../olca-ipc.ts
 deno fmt
 #+end_src
-
