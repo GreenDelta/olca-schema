@@ -10,13 +10,13 @@ readme = "README.md"
 requires-python = ">=3.12"
 keywords=["openLCA", "life cycle assessment", "LCA"]
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python :: 3",
     "License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
     "Operating System :: OS Independent",
-    "Environment :: Console",
+    "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
-    "Topic :: Utilities",
+    "Topic :: File Formats :: JSON",
 ]
 
 [project.urls]
@@ -26,3 +26,12 @@ classifiers = [
 [tool.setuptools.packages.find]
 include = ["olca_schema", "olca_schema.units"]
 exclude = ["tests"]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=9.0",
+]
+packaging = [
+    "build>=1.4",
+    "twine>=6.2",
+]

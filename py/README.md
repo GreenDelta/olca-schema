@@ -43,11 +43,32 @@ with zipio.ZipWriter('path/to/example.zip') as w:
 ```
 
 
-## Running the tests
+## Tests and packaging
 
+The Python library for the openLCA schema is part of the
+[olca-schema](https://github.com/GreenDelta/olca-schema) project. It does not
+have any runtime dependencies. The optional `test` and `packaging` extras are
+used for local development tasks.
+
+Run the tests with:
+
+```bash
+cd olca-schema/py
+# easy with uv; initialize the virtual environment
+uv venv [-p 3.12]
+# install the test dependencies
+uv sync --extra test
+# run the tests
+uv run pytest -v
 ```
-cd py
-uv venv
-uv pip install -e . pytest
-uv run pytest
+
+Build and validate a release package with:
+
+```bash
+# install the packaging dependencies
+uv sync --extra packaging
+# build the source and wheel distributions
+uv run python -m build
+# validate the generated artifacts
+uv run twine check dist/*
 ```
