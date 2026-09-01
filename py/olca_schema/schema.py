@@ -2691,6 +2691,30 @@ class Source:
 
 
 @dataclass
+class TagValue:
+
+    amount: Optional[float] = None
+    tag: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {}
+        if self.amount is not None:
+            d['amount'] = self.amount
+        if self.tag is not None:
+            d['tag'] = self.tag
+        return d
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> 'TagValue':
+        tag_value = TagValue()
+        if (v := d.get('amount')) or v is not None:
+            tag_value.amount = v
+        if (v := d.get('tag')) or v is not None:
+            tag_value.tag = v
+        return tag_value
+
+
+@dataclass
 class TechFlow:
 
     flow: Optional[Ref] = None
