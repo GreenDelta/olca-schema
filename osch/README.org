@@ -48,10 +48,11 @@ The following command generates the [[https://github.com/rust-lang/mdBook][mdBoo
 #+end_src
 
 
-With the =mdbook= command, the documentation can be then generated in the =docs= folder (relative to the book sources) via the following command:
+With the =mdbook= command, the documentation can be then generated in the =docs= folder (relative to the book sources) via the following command (it needs to be run from the =build/docs= directory so that the output path is resolved correctly):
 
 #+begin_src shell :results none
-mdbook build -d ../docs ../build/docs
+cd olca-schema/build/docs
+mdbook build -d ../../docs
 #+end_src
 
 This folder is then served as our online documentation via Github pages: [[https://greendelta.github.io/olca-schema/]]
