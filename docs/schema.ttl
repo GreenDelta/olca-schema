@@ -658,6 +658,10 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "A configuration request for calculating a [SankeyGraph] for a result."
   .
 
+:TagValue a rdfs:Class;
+  rdfs:comment "A single value of a tag result."
+  .
+
 :TechFlow a rdfs:Class;
   rdfs:comment "A technosphere flow. These are flows that can be linked to product inputs are waste outputs. A technosphere flow has a provider, which can be a `Process`, `ProductSystem`, or `Result`."
   .
@@ -725,7 +729,7 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   .
 
 :amount a rdf:Property;
-  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowResult :ImpactResult :ProjectVariant :CalculationSetup :CostValue :EnviFlowValue :GroupValue :ImpactValue :TechFlowValue)];
+  rdfs:domain [ a owl:Class; owl:unionOf (:EpdProduct :Exchange :FlowResult :ImpactResult :ProjectVariant :CalculationSetup :CostValue :EnviFlowValue :GroupValue :ImpactValue :TagValue :TechFlowValue)];
   rdfs:range xsd:double
   .
 
@@ -1714,6 +1718,12 @@ Finally, custom labels like `A, B, C, ...` or `Very good, Good, Fair, ...` for t
   rdfs:comment "";
   rdfs:domain :ComplianceDeclaration;
   rdfs:range :Ref
+  .
+
+:tag a rdf:Property;
+  rdfs:comment "";
+  rdfs:domain :TagValue;
+  rdfs:range xsd:string
   .
 
 :tags a rdf:Property;
